@@ -13,7 +13,7 @@ from __future__ import absolute_import, unicode_literals
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
-APPS_DIR = ROOT_DIR.path('bliski_pubikator')
+APPS_DIR = ROOT_DIR.path('bliski_publikator')
 
 env = environ.Env()
 
@@ -43,7 +43,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'bliski_pubikator.users',  # custom users app
+    'bliski_publikator.users',  # custom users app
     # Your stuff: custom apps go here
 )
 
@@ -65,7 +65,7 @@ MIDDLEWARE_CLASSES = (
 # MIGRATIONS CONFIGURATION
 # ------------------------------------------------------------------------------
 MIGRATION_MODULES = {
-    'sites': 'bliski_pubikator.contrib.sites.migrations'
+    'sites': 'bliski_publikator.contrib.sites.migrations'
 }
 
 # DEBUG
@@ -99,7 +99,7 @@ MANAGERS = ADMINS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db("DATABASE_URL", default="postgres:///bliski_pubikator"),
+    'default': env.db("DATABASE_URL", default="postgres:///bliski_publikator"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -213,8 +213,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
-ACCOUNT_ADAPTER = 'bliski_pubikator.users.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'bliski_pubikator.users.adapters.SocialAccountAdapter'
+ACCOUNT_ADAPTER = 'bliski_publikator.users.adapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'bliski_publikator.users.adapters.SocialAccountAdapter'
 
 # Custom user app defaults
 # Select the correct user model

@@ -1,5 +1,5 @@
 {
-  "name": "bliski_pubikator",
+  "name": "bliski_publikator",
   "description": "Celem strony jest pokazanie, jakie informacje są w posiadaniu spółek, a mimo to nie publikują one ich na BIP + wskazanie, czemu te informacje są czy mogą być ważne dla mieszkańców i zachęcenie mieszkańców do interesowania się.",
   "env": {
     "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-python",
