@@ -29,8 +29,9 @@ Pillow==3.1.1
 django-allauth==0.24.1
 
 
-# Python-PostgreSQL Database Adapter
-psycopg2==2.6.1
+# Python-MariaDB and Python-MySQL Database Adapter
+mysqlclient==1.3.7
+
 
 # Unicode slugification
 unicode-slugify==0.1.3

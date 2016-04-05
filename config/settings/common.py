@@ -99,7 +99,7 @@ MANAGERS = ADMINS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db("DATABASE_URL", default="postgres:///bliski_publikator"),
+    'default': env.db("DATABASE_URL", default="mysql:///bliski_publikator"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
