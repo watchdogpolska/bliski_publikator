@@ -16,6 +16,7 @@ ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
 APPS_DIR = ROOT_DIR.path('bliski_publikator')
 
 env = environ.Env()
+environ.Env.read_env()
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -99,7 +100,7 @@ MANAGERS = ADMINS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db("DATABASE_URL", default="mysql:///bliski_publikator"),
+    'default': env.db("DATABASE_URL", default="mysql:///user:user@localhost/bliski_publikator"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
