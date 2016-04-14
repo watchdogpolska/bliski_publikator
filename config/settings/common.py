@@ -40,13 +40,20 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'teryt_tree',
+    'versatileimagefield',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'bliski_publikator.users',  # custom users app
+    'bliski_publikator.monitorings',
+    'bliski_publikator.institutions',
+    'bliski_publikator.teryt'
     # Your stuff: custom apps go here
 )
+
+
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -158,6 +165,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'bliski_publikator.monitorings.context_processors.get_full_monitoring'
                 # Your stuff: custom template context processors go here
             ],
         },
