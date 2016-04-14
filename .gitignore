@@ -48,6 +48,7 @@ htmlcov
 
 # npm
 node_modules/
+bower_components/
 
 # Compass
 .sass-cache

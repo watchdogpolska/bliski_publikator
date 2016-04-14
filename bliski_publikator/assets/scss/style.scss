@@ -1,0 +1,109 @@
+@import 'variables';
+@import 'bootstrap';
+@import 'milestones';
+@import 'font-awesome';
+$red: #D72626;
+$gray: #F0F0F0;
+
+.block {
+  padding: 40px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.block:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 20px solid darken($gray, 15%); 
+  border-right-color: #fff;
+  border-top-color: #fff;
+}
+
+.select-list {
+  list-style: none;
+  padding: 0px;
+  li {
+    padding: 5px 0px;
+    a {
+       display: block;
+    }
+  }
+  li:after { // How to write it up? 
+    content: "";
+    display: block;
+    width: 25px;
+    height: 1px;
+    margin: 0px;
+  }
+  width: 100%;
+}
+
+
+.red {
+  @extend .block;
+  background-color: $red;
+  color: $gray;
+  a { 
+    color: darken(#fff, 10%);
+  }
+  a:hover{
+    color: darken(#fff, 20%);
+  }
+  
+  .page-title {
+    color: #fff;
+  }
+  .select-list {
+    li:after {
+      background-color: darken($gray, 10%);
+    }
+  }
+  .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+    color: #FFF643;
+  }
+}
+
+.gray {
+  @extend .block;
+  background-color: $gray;
+  text-color: $red;
+  .select-list {
+    li:after {
+      background-color: $red;
+    }
+  }
+  .page-title {
+    color: $red;
+  }
+}
+
+.footer {
+    padding: 12px 6px;
+    margin: 12px 0px;
+    border-top: 1px solid #F5F5F5;
+    color: #888;
+    font-size: 10px;
+}
+.footer-right {
+    float: left;
+}
+
+.footer-left {
+    float: right;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.progress-bar {
+  color: #000;
+}
+.link-tag {
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 15px;
+  padding: 1px 5px;
+  font-size: 0.8em;
+}
