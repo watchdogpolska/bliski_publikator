@@ -23,10 +23,6 @@
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
     {% endblock %}
 
-    {% block angular %}
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    {% endblock %}
-
   </head>
 
   <body>
@@ -48,6 +44,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'about' %}">About</a>
               </li>
+              {% for object in monitoring_full_list %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{object.get_absolute_url}}">{{object}}</a>
+              </li>
+              {% endfor %}
             </ul>
 
             <ul class="nav navbar-nav pull-xs-right">
@@ -81,7 +82,7 @@
       {% endif %}
 
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
+        {% include '_index.html' %}
       {% endblock content %}
 
     </div> <!-- /container -->
