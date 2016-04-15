@@ -53,8 +53,9 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'bliski_publikator.users',  # custom users app
     'bliski_publikator.monitorings',
+    'bliski_publikator.monitoring_pages',
     'bliski_publikator.institutions',
-    'bliski_publikator.teryt'
+    'bliski_publikator.teryt',
     # Your stuff: custom apps go here
 )
 

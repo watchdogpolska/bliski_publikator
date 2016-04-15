@@ -4,5 +4,5 @@ from django.apps import AppConfig
 
 
 class MonitoringsConfig(AppConfig):
-    name = 'monitorings'
-    verbose_name = _("Monitorings")
+    name = 'monitoring_pages'
+    verbose_name = _("Monitorings pages")

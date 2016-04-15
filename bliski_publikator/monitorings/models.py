@@ -23,7 +23,8 @@ class Monitoring(TimeStampedModel):
     logo = VersatileImageField(verbose_name=_("Logo"), null=True, blank=True)
     institutions = models.ManyToManyField(to='institutions.Institution',
                                           verbose_name=_("Institution"),
-                                          help_text=_("Specifies which institutions are covered by monitoring"))
+                                          help_text=_("Specifies which institutions are " +
+                                                      "covered by monitoring"))
     objects = MonitoringQuerySet.as_manager()
 
     class Meta:
