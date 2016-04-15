@@ -22,7 +22,7 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
     select_related = ['user', ]
 
 
-class MonitoringCreateView(LoginRequiredMixin, UserFormKwargsMixin, CreateView):
+class MonitoringCreateView(LoginRequiredMixin, UserFormKwargsMixin, CreateView):  # TODO: Add PageInline
     model = Monitoring
     form_class = MonitoringForm
 
