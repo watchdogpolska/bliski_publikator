@@ -49,3 +49,4 @@ django_filter==0.13
 django-autocomplete-light==3.1.5
 django-tinymce==2.3.0
 cached_property==1.3.0
+django-extra-views==0.7.1

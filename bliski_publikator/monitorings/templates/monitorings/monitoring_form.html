@@ -1,11 +1,24 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags i18n %}
 {% block content %}
-{% crispy form %}
+<form method="POST">
+{{ form | crispy }}
+<div id="form-pages">
+{% crispy pages  %}
+</div>
+<input type="submit" class="btn btn-primary" value="{% trans 'Submit' %}">
+</form>
 {% endblock %}
 
 {% block javascript %}
 <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
-
 {{ form.media }}
+<script src="https://raw.githubusercontent.com/elo80ka/django-dynamic-formset/v1.2.2/src/jquery.formset.js"></script>
+<script>
+$(function() {
+        $('#form-pages tr').formset({
+            prefix: '{{ pages.prefix }}',
+        });
+});
+</script>
 {% endblock %}

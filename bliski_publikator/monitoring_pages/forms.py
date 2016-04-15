@@ -27,9 +27,9 @@ class PageForm(UserKwargModelFormMixin, MonitoringMixin, FormHorizontalMixin, Si
         }
 
 
-class MiniPageForm(UserKwargModelFormMixin, MonitoringMixin, forms.ModelForm):
+class MiniPageForm(UserKwargModelFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(PageForm, self).__init__(*args, **kwargs)
+        super(MiniPageForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Page
