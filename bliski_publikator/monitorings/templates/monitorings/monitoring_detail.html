@@ -27,7 +27,7 @@
 {% block content %}
 
 {% if monitoring.page_set.all %}
-<div class="btn-group" role="group">
+<div class="btn-group" role="group">  {# TODO: Update view to looks like http://siecobywatelska.pl/co-robimy/ #}
     {% for obj in monitoring.page_set.all %}
     <a href="{% url 'monitorings:pages:details' monitoring_slug=monitoring.slug slug=obj.slug %}" class="btn btn-primary">{{obj}}</a>
     {% endfor %}
