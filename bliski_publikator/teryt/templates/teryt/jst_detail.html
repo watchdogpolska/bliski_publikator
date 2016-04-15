@@ -43,10 +43,10 @@
                 <i class="fa fa-home"></i>
                 {% trans 'Institutions'%}
             </h2>
-	    {% if object.institution_qs.all %}
-         	   {% include '_select_list.html' with object_list=object.institution_qs.all %}
+	    {% if object.institution_area.all %}
+         	   {% include '_select_list.html' with object_list=object.institution_area.all %}
 	    {% else %}
-   		   <p>{% trans 'No rows.' %}</p>
+   		   <p>{% trans 'No institutions.' %}</p>
 	    {% endif %}
         </div>
     </div>
@@ -56,7 +56,9 @@
                 <i class="fa fa-search"></i>
                 {% trans 'Cases'%}
             </h2>
+            {% comment %}
             {% include '_select_list.html' with object_list=object.case_qs.all %}
+            {% endcomment %}
         </div>
     </div>
     <div class="col-md-3">
@@ -65,7 +67,9 @@
                 <i class="fa fa-folder-open"></i>
                 {% trans 'Tasks' %}
             </h2>
+            {% comment %}
             {% include '_select_list.html' with object_list=object.task_qs.all %}
+            {% endcomment %}
         </div>
     </div>
 </div>

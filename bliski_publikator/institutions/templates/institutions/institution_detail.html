@@ -9,6 +9,18 @@
 <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete institution' %}</a>
 {% endif %}
 {% endblock %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    {% for jst in object.region.get_ancestors.all %}
+    <li><a href="{{jst.get_absolute_url}}">{{jst}}</a></li>
+    {% endfor %}
+    <li><a href="{{object.region.get_absolute_url}}">{{object.region}}</a></li>
+    <li class="active">{{object}}</li>
+
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1><i class="fa fa-home"></i>{{object}}</h1>

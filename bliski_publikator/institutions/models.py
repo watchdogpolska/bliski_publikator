@@ -10,7 +10,9 @@ from ..teryt.models import JST
 
 
 class InstitutionQuerySet(models.QuerySet):
-    pass
+    def area(self, jst):
+        return self.filter(region__tree_id=jst.tree_id,
+                           region__lft__range=(jst.lft, jst.rght))
 
 
 @python_2_unicode_compatible
@@ -25,7 +27,8 @@ class Institution(TimeStampedModel):
                                db_index=True)
     regon = models.CharField(verbose_name=_("REGON"), max_length=14, blank=True)  # TODO: RegonField
     krs = models.CharField(verbose_name=_("KRS"), max_length=11, blank=True)  # TODO: KRSField
-    monitorings = models.ManyToManyField('monitorings.Monitoring', through='monitorings.monitoring_institutions')
+    monitorings = models.ManyToManyField(to='monitorings.Monitoring',
+                                         through='monitorings.monitoring_institutions')
     objects = InstitutionQuerySet.as_manager()
 
     class Meta:

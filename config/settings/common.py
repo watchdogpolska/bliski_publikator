@@ -45,7 +45,8 @@ THIRD_PARTY_APPS = (
     'dal',
     'dal_select2',
     'autofixture',
-    'tinymce'
+    'tinymce',
+    'mptt'
 )
 
 # Apps specific for this project go here.

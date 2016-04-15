@@ -57,10 +57,11 @@ bower_components/
 .env
 
 # User-uploaded media
-bliski_pubikator/media/
+bliski_publikator/media/
 
 # Hitch directory
 tests/.hitch
 
 # MailHog binary
 mailhog
+staticfiles
