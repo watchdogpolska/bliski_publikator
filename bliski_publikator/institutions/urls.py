@@ -9,10 +9,13 @@ urlpatterns = [
         name="list"),
     url(r'^~create$', views.InstitutionCreateView.as_view(),
         name="create"),
+    url(r'^institution-autocomplete$', views.InstitutionAutocomplete.as_view(),
+        name="autocomplete"),
     url(r'^institution-(?P<slug>[\w-]+)$', views.InstitutionDetailView.as_view(),
         name="details"),
     url(r'^institution-(?P<slug>[\w-]+)/~update$', views.InstitutionUpdateView.as_view(),
         name="update"),
     url(r'^institution-(?P<slug>[\w-]+)/~delete$', views.InstitutionDeleteView.as_view(),
         name="delete"),
+
 ]

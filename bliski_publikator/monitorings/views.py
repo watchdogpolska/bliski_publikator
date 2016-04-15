@@ -1,12 +1,14 @@
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.utils.translation import ugettext_lazy as _
-from braces.views import (SelectRelatedMixin, LoginRequiredMixin, FormValidMessageMixin,
-                          UserFormKwargsMixin)
-from django.core.urlresolvers import reverse_lazy
 from atom.views import DeleteMessageMixin
-from .models import Monitoring
+from braces.views import (FormValidMessageMixin, LoginRequiredMixin, SelectRelatedMixin,
+                          UserFormKwargsMixin)
+from dal import autocomplete
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
 from .forms import MonitoringForm
+from .models import Monitoring
 
 
 class MonitoringListView(SelectRelatedMixin, ListView):
@@ -46,3 +48,13 @@ class MonitoringDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteMe
 
     def get_success_message(self):
         return _("{0} deleted!").format(self.object)
+
+
+class MonitoringAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Monitoring.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs

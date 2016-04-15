@@ -19,7 +19,9 @@ urlpatterns = [
     url(r'^users/', include("bliski_publikator.users.urls", namespace="users")),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^monitorings/', include("bliski_publikator.monitorings.urls", namespace="monitorings")),
-    url(r'^institutions/', include("bliski_publikator.institutions.urls", namespace="institutions")),
+    url(r'^institutions/', include("bliski_publikator.institutions.urls",
+                                   namespace="institutions")),
+    url(r'^teryt/', include("bliski_publikator.teryt.urls", namespace="teryt")),
 
     # Your stuff: custom urls includes go here
 

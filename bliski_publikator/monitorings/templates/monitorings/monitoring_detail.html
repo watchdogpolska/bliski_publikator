@@ -1,6 +1,6 @@
 {% extends 'monitorings/monitoring_base.html' %}
 {% load i18n %}
-{% block content %}
+{% block buttons %}
 {% if perms.monitorings.change_monitoring %}
 <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update monitoring' %}</a>
 {% endif %}
@@ -9,20 +9,35 @@
 <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete monitoring' %}</a>
 {% endif %}
 
+{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1><i class="fa fa-search"></i>{{object}}</h1>
+</div>
 
-<h1>{{object}}</h1>
-{% if logo %}
-<img src="{{object.logo.url}}"></img>
-{% endif %}
-{{object.description | safe}}
-<h2>{% trans 'Covered institutions' %}</h2>
-{% if object.institutions.all %}
-<ul>
-{% for obj in object.institutions.all %}
-    <li><a href="{{obj.get_absolute_url}}">{{obj}}</a></li>
-{% endfor %}
-</ul>
-{% else %}
-<p>{% trans 'No institutions' %}</p>
-{% endif %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="red">
+            <h2>{% trans 'Design and purpose' %}</h2>
+            {% if logo %}
+            <img src="{{object.logo.url}}"></img>
+            {% endif %}
+            {{object.description | safe}}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="gray">
+            <h2>{% trans 'Covered institutions' %}</h2>
+            {% if object.institutions.all %}
+            <ul>
+                {% for obj in object.institutions.all %}
+                <li><a href="{{obj.get_absolute_url}}">{{obj}}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>{% trans 'No institutions' %}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

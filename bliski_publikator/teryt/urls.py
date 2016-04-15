@@ -9,4 +9,10 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)$', views.JSTDetailView.as_view(), name="details"),
     url(r'^$', views.JSTListView.as_view(), name="list"),
     url(r'^$', views.JSTListView.as_view(), name="voivodeship"),
+    url(r'^voivodeship-autocomplete/$', views.VoivodeshipAutocomplete.as_view(),
+        name='voivodeship-autocomplete',),
+    url(r'^county-autocomplete/$', views.CountyAutocomplete.as_view(),
+        name='county-autocomplete',),
+    url(r'^community-autocomplete/$', views.CommunityAutocomplete.as_view(),
+        name='community-autocomplete',),
 ]

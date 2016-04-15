@@ -1,6 +1,6 @@
 {% extends 'institutions/institution_base.html' %}
 {% load i18n %}
-{% block content %}
+{% block buttons %}
 {% if perms.institutions.change_institution %}
 <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update institution' %}</a>
 {% endif %}
@@ -8,21 +8,34 @@
 {% if perms.institutions.delete_institution %}
 <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete institution' %}</a>
 {% endif %}
+{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1><i class="fa fa-home"></i>{{object}}</h1>
+</div>
 
-
-<h1>{{object}}</h1>
-{% if logo %}
-<img src="{{object.logo.url}}"></img>
-{% endif %}
-{{object.description | safe}}
-<h2>{% trans 'Monitoring involving' %}</h2>
-{% if object.monitoring_set.all %}
-<ul>
-{% for obj in object.monitoring_set.all %}
-    <li><a href="{{obj.get_absolute_url}}">{{obj}}</a></li>
-{% endfor %}
-</ul>
-{% else %}
-<p>{% trans 'No institutions' %}</p>
-{% endif %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="red">
+            <h2>{% trans 'Identfication' %}</h2>
+            {% if object.regon %}<p>{% trans 'REGON' %}:{{object.regon}}</p>{% endif %}
+            {% if object.krs %}<p>{% trans 'KRS' %}:{{object.krs}}</p>{% endif %}
+            {% if object.email %}<p>{% trans 'E-mail' %}:<a href="{{object.email}}">{{object.email}}</a></p>{% endif %}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="gray">
+            <h2>{% trans 'Monitorings' %}</h2>
+            {% if object.monitorings.all %}
+            <ul>
+                {% for obj in object.monitorings.all %}
+                <li><a href="{{obj.get_absolute_url}}">{{obj}}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>{% trans 'No monitorings' %}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

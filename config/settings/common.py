@@ -42,6 +42,10 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
     'teryt_tree',
     'versatileimagefield',
+    'dal',
+    'dal_select2',
+    'autofixture',
+    'tinymce'
 )
 
 # Apps specific for this project go here.
@@ -52,7 +56,6 @@ LOCAL_APPS = (
     'bliski_publikator.teryt'
     # Your stuff: custom apps go here
 )
-
 
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

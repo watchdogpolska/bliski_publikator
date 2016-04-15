@@ -1,14 +1,16 @@
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.utils.translation import ugettext_lazy as _
-from braces.views import (SelectRelatedMixin, LoginRequiredMixin, FormValidMessageMixin,
-                          UserFormKwargsMixin)
-from django.core.urlresolvers import reverse_lazy
-from django_filters.views import FilterView
 from atom.views import DeleteMessageMixin
-from .models import Institution
-from .forms import InstitutionForm
+from braces.views import (FormValidMessageMixin, LoginRequiredMixin, SelectRelatedMixin,
+                          UserFormKwargsMixin)
+from dal import autocomplete
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django_filters.views import FilterView
+
 from .filters import InstitutionFilter
+from .forms import InstitutionForm
+from .models import Institution
 
 
 class InstitutionListView(SelectRelatedMixin, FilterView):
@@ -53,3 +55,13 @@ class InstitutionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteM
 
     def get_success_message(self):
         return _("{0} deleted!").format(self.object)
+
+
+class InstitutionAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Institution.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs
