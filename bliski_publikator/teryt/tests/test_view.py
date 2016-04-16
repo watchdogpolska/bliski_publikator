@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory, TestCase
 
 from .. import views
-from ...factories import JSTFactory
+from ..factories import JSTFactory
 from django.core.urlresolvers import reverse_lazy
 
 

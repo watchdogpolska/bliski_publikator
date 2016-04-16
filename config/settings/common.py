@@ -44,7 +44,6 @@ THIRD_PARTY_APPS = (
     'versatileimagefield',
     'dal',
     'dal_select2',
-    'autofixture',
     'tinymce',
     'mptt'
 )
