@@ -1,18 +1,28 @@
-sudo: true
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq build-essential gettext python-dev zlib1g-dev libpq-dev xvfb
-  - sudo apt-get install -qq libtiff4-dev libjpeg8-dev libfreetype6-dev liblcms1-dev libwebp-dev
-  - sudo apt-get install -qq graphviz-dev python-setuptools python3-dev python-virtualenv python-pip
-  - sudo apt-get install -qq firefox automake libtool libreadline6 libreadline6-dev libreadline-dev
-  - sudo apt-get install -qq libsqlite3-dev libxml2 libxml2-dev libssl-dev libbz2-dev wget curl llvm
 language: python
-python:
-- "3.5"
+python: 3.5
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+
+env:
+  global:
+    - DATABASE_URL="mysql://root:@localhost/test_bliski_publikator"
+  matrix:
+    - TOX_ENV=py34-dj19
+    - TOX_ENV=py34-djmaster
+    - TOX_ENV=py35-dj19
+    - TOX_ENV=py35-djmaster
+
+matrix:
+  allow_failures:
+    - env: TOX_ENV=py34-djmaster
+    - env: TOX_ENV=py35-djmaster
+    - env: TOX_ENV=pypy-djmaster
 
 install:
-  - "pip install hitch"
-  - "cd tests"
-  - "hitch init"
+  - pip install -U pip wheel
+  - pip install tox
 script:
-  - "hitch test . --extra '{\"xvfb\":true, \"pause_on_failure\":false}'"
+- tox -e "$TOX_ENV"
