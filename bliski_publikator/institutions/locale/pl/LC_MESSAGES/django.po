@@ -7,97 +7,101 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 09:34+0000\n"
+"POT-Creation-Date: 2016-04-16 22:06+0000\n"
 "PO-Revision-Date: 2016-04-15 11:35+0200\n"
+"Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
+"Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.8.4\n"
 
-#: apps.py:8 models.py:36
+#: institutions/apps.py:8 institutions/models.py:36
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: forms.py:35
+#: institutions/forms.py:35
 msgid "Update"
 msgstr "Zaktualizuj"
 
-#: forms.py:35
+#: institutions/forms.py:35
 msgid "Save"
 msgstr "Zapisz"
 
-#: forms.py:39
+#: institutions/forms.py:39
 msgid "Identification"
 msgstr "Identyfikacja"
 
-#: forms.py:45
+#: institutions/forms.py:45
 msgid "Location"
 msgstr "Lokalizacja"
 
-#: forms.py:51 templates/institutions/institution_detail.html.py:40
+#: institutions/forms.py:51
+#: institutions/templates/institutions/institution_detail.html:40
 msgid "Monitorings"
 msgstr "Monitoringi"
 
-#: models.py:20
+#: institutions/models.py:20
 msgid "Name"
 msgstr "Nazwa"
 
-#: models.py:21
+#: institutions/models.py:21
 msgid "Slug"
 msgstr "Identyfikator redakcyjny"
 
-#: models.py:23 templates/institutions/institution_detail.html.py:35
+#: institutions/models.py:23
+#: institutions/templates/institutions/institution_detail.html:35
 msgid "E-mail"
 msgstr "E-mail"
 
-#: models.py:26
+#: institutions/models.py:26
 msgid "Unit of administrative division"
 msgstr "Jednostka podziału terytorialnego"
 
-#: models.py:28 templates/institutions/institution_detail.html.py:33
+#: institutions/models.py:28
+#: institutions/templates/institutions/institution_detail.html:33
 msgid "REGON"
 msgstr "REGON"
 
-#: models.py:29 templates/institutions/institution_detail.html.py:34
+#: institutions/models.py:29
+#: institutions/templates/institutions/institution_detail.html:34
 msgid "KRS"
 msgstr "KRS"
 
-#: models.py:35
+#: institutions/models.py:35
 msgid "Institution"
 msgstr "Instytucja"
 
-#: templates/institutions/institution_detail.html:5
+#: institutions/templates/institutions/institution_detail.html:5
 msgid "Update institution"
 msgstr "Zaktualizuj instytucje"
 
-#: templates/institutions/institution_detail.html:9
+#: institutions/templates/institutions/institution_detail.html:9
 msgid "Delete institution"
 msgstr "Usuń instytucje"
 
-#: templates/institutions/institution_detail.html:32
+#: institutions/templates/institutions/institution_detail.html:32
 msgid "Identfication"
 msgstr "Identyfikacja"
 
-#: templates/institutions/institution_detail.html:48
+#: institutions/templates/institutions/institution_detail.html:48
 msgid "No monitorings"
 msgstr "Brak monitoringów"
 
-#: views.py:37
+#: institutions/views.py:37
 #, python-brace-format
 msgid "{0} created!"
 msgstr "{0} utworzony!"
 
-#: views.py:47
+#: institutions/views.py:47
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: views.py:57
+#: institutions/views.py:57
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
