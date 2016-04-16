@@ -244,3 +244,23 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'atom.ext.slugify.slugifier.ascii_slugify'
 ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
+BLEACH_ALLOWED_TAGS = [
+    # bleach default
+    'a',
+    'abbr',
+    'acronym',
+    'b',
+    'blockquote',
+    'code',
+    'em',
+    'i',
+    'li',
+    'ol',
+    'strong',
+    'ul',
+    # extra
+    'br',
+    'p',
+    'u',
+    'div',
+]
