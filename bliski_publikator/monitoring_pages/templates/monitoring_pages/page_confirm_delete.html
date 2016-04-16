@@ -1,4 +1,15 @@
 {% extends 'monitoring_pages/page_base.html' %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{{monitoring.get_absolute_url}}">{{monitoring}}</a></li>
+    <li><a href="{{object.get_absolute_url}}">{{object.get_absolute_url}}</a></li>
+    <li class="active">{% trans 'Delete page' %}
+    </li>
+</ol>
+{% endblock %}
+
 {% block content %}
 {% include '_confirm_delete.html' with object=object %}
 {% endblock %}

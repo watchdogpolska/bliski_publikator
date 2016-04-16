@@ -1,4 +1,15 @@
 {% extends 'monitorings/monitoring_base.html' %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{{object.get_absolute_url}}">{{object}}</a></li>
+    <li class="active">
+    {% if object %}{% trans 'Delete monitoring' %}{% endif %}
+    </li>
+</ol>
+{% endblock %}
+
 {% block content %}
 {% include '_confirm_delete.html' with object=object %}
 {% endblock %}

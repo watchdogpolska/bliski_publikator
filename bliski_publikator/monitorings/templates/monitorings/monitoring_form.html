@@ -1,5 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'monitorings/monitoring_base.html' %}
 {% load crispy_forms_tags i18n %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    {% if object %}<li><a href="{{object.get_absolute_url}}">{{object}}</a></li>{% endif %}
+    <li class="active">
+    {% if object %}{% trans 'Update monitoring' %}{% else %}{% trans 'Add monitoring' %}{% endif %}
+    </li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <form method="POST">
 {{ form | crispy }}

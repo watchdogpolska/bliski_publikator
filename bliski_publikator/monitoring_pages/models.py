@@ -19,7 +19,7 @@ class Page(TimeStampedModel):
     slug = AutoSlugField(populate_from='title',
                          verbose_name=_("Slug"),
                          unique_with=['monitoring'])
-    content = BleachField(blank=True)
+    content = BleachField(blank=True, verbose_name=_("Content"))
     ordering = models.SmallIntegerField(verbose_name=_("Ordering"), default=0)
     objects = PageQuerySet.as_manager()
 

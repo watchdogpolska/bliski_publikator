@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags i18n %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{{monitoring.get_absolute_url}}">{{monitoring}}</a></li>
+    {% if object %}
+    <li><a href="{{object.get_absolute_url}}">{{object.get_absolute_url}}</a></li>
+    {% endif %}
+    <li class="active">
+    {% if object %}{% trans 'Update page' %}{% else %}{% trans 'Add page' %}{% endif %}
+    </li>
+</ol>
+{% endblock %}
+
 {% block content %}
 {% crispy form %}
 {% endblock %}

@@ -1,18 +1,5 @@
 {% extends 'monitoring_pages/page_base.html' %}
 {% load i18n %}
-{% block buttons %}
-{% if perms.monitoring_pages.change_page or perms.monitoring_pages.delete_page %}
-<div class="btn-group" role="group">
-    {% if perms.monitoring_pages.change_page %}
-    <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update page' %}</a>
-    {% endif %}
-
-    {% if perms.monitoring_pages.delete_page %}
-    <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete page' %}</a>
-    {% endif %}
-</div>
-{% endif %}
-{% endblock %}
 
 {% block breadcrumbs %}
 <ol class="breadcrumb">
@@ -22,10 +9,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="fa fa-search"></i>{{object}}</h1>
-</div>
+<h1><i class="fa fa-search"></i>{{object.monitoring}}</h1>
 
+<div class="page-header">
+    <h1><i class="fa fa-book"></i>{{object}}</h1>
+</div>
 <div class="row">
     <div class="col-md-12">
         <div class="gray">

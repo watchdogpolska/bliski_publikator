@@ -1,1 +1,21 @@
 {% extends 'base.html' %}
+{% load i18n %}
+{% block buttons %}
+{% if object %}
+{% if perms.monitorings.change_monitoring or perms.monitorings.delete_monitoring or perms.monitoring_pages.add_page %}
+<div class="btn-group" role="group">
+    {% if perms.monitorings.change_monitoring %}
+    <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update monitoring' %}</a>
+    {% endif %}
+
+    {% if perms.monitorings.delete_monitoring %}
+    <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete monitoring' %}</a>
+    {% endif %}
+
+    {% if perms.monitoring_pages.add_page %}
+    <a href="{% url 'monitorings:pages:create' monitoring_slug=object.slug %}" class="btn btn-primary">{% trans 'Add page' %}</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

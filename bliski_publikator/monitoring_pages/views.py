@@ -27,7 +27,7 @@ class MonitoringMixin(object):
         return context
 
 
-class PageDetailView(SelectRelatedMixin, DetailView):
+class PageDetailView(SelectRelatedMixin, MonitoringMixin, DetailView):
     model = Page
     select_related = ['monitoring', ]
 
@@ -63,8 +63,10 @@ class PageUpdateView(LoginRequiredMixin, PermissionRequiredMixin, MonitoringMixi
 class PageDeleteView(LoginRequiredMixin, PermissionRequiredMixin, MonitoringMixin,
                      DeleteMessageMixin, DeleteView):
     model = Page
-    success_url = reverse_lazy('monitorings_pages:list')
     permission_required = 'monitorings_pages.change_monitoring'
+
+    def get_success_url(self):
+        return self.monitoring.get_absolute_url()
 
     def get_success_message(self):
         return _("{0} deleted!").format(self.object)

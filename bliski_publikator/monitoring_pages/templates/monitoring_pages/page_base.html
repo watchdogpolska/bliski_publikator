@@ -1,1 +1,16 @@
 {% extends 'base.html' %}
+{% load i18n %}
+
+{% block buttons %}
+{% if object and perms.monitoring_pages.change_page or perms.monitoring_pages.delete_page %}
+<div class="btn-group" role="group">
+    {% if perms.monitoring_pages.change_page %}
+    <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update page' %}</a>
+    {% endif %}
+
+    {% if perms.monitoring_pages.delete_page %}
+    <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete page' %}</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

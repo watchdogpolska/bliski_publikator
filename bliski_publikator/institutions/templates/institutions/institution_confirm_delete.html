@@ -1,6 +1,5 @@
 {% extends 'institutions/institution_base.html' %}
-{% load crispy_forms_tags i18n %}
-
+{% load i18n %}
 {% block breadcrumbs %}
 <ol class="breadcrumb">
     {% for jst in object.region.get_ancestors.all %}
@@ -9,17 +8,12 @@
     <li><a href="{{object.region.get_absolute_url}}">{{object.region}}</a></li>
     <li><a href="{{object.get_absolute_url}}">{{object.get_absolute_url}}</a></li>
     <li class="active">
-    {% if object %}{% trans 'Update institution' %}{% else %}{% trans 'Add institution' %}{% endif %}
+    {% if object %}{% trans 'Delete institution' %}{% endif %}
     </li>
 </ol>
 {% endblock %}
 
+
 {% block content %}
-{% crispy form %}
-{% endblock %}
-
-{% block javascript %}
-<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
-
-{{ form.media }}
+{% include '_confirm_delete.html' with object=object %}
 {% endblock %}

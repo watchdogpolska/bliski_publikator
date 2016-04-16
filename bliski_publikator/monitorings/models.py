@@ -18,7 +18,7 @@ class Monitoring(TimeStampedModel):
     name = models.CharField(verbose_name=_("Name"), max_length=50)
     slug = AutoSlugField(populate_from='name', verbose_name=_("Slug"), unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    description = BleachField()
+    description = BleachField(verbose_name=_("Description"))
     active = models.BooleanField(verbose_name=_("Active status"), default=False)
     logo = VersatileImageField(verbose_name=_("Logo"), null=True, blank=True)
     institutions = models.ManyToManyField(to='institutions.Institution',

@@ -1,14 +1,5 @@
 {% extends 'institutions/institution_base.html' %}
 {% load i18n %}
-{% block buttons %}
-{% if perms.institutions.change_institution %}
-<a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update institution' %}</a>
-{% endif %}
-
-{% if perms.institutions.delete_institution %}
-<a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete institution' %}</a>
-{% endif %}
-{% endblock %}
 
 {% block breadcrumbs %}
 <ol class="breadcrumb">
@@ -17,7 +8,6 @@
     {% endfor %}
     <li><a href="{{object.region.get_absolute_url}}">{{object.region}}</a></li>
     <li class="active">{{object}}</li>
-
 </ol>
 {% endblock %}
 
