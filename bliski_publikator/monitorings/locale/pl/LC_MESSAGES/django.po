@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-15 09:32+0000\n"
+"PO-Revision-Date: 2016-04-15 11:34+0200\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: apps.py:8 models.py:32
+msgid "Monitorings"
+msgstr "Monitoringi"
+
+#: models.py:18
+msgid "Name"
+msgstr "Nazwa"
+
+#: models.py:19
+msgid "Slug"
+msgstr "Identyfikator redakcyjny"
+
+#: models.py:22
+msgid "Active status"
+msgstr "Status aktywności"
+
+#: models.py:23
+msgid "Logo"
+msgstr "Logo"
+
+#: models.py:25
+msgid "Institution"
+msgstr "Instytucja"
+
+#: models.py:26
+msgid "Specifies which institutions are covered by monitoring"
+msgstr "Określ, które instytucje są objęte monitoringiem"
+
+#: models.py:31
+msgid "Monitoring"
+msgstr "Monitoring"
+
+#: templates/monitorings/monitoring_detail.html:7
+msgid "Update monitoring"
+msgstr "Zaktualizuj monitoring"
+
+#: templates/monitorings/monitoring_detail.html:11
+msgid "Delete monitoring"
+msgstr "Usuń monitoring"
+
+#: templates/monitorings/monitoring_detail.html:15
+msgid "Add page"
+msgstr "Dodaj stronę"
+
+#: templates/monitorings/monitoring_detail.html:44
+msgid "Design and purpose"
+msgstr "Założenia i cele"
+
+#: templates/monitorings/monitoring_detail.html:53
+msgid "Covered institutions"
+msgstr "Instytucje objęte"
+
+#: templates/monitorings/monitoring_detail.html:61
+msgid "No institutions"
+msgstr "Brak instytucji"
+
+#: templates/monitorings/monitoring_form.html:9
+msgid "Submit"
+msgstr "Zapisz"
+
+#: templates/monitorings/monitoring_list.html:5
+msgid "Add monitoring"
+msgstr "Dodaj monitoring"
+
+#: views.py:43
+#, python-brace-format
+msgid "{0} created!"
+msgstr "{0} utworzony!"
+
+#: views.py:55
+#, python-brace-format
+msgid "{0} updated!"
+msgstr "{0} zaktualizowany!"
+
+#: views.py:65
+#, python-brace-format
+msgid "{0} deleted!"
+msgstr "{0} usunięty!"

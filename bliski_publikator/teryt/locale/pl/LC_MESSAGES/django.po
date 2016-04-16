@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-15 09:39+0000\n"
+"PO-Revision-Date: 2016-04-15 12:41+0200\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: templates/teryt/_voivodeship_map.svg.html:16
+msgid "Subcarpathian"
+msgstr "Podkarpackie"
+
+#: templates/teryt/_voivodeship_map.svg.html:21
+msgid "Lesser Poland"
+msgstr "Małopolskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:26
+msgid "Silesian"
+msgstr "Śląskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:31
+msgid "Opole"
+msgstr "Opolskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:36
+msgid "Lower Silesian"
+msgstr "Dolnośląskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:41
+msgid "Świętokrzyskie"
+msgstr "Świętokrzyskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:46
+msgid "Lublin"
+msgstr "Lubelskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:51
+msgid "Łódź"
+msgstr "Łódzkie"
+
+#: templates/teryt/_voivodeship_map.svg.html:56
+msgid "Mazovian"
+msgstr "Mazowieckie"
+
+#: templates/teryt/_voivodeship_map.svg.html:61
+msgid "Greater Poland"
+msgstr "Wielkopolska"
+
+#: templates/teryt/_voivodeship_map.svg.html:66
+msgid "Lubusz"
+msgstr "Lubuskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:71
+msgid "Kuyavian-Pomeranian"
+msgstr "Kujawsko-pomorskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:76
+msgid "Podlaskie"
+msgstr "Pomorskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:81
+msgid "West Pomeranian"
+msgstr "Zachodniopomorskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:86
+msgid "Warmian-Masurian"
+msgstr "Warmińskomazurskie"
+
+#: templates/teryt/_voivodeship_map.svg.html:91
+msgid "Pomeranian"
+msgstr "Pomorskie"
+
+#: templates/teryt/jst_detail.html:25
+msgid "Voivodeships"
+msgstr "Województwa"
+
+#: templates/teryt/jst_detail.html:30
+msgid "Subordinate units"
+msgstr "Jednostki podrzędne"
+
+#: templates/teryt/jst_detail.html:44
+msgid "Institutions"
+msgstr "Instytucje"
+
+#: templates/teryt/jst_detail.html:49
+msgid "No institutions."
+msgstr "Brak instytucji"
+
+#: templates/teryt/jst_detail.html:57
+msgid "Cases"
+msgstr "Sprawy"
+
+#: templates/teryt/jst_detail.html:69
+msgid "Tasks"
+msgstr "Zadania"
+
+#: templates/teryt/jst_list.html:6
+msgid "Voivodeship"
+msgstr "Województwa"
+
+#: templates/teryt/jst_list.html:7
+msgid "Select voivodeship."
+msgstr "Wybierz województwo"

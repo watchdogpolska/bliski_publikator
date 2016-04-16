@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-15 09:35+0000\n"
+"PO-Revision-Date: 2016-04-15 11:36+0200\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: apps.py:8
+msgid "Monitorings pages"
+msgstr "Strony monitoringów"
+
+#: models.py:17
+msgid "Monitoring"
+msgstr "Monitoring"
+
+#: models.py:18
+msgid "Title"
+msgstr "Tytutł"
+
+#: models.py:20
+msgid "Slug"
+msgstr "Identyfikator redakcyjny"
+
+#: models.py:23
+msgid "Ordering"
+msgstr "Sortowanie"
+
+#: models.py:27
+msgid "Page"
+msgstr "Strona"
+
+#: models.py:28
+msgid "Pages"
+msgstr "Strony"
+
+#: templates/monitoring_pages/page_detail.html:7
+msgid "Update page"
+msgstr "Zaktualizuj stronę"
+
+#: templates/monitoring_pages/page_detail.html:11
+msgid "Delete page"
+msgstr "Usuń stronę"
+
+#: views.py:45
+#, python-brace-format
+msgid "{0} created!"
+msgstr "{0} utworzony!"
+
+#: views.py:60
+#, python-brace-format
+msgid "{0} updated!"
+msgstr "{0} zaktualizowany!"
+
+#: views.py:70
+#, python-brace-format
+msgid "{0} deleted!"
+msgstr "{0} usunięty!"
