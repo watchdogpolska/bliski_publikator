@@ -264,3 +264,5 @@ BLEACH_ALLOWED_TAGS = [
     'u',
     'div',
 ]
+
+LOCALE_PATHS = [str(APPS_DIR.path('locale')), ]
