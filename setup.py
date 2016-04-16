@@ -6,8 +6,8 @@ try:
 except ImportError:
     from distutils.core import setup
 
-import taravel
-version = taravel.__version__
+import bliski_publikator
+version = bliski_publikator.__version__
 
 setup(
     name='bliski_publikator',
