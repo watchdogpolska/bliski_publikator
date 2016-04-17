@@ -27,8 +27,14 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
 
 class PageInline(InlineFormSet):
     model = Page
-    fields = ['title', 'ordering']  # Use MiniPageForm in PageInline
+    fields = ['title', 'ordering']
+    form_class = MiniPageForm
     formset_class = BaseTableFormSet
+
+    def get_factory_kwargs(self):
+        kwargs = super(PageInline, self).get_factory_kwargs()
+        kwargs.pop('fields', None)
+        return kwargs
 
 
 class MonitoringCreateView(LoginRequiredMixin, PermissionRequiredMixin, UserFormKwargsMixin,
