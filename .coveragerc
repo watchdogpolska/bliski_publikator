@@ -1,5 +1,5 @@
 [run]
-include = bliski_pubikator/*
+include = bliski_publikator/*
 omit = *migrations*, *tests*
 plugins =
     django_coverage_plugin
