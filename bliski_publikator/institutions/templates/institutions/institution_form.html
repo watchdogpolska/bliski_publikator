@@ -3,11 +3,13 @@
 
 {% block breadcrumbs %}
 <ol class="breadcrumb">
+    {% if object %}
     {% for jst in object.region.get_ancestors.all %}
     <li><a href="{{jst.get_absolute_url}}">{{jst}}</a></li>
     {% endfor %}
     <li><a href="{{object.region.get_absolute_url}}">{{object.region}}</a></li>
     <li><a href="{{object.get_absolute_url}}">{{object.get_absolute_url}}</a></li>
+    {% endif %}
     <li class="active">
     {% if object %}{% trans 'Update institution' %}{% else %}{% trans 'Add institution' %}{% endif %}
     </li>
