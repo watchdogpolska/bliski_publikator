@@ -28,8 +28,10 @@ class InstitutionForm(UserKwargModelFormMixin, FormHorizontalMixin, forms.ModelF
         if kwargs.get('instance', None):
             instance = kwargs.get('instance')
             kwargs['initial'] = kwargs.get('initial', {})
-            kwargs['initial']['county'] = instance.region.parent.pk
-            kwargs['initial']['voivodeship'] = instance.region.parent.parent.pk
+            if instance.region.parent:
+                kwargs['initial']['county'] = instance.region.parent.pk
+                if instance.region.parent.parent:
+                    kwargs['initial']['voivodeship'] = instance.region.parent.parent.pk
 
         super(InstitutionForm, self).__init__(*args, **kwargs)
         button_label = _('Update') if self.instance.pk else _("Save")

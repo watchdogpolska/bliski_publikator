@@ -1,8 +1,8 @@
 from atom.views import DeleteMessageMixin
-from braces.views import (FormValidMessageMixin, LoginRequiredMixin, SelectRelatedMixin,
+from braces.views import (FormValidMessageMixin, SelectRelatedMixin,
                           UserFormKwargsMixin)
 from dal import autocomplete
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
@@ -29,9 +29,11 @@ class InstitutionDetailView(SelectRelatedMixin, DetailView):
     select_related = ['region', ]
 
 
-class InstitutionCreateView(LoginRequiredMixin, UserFormKwargsMixin, CreateView):
+class InstitutionCreateView(LoginRequiredMixin, PermissionRequiredMixin, UserFormKwargsMixin,
+                            CreateView):
     model = Institution
     form_class = InstitutionForm
+    permission_required = 'institutions.add_institution'
 
     def get_form_valid_message(self):
         return _("{0} created!").format(self.object)
