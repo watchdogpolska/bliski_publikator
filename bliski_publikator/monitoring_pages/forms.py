@@ -30,8 +30,6 @@ class PageForm(UserKwargModelFormMixin, MonitoringMixin, FormHorizontalMixin, Si
 class MiniPageForm(UserKwargModelFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MiniPageForm, self).__init__(*args, **kwargs)
-
     class Meta:
         model = Page
         fields = ['title', 'ordering']
-

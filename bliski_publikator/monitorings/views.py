@@ -1,12 +1,14 @@
 from atom.ext.crispy_forms.forms import BaseTableFormSet
 from atom.views import DeleteMessageMixin
-from braces.views import FormValidMessageMixin, LoginRequiredMixin, SelectRelatedMixin, UserFormKwargsMixin
+from braces.views import (FormValidMessageMixin, LoginRequiredMixin, SelectRelatedMixin,
+                          UserFormKwargsMixin)
 from dal import autocomplete
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
-from extra_views import CreateWithInlinesView, InlineFormSet, NamedFormsetsMixin, UpdateWithInlinesView
+from django.views.generic import DeleteView, DetailView, ListView
+from extra_views import (CreateWithInlinesView, InlineFormSet, NamedFormsetsMixin,
+                         UpdateWithInlinesView)
 
 from ..monitoring_pages.models import Page
 from .forms import MonitoringForm
@@ -31,7 +33,7 @@ class PageInline(InlineFormSet):
     form_class = MiniPageForm
     formset_class = BaseTableFormSet
 
-    def get_factory_kwargs(self):
+    def get_factory_kwargs(self):  # Hack, see AndrewIngram/django-extra-views#121
         kwargs = super(PageInline, self).get_factory_kwargs()
         kwargs.pop('fields', None)
         return kwargs
