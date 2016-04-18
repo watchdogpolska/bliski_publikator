@@ -10,3 +10,5 @@ factory_boy==2.6.1
 # pytest!
 pytest-django==2.9.1
 pytest-sugar==0.5.1
+
+codecov>=1.4.0
