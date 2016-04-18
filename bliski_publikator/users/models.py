@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import Permission
 
 
 @python_2_unicode_compatible
@@ -20,3 +21,9 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('users:detail', kwargs={'username': self.username})
+
+    def assign_perm(self, perm):
+        app_label, codename = perm.split('.', 1)
+        perm_obj = Permission.objects.get(content_type__app_label=app_label,
+                                          codename=codename)
+        self.user_permissions.add(perm_obj)

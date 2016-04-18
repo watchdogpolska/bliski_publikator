@@ -1,9 +1,8 @@
 from atom.ext.crispy_forms.forms import BaseTableFormSet
 from atom.views import DeleteMessageMixin
-from braces.views import (FormValidMessageMixin, LoginRequiredMixin, SelectRelatedMixin,
-                          UserFormKwargsMixin)
+from braces.views import FormValidMessageMixin, SelectRelatedMixin, UserFormKwargsMixin
 from dal import autocomplete
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView
@@ -67,7 +66,7 @@ class MonitoringDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteMe
                            DeleteView):
     model = Monitoring
     success_url = reverse_lazy('monitorings:list')
-    permission_required = 'monitorings.change_monitoring'
+    permission_required = 'monitorings.delete_monitoring'
 
     def get_success_message(self):
         return _("{0} deleted!").format(self.object)

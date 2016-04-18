@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
 from django.test import TestCase
@@ -8,13 +7,6 @@ from django.test import TestCase
 from ..users.factories import UserFactory
 from .factories import InstitutionFactory
 from .models import Institution
-
-
-def assign_perm(perm, user):
-    app_label, codename = perm.split('.', 1)
-    perm_obj = Permission.objects.get(content_type__app_label=app_label,
-                                      codename=codename)
-    user.user_permissions.add(perm_obj)
 
 
 class InstitutionTestCase(TestCase):
@@ -73,7 +65,7 @@ class InstitutionCreateViewTestCase(TestCase):
 
     def test_permitted(self):
         self.client.login(username=self.user.username, password='pass')
-        assign_perm('institutions.add_institution', self.user)
+        self.user.assign_perm('institutions.add_institution')
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)
 
@@ -95,7 +87,7 @@ class InstitutionUpdateViewTestCase(TestCase):
 
     def test_permitted(self):
         self.client.login(username=self.user.username, password='pass')
-        assign_perm('institutions.change_institution', self.user)
+        self.user.assign_perm('institutions.change_institution')
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)
 
@@ -117,7 +109,7 @@ class InstitutionDeleteViewTestCase(TestCase):
 
     def test_permitted(self):
         self.client.login(username=self.user.username, password='pass')
-        assign_perm('institutions.delete_institution', self.user)
+        self.user.assign_perm('institutions.delete_institution')
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)
 
