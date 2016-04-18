@@ -1,8 +1,7 @@
 from atom.views import DeleteMessageMixin
-from braces.views import (FormValidMessageMixin, LoginRequiredMixin, SelectRelatedMixin,
+from braces.views import (FormValidMessageMixin, SelectRelatedMixin,
                           UserFormKwargsMixin)
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from cached_property import cached_property
@@ -32,9 +31,11 @@ class PageDetailView(SelectRelatedMixin, MonitoringMixin, DetailView):
     select_related = ['monitoring', ]
 
 
-class PageCreateView(LoginRequiredMixin, MonitoringMixin, UserFormKwargsMixin, CreateView):
+class PageCreateView(LoginRequiredMixin, PermissionRequiredMixin, MonitoringMixin,
+                     UserFormKwargsMixin, CreateView):
     model = Page
     form_class = PageForm
+    permission_required = 'monitoring_pages.add_page'
 
     def get_form_kwargs(self, *args, **kwargs):
         kw = super(PageCreateView, self).get_form_kwargs(*args, **kwargs)
@@ -49,7 +50,7 @@ class PageUpdateView(LoginRequiredMixin, PermissionRequiredMixin, MonitoringMixi
                      UserFormKwargsMixin, FormValidMessageMixin, UpdateView):
     model = Page
     form_class = PageForm
-    permission_required = 'monitorings_pages.change_monitoring'
+    permission_required = 'monitoring_pages.change_page'
 
     def get_form_kwargs(self, *args, **kwargs):
         kw = super(PageUpdateView, self).get_form_kwargs(*args, **kwargs)
@@ -63,7 +64,7 @@ class PageUpdateView(LoginRequiredMixin, PermissionRequiredMixin, MonitoringMixi
 class PageDeleteView(LoginRequiredMixin, PermissionRequiredMixin, MonitoringMixin,
                      DeleteMessageMixin, DeleteView):
     model = Page
-    permission_required = 'monitorings_pages.change_monitoring'
+    permission_required = 'monitoring_pages.delete_page'
 
     def get_success_url(self):
         return self.monitoring.get_absolute_url()

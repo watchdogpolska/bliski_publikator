@@ -45,3 +45,7 @@ class Page(TimeStampedModel):
         return reverse('monitorings:pages:delete', kwargs={'slug': self.slug,
                                                            'monitoring_slug': self.monitoring.slug}
                        )
+
+    @classmethod
+    def get_add_url(self, monitoring):
+        return reverse('monitorings:pages:create', kwargs={'monitoring_slug': monitoring.slug})
