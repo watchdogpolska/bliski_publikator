@@ -1,9 +1,13 @@
-from django.test import TestCase
+from __future__ import unicode_literals
+
+from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
+from django.utils.encoding import force_text
+from django.test import TestCase
 
 from ..users.factories import UserFactory
 from .factories import InstitutionFactory
-from django.contrib.auth.models import Permission
+from .models import Institution
 
 
 def assign_perm(perm, user):
@@ -11,6 +15,30 @@ def assign_perm(perm, user):
     perm_obj = Permission.objects.get(content_type__app_label=app_label,
                                       codename=codename)
     user.user_permissions.add(perm_obj)
+
+
+class InstitutionTestCase(TestCase):
+    def setUp(self):
+        self.obj = InstitutionFactory(name="WSA w Warszawie")
+
+    def test_str(self):
+        self.assertEqual(force_text(self.obj), "WSA w Warszawie")
+
+    def test_get_absolute_url(self):
+        self.assertEqual(self.obj.get_absolute_url(),
+                         "/institutions/institution-wsa-w-warszawie")
+
+    def test_get_update_url(self):
+        self.assertEqual(self.obj.get_update_url(),
+                         "/institutions/institution-wsa-w-warszawie/~update")
+
+    def test_get_delete_url(self):
+        self.assertEqual(self.obj.get_delete_url(),
+                         "/institutions/institution-wsa-w-warszawie/~delete")
+
+    def test_get_add_url(self):
+        self.assertEqual(Institution.get_add_url(),
+                         "/institutions/~create")
 
 
 class InstitutionListViewTestCase(TestCase):
