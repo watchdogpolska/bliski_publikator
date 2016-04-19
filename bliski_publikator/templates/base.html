@@ -50,14 +50,21 @@
                 <a class="nav-link" href="{{object.get_absolute_url}}">{{object}}</a>
               </li>
               {% endfor %}
+              {% if monitoring_full_list.nonactive  or perms.monitorings.add_monitoring %}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'Others' %} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   {% for object in monitoring_full_list.nonactive %}
                   <li><a class="nav-link" href="{{object.get_absolute_url}}">{{object}}</a></li>
                   {% endfor %}
+                  {% if monitoring_full_list.nonactive and perms.monitorings.add_monitoring %}
+                  <li role="separator" class="divider"></li>
+                  {% endif %}
+                  {% if perms.monitorings.add_monitoring %}
+                  <li><a href="{% url 'monitorings:create' %}">{% trans 'Add monitoring' %}</a>{% endif %}
                 </ul>
               </li>
+              {% endif %}
             </ul>
             
             <ul class="nav navbar-nav navbar-right">
