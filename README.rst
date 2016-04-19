@@ -6,8 +6,8 @@
     :target: https://travis-ci.org/watchdogpolska/bliski_publikator
     :alt: Build Status
 
-.. image:: https://requires.io/github/watchdogpolska/bliski_publikator/requirements.svg?branch=requires-io-master
-     :target: https://requires.io/github/watchdogpolska/bliski_publikator/requirements/?branch=requires-io-master
+.. image:: https://requires.io/github/watchdogpolska/bliski_publikator/requirements.svg?branch=master
+     :target: https://requires.io/github/watchdogpolska/bliski_publikator/requirements/?branch=master
      :alt: Requirements Status
 
 bliski_publikator
