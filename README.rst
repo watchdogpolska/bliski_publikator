@@ -46,14 +46,19 @@ Running tests with py.test
 Live reloading and Sass CSS compilation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Moved to `Live reloading and SASS compilation`_.
+If you’d like to take advantage of live reloading and Sass / JS compilation you can do so with a little bit of prep work.
 
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.org/en/latest/live-reloading-and-sass-compilation.html
+Make sure that nodejs, gulp-cli, bower is installed. Then in the project root run:
 
+    $ npm install
 
+Now you just need:
 
+    $ gulp watch
 
+The base app will now run as it would with the usual manage.py runserver but with live reloading and Sass compilation enabled.
 
+To get live reloading to work you won't need to install an appropriate browser extension.  It's provided by proxying request and injecting script.
 
 
 Sentry
