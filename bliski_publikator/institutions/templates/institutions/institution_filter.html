@@ -1,16 +1,24 @@
 {% extends 'institutions/institution_base.html' %}
 {% load i18n crispy_forms_tags %}
+
+{% block buttons %}
+{% if perms.institutions.add_institution %}
+<a href="{{view.model.get_add_url}}" class="btn btn-primary">{% trans 'Add institution' %}</a>
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-sm-4">
-    <form>
-    {% crispy filter.form %}
-    <input type="submit" class="btn btn-primary">
-    </div>
-    <div class="col-sm-4">
-    {% for object in object_list %}
-        {% include 'institutions/_institution_meta.html' with object=object %}
-    {% endfor %}
+        <form>
+            {% crispy filter.form %}
+            <input type="submit" class="btn btn-primary">
+        </form>
+        <div class="col-sm-4">
+            {% for object in object_list %}
+            {% include 'institutions/_institution_meta.html' with object=object %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

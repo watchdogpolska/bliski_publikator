@@ -23,12 +23,13 @@ class Institution(TimeStampedModel):
     email = models.EmailField(verbose_name=_("E-mail"), blank=True)
     region = models.ForeignKey(JST,
                                limit_choices_to={'category__level': 3},
-                               verbose_name=_('Unit of administrative division'),
+                               verbose_name=_('Community'),
                                db_index=True)
     regon = models.CharField(verbose_name=_("REGON"), max_length=14, blank=True)  # TODO: RegonField
     krs = models.CharField(verbose_name=_("KRS"), max_length=11, blank=True)  # TODO: KRSField
     monitorings = models.ManyToManyField(to='monitorings.Monitoring',
-                                         through='monitorings.monitoring_institutions')
+                                         through='monitorings.monitoring_institutions',
+                                         verbose_name=_("Monitorings"))
     objects = InstitutionQuerySet.as_manager()
 
     class Meta:

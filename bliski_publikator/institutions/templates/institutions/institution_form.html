@@ -8,7 +8,7 @@
     <li><a href="{{jst.get_absolute_url}}">{{jst}}</a></li>
     {% endfor %}
     <li><a href="{{object.region.get_absolute_url}}">{{object.region}}</a></li>
-    <li><a href="{{object.get_absolute_url}}">{{object.get_absolute_url}}</a></li>
+    <li><a href="{{object.get_absolute_url}}">{{object}}</a></li>
     {% endif %}
     <li class="active">
     {% if object %}{% trans 'Update institution' %}{% else %}{% trans 'Add institution' %}{% endif %}
@@ -22,6 +22,5 @@
 
 {% block javascript %}
 <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
-
 {{ form.media }}
 {% endblock %}

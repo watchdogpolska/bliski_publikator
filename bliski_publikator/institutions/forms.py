@@ -12,16 +12,18 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 class InstitutionForm(UserKwargModelFormMixin, FormHorizontalMixin, forms.ModelForm):
     # TODO: Split region,voivodeship,county into forms.MultiWidget
     voivodeship = forms.ModelChoiceField(
-       required=False,
-       queryset=JST.objects.voivodeship().all(),
-       widget=autocomplete.ModelSelect2(url='teryt:voivodeship-autocomplete')
+        label=_("Voivodeship"),
+        required=False,
+        queryset=JST.objects.voivodeship().all(),
+        widget=autocomplete.ModelSelect2(url='teryt:voivodeship-autocomplete')
     )
     county = forms.ModelChoiceField(
-       required=False,
-       queryset=JST.objects.county().all(),
-       widget=autocomplete.ModelSelect2(url='teryt:county-autocomplete',
-                                        forward=['voivodeship'],
-                                        )
+        label=_("County"),
+        required=False,
+        queryset=JST.objects.county().all(),
+        widget=autocomplete.ModelSelect2(url='teryt:county-autocomplete',
+                                         forward=['voivodeship'],
+                                         )
     )
 
     def __init__(self, *args, **kwargs):
@@ -35,6 +37,7 @@ class InstitutionForm(UserKwargModelFormMixin, FormHorizontalMixin, forms.ModelF
 
         super(InstitutionForm, self).__init__(*args, **kwargs)
         button_label = _('Update') if self.instance.pk else _("Save")
+        self.instance.user = self.user
         self.helper.form_class = 'form'
         self.helper.layout = Layout(
             Fieldset(

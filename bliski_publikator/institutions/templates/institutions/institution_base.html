@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block buttons %}
-{% if object and perms.institutions.change_institution or perms.institutions.delete_institution %}
+{% if perms.institutions.add_institution or perms.institutions.change_institution or perms.institutions.delete_institution %}
+{% if object %}
 <div class="btn-group" role="group">
-{% if perms.institutions.change_institution %}
-<a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update institution' %}</a>
-{% endif %}
+    {% if perms.institutions.change_institution %}
+    <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update institution' %}</a>
+    {% endif %}
 
-{% if perms.institutions.delete_institution %}
-<a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete institution' %}</a>
-{% endif %}
+    {% if perms.institutions.delete_institution %}
+    <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete institution' %}</a>
+    {% endif %}
 </div>
+{% endif %}
 {% endif %}
 {% endblock %}
