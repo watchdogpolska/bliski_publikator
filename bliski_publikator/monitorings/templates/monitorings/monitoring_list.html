@@ -1,11 +1,13 @@
 {% extends 'monitorings/monitoring_base.html' %}
 {% load i18n %}
 
-{% block content %}
+{% block buttons %}
 {% if perms.monitorings.add_monitoring %}
 <a href="{{view.model.get_add_url}}" class="btn btn-primary">{% trans 'Add monitoring' %}</a>
 {% endif %}
+{% endblock %}
 
+{% block content %}
 {% for object in object_list %}
 <a href="{{object.get_absolute_url}}">{{object}}</a>
 {% endfor %}

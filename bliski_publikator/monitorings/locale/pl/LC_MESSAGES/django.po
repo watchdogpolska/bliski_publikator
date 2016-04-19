@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-16 23:40+0000\n"
+"POT-Creation-Date: 2016-04-19 00:12+0000\n"
 "PO-Revision-Date: 2016-04-17 01:40+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
@@ -19,88 +19,88 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.4\n"
 
-#: apps.py:8 models.py:32
+#: monitorings/apps.py:8 monitorings/models.py:32
 msgid "Monitorings"
 msgstr "Monitoringi"
 
-#: models.py:18
+#: monitorings/models.py:18
 msgid "Name"
 msgstr "Nazwa"
 
-#: models.py:19
+#: monitorings/models.py:19
 msgid "Slug"
 msgstr "Identyfikator redakcyjny"
 
-#: models.py:21
+#: monitorings/models.py:21
 msgid "Description"
 msgstr "Opis"
 
-#: models.py:22
+#: monitorings/models.py:22
 msgid "Active status"
 msgstr "Status aktywności"
 
-#: models.py:23
+#: monitorings/models.py:23
 msgid "Logo"
 msgstr "Logo"
 
-#: models.py:25
+#: monitorings/models.py:25
 msgid "Institution"
 msgstr "Instytucja"
 
-#: models.py:26
+#: monitorings/models.py:26
 msgid "Specifies which institutions are covered by monitoring"
 msgstr "Określ, które instytucje są objęte monitoringiem"
 
-#: models.py:31
+#: monitorings/models.py:31
 msgid "Monitoring"
 msgstr "Monitoring"
 
-#: templates/monitorings/monitoring_base.html:7
-#: templates/monitorings/monitoring_form.html:8
+#: monitorings/templates/monitorings/monitoring_base.html:8
+#: monitorings/templates/monitorings/monitoring_form.html:8
 msgid "Update monitoring"
 msgstr "Zaktualizuj monitoring"
 
-#: templates/monitorings/monitoring_base.html:11
-#: templates/monitorings/monitoring_confirm_delete.html:8
+#: monitorings/templates/monitorings/monitoring_base.html:12
+#: monitorings/templates/monitorings/monitoring_confirm_delete.html:8
 msgid "Delete monitoring"
 msgstr "Usuń monitoring"
 
-#: templates/monitorings/monitoring_base.html:15
+#: monitorings/templates/monitorings/monitoring_base.html:16
 msgid "Add page"
 msgstr "Dodaj stronę"
 
-#: templates/monitorings/monitoring_detail.html:27
+#: monitorings/templates/monitorings/monitoring_detail.html:27
 msgid "Design and purpose"
 msgstr "Założenia i cele"
 
-#: templates/monitorings/monitoring_detail.html:36
+#: monitorings/templates/monitorings/monitoring_detail.html:36
 msgid "Covered institutions"
 msgstr "Instytucje objęte"
 
-#: templates/monitorings/monitoring_detail.html:44
+#: monitorings/templates/monitorings/monitoring_detail.html:44
 msgid "No institutions"
 msgstr "Brak instytucji"
 
-#: templates/monitorings/monitoring_form.html:8
-#: templates/monitorings/monitoring_list.html:5
+#: monitorings/templates/monitorings/monitoring_form.html:8
+#: monitorings/templates/monitorings/monitoring_list.html:6
 msgid "Add monitoring"
 msgstr "Dodaj monitoring"
 
-#: templates/monitorings/monitoring_form.html:19
+#: monitorings/templates/monitorings/monitoring_form.html:19
 msgid "Submit"
 msgstr "Zapisz"
 
-#: views.py:43
+#: monitorings/views.py:50
 #, python-brace-format
 msgid "{0} created!"
 msgstr "{0} utworzony!"
 
-#: views.py:55
+#: monitorings/views.py:62
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: views.py:65
+#: monitorings/views.py:72
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
