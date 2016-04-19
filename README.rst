@@ -1,3 +1,15 @@
+.. image:: https://codecov.io/github/watchdogpolska/bliski_publikator/coverage.svg?branch=master
+    :target: https://codecov.io/github/watchdogpolska/bliski_publikator?branch=master
+    :alt: Coverage Status
+
+.. image:: https://travis-ci.org/watchdogpolska/bliski_publikator.svg?branch=master
+    :target: https://travis-ci.org/watchdogpolska/bliski_publikator
+    :alt: Build Status
+
+.. image:: https://requires.io/github/watchdogpolska/bliski_publikator/requirements.svg?branch=requires-io-master
+     :target: https://requires.io/github/watchdogpolska/bliski_publikator/requirements/?branch=requires-io-master
+     :alt: Requirements Status
+
 bliski_publikator
 ==============================
 
