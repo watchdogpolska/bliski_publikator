@@ -34,7 +34,7 @@ django-autoslug==1.9.3
 pytz==2016.3
 
 # Redis support
-django-redis==4.4.1
+django-redis==4.4.2
 redis>=2.10.0
 
 # Your custom requirements go here
