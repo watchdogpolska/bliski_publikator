@@ -7,6 +7,7 @@ Local settings
 - Add Django Debug Toolbar
 - Add django-extensions as app
 '''
+import os
 
 from .common import *  # noqa
 
@@ -14,6 +15,15 @@ from .common import *  # noqa
 # ------------------------------------------------------------------------------
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+
+STATICFILES_DIRS += (
+    str(ROOT_DIR.path("bower_components")),
+)
+
+
+TEMPLATES[0]['DIRS'].insert(
+    0, str(APPS_DIR.path("templates_dev"))
+)
 
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
