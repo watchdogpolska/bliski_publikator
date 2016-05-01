@@ -49,11 +49,15 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(){
-        this._montiroingSrvice
-            .getMonitoring(this.monitoring_id)
-            .subscribe(
-                (m => this.monitoring = m),
-                (error => { console.log(error) })
-            )
+        if(this.monitoring_id > 0){
+            this._montiroingSrvice
+                .getMonitoring(this.monitoring_id)
+                .subscribe(
+                    (m => this.monitoring = m),
+                    (error => { console.log(error) })
+                )
+        }else{
+            this.monitoring = new Monitoring();
+        }
     }
 }

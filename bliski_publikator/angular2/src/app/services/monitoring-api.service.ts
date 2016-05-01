@@ -18,6 +18,11 @@ export class MonitoringService extends BaseApiService {
         super(http);
     }
 
+    saveMonitoring(monitoring: Monitoring){
+        var data = monitoring.toPlainObject();
+        return this.simple_post('monitoring/', data);
+    }
+
     getMonitoring(id: number):Observable<Monitoring> {
         return this.simple_get(`monitoring/${id}`)
             .map(data => {

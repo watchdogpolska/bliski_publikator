@@ -7,7 +7,7 @@ import { QuestionBase } from '../model/question-base'
 import { DropdownQuestion } from '../model/question-dropdown'
 import { TextboxQuestion } from '../model/question-textbox'
 import { QuestionEditComponent } from './question-edit.component'
-
+import { MonitoringService } from '../services/monitoring-api.service'
 
 @Component({
     selector: 'sowp-question-editor',
@@ -18,6 +18,9 @@ import { QuestionEditComponent } from './question-edit.component'
         DROPDOWN_DIRECTIVES,
         // Dragula
     ],
+    providers: [
+        MonitoringService
+    ]
     // viewProviders: [DragulaService],
 })
 export class QuestionEditorComponent implements OnInit {
@@ -29,6 +32,9 @@ export class QuestionEditorComponent implements OnInit {
 
     preview: Object;
 
+    constructor(private _api:MonitoringService ){
+
+    }
     ngOnInit() {
         this.questions = this.monitoring.questions;
         this.monitoring.questions_changes.subscribe(
@@ -64,7 +70,9 @@ export class QuestionEditorComponent implements OnInit {
     }
 
     saveMonitoring() {
-        this.preview = JSON.parse(JSON.stringify(this.monitoring.toPlainObject()));
-        console.log(this.preview);
+        this._api.saveMonitoring(this.monitoring).subscribe(
+            v => { console.log(v); alert("Zapisano"); },
+            v => { console.log(v); alert("Błąd"); },
+        );
     }
 }
