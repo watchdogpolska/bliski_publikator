@@ -8,6 +8,23 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
+from rest_framework import routers
+from bliski_publikator.institutions.viewsets import InstitutionViewSet
+from bliski_publikator.users.viewsets import UserViewSet
+from bliski_publikator.teryt.viewsets import (JSTViewSet, JednostkaAdministracyjnaViewSet,
+                                              CategoryViewSet)
+from bliski_publikator.monitorings.viewsets import MonitoringViewSet
+from bliski_publikator.monitoring_pages.viewsets import PageViewSet
+
+router = routers.DefaultRouter()
+router.register(r'institutions', InstitutionViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'teryt', JSTViewSet)
+router.register(r'teryt', JednostkaAdministracyjnaViewSet)
+router.register(r'category', CategoryViewSet)
+router.register(r'monitorings', MonitoringViewSet)
+router.register(r'monitoring_pages', PageViewSet)
+
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
@@ -24,7 +41,8 @@ urlpatterns = [
     url(r'^institutions/', include("bliski_publikator.institutions.urls",
                                    namespace="institutions")),
     url(r'^teryt/', include("bliski_publikator.teryt.urls", namespace="teryt")),
-
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/', include(router.urls)),
     # Your stuff: custom urls includes go here
 
 
