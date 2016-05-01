@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
         let nativeElement = this._el.nativeElement;
         this.monitoring_id = +nativeElement.getAttribute('monitoring-id');
         this.organizaiton_id = +nativeElement.getAttribute('organizaiton-id');
-        this.mode = nativeElement.getAttribute('type') || 'mode';
+        this.mode = nativeElement.getAttribute('mode') || 'editor';
     }
 
     ngOnInit(){
