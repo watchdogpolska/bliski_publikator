@@ -1,0 +1,18 @@
+{
+	"title": "API Bardzo przydatne",
+	"base_url": "api/",
+	"entry-points": [
+		{
+			"path": "answer",
+			"accepted_method": "POST"
+		},
+		{
+			"path": "/monitoring/[ID]",
+			"accepted_method": "GET"
+		},
+		{
+			"path": "/orgnaization/[ID]",
+			"accepted_method": "GET"
+		},
+	] 
+}

@@ -126,4 +126,13 @@ module.exports = {
     js: srcAssets + '/scripts/*.js',
     html: baseTemplate
   },
+  webpack: {
+    entry: packageName + '/angular2/src/main.ts',
+    dev: {
+      dest: devStatic + '/angular2/'
+    },
+    prod: {
+      dest: prodStatic + '/angular2/'
+    }
+  }
 };

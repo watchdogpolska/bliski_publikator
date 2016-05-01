@@ -11,6 +11,8 @@ from django.views import defaults as default_views
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
+    url(r'^angular2/$', TemplateView.as_view(template_name='pages/angular2-example.html'), name="ng2-example"),
+    url(r'^api/monitoring/[0-9]+$', TemplateView.as_view(template_name='api/monitoring-1-get-ok.json'), name="monitoring-1-get-ok"),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, include(admin.site.urls)),

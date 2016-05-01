@@ -12,3 +12,4 @@ bower_components/
 
 templates_dev/
 templates_prod/
+static/angular2/
