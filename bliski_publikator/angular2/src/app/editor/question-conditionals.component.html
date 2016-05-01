@@ -15,7 +15,7 @@
     </div>
     <div class="col-sm-10">
         <ul class="list-unstyled">
-            <li *ngFor="#condition of current.hideConditions">
+            <li *ngFor="let condition of current.hideConditions">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div [ngSwitch]="condition.type">
@@ -37,9 +37,9 @@
                                         <label for="input" class="col-sm-2 control-label">Pytanie:</label>
                                         <div class="col-sm-10">
                                             <select name="" id="input" class="form-control" required="required">
-                                                <option 
-                                                *ngFor="#option of questions" 
-                                                [value]="option" 
+                                                <option
+                                                *ngFor="let option of questions"
+                                                [value]="option"
                                                 [hidden]="current == option"
                                                 [selected]="current.target == option">
                                                 {{ option.label }}</option>

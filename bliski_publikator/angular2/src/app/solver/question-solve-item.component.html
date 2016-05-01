@@ -10,7 +10,7 @@
       </div>
       <div *ngSwitchWhen="'dropdown'">
         <select [id]="question.key" [name]="question.key" [ngControl]="question.key">
-          <option *ngFor="#opt of question.options" [value]="opt.key">{{opt.value}}</option>
+          <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
         </select>
       </div>
       <div *ngSwitchDefault>default</div>

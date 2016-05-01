@@ -3,7 +3,7 @@
 
 <div>
 	<form (ngSubmit)="onSubmit()" class="form-horizontal">
-		<div *ngFor="#question of monitoring.questions">
+		<div *ngFor="let question of monitoring.questions">
 			<div [hidden]="isHidden(question)">
 				<sowp-question-view [question]="question" [hidden]="isHidden(question)" [form]="form"></sowp-question-view>
 				<hr>

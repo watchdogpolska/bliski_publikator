@@ -18,7 +18,7 @@
 <h3>Pytania</h3>
 <div class="questions">
 	<accordion *ngIf="questions.length > 0">
-		<accordion-group #group *ngFor="#question of questions, #i = index">
+		<accordion-group #group *ngFor="let question of questions, #i = index">
 			<div accordion-heading>
 				<i class="pull-right fa fa-caret-down"
 					[ngClass]="{'fa-rotate-180': group?.isOpen}"></i>
