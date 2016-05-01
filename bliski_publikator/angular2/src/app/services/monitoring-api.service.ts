@@ -20,7 +20,7 @@ export class MonitoringService extends BaseApiService {
 
     saveMonitoring(monitoring: Monitoring){
         var data = monitoring.toPlainObject();
-        return this.simple_post('monitoring/', data);
+        return this.simple_post('monitoring/', data, {'url': document.location});
     }
 
     getMonitoring(id: number):Observable<Monitoring> {
@@ -30,9 +30,9 @@ export class MonitoringService extends BaseApiService {
                 this.addHideConditions(data.questions, questions);
                 return new Monitoring(
                     {
-                        title: data.title, 
-                        description: data.description, 
-                        questions: questions 
+                        name: data.name,
+                        description: data.description,
+                        questions: questions
                     }
                 );
             })
@@ -46,10 +46,10 @@ export class MonitoringService extends BaseApiService {
 
     parseQuestion(question):QuestionBase<any>{
         // console.log('parseQuestion', question);
-        switch(question.controlType){
-            case 'textbox':
+        switch(question.type){
+            case 'short_text':
                 return new TextboxQuestion(question);
-            case 'dropdown': 
+            case 'choice':
                 return new DropdownQuestion(question);
         }
         throw new Error(`Unsupported controlType [${question.controlType}].`);
@@ -64,7 +64,7 @@ export class MonitoringService extends BaseApiService {
     }
 
     parseHideConditions(data, questions: QuestionBase<any>[]) {
-        let target = questions.find(t => data.target == t.id);
+        let target = questions[data.target];
         switch(data.type){
             case 'is-equal':{
                 let value = data.value;

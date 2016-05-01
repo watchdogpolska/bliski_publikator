@@ -7,7 +7,7 @@ export interface DropdownOption{
 }
 
 export class DropdownQuestion extends QuestionBase<string>{
-    controlType = 'dropdown';
+    controlType = 'choice';
     _options: DropdownOption[] = [];
     options_changes = new EventEmitter();
 
@@ -25,8 +25,8 @@ export class DropdownQuestion extends QuestionBase<string>{
         this.options_changes.emit(options);
     }
 
-    toPlainObject() {
-        let obj = super.toPlainObject();
+    toPlainObject(questions: QuestionBase<any>[]) {
+        let obj = super.toPlainObject(questions);
         obj['options'] = this._options;
         return obj;
     }

@@ -16,9 +16,9 @@ export class isNullConditional extends BaseConditional{
         return answers[this.target.key] == null || answers[this.target.key] === "";
     }
 
-    toPlainObject(){
-        let obj = super.toPlainObject();
-        obj['target'] = this.target.id;
-        return obj; 
+    toPlainObject(questions: QuestionBase<any>[]) {
+        let obj = super.toPlainObject(questions);
+        obj['target'] = questions.indexOf(this.target);
+        return obj;
     }
 }

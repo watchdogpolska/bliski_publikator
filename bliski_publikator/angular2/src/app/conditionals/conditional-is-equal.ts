@@ -19,10 +19,10 @@ export class isEqualConditional extends BaseConditional{
         return answers[this.target.key] == this.value;
     }
 
-    toPlainObject(){
-        let obj = super.toPlainObject();
-        obj['target'] = this.target.id;
+    toPlainObject(questions: QuestionBase<any>[]) {
+        let obj = super.toPlainObject(questions);
+        obj['target'] = questions.indexOf(this.target);
         obj['value'] = this.value;
-        return obj; 
+        return obj;
     }
 }

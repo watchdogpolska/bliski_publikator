@@ -13,8 +13,8 @@ export abstract class BaseApiService {
     private _apiUrl = '/api/';
     constructor(protected _http: Http) { }
 
-    protected simple_post(entry, data){
-        let url = this._apiUrl + entry;
+    protected simple_post(entry, data, options = {}){
+        let url = options['url'] || (this._apiUrl + entry);
         let body = JSON.stringify(data);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });

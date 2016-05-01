@@ -1,31 +1,29 @@
 {
-  "title": "Monitoring spółek komunalnych",
+  "name": "Monitoring spółek komunalnych",
   "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum atque necessitatibus odio, quos ipsum numquam ipsam minus accusantium animi alias?",
   "questions": [
     {
       "id": 1,
-      "label": "Czy to jest bardzo ważne?",
+      "name": "Czy to jest bardzo ważne?",
       "description": "Czy to jest bardzo ważne?",
       "order": 1,
-      "controlType": "textbox",
-      "hideConditions": [],
-      "inputType": "text"
+      "type": "short_text",
+      "hideConditions": []
     },
     {
       "id": 2,
-      "label": "Czy to jest bardzo ważne?",
+      "name": "Czy to jest bardzo ważne?",
       "description": "Czy to jest bardzo ważne?",
       "order": 1,
-      "controlType": "textbox",
-      "hideConditions": [],
-      "inputType": "text"
+      "type": "short_text",
+      "hideConditions": []
     },
     {
       "id": 3,
-      "label": "Jak bardzo jest to ważne?",
+      "name": "Jak bardzo jest to ważne?",
       "description": "Czy to jest bardzo ważne?",
       "order": 1,
-      "controlType": "dropdown",
+      "type": "short_text",
       "hideConditions": [
         {
           "type": "is-equal",
@@ -58,10 +56,10 @@
     },
     {
       "id": 4,
-      "label": "Jak bardzo jest to ważne?",
+      "name": "Jak bardzo jest to ważne?",
       "description": "Czy to jest bardzo ważne?",
       "order": 1,
-      "controlType": "dropdown",
+      "type": "choice",
       "hideConditions": [
         {
           "type": "is-equal",
@@ -94,10 +92,10 @@
     },
     {
       "id": 5,
-      "label": "Czy ta informacja została opublikowana?",
+      "name": "Czy ta informacja została opublikowana?",
       "description": "Publikowanie informacji jest bardzo ważne. Lorem ipsum dolor \n                sit amet, consectetur adipisicing elit. Incidunt, odio, error. \n                Accusantium aspernatur architecto, similique nemo? Illo, \n                neque alias consectetur?",
       "order": 1,
-      "controlType": "dropdown",
+      "type": "choice",
       "hideConditions": [],
       "options": [
         {
@@ -112,10 +110,10 @@
     },
     {
       "id": 6,
-      "label": "Od kiedy ta informacja jest widoczna?",
+      "name": "Od kiedy ta informacja jest widoczna?",
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum similique adipisci eveniet deleniti non ad, eaque quae architecto numquam reprehenderit. Repudiandae molestias tempore dolores nihil provident sequi iste atque, explicabo.",
       "order": 1,
-      "controlType": "textbox",
+      "type": "short_text",
       "hideConditions": [
         {
           "type": "is-equal",
@@ -127,8 +125,7 @@
           "target": 5,
           "value": null
         }
-      ],
-      "inputType": "text"
+      ]
     }
   ]
 }

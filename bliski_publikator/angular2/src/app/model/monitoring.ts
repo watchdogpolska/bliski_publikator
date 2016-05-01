@@ -3,26 +3,26 @@ import { EventEmitter } from 'angular2/core';
 import { QuestionBase } from './question-base';
 
 export class Monitoring{
-    title: string;
+    name: string;
     description: string;
     private _questions: QuestionBase<any>[];
     questions_changes = new EventEmitter();
 
     constructor(options: {
-        title?: string,
+        name?: string,
         description?: string,
         questions?: QuestionBase<any>[]
     } = {}) {
-        this.title = options.title || '';
+        this.name = options.name || '';
         this.description = options.description || '';
         this._questions = options.questions || [];
     }
 
     toPlainObject() {
         let obj = {
-            'title': this.title,
+            'name': this.name,
             'description': this.description,
-            'questions': this._questions.map(t => t.toPlainObject())
+            'questions': this._questions.map(t => t.toPlainObject(this.questions))
         };
         return obj;
     }
