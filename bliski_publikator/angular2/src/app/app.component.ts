@@ -15,7 +15,7 @@ import { Monitoring } from './model/monitoring'
 @Component({
     selector: 'app',
     template: `
-        <div [ngSwitch]="type" *ngIf="monitoring">
+        <div [ngSwitch]="mode" *ngIf="monitoring">
             <sowp-question-solver
                 *ngSwitchWhen="'solver'"
                 [monitoring]="monitoring"></sowp-question-solver>
@@ -36,8 +36,8 @@ export class AppComponent implements OnInit {
 
     monitoring_id: number;
     organizaiton_id: number;
+    mode: string;
     monitoring: Monitoring
-    type: string = 'editor';
     constructor(
         private _montiroingSrvice: MonitoringService,
         private _el: ElementRef
@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
         let nativeElement = this._el.nativeElement;
         this.monitoring_id = +nativeElement.getAttribute('monitoring-id');
         this.organizaiton_id = +nativeElement.getAttribute('organizaiton-id');
+        this.mode = nativeElement.getAttribute('type') || 'mode';
     }
 
     ngOnInit(){
