@@ -1,0 +1,131 @@
+{
+  "name": "Monitoring spółek komunalnych",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum atque necessitatibus odio, quos ipsum numquam ipsam minus accusantium animi alias?",
+  "questions": [
+    {
+      "id": 1,
+      "name": "Czy to jest bardzo ważne?",
+      "description": "Czy to jest bardzo ważne?",
+      "order": 1,
+      "type": "short_text",
+      "hideConditions": []
+    },
+    {
+      "id": 2,
+      "name": "Czy to jest bardzo ważne?",
+      "description": "Czy to jest bardzo ważne?",
+      "order": 1,
+      "type": "short_text",
+      "hideConditions": []
+    },
+    {
+      "id": 3,
+      "name": "Jak bardzo jest to ważne?",
+      "description": "Czy to jest bardzo ważne?",
+      "order": 1,
+      "type": "short_text",
+      "hideConditions": [
+        {
+          "type": "is-equal",
+          "target": 2,
+          "value": "TAK"
+        }
+      ],
+      "options": [
+        {
+          "key": "1",
+          "value": "Bardzo ważne"
+        },
+        {
+          "key": "2",
+          "value": "Ważne"
+        },
+        {
+          "key": "3",
+          "value": "Średnio"
+        },
+        {
+          "key": "4",
+          "value": "Nie ważne"
+        },
+        {
+          "key": "5",
+          "value": "Nie istotne"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Jak bardzo jest to ważne?",
+      "description": "Czy to jest bardzo ważne?",
+      "order": 1,
+      "type": "choice",
+      "hideConditions": [
+        {
+          "type": "is-equal",
+          "target": 1,
+          "value": "TAK"
+        }
+      ],
+      "options": [
+        {
+          "key": "1",
+          "value": "Bardzo ważne"
+        },
+        {
+          "key": "2",
+          "value": "Ważne"
+        },
+        {
+          "key": "3",
+          "value": "Średnio"
+        },
+        {
+          "key": "4",
+          "value": "Nie ważne"
+        },
+        {
+          "key": "5",
+          "value": "Nie istotne"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Czy ta informacja została opublikowana?",
+      "description": "Publikowanie informacji jest bardzo ważne. Lorem ipsum dolor \n                sit amet, consectetur adipisicing elit. Incidunt, odio, error. \n                Accusantium aspernatur architecto, similique nemo? Illo, \n                neque alias consectetur?",
+      "order": 1,
+      "type": "choice",
+      "hideConditions": [],
+      "options": [
+        {
+          "key": "1",
+          "value": "TAK"
+        },
+        {
+          "key": "2",
+          "value": "NIE"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Od kiedy ta informacja jest widoczna?",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum similique adipisci eveniet deleniti non ad, eaque quae architecto numquam reprehenderit. Repudiandae molestias tempore dolores nihil provident sequi iste atque, explicabo.",
+      "order": 1,
+      "type": "short_text",
+      "hideConditions": [
+        {
+          "type": "is-equal",
+          "target": 5,
+          "value": "2"
+        },
+        {
+          "type": "is-equal",
+          "target": 5,
+          "value": null
+        }
+      ]
+    }
+  ]
+}
