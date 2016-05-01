@@ -56,6 +56,7 @@ LOCAL_APPS = (
     'bliski_publikator.monitoring_pages',
     'bliski_publikator.institutions',
     'bliski_publikator.teryt',
+    'bliski_publikator.questions',
     # Your stuff: custom apps go here
 )
 
