@@ -17,7 +17,8 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.4",
-    "font-awesome": "^4.6.1"
+    "font-awesome": "^4.6.1",
+    "masonry": "^4.1.0"
   },
   "overrides": {
     "font-awesome": {
