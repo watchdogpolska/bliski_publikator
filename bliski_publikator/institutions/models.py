@@ -29,7 +29,8 @@ class Institution(TimeStampedModel):
     krs = models.CharField(verbose_name=_("KRS"), max_length=11, blank=True)  # TODO: KRSField
     monitorings = models.ManyToManyField(to='monitorings.Monitoring',
                                          through='monitorings.monitoring_institutions',
-                                         verbose_name=_("Monitorings"))
+                                         verbose_name=_("Monitorings"),
+                                         blank=True)
     objects = InstitutionQuerySet.as_manager()
 
     class Meta:
