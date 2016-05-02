@@ -68,18 +68,12 @@ class MonitoringCreateViewTestCase(TestCase):
         self.client.login(username=self.user.username, password='pass')
         self.user.assign_perm('monitorings.add_monitoring')
         resp = self._post_fixture('basic')
-        import ipdb
-        ipdb.set_trace()
-
         self.assertEqual(resp.status_code, 200)
 
     def test_advanced_fixture(self):
         self.client.login(username=self.user.username, password='pass')
         self.user.assign_perm('monitorings.add_monitoring')
         resp = self._post_fixture('advanced')
-        import ipdb
-        ipdb.set_trace()
-
         self.assertEqual(resp.status_code, 200)
 
 
