@@ -48,7 +48,7 @@ class MonitoringCreateView(LoginRequiredMixin, PermissionRequiredMixin, Template
         return JsonResponse(kwargs, status=400)
 
     def post(self, *args, **kwargs):
-        data = json.loads(self.request.body)
+        data = json.loads(self.request.body.decode('utf-8'))
 
         # Validate
         # Validate monitoring
