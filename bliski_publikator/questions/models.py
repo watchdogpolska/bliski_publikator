@@ -49,8 +49,9 @@ class ChoiceQuerySet(models.QuerySet):
 @python_2_unicode_compatible
 class Choice(TimeStampedModel):
     question = models.ForeignKey(to=Question,
-                                 verbose_name=_("Question"))
-    key = models.CharField(max_length=50, verbose_name=_("Value"))
+                                 verbose_name=_("Question"),
+                                 limit_choices_to={'type': Question.TYPE.choice})
+    key = models.CharField(max_length=50, verbose_name=_("Key"))
     value = models.CharField(max_length=50, verbose_name=_("Value"))
     order = models.PositiveSmallIntegerField(verbose_name=_("Order"))
 
