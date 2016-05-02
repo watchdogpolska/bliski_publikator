@@ -119,7 +119,7 @@ class MonitoringCreateView(LoginRequiredMixin, PermissionRequiredMixin, Template
                 continue
             for j, option in enumerate(question['options']):
                 related = {'question': question_objs[i], 'order': j}
-                choice_objs.append(ChoiceForm(options, related=related).save())
+                choice_objs.append(ChoiceForm(option, related=related).save())
         return JsonResponse({'success': True, 'url': monitoring.get_absolute_url()})
 
 
