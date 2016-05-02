@@ -44,6 +44,9 @@ class Monitoring(TimeStampedModel):
     def get_delete_url(self):
         return reverse('monitorings:delete', kwargs={'slug': self.slug})
 
+    def get_assign_url(self):
+        return reverse('monitorings:assign', kwargs={'slug': self.slug})
+
     def get_answer_url(self, institution):
         kwargs = {'slug': self.slug, 'institution_slug': institution.slug}
         return reverse('monitorings:institution_answer', kwargs=kwargs)

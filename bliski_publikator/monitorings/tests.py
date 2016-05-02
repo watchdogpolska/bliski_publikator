@@ -41,6 +41,10 @@ class MonitoringTestCase(TestCase):
         self.assertEqual(self.obj.get_delete_url(),
                          "/monitorings/monitoring-sportowy/~delete")
 
+    def test_get_assign_url(self):
+        self.assertEqual(self.obj.get_delete_url(),
+                         "/monitorings/monitoring-sportowy/~assign")
+
     def test_get_add_url(self):
         self.assertEqual(Monitoring.get_add_url(),
                          "/monitorings/~create")

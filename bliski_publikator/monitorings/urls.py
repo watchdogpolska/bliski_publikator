@@ -19,6 +19,9 @@ urlpatterns = [
         name="update"),
     url(r'^(?P<slug>[\w-]+)/~delete$', views.MonitoringDeleteView.as_view(),
         name="delete"),
+    # Extra action
+    url(r'^(?P<slug>[\w-]+)/~institution$', views.MonitoringAssignUpdateView.as_view(),
+        name="assign"),
 
     # Answer views
     url(r'^(?P<slug>[\w-]+)/(?P<institution_slug>[\w-]+)/~answer$',

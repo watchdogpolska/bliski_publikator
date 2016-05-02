@@ -1,0 +1,47 @@
+{% extends 'monitorings/institution_base.html' %}
+{% load crispy_forms_tags i18n %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{{monitoring.get_absolute_url}}">{{monitoring}}</a></li>
+    <li class="active">{% trans 'Assign institutions' %}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+            <form method="GET">
+                {{ filter.form | crispy }}
+                <input type="submit" class="btn btn-primary" value="{% trans 'Filtr' %}">
+            </form>
+    </div>
+    <div class="col-sm-8">
+    {% if object_list %}
+    <form method="POST">
+        <button type="submit" class="btn btn-primary">{% blocktrans with monitoring=monitoring %}Assign institutions to {{monitoring}}{%endblocktrans %}</button>
+        <table  class="table table-striped">
+            <tr>
+                <td>&nbsp;</td>
+                <td>{% trans 'Name' %}</td>
+                <td>{% trans 'Region' %}</td>
+            </tr>
+            {% for object in object_list %}
+                <tr class="table table-striped">
+                    <td><input type="checkbox" name="to_assign" value="{{object.pk}}"></td>
+                    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+                    <td><a href="{{object.region.get_absolute_url}}" title="TERYT: {{object.region.pk}}">{{object.region}}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div style="display:none">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        </div>
+        <button type="submit" class="btn btn-primary">{% blocktrans with monitoring=monitoring %}Assign institutions to {{monitoring}}{%endblocktrans %}</button>
+    </form>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
+

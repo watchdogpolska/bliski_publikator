@@ -3,17 +3,22 @@ import json
 from atom.ext.crispy_forms.forms import BaseTableFormSet
 from atom.views import DeleteMessageMixin
 from braces.views import FormValidMessageMixin, SelectRelatedMixin, UserFormKwargsMixin
+from cached_property import cached_property
 from dal import autocomplete
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.urlresolvers import reverse_lazy
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _f
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
+from django_filters.views import FilterView
 from extra_views import InlineFormSet, NamedFormsetsMixin, UpdateWithInlinesView
 
+from ..institutions.filters import InstitutionFilter
+from ..institutions.models import Institution
 from ..monitoring_pages.forms import MiniPageForm
 from ..monitoring_pages.models import Page
 from ..questions.forms import ChoiceForm, ConditionForm, QuestionForm, get_form_cls_for_question
@@ -150,6 +155,40 @@ class MonitoringUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UserForm
 
     def get_form_valid_message(self):
         return _("{0} updated!").format(self.object)
+
+
+# TODO Tests for MonitoringAssignUpdateView
+class MonitoringAssignUpdateView(LoginRequiredMixin, PermissionRequiredMixin, FilterView):
+    model = Institution
+    filterset_class = InstitutionFilter
+    permission_required = 'monitorings.change_monitoring'
+    template_name = 'monitorings/institution_assign.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super(MonitoringAssignUpdateView, self).get_queryset(*args, **kwargs)
+        return qs.exclude(monitorings=self.monitoring.pk).select_related('region')
+
+    @cached_property
+    def monitoring(self):
+        return get_object_or_404(Monitoring, slug=self.kwargs['slug'])
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MonitoringAssignUpdateView, self).get_context_data(*args, **kwargs)
+        context['monitoring'] = self.monitoring
+        return context
+
+    def post(self, request, *args, **kwargs):
+        ids = request.POST.getlist('to_assign')
+        qs = Institution.objects.filter(pk__in=ids).exclude(monitorings=self.monitoring.pk)
+        count = 0
+        for institution in qs:
+            self.monitoring.institutions.add(institution)
+            count += 1
+        msg = _("%(count)d institutions was assigned " +
+                "to %(monitoring)s") % {'count': count,
+                                        'monitoring': self.monitoring}
+        messages.success(self.request, msg)
+        return HttpResponseRedirect(request.get_full_path())
 
 
 class MonitoringDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteMessageMixin,
