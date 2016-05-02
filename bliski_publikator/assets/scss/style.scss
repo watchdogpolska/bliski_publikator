@@ -1,7 +1,12 @@
 @import 'variables';
-@import 'bootstrap';
+
+/* inject:scss */
+/* endinject   */
+
 @import 'milestones';
-@import 'font-awesome';
+@import 'grid';
+@import 'monitoring_item';
+
 $red: #D72626;
 $gray: #F0F0F0;
 
@@ -16,7 +21,7 @@ $gray: #F0F0F0;
   position: absolute;
   top: 0;
   right: 0;
-  border: 20px solid darken($gray, 15%); 
+  border: 20px solid darken($gray, 15%);
   border-right-color: #fff;
   border-top-color: #fff;
 }
@@ -30,7 +35,7 @@ $gray: #F0F0F0;
        display: block;
     }
   }
-  li:after { // How to write it up? 
+  li:after { // How to write it up?
     content: "";
     display: block;
     width: 25px;
@@ -45,13 +50,13 @@ $gray: #F0F0F0;
   @extend .block;
   background-color: $red;
   color: $gray;
-  a { 
+  a {
     color: darken(#fff, 10%);
   }
   a:hover{
     color: darken(#fff, 20%);
   }
-  
+
   .page-title {
     color: #fff;
   }

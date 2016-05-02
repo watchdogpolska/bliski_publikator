@@ -14,11 +14,10 @@
       <![endif]-->
 
       {% block css %}
-
-      <!-- Your stuff: Third-party css libraries go here -->
-
-      <!-- This file store project specific CSS -->
-      <link href="{% static 'css/style.css' %}" rel="stylesheet">
+      <!-- bower:css -->
+      <!-- endbower -->
+      <!-- inject:css -->
+      <!-- endinject -->
       {% endblock %}
 
     </head>
@@ -114,7 +113,10 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     {% block javascript %}
-    <script src="{% static 'js/script.js' %}"></script>
+      <!-- bower:js -->
+      <!-- endbower -->
+      <!-- inject:js -->
+      <!-- endinject -->
     {% endblock javascript %}
   </body>
   </html>

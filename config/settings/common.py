@@ -45,7 +45,8 @@ THIRD_PARTY_APPS = (
     'dal',
     'dal_select2',
     'tinymce',
-    'mptt'
+    'mptt',
+    'rest_framework'
 )
 
 # Apps specific for this project go here.
@@ -55,6 +56,7 @@ LOCAL_APPS = (
     'bliski_publikator.monitoring_pages',
     'bliski_publikator.institutions',
     'bliski_publikator.teryt',
+    'bliski_publikator.questions',
     # Your stuff: custom apps go here
 )
 
@@ -265,3 +267,14 @@ BLEACH_ALLOWED_TAGS = [
 ]
 
 LOCALE_PATHS = [str(APPS_DIR.path('locale')), ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}

@@ -1,0 +1,15 @@
+/static/dev/
+/static/prod/
+
+.DS_Store
+
+# node
+node_modules/
+
+# bower packages
+bower_components/
+.sass-cache/
+
+templates_dev/
+templates_prod/
+static/angular2/

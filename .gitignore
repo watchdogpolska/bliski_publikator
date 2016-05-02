@@ -68,3 +68,4 @@ staticfiles
 .gulp-scss-cache/
 bliski_publikator.egg-info/
 
+typings

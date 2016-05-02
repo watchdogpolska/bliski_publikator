@@ -1,0 +1,10 @@
+// TODO Make it responsive
+.grid{
+  margin: 0 -2em;
+}
+.grid__item{
+  padding: 2em;
+}
+.grid__sizer, .grid__item{
+  width: 50%;
+}

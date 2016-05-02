@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from os.path import dirname, join
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
 from django.test import TestCase
@@ -7,6 +7,7 @@ from django.test import TestCase
 from ..users.factories import UserFactory
 from .factories import MonitoringFactory
 from .models import Monitoring
+from ..institutions.factories import InstitutionFactory
 
 
 class MonitoringTestCase(TestCase):
@@ -34,8 +35,18 @@ class MonitoringTestCase(TestCase):
 
 
 class MonitoringCreateViewTestCase(TestCase):
+    def _get_json(self, filename):
+        path = join(dirname(__file__), 'fixtures', filename)
+        fp = open(path, 'rb')
+        return fp.read()
+
+    def _post_fixture(self, fixture_name, url=None):
+        body = self._get_json(fixture_name + '.json')
+        return self.client.post(url or self.url, body, content_type="application/json")
+
     def setUp(self):
         self.user = UserFactory()
+        self.institution = InstitutionFactory(pk=1)
         self.url = reverse('monitorings:create')
 
     def test_auth(self):
@@ -51,6 +62,18 @@ class MonitoringCreateViewTestCase(TestCase):
         self.client.login(username=self.user.username, password='pass')
         self.user.assign_perm('monitorings.add_monitoring')
         resp = self.client.get(self.url)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_basic_fixture(self):
+        self.client.login(username=self.user.username, password='pass')
+        self.user.assign_perm('monitorings.add_monitoring')
+        resp = self._post_fixture('basic')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_advanced_fixture(self):
+        self.client.login(username=self.user.username, password='pass')
+        self.user.assign_perm('monitorings.add_monitoring')
+        resp = self._post_fixture('advanced')
         self.assertEqual(resp.status_code, 200)
 
 

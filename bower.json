@@ -17,6 +17,21 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.4",
-    "font-awesome": "^4.6.1"
+    "font-awesome": "^4.6.1",
+    "masonry": "^4.1.0"
+  },
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "./fonts/FontAwesome.otf",
+        "./fonts/fontawesome-webfont.eot",
+        "./fonts/fontawesome-webfont.svg",
+        "./fonts/fontawesome-webfont.ttf",
+        "./fonts/fontawesome-webfont.woff",
+        "./fonts/fontawesome-webfont.woff2",
+        "./less/font-awesome.less",
+        "./scss/font-awesome.scss"
+      ]
+    }
   }
 }

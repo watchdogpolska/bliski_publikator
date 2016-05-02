@@ -96,6 +96,10 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
         'django.template.loaders.filesystem.Loader', 'django.template.loaders.app_directories.Loader', ]),
 ]
 
+TEMPLATES[0]['DIRS'].insert(
+    0, os.path.join(APPS_DIR, "templates_prod")
+)
+
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ

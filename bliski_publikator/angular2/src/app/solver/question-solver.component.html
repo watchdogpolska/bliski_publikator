@@ -1,0 +1,24 @@
+<h2>{{ monitoring.title }}</h2>
+<p>{{ monitoring.description }}</p>
+
+<div>
+	<form (ngSubmit)="onSubmit()" class="form-horizontal">
+		<div *ngFor="let question of monitoring.questions">
+			<div [hidden]="isHidden(question)">
+				<sowp-question-view [question]="question" [hidden]="isHidden(question)" [form]="form"></sowp-question-view>
+				<hr>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-10 col-sm-offset-2">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</div>
+		</div>
+	</form>
+</div>
+<b>visibility</b>
+<pre>{{ visibility | json }}</pre>
+<b>monitoring</b>
+<pre>{{ monitoring | json }}</pre>
+<b>monitoring.toPlainObject()</b>
+<pre>{{ monitoring.toPlainObject() | json }}</pre>

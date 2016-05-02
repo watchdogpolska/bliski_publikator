@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {{ block.super }}
+  <base href="/">
+{% endblock head %}
+
+{% block content %}
+  <app mode="solver">loading...</app>
+{% endblock content %}
+
+{% block javascript %}
+  {% include "angular2.html" %}
+{% endblock javascript %}
