@@ -1,27 +1,39 @@
 import json
+
 from atom.ext.crispy_forms.forms import BaseTableFormSet
 from atom.views import DeleteMessageMixin
 from braces.views import FormValidMessageMixin, SelectRelatedMixin, UserFormKwargsMixin
 from dal import autocomplete
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.urlresolvers import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _f
-
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from extra_views import InlineFormSet, NamedFormsetsMixin, UpdateWithInlinesView
-from django.http import JsonResponse
+
 from ..monitoring_pages.forms import MiniPageForm
 from ..monitoring_pages.models import Page
+from ..questions.forms import ChoiceForm, ConditionForm, QuestionForm, get_form_cls_for_question
+from ..questions.models import Question, Sheet
 from .forms import MonitoringForm
-from .models import Monitoring
-from django.utils.encoding import force_text
-from ..questions.forms import QuestionForm, ConditionForm, ChoiceForm
-
+from .models import Monitoring, MonitoringInstitution
 
 NO_QUESTION = _f("Questions are required. No questions provided")
 
 UNKNOWN_TARGET = _f("Attempt to create reference to non-exists target.")
+
+
+class JSONResponseMixin(object):
+    def error_list(self, form):
+        return [(k, force_text(v[0])) for k, v in form.errors.items()]
+
+    def error(self, **kwargs):
+        kwargs['success'] = False
+        # transaction.rollback() # TODO: Rollback on error
+        return JsonResponse(kwargs, status=400)
 
 
 class MonitoringListView(SelectRelatedMixin, ListView):
@@ -35,19 +47,13 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
     select_related = ['user', ]
 
 
-class MonitoringCreateView(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+class MonitoringCreateView(LoginRequiredMixin, JSONResponseMixin, PermissionRequiredMixin,
+                           TemplateView):
     model = Monitoring
     permission_required = 'monitorings.add_monitoring'
-    template_name = 'monitorings/monitoring_form_angular.html'
+    template_name = 'monitorings/monitoring_form_monitoring.html'
 
-    def error_list(self, form):
-        return [(k, force_text(v[0])) for k, v in form.errors.items()]
-
-    def error(self, **kwargs):
-        kwargs['success'] = False
-        return JsonResponse(kwargs, status=400)
-
-    def post(self, *args, **kwargs):
+    def post(self, *args, **kwargs):  # TODO: Transactions in MonitoringCreateView
         data = json.loads(self.request.body.decode('utf-8'))
 
         # Validate
@@ -88,7 +94,6 @@ class MonitoringCreateView(LoginRequiredMixin, PermissionRequiredMixin, Template
             return self.error(errors=[self.error_list(x) for x in choices_forms])
 
         # Save
-
         # Save monitoring
         monitoring = form.save()
 
@@ -165,3 +170,65 @@ class MonitoringAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(name__istartswith=self.q)
 
         return qs
+
+
+class MonitoringAnswerView(LoginRequiredMixin, JSONResponseMixin, TemplateView):
+    template_name = 'monitorings/monitoring_form_answer.html'
+
+    def get_object(self):
+        return get_object_or_404(MonitoringInstitution,
+                                 monitoring__slug=self.kwargs['slug'],
+                                 institution__slug=self.kwargs['institution_slug'])
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MonitoringAnswerView, self).get_context_data(*args, **kwargs)
+        thr = self.get_object()
+        context['monitoring'] = thr.monitoring
+        context['institution'] = thr.institution
+        return context
+
+    def get_answer_by_pk(self, pk):
+        for answer in self.data:
+            if answer.get('question_id') == pk:
+                return answer
+        return None
+
+    def _construct_answer_forms(self, questions, sheet):
+        forms = []
+        for question in questions:
+            answer = self.get_answer_by_pk(question.pk)
+            form_cls = get_form_cls_for_question(question)
+            form = form_cls(data=answer, question=question, sheet=sheet)
+            forms.append(form)
+        return forms
+
+    def post(self, *args, **kwargs):  # TODO: Transactions in MonitoringAnswerView
+        self.data = json.loads(self.request.body.decode('utf-8'))
+
+        thr = self.get_object()
+        (monitoring, institution) = (thr.monitoring, thr.institution)
+
+        questions = Question.objects.filter(monitoring=monitoring).all()
+        sheet, created = Sheet.objects.get_or_create(monitoring=monitoring, user=self.request.user)
+
+        # Validate one sheet per user
+        if not created:
+            return self.error(error="Unable to answer twice")
+
+        # Validate all answers
+        for question in questions:
+            answer = self.get_answer_by_pk(question.pk)
+            if not answer:
+                return self.error(error="Missing answer for question #%d" % (question.pk))
+        # Construct forms
+        answer_forms = self._construct_answer_forms(questions, sheet)
+
+        # Validate forms
+        if not all(x.is_valid() for x in answer_forms):
+            return self.error(errors=[self.error_list(x) for x in answer_forms])
+
+        # Save answers
+        [form.save() for form in answer_forms]
+
+        return JsonResponse({'success': True,
+                             'return_url': monitoring.get_institution_url(institution)})

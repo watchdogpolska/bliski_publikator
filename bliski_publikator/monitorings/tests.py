@@ -8,6 +8,18 @@ from ..users.factories import UserFactory
 from .factories import MonitoringFactory
 from .models import Monitoring
 from ..institutions.factories import InstitutionFactory
+from ..questions.models import Answer, Sheet, Question, Choice
+
+
+class FixtureMixin(object):
+    def _get_json(self, filename):
+        path = join(dirname(__file__), 'fixtures', filename)
+        fp = open(path, 'rb')
+        return fp.read()
+
+    def _post_fixture(self, fixture_name, url=None):
+        body = self._get_json(fixture_name + '.json')
+        return self.client.post(url or self.url, body, content_type="application/json")
 
 
 class MonitoringTestCase(TestCase):
@@ -33,17 +45,13 @@ class MonitoringTestCase(TestCase):
         self.assertEqual(Monitoring.get_add_url(),
                          "/monitorings/~create")
 
+    def test_get_answer_url(self):
+        institution = InstitutionFactory(name="WSA")
+        self.assertEqual(self.obj.get_answer_url(institution),
+                         "/monitorings/monitoring-sportowy/wsa/~answer")
 
-class MonitoringCreateViewTestCase(TestCase):
-    def _get_json(self, filename):
-        path = join(dirname(__file__), 'fixtures', filename)
-        fp = open(path, 'rb')
-        return fp.read()
 
-    def _post_fixture(self, fixture_name, url=None):
-        body = self._get_json(fixture_name + '.json')
-        return self.client.post(url or self.url, body, content_type="application/json")
-
+class MonitoringCreateViewTestCase(FixtureMixin, TestCase):
     def setUp(self):
         self.user = UserFactory()
         self.institution = InstitutionFactory(pk=1)
@@ -67,14 +75,20 @@ class MonitoringCreateViewTestCase(TestCase):
     def test_basic_fixture(self):
         self.client.login(username=self.user.username, password='pass')
         self.user.assign_perm('monitorings.add_monitoring')
-        resp = self._post_fixture('basic')
+        resp = self._post_fixture('monitoring_basic')
         self.assertEqual(resp.status_code, 200)
 
     def test_advanced_fixture(self):
         self.client.login(username=self.user.username, password='pass')
         self.user.assign_perm('monitorings.add_monitoring')
-        resp = self._post_fixture('advanced')
+        resp = self._post_fixture('monitoring_advanced')
         self.assertEqual(resp.status_code, 200)
+
+    def test_broken_target(self):
+        self.client.login(username=self.user.username, password='pass')
+        self.user.assign_perm('monitorings.add_monitoring')
+        resp = self._post_fixture('monitoring_broken_target')
+        self.assertEqual(resp.status_code, 400)
 
 
 class MonitoringUpdateViewTestCase(TestCase):
@@ -136,3 +150,52 @@ class MonitoringAutocompleteTestCase(TestCase):
 
         resp = self.client.get(self.url, {'q': self.obj.name+"filtered"})
         self.assertNotContains(resp, self.obj.name)
+
+
+class MonitoringAnswerViewTestCase(FixtureMixin, TestCase):
+    def setUp(self):
+        self.user = UserFactory()
+        self.monitoring = MonitoringFactory()
+        self.institution = InstitutionFactory()
+        self.monitoring.institutions.add(self.institution)
+        # self.monitoring.institutions.save()
+        self.url = self.monitoring.get_answer_url(self.institution)
+        self.short_text_q = Question.objects.create(pk=1,
+                                                    type=Question.TYPE.short_text,
+                                                    name="Short text question",
+                                                    monitoring=self.monitoring,
+                                                    created_by=self.user,
+                                                    order=0)
+        self.long_text_q = Question.objects.create(pk=2,
+                                                   type=Question.TYPE.long_text,
+                                                   name="Long text question",
+                                                   monitoring=self.monitoring,
+                                                   created_by=self.user,
+                                                   order=1)
+        self.long_text_q = Question.objects.create(pk=3,
+                                                   type=Question.TYPE.choice,
+                                                   name="Choicetext question",
+                                                   monitoring=self.monitoring,
+                                                   created_by=self.user,
+                                                   order=2)
+        self.choice = Choice.objects.create(question=self.long_text_q,
+                                            key="key",
+                                            value="Value of choice",
+                                            order=0)
+
+    def test_auth(self):
+        resp = self.client.get(self.url)
+        self.assertEqual(resp.status_code, 302)
+
+    def test_status(self):
+        self.client.login(username=self.user.username, password='pass')
+        resp = self.client.get(self.url)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_answer_pass(self):
+        self.client.login(username=self.user.username, password='pass')
+        resp = self._post_fixture('answer_basic')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(Answer.objects.count(), 3)
+        self.assertTrue(Sheet.objects.filter(monitoring=self.monitoring,
+                                             user=self.user).exists())
