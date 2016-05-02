@@ -1,24 +1,25 @@
 {
     "name": "Tytuł monitoringu",
     "description": "Opis monitoringu",
+    "institutions": ["1"],
     "questions": [
         {
             "name": "Jaka jest pogoda?",
             "description": "Tekst pomocniczy",
             "type": "short_text",
-            "hideConditions": [],
+            "hideConditions": []
         },
         {
             "name": "Gdzie ja jestem?",
             "description": "WWW",
-              "type": "long_text",
+            "type": "long_text",
             "hideConditions": [
                 {
                     "type": "is-equal",
                     "target": 0,
                     "value": "xx"
                 }
-            ],
+            ]
         },
         {
             "name": "Pytanie drugie",

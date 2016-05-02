@@ -14,18 +14,19 @@ class QuestionQuerySet(models.QuerySet):
 
 @python_2_unicode_compatible
 class Question(TimeStampedModel):
-    TYPE = Choices((0, 'short_text', _('Short text answer')),
-                   (1, 'long_text', _('Long text answer')),
-                   (2, 'choice', _("Choice answer")))
+    TYPE = Choices(('short_text', _('Short text answer')),
+                   ('long_text', _('Long text answer')),
+                   ('choice', _("Choice answer")))
     monitoring = models.ForeignKey(to=Monitoring,
                                    verbose_name=_("Monitoring"))
     created_by = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                                    verbose_name=_("Created by"))
-    title = models.CharField(verbose_name=_("Title"), max_length=100)
+    name = models.CharField(verbose_name=_("Title"), max_length=100)
     description = models.TextField(verbose_name=_("Description"))
-    type = models.IntegerField(choices=TYPE,
-                               default=TYPE.short_text,
-                               verbose_name=_("Answer type"))
+    type = models.CharField(choices=TYPE,
+                            default=TYPE.short_text,
+                            verbose_name=_("Answer type"),
+                            max_length=25)
     order = models.PositiveSmallIntegerField(verbose_name=_("Order"))
 
     objects = QuestionQuerySet.as_manager()
@@ -36,7 +37,7 @@ class Question(TimeStampedModel):
         ordering = ['order', 'created', ]
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class ChoiceQuerySet(models.QuerySet):
@@ -47,6 +48,7 @@ class ChoiceQuerySet(models.QuerySet):
 class Choice(TimeStampedModel):
     question = models.ForeignKey(to=Question,
                                  verbose_name=_("Question"))
+    key = models.CharField(max_length=50, verbose_name=_("Value"))
     value = models.CharField(max_length=50, verbose_name=_("Value"))
     order = models.PositiveSmallIntegerField(verbose_name=_("Order"))
 
@@ -66,21 +68,22 @@ class ConditionQuerySet(models.QuerySet):
 
 
 class Condition(TimeStampedModel):
-    TYPE = Choices((0, 'is_true', _('Is true')),
-                   (1, 'is_false', _('Is false')),
-                   (2, 'is_equal', _("Is equal")),
-                   (3, 'is_not_equal', _("Is not equal")),
+    TYPE = Choices(('is-true', _('Is true')),
+                   ('is-false', _('Is false')),
+                   ('is-equal', _("Is equal")),
+                   ('is-not-equal', _("Is not equal")),
                    )
-    type = models.IntegerField(choices=TYPE,
-                               default=TYPE.is_true,
-                               verbose_name=_("Answer type"))
+    type = models.CharField(choices=TYPE,
+                            default='is-true',
+                            max_length=15,
+                            verbose_name=_("Answer type"))
     target = models.ForeignKey(to=Question,
                                related_name="condition_target",
+                               null=True,
+                               blank=True,
                                verbose_name=_("Target"))
     related = models.ForeignKey(to=Question,
                                 related_name="condition_related",
-                                null=True,
-                                blank=True,
                                 verbose_name=_("Related"))
     objects = ConditionQuerySet.as_manager()
 
@@ -112,6 +115,8 @@ class AnswerQuerySet(models.QuerySet):
 
 
 class Answer(TimeStampedModel):
+    question = models.ForeignKey(to=Question,
+                                 verbose_name=_("Question"))
     sheet = models.ForeignKey(to=Sheet,
                               verbose_name=_("Sheet"))
     objects = AnswerQuerySet.as_manager()
@@ -134,8 +139,8 @@ class AnswerTextQuerySet(models.QuerySet):
 
 
 class AnswerText(TimeStampedModel):
-    sheet = models.ForeignKey(to=Sheet,
-                              verbose_name=_("Sheet"))
+    answer = models.OneToOneField(to=Answer,
+                                  verbose_name=_("Answer"))
     value = models.CharField(verbose_name=_("Value"), max_length=150)
     objects = AnswerTextQuerySet.as_manager()
 
@@ -149,8 +154,8 @@ class AnswerDateQuerySet(models.QuerySet):
 
 
 class AnswerDate(TimeStampedModel):
-    sheet = models.ForeignKey(to=Sheet,
-                              verbose_name=_("Sheet"))
+    answer = models.OneToOneField(to=Answer,
+                                  verbose_name=_("Answer"))
     value = models.DateTimeField(verbose_name=_("Value"))
 
     objects = AnswerTextQuerySet.as_manager()
@@ -165,8 +170,8 @@ class AnswerBoolQuerySet(models.QuerySet):
 
 
 class AnswerBool(TimeStampedModel):
-    sheet = models.ForeignKey(to=Sheet,
-                              verbose_name=_("Sheet"))
+    answer = models.OneToOneField(to=Answer,
+                                  verbose_name=_("Sheet"))
     value = models.BooleanField(verbose_name=_("Value"))
 
     class Meta:

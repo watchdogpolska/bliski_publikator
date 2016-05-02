@@ -1,6 +1,7 @@
 {
   "name": "Monitoring spółek komunalnych",
   "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum atque necessitatibus odio, quos ipsum numquam ipsam minus accusantium animi alias?",
+  "institutions": ["1"],
   "questions": [
     {
       "id": 1,
