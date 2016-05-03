@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/(?P<institution_slug>[\w-]+)/~answer$',
         views.MonitoringAnswerView.as_view(),
         name="institution_answer"),
-    url(r'^(?P<slug>[\w-]+)/(?P<institution_slug>[\w-]+)$',
+    url(r'^(?P<slug>[\w-]+)/institution-(?P<institution_slug>[\w-]+)$',
         views.MonitoringDetailView.as_view(),
         name="institution_detail"),
 
