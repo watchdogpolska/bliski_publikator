@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block content %}
-<h2><i class="fa fa-search"></i>{{object.monitoring}}</h2>
+<h1><i class="fa fa-search"></i> {{object.monitoring}}</h1>
 
 <div class="page-header">
-    <h1><i class="fa fa-book"></i>{{object}}</h1>
+    <h2><i class="fa fa-book"></i> {{object}}</h2>
 </div>
 {% with monitoring=object.monitoring page_set=monitoring.page_set.all %}
   <nav class="secondary__menu" role="group">
