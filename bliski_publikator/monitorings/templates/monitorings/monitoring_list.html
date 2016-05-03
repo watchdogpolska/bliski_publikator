@@ -8,15 +8,16 @@
 {% endblock %}
 
 {% block content %}
+<div class="page-header">
+    <h1>{% trans 'List of monitorings' %}</h1>
+</div>
 <div class="grid">
   <div class="grid__sizer">
   </div>
   {% for object in object_list %}
     <div class="grid__item">
       <div class="monitoring">
-        <div class="monitoring__icon">
-
-        </div>
+        <div class="monitoring__icon"></div>
         <div class="monitoring__date">
           {{ object.created }}
         </div>
