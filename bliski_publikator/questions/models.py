@@ -89,6 +89,9 @@ class Condition(TimeStampedModel):
     related = models.ForeignKey(to=Question,
                                 related_name="condition_related",
                                 verbose_name=_("Related"))
+    value = models.CharField(max_length=50,
+                             verbose_name=_("Value"),
+                             blank=True)
     objects = ConditionQuerySet.as_manager()
 
     class Meta:
