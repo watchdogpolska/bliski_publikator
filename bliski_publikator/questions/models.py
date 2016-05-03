@@ -23,8 +23,10 @@ class Question(TimeStampedModel):
                                    verbose_name=_("Monitoring"))
     created_by = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                                    verbose_name=_("Created by"))
-    name = models.CharField(verbose_name=_("Title"), max_length=100)
-    description = models.TextField(verbose_name=_("Description"))
+    name = models.CharField(verbose_name=_("Title"),
+                            max_length=100)
+    description = models.TextField(verbose_name=_("Description"),
+                                   blank=True)
     type = models.CharField(choices=TYPE,
                             default=TYPE.short_text,
                             verbose_name=_("Answer type"),
