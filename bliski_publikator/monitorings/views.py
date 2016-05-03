@@ -227,11 +227,12 @@ class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, Template
         context['institution'] = thr.institution
         return context
 
+    @cached_property
+    def answer_dict(self):
+        return {answer.get('question_id'): answer for answer in self.data}
+
     def get_answer_by_pk(self, pk):
-        for answer in self.data:
-            if answer.get('question_id') == pk:
-                return answer
-        return None
+        return self.answer_dict[pk]
 
     def _construct_answer_forms(self, questions, sheet):
         forms = []
@@ -243,7 +244,7 @@ class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, Template
         return forms
 
     def post(self, *args, **kwargs):  # TODO: Transactions in MonitoringAnswerView
-        self.data = json.loads(self.request.body.decode('utf-8'))
+        self.data = json.loads(self.request.body.decode('utf-8')).get('result', {})
 
         thr = self.get_object()
         (monitoring, institution) = (thr.monitoring, thr.institution)
