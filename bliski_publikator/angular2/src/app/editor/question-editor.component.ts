@@ -45,11 +45,11 @@ export class QuestionEditorComponent implements OnInit {
     }
 
     addDropdownQuestion() {
-        this.monitoring.questions = [new DropdownQuestion(), ...this.questions];
+        this.monitoring.questions = [...this.questions, new DropdownQuestion()];
     }
 
     addTextBoxQuestion(){
-        this.monitoring.questions = [new TextboxQuestion(), ...this.questions];
+        this.monitoring.questions = [...this.questions, new TextboxQuestion()];
     }
 
     removeQuestion(question: QuestionBase<any>){
