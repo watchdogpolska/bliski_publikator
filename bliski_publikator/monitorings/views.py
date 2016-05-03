@@ -117,7 +117,8 @@ class MonitoringCreateView(LoginRequiredMixin, JSONResponseMixin, PermissionRequ
                 continue
             for condition in question['hideConditions']:
                 related = {'related': question_objs[i],
-                           'target': question_objs[condition.get('target', 0)]}
+                           'target': question_objs[condition.get('target', 0)],
+                           'value': condition.get('value', '') or ''}
                 condition_objs.append(ConditionForm(data=condition, related=related).save())
 
         # Save choices

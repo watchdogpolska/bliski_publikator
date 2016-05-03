@@ -28,7 +28,7 @@ class ChoiceForm(RelatedInstanceMixin, forms.ModelForm):
 class ConditionForm(RelatedInstanceMixin, forms.ModelForm):
     class Meta:
         model = Condition
-        fields = ['type']
+        fields = ['type', 'value']
 
 
 class SheetForm(UserKwargModelFormMixin, RelatedInstanceMixin, forms.ModelForm):
