@@ -9,6 +9,8 @@ import { TextboxQuestion } from '../model/question-textbox'
 import { QuestionEditComponent } from './question-edit.component'
 import { MonitoringService } from '../services/monitoring-api.service'
 
+import {TinyMceComponent } from '../tinymce/tinymce.value-accessor';
+
 @Component({
     selector: 'sowp-question-editor',
     template: require('./question-editor.component.html'),
@@ -16,7 +18,7 @@ import { MonitoringService } from '../services/monitoring-api.service'
         QuestionEditComponent,
         ACCORDION_DIRECTIVES,
         DROPDOWN_DIRECTIVES,
-        // Dragula
+        TinyMceComponent
     ],
     providers: [
         MonitoringService
