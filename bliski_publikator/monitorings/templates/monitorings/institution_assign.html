@@ -24,23 +24,25 @@
     <form method="POST">
         <button type="submit" class="btn btn-primary">{% blocktrans with monitoring=monitoring %}Assign institutions to {{monitoring}}{%endblocktrans %}</button>
         <table  class="table table-striped">
+          <thead>
             <tr>
-                <td>&nbsp;</td>
-                <td>{% trans 'Name' %}</td>
-                <td>{% trans 'Region' %}</td>
+              <th style="width: 20px;">&nbsp;</th>
+              <th>{% trans 'Name' %}</th>
+              <th>{% trans 'Region' %}</th>
             </tr>
-            {% for object in object_list %}
-                <tr class="table table-striped">
-                    <td><input type="checkbox" name="to_assign" value="{{object.pk}}"></td>
-                    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-                    <td><a href="{{object.region.get_absolute_url}}" title="TERYT: {{object.region.pk}}">{{object.region}}</a></td>
-                </tr>
-            {% endfor %}
+          </thead>
+          <tbody>
+          {% for object in object_list %}
+            <tr class="table table-striped">
+                <td><input type="checkbox" name="to_assign" value="{{object.pk}}"></td>
+                <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+                <td><a href="{{object.region.get_absolute_url}}" title="TERYT: {{object.region.pk}}">{{object.region}}</a></td>
+            </tr>
+          {% endfor %}
+          </tbody>
         </table>
 
-        <div style="display:none">
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-        </div>
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <button type="submit" class="btn btn-primary">{% blocktrans with monitoring=monitoring %}Assign institutions to {{monitoring}}{%endblocktrans %}</button>
     </form>
     {% endif %}
