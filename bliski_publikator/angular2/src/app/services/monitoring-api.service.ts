@@ -12,10 +12,12 @@ import { DropdownQuestion } from '../model/question-dropdown';
 import { isEqualConditional } from '../conditionals/conditional-is-equal'
 import { isNullConditional } from '../conditionals/conditional-is-null'
 
+import {CsrfService} from '../services/csrf.service';
+
 export class MonitoringService extends BaseApiService {
 
-    constructor(http: Http) {
-        super(http);
+    constructor(http: Http, csrf: CsrfService) {
+        super(http, csrf);
     }
 
     saveMonitoring(monitoring: Monitoring){

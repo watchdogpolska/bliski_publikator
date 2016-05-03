@@ -6,6 +6,8 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {AppComponent} from './app/app.component';
 
+import {CsrfService} from './app/services/csrf.service';
+
 import 'rxjs/Rx';
 
 if ('prod' === ENV) {
@@ -14,5 +16,6 @@ if ('prod' === ENV) {
 
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS,
-  HTTP_PROVIDERS
+  HTTP_PROVIDERS,
+  CsrfService
 ]);
