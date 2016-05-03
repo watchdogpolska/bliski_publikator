@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-19 00:12+0000\n"
-"PO-Revision-Date: 2016-04-17 01:40+0200\n"
+"POT-Creation-Date: 2016-05-02 22:51+0000\n"
+"PO-Revision-Date: 2016-05-03 00:52+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -17,90 +17,117 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-#: monitorings/apps.py:8 monitorings/models.py:32
+#: apps.py:8 models.py:32
 msgid "Monitorings"
 msgstr "Monitoringi"
 
-#: monitorings/models.py:18
+#: models.py:18 templates/monitorings/institution_assign.html.py:26
 msgid "Name"
 msgstr "Nazwa"
 
-#: monitorings/models.py:19
+#: models.py:19
 msgid "Slug"
 msgstr "Identyfikator redakcyjny"
 
-#: monitorings/models.py:21
+#: models.py:21
 msgid "Description"
 msgstr "Opis"
 
-#: monitorings/models.py:22
+#: models.py:22
 msgid "Active status"
 msgstr "Status aktywności"
 
-#: monitorings/models.py:23
+#: models.py:23
 msgid "Logo"
 msgstr "Logo"
 
-#: monitorings/models.py:25
+#: models.py:25
 msgid "Institution"
 msgstr "Instytucja"
 
-#: monitorings/models.py:26
+#: models.py:26
 msgid "Specifies which institutions are covered by monitoring"
 msgstr "Określ, które instytucje są objęte monitoringiem"
 
-#: monitorings/models.py:31
+#: models.py:31
 msgid "Monitoring"
 msgstr "Monitoring"
 
-#: monitorings/templates/monitorings/monitoring_base.html:8
-#: monitorings/templates/monitorings/monitoring_form.html:8
+#: templates/monitorings/institution_assign.html:7
+#: templates/monitorings/monitoring_base.html:10
+msgid "Assign institutions"
+msgstr "Przypisz instytucje"
+
+#: templates/monitorings/institution_assign.html:16
+msgid "Filtr"
+msgstr "Filtr"
+
+#: templates/monitorings/institution_assign.html:22
+#: templates/monitorings/institution_assign.html:41
+#, python-format
+msgid "Assign institutions to %(monitoring)s"
+msgstr "Przypisz instytucje do %(monitoring)s"
+
+#: templates/monitorings/institution_assign.html:27
+msgid "Region"
+msgstr "Region"
+
+#: templates/monitorings/monitoring_base.html:9
+#: templates/monitorings/monitoring_form.html:8
 msgid "Update monitoring"
 msgstr "Zaktualizuj monitoring"
 
-#: monitorings/templates/monitorings/monitoring_base.html:12
-#: monitorings/templates/monitorings/monitoring_confirm_delete.html:8
+#: templates/monitorings/monitoring_base.html:14
+#: templates/monitorings/monitoring_confirm_delete.html:8
 msgid "Delete monitoring"
 msgstr "Usuń monitoring"
 
-#: monitorings/templates/monitorings/monitoring_base.html:16
+#: templates/monitorings/monitoring_base.html:18
 msgid "Add page"
 msgstr "Dodaj stronę"
 
-#: monitorings/templates/monitorings/monitoring_detail.html:27
+#: templates/monitorings/monitoring_detail.html:27
 msgid "Design and purpose"
 msgstr "Założenia i cele"
 
-#: monitorings/templates/monitorings/monitoring_detail.html:36
+#: templates/monitorings/monitoring_detail.html:36
 msgid "Covered institutions"
 msgstr "Instytucje objęte"
 
-#: monitorings/templates/monitorings/monitoring_detail.html:44
+#: templates/monitorings/monitoring_detail.html:44
 msgid "No institutions"
 msgstr "Brak instytucji"
 
-#: monitorings/templates/monitorings/monitoring_form.html:8
-#: monitorings/templates/monitorings/monitoring_list.html:6
+#: templates/monitorings/monitoring_form.html:8
+#: templates/monitorings/monitoring_form_monitoring.html:12
+#: templates/monitorings/monitoring_list.html:6
 msgid "Add monitoring"
 msgstr "Dodaj monitoring"
 
-#: monitorings/templates/monitorings/monitoring_form.html:19
+#: templates/monitorings/monitoring_form.html:19
 msgid "Submit"
 msgstr "Zapisz"
 
-#: monitorings/views.py:50
-#, python-brace-format
-msgid "{0} created!"
-msgstr "{0} utworzony!"
+#: templates/monitorings/monitoring_form_answer.html:13
+msgid "Rank institution"
+msgstr "Ocena instytucji"
 
-#: monitorings/views.py:62
+#: views.py:157
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: monitorings/views.py:72
+#: views.py:186
+#, python-format
+msgid "%(count)d institutions was assigned to %(monitoring)s"
+msgstr "%(count)d instytucji zostało przypisanych do %(monitoring)s"
+
+#: views.py:200
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
+
+#~ msgid "{0} created!"
+#~ msgstr "{0} utworzony!"

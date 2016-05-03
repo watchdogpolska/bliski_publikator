@@ -7,6 +7,7 @@
 <div class="btn-group" role="group">
     {% if perms.monitorings.change_monitoring %}
     <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update monitoring' %}</a>
+    <a href="{{object.get_assign_url}}" class="btn btn-primary">{% trans 'Assign institutions' %}</a>
     {% endif %}
 
     {% if perms.monitorings.delete_monitoring %}

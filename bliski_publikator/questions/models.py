@@ -12,6 +12,8 @@ class QuestionQuerySet(models.QuerySet):
     pass
 
 
+# TODO: Make registers to dynamically
+
 @python_2_unicode_compatible
 class Question(TimeStampedModel):
     TYPE = Choices(('short_text', _('Short text answer')),
@@ -47,8 +49,9 @@ class ChoiceQuerySet(models.QuerySet):
 @python_2_unicode_compatible
 class Choice(TimeStampedModel):
     question = models.ForeignKey(to=Question,
-                                 verbose_name=_("Question"))
-    key = models.CharField(max_length=50, verbose_name=_("Value"))
+                                 verbose_name=_("Question"),
+                                 limit_choices_to={'type': Question.TYPE.choice})
+    key = models.CharField(max_length=50, verbose_name=_("Key"))
     value = models.CharField(max_length=50, verbose_name=_("Value"))
     order = models.PositiveSmallIntegerField(verbose_name=_("Order"))
 
@@ -58,6 +61,7 @@ class Choice(TimeStampedModel):
         verbose_name = _("choice")
         verbose_name_plural = _("choices")
         ordering = ['order', 'created', ]
+        unique_together = (("question", "key"),)
 
     def __str__(self):
         return self.value
@@ -108,6 +112,7 @@ class Sheet(TimeStampedModel):
         verbose_name = _("Sheet")
         verbose_name_plural = _("Sheets")
         ordering = ['monitoring', 'user', 'created', ]
+        unique_together = (("monitoring", "user"),)
 
 
 class AnswerQuerySet(models.QuerySet):
@@ -124,23 +129,32 @@ class Answer(TimeStampedModel):
     def type(self):
         if self.answertext:
             return 1
-        if self.answerdate:
+        if self.answerchoice:
             return 2
-        if self.answerbool:
-            return 3
 
     class Meta:
         verbose_name = _("Answer")
         verbose_name_plural = _("Answers")
+        unique_together = (("question", "sheet"),)
 
 
-class AnswerTextQuerySet(models.QuerySet):
+class AbstractAnswerTypeQuerySet(models.QuerySet):
     pass
 
 
-class AnswerText(TimeStampedModel):
-    answer = models.OneToOneField(to=Answer,
-                                  verbose_name=_("Answer"))
+class AbstractAnswerType(TimeStampedModel):
+    answer = models.OneToOneField(Answer)
+    objects = AbstractAnswerTypeQuerySet.as_manager()
+
+    class Meta:
+        abstract = True
+
+
+class AnswerTextQuerySet(AbstractAnswerTypeQuerySet):
+    pass
+
+
+class AnswerText(AbstractAnswerType):
     value = models.CharField(verbose_name=_("Value"), max_length=150)
     objects = AnswerTextQuerySet.as_manager()
 
@@ -149,31 +163,14 @@ class AnswerText(TimeStampedModel):
         verbose_name_plural = _("Text answers")
 
 
-class AnswerDateQuerySet(models.QuerySet):
+class AnswerChoiceQuerySet(AbstractAnswerTypeQuerySet):
     pass
 
 
-class AnswerDate(TimeStampedModel):
-    answer = models.OneToOneField(to=Answer,
-                                  verbose_name=_("Answer"))
-    value = models.DateTimeField(verbose_name=_("Value"))
-
-    objects = AnswerTextQuerySet.as_manager()
+class AnswerChoice(AbstractAnswerType):
+    value = models.ForeignKey(Choice, verbose_name=_("Value"))
+    objects = AnswerChoiceQuerySet.as_manager()
 
     class Meta:
-        verbose_name = _("Date answer")
-        verbose_name_plural = _("Date answers")
-
-
-class AnswerBoolQuerySet(models.QuerySet):
-    pass
-
-
-class AnswerBool(TimeStampedModel):
-    answer = models.OneToOneField(to=Answer,
-                                  verbose_name=_("Sheet"))
-    value = models.BooleanField(verbose_name=_("Value"))
-
-    class Meta:
-        verbose_name = _("Bool answer")
-        verbose_name_plural = _("Bool answers")
+        verbose_name = _("Choice answer")
+        verbose_name_plural = _("Choice answers")

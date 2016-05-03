@@ -1,0 +1,24 @@
+{% extends 'monitorings/monitoring_base.html' %}
+{% load crispy_forms_tags i18n %}
+
+{% block head %}
+  {{ block.super }}
+  <base href="/">
+{% endblock head %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{{monitoring.get_absolute_url}}">{{monitoring}}</a></li>
+    <li><a href="{{institution.get_absolute_url}}">{{institution}}</a></li>
+    <li class="active">{% trans 'Rank institution' %}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<app mode="solver" monitoring-id="{{monitoring.pk}}" institution-id="{{institution.pk}}">loading...</app>
+{% endblock %}
+
+{% block javascript %}
+  {% include "angular2.html" %}
+{% endblock javascript %}
+
