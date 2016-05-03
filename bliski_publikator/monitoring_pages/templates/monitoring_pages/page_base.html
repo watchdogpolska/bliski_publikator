@@ -3,13 +3,16 @@
 
 {% block buttons %}
 {% if object and perms.monitoring_pages.change_page or perms.monitoring_pages.delete_page %}
-<div class="btn-group" role="group">
+<div class="btn-group pull-right" role="group">
     {% if perms.monitoring_pages.change_page %}
-    <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update page' %}</a>
+    <a href="{{object.get_update_url}}" class="btn btn-primary">
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans 'Update page' %}
+    </a>
     {% endif %}
 
     {% if perms.monitoring_pages.delete_page %}
-    <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete page' %}</a>
+    <a href="{{object.get_delete_url}}" class="btn btn-primary">
+      <i class="fa fa-trash" aria-hidden="true"></i> {% trans 'Delete page' %}</a>
     {% endif %}
 </div>
 {% endif %}
