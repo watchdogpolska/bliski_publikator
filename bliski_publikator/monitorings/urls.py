@@ -24,12 +24,12 @@ urlpatterns = [
         name="assign"),
 
     # Answer views
+    url(r'^(?P<pk>[\d]+)/api$', views.MonitoringApiDetailView.as_view(), name="details_api"),
     url(r'^(?P<slug>[\w-]+)/(?P<institution_slug>[\w-]+)/~answer$',
         views.MonitoringAnswerView.as_view(),
         name="institution_answer"),
     url(r'^(?P<slug>[\w-]+)/institution-(?P<institution_slug>[\w-]+)$',
         views.MonitoringDetailView.as_view(),
         name="institution_detail"),
-
     url(r'^', include("bliski_publikator.monitoring_pages.urls", namespace="pages")),
 ]
