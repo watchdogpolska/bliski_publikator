@@ -122,7 +122,7 @@ module.exports = {
     }
   },
   watch: {
-    scss: srcAssets  + '/styles/*.scss',
+    scss: srcAssets  + '/scss/*.scss',
     js: srcAssets + '/scripts/*.js',
     html: baseTemplate
   },

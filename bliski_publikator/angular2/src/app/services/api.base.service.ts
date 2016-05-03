@@ -6,19 +6,19 @@ import {
     RequestOptions
 } from 'angular2/http';
 
+import {CsrfService} from '../services/csrf.service';
+
 import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
 export abstract class BaseApiService {
     private _apiUrl = '/api/';
-    constructor(protected _http: Http) { }
+    constructor(protected _http: Http, protected _csrf: CsrfService) { }
 
     protected simple_post(entry, data, options = {}){
         let url = options['url'] || (this._apiUrl + entry);
         let body = JSON.stringify(data);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        console.log({ body, headers, options });
+        let options = this.getDefaultOptions();
         return this._http.post(url, body, options)
             .map(this.extractData)
             .catch(this.handleError);
@@ -26,7 +26,8 @@ export abstract class BaseApiService {
 
     protected simple_get(entry, qs = {}){
         let url = this._apiUrl + entry;
-        return this._http.get(url)
+        let options = this.getDefaultOptions();
+        return this._http.get(url, options)
             .map(this.extractData)
             .catch(this.handleError)
     }
@@ -43,5 +44,14 @@ export abstract class BaseApiService {
         let errMsg = error.message || 'Server error';
         console.error(errMsg);
         return Observable.throw(errMsg);
+    }
+
+    private getDefaultOptions() {
+        let headers = new Headers(
+            {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': this._csrf.getToken()
+            });
+        return new RequestOptions({ headers: headers });
     }
 }

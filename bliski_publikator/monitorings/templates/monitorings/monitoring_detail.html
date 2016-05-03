@@ -8,18 +8,22 @@
 {% endblock %}
 
 {% block content %}
+<div class="page-header">
+    <h1><i class="fa fa-search"></i> {{object}}</h1>
+</div>
 
 {% if monitoring.page_set.all %}
-<div class="btn-group" role="group">  {# TODO: Update view to looks like http://siecobywatelska.pl/co-robimy/ #}
-    {% for obj in monitoring.page_set.all %}
-    <a href="{% url 'monitorings:pages:details' monitoring_slug=monitoring.slug slug=obj.slug %}" class="btn btn-primary">{{obj}}</a>
-    {% endfor %}
-</div>
+<nav class="secondary__menu" role="group">
+    <ul class="secondary__list">
+      {% for obj in monitoring.page_set.all %}
+      <li class="secondary__item">
+        <a href="{% url 'monitorings:pages:details' monitoring_slug=monitoring.slug slug=obj.slug %}" class="secondary__link">{{obj}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+</nav>
 {% endif %}
 
-<div class="page-header">
-    <h1><i class="fa fa-search"></i>{{object}}</h1>
-</div>
 
 <div class="row">
     <div class="col-md-4">

@@ -16,7 +16,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django_filters.views import FilterView
 from extra_views import InlineFormSet, NamedFormsetsMixin, UpdateWithInlinesView
-
+from braces.views import JSONResponseMixin
 from ..institutions.filters import InstitutionFilter
 from ..institutions.models import Institution
 from ..monitoring_pages.forms import MiniPageForm
@@ -31,7 +31,7 @@ NO_QUESTION = _f("Questions are required. No questions provided")
 UNKNOWN_TARGET = _f("Attempt to create reference to non-exists target.")
 
 
-class JSONResponseMixin(object):
+class CustomJSONResponseMixin(object):
     def error_list(self, form):
         return [(k, force_text(v[0])) for k, v in form.errors.items()]
 
@@ -52,7 +52,7 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
     select_related = ['user', ]
 
 
-class MonitoringCreateView(LoginRequiredMixin, JSONResponseMixin, PermissionRequiredMixin,
+class MonitoringCreateView(LoginRequiredMixin, CustomJSONResponseMixin, PermissionRequiredMixin,
                            TemplateView):
     model = Monitoring
     permission_required = 'monitorings.add_monitoring'
@@ -117,7 +117,8 @@ class MonitoringCreateView(LoginRequiredMixin, JSONResponseMixin, PermissionRequ
                 continue
             for condition in question['hideConditions']:
                 related = {'related': question_objs[i],
-                           'target': question_objs[condition.get('target', 0)]}
+                           'target': question_objs[condition.get('target', 0)],
+                           'value': condition.get('value', '') or ''}
                 condition_objs.append(ConditionForm(data=condition, related=related).save())
 
         # Save choices
@@ -211,7 +212,7 @@ class MonitoringAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-class MonitoringAnswerView(LoginRequiredMixin, JSONResponseMixin, TemplateView):
+class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, TemplateView):
     template_name = 'monitorings/monitoring_form_answer.html'
 
     def get_object(self):
@@ -271,3 +272,46 @@ class MonitoringAnswerView(LoginRequiredMixin, JSONResponseMixin, TemplateView):
 
         return JsonResponse({'success': True,
                              'return_url': monitoring.get_institution_url(institution)})
+
+
+class MonitoringApiDetailView(JSONResponseMixin, DetailView):
+    model = Monitoring
+
+    def get_options(self, question):
+        for choice in question.choice_set.all():
+            yield {'key': choice.key, 'value': choice.value}
+
+    def get_conditions(self, question):
+        for condition in question.condition_related.all():  # TODO: Prefetch condition.target
+            data = {}
+            data['type'] = condition.type
+            data['target'] = condition.target.order  # It's ok, "order"
+            data['value'] = condition.value
+            yield data
+
+    def get_questions(self):
+        for question in self.object.question_set.all():
+            data = {}
+            data['name'] = question.name
+            data['description'] = question.description
+            data['type'] = question.type
+            data['hideConditions'] = list(self.get_conditions(question))
+            if question.type == Question.TYPE.choice:
+                data['options'] = list(self.get_options(question))
+            yield data
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = {}
+        context['name'] = self.object.name
+        context['description'] = self.object.description
+        context['questons'] = list(self.get_questions())
+        return self.render_json_response(context)
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super(MonitoringApiDetailView, self).get_queryset(*args, **kwargs)
+        return qs.prefetch_related('question_set',
+                                   'question_set__condition_related',
+                                   'question_set__condition_related__target',
+                                   'question_set__choice_set',
+                                   )

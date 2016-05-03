@@ -1,4 +1,7 @@
 {% load i18n %}
+<div class="page-header">
+    <h1>{% trans "Confirm delete" %}</h1>
+</div>
 {% blocktrans with object=object %}Are you sure you want to remove "{{object}}"?{% endblocktrans %}
 <form method="POST">
 <div style="display:none">

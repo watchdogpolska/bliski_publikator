@@ -10,8 +10,7 @@
 	<div class="form-group">
 		<label for="monitoring_description" class="col-sm-2 control-label">Opis:</label>
 		<div class="col-sm-10">
-			<textarea class="form-control" [(ngModel)]="monitoring.description" id="monitoring_description">
-			</textarea>
+			<tinymce [(value)]="monitoring.description"></tinymce>
 		</div>
 	</div>
 </div>
@@ -25,8 +24,8 @@
 				<i class="pull-right glyphicon" [ngClass]="{'glyphicon-caret-down': group?.isOpen, 'glyphicon-caret-up': !group?.isOpen}"></i>
 				Pytanie: {{ question.name }}
 			</div>
-			<div class="row">
-				<div class="btn-group pull-right">
+			<div class="text-right">
+				<div class="btn-group">
 					<button class="btn btn-primary btn-xs" (click)="removeQuestion(question)">
 						<i class="fa fa-trash" aria-hidden="true"></i> Skasuj
 					</button>

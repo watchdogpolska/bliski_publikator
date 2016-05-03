@@ -24,7 +24,8 @@ class Monitoring(TimeStampedModel):
     institutions = models.ManyToManyField(to='institutions.Institution',
                                           verbose_name=_("Institution"),
                                           help_text=_("Specifies which institutions are " +
-                                                      "covered by monitoring"))
+                                                      "covered by monitoring"),
+                                          blank=True)
     objects = MonitoringQuerySet.as_manager()
 
     class Meta:

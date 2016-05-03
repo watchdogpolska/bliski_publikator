@@ -9,11 +9,28 @@
 {% endblock %}
 
 {% block content %}
-<h2><i class="fa fa-search"></i>{{object.monitoring}}</h2>
-
 <div class="page-header">
-    <h1><i class="fa fa-book"></i>{{object}}</h1>
+  <h1><i class="fa fa-search"></i> {{object.monitoring}}</h1>
 </div>
+
+<h2><i class="fa fa-book"></i> {{object}}</h2>
+{% with monitoring=object.monitoring page_set=monitoring.page_set.all %}
+  <nav class="secondary__menu" role="group">
+      <ul class="secondary__list">
+        {% for obj in page_set %}
+        {% if obj == object %}
+        <li class="secondary__item secondary__item--active">
+          {{obj}}
+        </li>
+        {% else %}
+        <li class="secondary__item">
+          <a href="{% url 'monitorings:pages:details' monitoring_slug=monitoring.slug slug=obj.slug %}" class="secondary__link">{{obj}}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+  </nav>
+{% endwith %}
 <div class="row">
     <div class="col-md-12">
         <div class="gray">
