@@ -21,10 +21,6 @@ LICENSE: BSD
 Settings
 ------------
 
-Moved to settings_.
-
-.. _settings: http://cookiecutter-django.readthedocs.org/en/latest/settings.html
-
 Basic Commands
 --------------
 
@@ -48,23 +44,38 @@ To run the tests, check your test coverage, and generate an HTML coverage report
     $ coverage html
     $ open htmlcov/index.html
 
-Running tests with py.test
+Running tests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-  $ py.test
+  $ pip install -r requirements/test.txt
+  $ python manage.py tests
+
+
+Running tests
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Standard develop server::
+
+  $ pip install -r requirements/local.txt
+  $ python manage.py migrate
+  $ python manage.py runserver
+
+SQL-logging develop server::
+
+  $ SQL_LOG=True python manage.py runserver
 
 Live reloading and Sass CSS compilation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you’d like to take advantage of live reloading and Sass / JS compilation you can do so with a little bit of prep work.
 
-Make sure that nodejs, gulp-cli, bower is installed. Then in the project root run:
+Make sure that nodejs, gulp-cli, bower is installed. Then in the project root run::
 
     $ npm install
 
-Now you just need:
+Now you just need::
 
     $ gulp watch
 
