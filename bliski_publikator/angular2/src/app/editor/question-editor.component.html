@@ -24,8 +24,8 @@
 				<i class="pull-right glyphicon" [ngClass]="{'glyphicon-caret-down': group?.isOpen, 'glyphicon-caret-up': !group?.isOpen}"></i>
 				Pytanie: {{ question.name }}
 			</div>
-			<div class="row">
-				<div class="btn-group pull-right">
+			<div class="text-right">
+				<div class="btn-group">
 					<button class="btn btn-primary btn-xs" (click)="removeQuestion(question)">
 						<i class="fa fa-trash" aria-hidden="true"></i> Skasuj
 					</button>
