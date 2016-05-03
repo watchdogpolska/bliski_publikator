@@ -5,12 +5,15 @@
 <ol class="breadcrumb">
     {% if object %}<li><a href="{{object.get_absolute_url}}">{{object}}</a></li>{% endif %}
     <li class="active">
-    {% if object %}{% trans 'Update monitoring' %}{% else %}{% trans 'Add monitoring' %}{% endif %}
+    {% trans 'Update monitoring' %}
     </li>
 </ol>
 {% endblock %}
 
 {% block content %}
+<div class="page-header">
+    <h1>{% trans 'Update monitoring' %}</h1>
+</div>
 <form method="POST">
 {{ form | crispy }}
 <div id="form-pages">

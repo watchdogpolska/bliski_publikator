@@ -17,6 +17,11 @@
 {% endblock %}
 
 {% block content %}
+<div class="page-header">
+    <h1>
+      {% if object %}{% trans 'Update institution' %}{% else %}{% trans 'Add institution' %}{% endif %}
+    </h1>
+</div>
 {% crispy form %}
 {% endblock %}
 
