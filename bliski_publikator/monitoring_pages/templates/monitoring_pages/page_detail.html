@@ -10,10 +10,10 @@
 
 {% block content %}
 <div class="page-header">
-  <h1><i class="fa fa-search"></i> {{object.monitoring}}</h1>
+  <h1><i class="fa fa-search" aria-hidden="true"></i> {{object.monitoring}}</h1>
 </div>
 
-<h2><i class="fa fa-book"></i> {{object}}</h2>
+<h2><i class="fa fa-book" aria-hidden="true"></i> {{object}}</h2>
 {% with monitoring=object.monitoring page_set=monitoring.page_set.all %}
   <nav class="secondary__menu" role="group">
       <ul class="secondary__list">

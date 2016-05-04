@@ -14,7 +14,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="fa fa-globe"></i> {{object}} <small>{{object.category}}</small></h1>
+    <h1><i class="fa fa-globe" aria-hidden="true"></i> {{object}} <small>{{object.category}}</small></h1>
 </div>
 
 <div class="row">
@@ -40,7 +40,7 @@
     <div class="col-md-6">
         <div class="red">
             <h2 class="title">
-                <i class="fa fa-home"></i>
+                <i class="fa fa-home" aria-hidden="true"></i>
                 {% trans 'Institutions'%}
             </h2>
 	    {% if object.institution_area.all %}
