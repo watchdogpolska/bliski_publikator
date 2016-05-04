@@ -21,6 +21,7 @@ class Monitoring(TimeStampedModel):
     description = BleachField(verbose_name=_("Description"))
     active = models.BooleanField(verbose_name=_("Active status"), default=False)
     logo = VersatileImageField(verbose_name=_("Logo"), null=True, blank=True)
+    max_point = models.IntegerField(verbose_name=_("Max point"))
     institutions = models.ManyToManyField(to='institutions.Institution',
                                           verbose_name=_("Institution"),
                                           help_text=_("Specifies which institutions are " +

@@ -6,6 +6,7 @@ from model_utils import Choices
 from model_utils.models import TimeStampedModel
 
 from ..monitorings.models import Monitoring
+from ..institutions.models import Institution
 
 
 class QuestionQuerySet(models.QuerySet):
@@ -32,7 +33,6 @@ class Question(TimeStampedModel):
                             verbose_name=_("Answer type"),
                             max_length=25)
     order = models.PositiveSmallIntegerField(verbose_name=_("Order"))
-
     objects = QuestionQuerySet.as_manager()
 
     class Meta:
@@ -107,10 +107,13 @@ class SheetQuerySet(models.QuerySet):
 
 
 class Sheet(TimeStampedModel):
-    monitoring = models.ForeignKey(Monitoring,
+    monitoring = models.ForeignKey(to=Monitoring,
                                    verbose_name=_("Monitoring"))
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                              verbose_name=_("User"))
+    institution = models.ForeignKey(to=Institution,
+                                    verbose_name=_("Institution"))
+    point = models.IntegerField(verbose_name=_("Point"))
     objects = SheetQuerySet.as_manager()
 
     class Meta:
