@@ -74,7 +74,7 @@ export class QuestionSolverComponent implements OnInit {
             console.log("answer: ", question);
             let curr_value = values[answer_key];
             answers.push({
-                id: question.id,
+                question_id: question.id,
                 value: curr_value,
                 point: question.calc_point_sum(curr_value);
             });
