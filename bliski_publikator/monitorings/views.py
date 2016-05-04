@@ -229,7 +229,7 @@ class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, Template
 
     @cached_property
     def answer_dict(self):
-        return {answer.get('question_id'): answer for answer in self.data}
+        return {answer.get('question_id'): answer for answer in self.data.get('result', {})}
 
     def get_answer_by_pk(self, pk):
         return self.answer_dict[pk]
@@ -244,13 +244,16 @@ class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, Template
         return forms
 
     def post(self, *args, **kwargs):  # TODO: Transactions in MonitoringAnswerView
-        self.data = json.loads(self.request.body.decode('utf-8')).get('result', {})
+        self.data = json.loads(self.request.body.decode('utf-8'))
 
         thr = self.get_object()
         (monitoring, institution) = (thr.monitoring, thr.institution)
 
         questions = Question.objects.filter(monitoring=monitoring).all()
-        sheet, created = Sheet.objects.get_or_create(monitoring=monitoring, user=self.request.user)
+        sheet, created = Sheet.objects.get_or_create(monitoring=monitoring,
+                                                     institution=institution,
+                                                     user=self.request.user,
+                                                     point=self.data.get('point', 0))
 
         # Validate one sheet per user
         if not created:

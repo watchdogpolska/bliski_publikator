@@ -1,7 +1,7 @@
 {
     "name": "Tytuł monitoringu",
     "description": "Opis monitoringu",
-    "institutions": ["1"],
+    "max_point": 25,
     "questions": [
         {
             "name": "Jaka jest pogoda?",

@@ -3,5 +3,6 @@
     {"question_id": 1, "value": "1"},
     {"question_id": 2, "value": "2"},
     {"question_id": 3, "value": "key"}
-  ]
+  ],
+  "point": 25
 }
