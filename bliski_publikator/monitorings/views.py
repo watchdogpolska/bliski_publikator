@@ -310,7 +310,7 @@ class MonitoringApiDetailView(JSONResponseMixin, DetailView):
         context = {}
         context['name'] = self.object.name
         context['description'] = self.object.description
-        context['questons'] = list(self.get_questions())
+        context['questions'] = list(self.get_questions())
         return self.render_json_response(context)
 
     def get_queryset(self, *args, **kwargs):
