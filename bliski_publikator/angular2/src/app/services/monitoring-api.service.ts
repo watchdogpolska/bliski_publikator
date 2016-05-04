@@ -29,7 +29,7 @@ export class MonitoringService extends BaseApiService {
     }
 
     getMonitoring(id: number):Observable<Monitoring> {
-        return this.simple_get(`/api/monitoring/${id}`)
+        return this.simple_get(`/monitorings/${id}/api`)
             .map(data => {
                 let questions = this.parseQuestionsList(data.questions);
                 this.addConditions(data.questions, questions);
