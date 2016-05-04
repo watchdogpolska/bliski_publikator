@@ -102,7 +102,6 @@ export class MonitoringService{
             description,
             questions
         });
-        console.log( JSON.stringify( monitoring.toPlainObject() ) );
 
         return Promise.resolve(monitoring);
     }
