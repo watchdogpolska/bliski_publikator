@@ -229,7 +229,7 @@ class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, Template
 
     @cached_property
     def answer_dict(self):
-        return {answer.get('question_id'): answer for answer in self.data.get('result', {})}
+        return {x['question_id']: x for x in  self.data.get('result', [])}
 
     def get_answer_by_pk(self, pk):
         return self.answer_dict[pk]
