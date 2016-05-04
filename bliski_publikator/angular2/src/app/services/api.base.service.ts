@@ -15,8 +15,7 @@ export abstract class BaseApiService {
     private _apiUrl = '/api/';
     constructor(protected _http: Http, protected _csrf: CsrfService) { }
 
-    protected simple_post(entry, data, options = {}){
-        let url = options['url'] || (this._apiUrl + entry);
+    protected simple_post(url:string, data){
         let body = JSON.stringify(data);
         let options = this.getDefaultOptions();
         return this._http.post(url, body, options)
@@ -24,8 +23,7 @@ export abstract class BaseApiService {
             .catch(this.handleError);
     }
 
-    protected simple_get(entry, qs = {}){
-        let url = this._apiUrl + entry;
+    protected simple_get(url:string, qs = {}){
         let options = this.getDefaultOptions();
         return this._http.get(url, options)
             .map(this.extractData)

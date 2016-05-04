@@ -2,6 +2,7 @@ import { EventEmitter } from 'angular2/core'
 
 import { slugify } from '../utils';
 import { BaseConditional } from '../conditionals/condititional-base';
+import { BaseCountCondition } from '../count.conditions/cconditions.base';
 import { Serializable } from '../serializable';
 
 export class QuestionBase<T> {
@@ -12,8 +13,10 @@ export class QuestionBase<T> {
     description: string;
     order: number;
     controlType: string;
-    private _hideConditions: BaseConditional[];
-    hideConditions_changes = new EventEmitter();
+    private _hideConditions: BaseConditional[] = [];
+    private _countConditions: BaseCountCondition[] = [];
+    hideConditions_changes = new EventEmitter<BaseConditional[]>();
+    countConditions_changes = new EventEmitter<BaseCountCondition[]>();
 
     constructor(options: {
         defaultValue?: T,
@@ -22,17 +25,14 @@ export class QuestionBase<T> {
         name?: string,
         description?: string,
         order?: number,
-        controlType?: string,
-        hideConditions?: BaseConditional[]
+        controlType?: string
     } = {}) {
         this.id = (options.id || options.id > 0) ? options.id : -1;
         this._key = options.key || '';
         this.name = options.name || '';
         this.description = options.description || '';
         this.order = options.order === undefined ? 1 : options.order;
-        this.controlType = options.controlType || '';
-        this.hideConditions = options.hideConditions || [];
-    }
+        this.controlType = options.controlType || '';    }
 
     get key(){
         if (this._key)
@@ -54,6 +54,26 @@ export class QuestionBase<T> {
         this.hideConditions_changes.emit(conditions);
     }
 
+    get countConditions(){
+        return this._countConditions;
+    }
+
+    set countConditions(conditions: BaseCountCondition[]) {
+        this._countConditions = conditions;
+        this.countConditions_changes.emit(conditions);
+    }
+
+    get max_point_sum(){
+        return this._countConditions
+            .reduce((prev, curr) => prev + curr.point, 0);
+    }
+
+    calc_point_sum(answer) {
+        return this._countConditions
+            .filter(t => t.isValid(answer))
+            .reduce((prev, curr) => prev + curr.point, 0);
+    }
+
     isHidden(answers:any){
         if (this.hideConditions.length == 0)
             return false;
@@ -71,6 +91,7 @@ export class QuestionBase<T> {
         obj['type'] = this.controlType;
         obj['defaultValue'] = this.defaultValue;
         obj['hideConditions'] = this._hideConditions.map(t => t.toPlainObject(questions));
+        obj['countConditions'] = this._countConditions.map(t => t.toPlainObject());
         return obj;
     }
 }

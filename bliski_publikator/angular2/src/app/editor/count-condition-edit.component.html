@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-2">
+    <label for="">Warunki liczenia</label>
+    <button class="btn btn-default" (click)='addIsEqualCondional()'>
+      <i class="fa fa-plus" aria-hidden="true"></i> Dodaj
+    </button>
+  </div>
+  <div class="col-md-10">
+    <ul class="list-unstyled">
+      <li *ngFor="let condition of current.countConditions">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form action="" method="POST" class="form-horizontal" role="form">
+              <div class="form-group">
+                <label for="input" class="col-sm-2 control-label">Punkty:</label>
+                <div class="col-sm-10">
+                  <input type="number" [(ngModel)]="condition.point" class="form-control" value="0" min="1" max="5" step="1">
+                </div>
+              </div>
+              <div [ngSwitch]='condition.type'>
+                <div *ngSwitchWhen="'is-equal'">
+                  <div class="form-group">
+                    <label for="input" class="col-sm-2 control-label">Wartość:</label>
+                    <div class="col-sm-10">
+                      <input type="text" [(ngModel)]="condition.value" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<pre>{{ current.countConditions | json}}</pre>

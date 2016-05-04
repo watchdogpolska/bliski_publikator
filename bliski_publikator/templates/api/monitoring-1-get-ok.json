@@ -6,18 +6,21 @@
       "name": "Czy to jest bardzo ważne?",
       "description": "Czy to jest bardzo ważne?",
       "type": "short_text",
+      "countConditions": [],
       "hideConditions": []
     },
     {
       "name": "Czy to jest bardzo ważne?",
       "description": "Czy to jest bardzo ważne?",
       "type": "short_text",
+      "countConditions": [],
       "hideConditions": []
     },
     {
       "name": "Jak bardzo jest to ważne?",
       "description": "Czy to jest bardzo ważne?",
       "type": "short_text",
+      "countConditions": [],
       "hideConditions": [
         {
           "type": "is-equal",
@@ -49,9 +52,21 @@
       ]
     },
     {
-      "name": "Jak bardzo jest to ważne?",
+      "name": "Jak bardzo jest to ważne? PYTANIE LICZONE",
       "description": "Czy to jest bardzo ważne?",
       "type": "choice",
+      "countConditions": [
+        {
+          "type": "is-equal",
+          "point": "1",
+          "value": "1"
+        },
+        {
+          "type": "is-equal",
+          "point": "2",
+          "value": "2"
+        }
+      ],
       "hideConditions": [
         {
           "type": "is-equal",
@@ -86,6 +101,7 @@
       "name": "Czy ta informacja została opublikowana?",
       "description": "Publikowanie informacji jest bardzo ważne. Lorem ipsum dolor \n                sit amet, consectetur adipisicing elit. Incidunt, odio, error. \n                Accusantium aspernatur architecto, similique nemo? Illo, \n                neque alias consectetur?",
       "type": "choice",
+      "countConditions": [],
       "hideConditions": [],
       "options": [
         {
@@ -102,6 +118,7 @@
       "name": "Od kiedy ta informacja jest widoczna?",
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum similique adipisci eveniet deleniti non ad, eaque quae architecto numquam reprehenderit. Repudiandae molestias tempore dolores nihil provident sequi iste atque, explicabo.",
       "type": "short_text",
+      "countConditions": [],
       "hideConditions": [
         {
           "type": "is-equal",
