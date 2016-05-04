@@ -3,6 +3,7 @@
   "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum atque necessitatibus odio, quos ipsum numquam ipsam minus accusantium animi alias?",
   "questions": [
     {
+      "id": 1,
       "name": "Czy to jest bardzo ważne?",
       "description": "Czy to jest bardzo ważne?",
       "type": "short_text",
@@ -10,6 +11,7 @@
       "hideConditions": []
     },
     {
+      "id": 2,
       "name": "Czy to jest bardzo ważne?",
       "description": "Czy to jest bardzo ważne?",
       "type": "short_text",
@@ -17,6 +19,7 @@
       "hideConditions": []
     },
     {
+      "id": 3,
       "name": "Jak bardzo jest to ważne?",
       "description": "Czy to jest bardzo ważne?",
       "type": "short_text",
@@ -52,6 +55,7 @@
       ]
     },
     {
+      "id": 4,
       "name": "Jak bardzo jest to ważne? PYTANIE LICZONE",
       "description": "Czy to jest bardzo ważne?",
       "type": "choice",
@@ -98,6 +102,7 @@
       ]
     },
     {
+      "id": 5,
       "name": "Czy ta informacja została opublikowana?",
       "description": "Publikowanie informacji jest bardzo ważne. Lorem ipsum dolor \n                sit amet, consectetur adipisicing elit. Incidunt, odio, error. \n                Accusantium aspernatur architecto, similique nemo? Illo, \n                neque alias consectetur?",
       "type": "choice",
@@ -115,6 +120,7 @@
       ]
     },
     {
+      "id": 6,
       "name": "Od kiedy ta informacja jest widoczna?",
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum similique adipisci eveniet deleniti non ad, eaque quae architecto numquam reprehenderit. Repudiandae molestias tempore dolores nihil provident sequi iste atque, explicabo.",
       "type": "short_text",
