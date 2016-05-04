@@ -296,6 +296,7 @@ class MonitoringApiDetailView(JSONResponseMixin, DetailView):
     def get_questions(self):
         for question in self.object.question_set.all():
             data = {}
+            data['id'] = question.id
             data['name'] = question.name
             data['description'] = question.description
             data['type'] = question.type
