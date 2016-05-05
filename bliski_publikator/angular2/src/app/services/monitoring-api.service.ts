@@ -52,6 +52,7 @@ export class MonitoringService extends BaseApiService {
     parseQuestion(question):QuestionBase<any>{
         // console.log('parseQuestion', question);
         switch(question.type){
+            case 'long_text':
             case 'short_text':
                 return new TextboxQuestion(question);
             case 'choice':
