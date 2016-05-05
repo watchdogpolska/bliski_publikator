@@ -70,8 +70,8 @@ export class MonitoringService extends BaseApiService {
     addConditions(data: any[], , questions: QuestionBase<any>[]){
         data.forEach( (q, i) => {
                 var question = questions[i];
-                question.hideConditions = q.hideConditions.map(c => this.parseHideConditions(c, questions));
-                question.countConditions = q.countConditions.map(this.parseCountCondition);
+                question.hideConditions = (q.hideConditions || []).map(c => this.parseHideConditions(c, questions));
+                question.countConditions = (q.countConditions || []).map(this.parseCountCondition);
             });
     }
 
