@@ -11,6 +11,7 @@ export abstract class BaseConditional {
     }
 
     abstract isValid(answers):boolean;
+
     toPlainObject(questions: QuestionBase<any>[]) {
         let obj = {};
         obj[ 'type' ] = this.type;

@@ -49,10 +49,15 @@ class MonitoringTestCase(TestCase):
         self.assertEqual(Monitoring.get_add_url(),
                          "/monitorings/~create")
 
-    def test_get_answer_url(self):
+    def test_get_sheet_list_url(self):
         institution = InstitutionFactory(name="WSA")
-        self.assertEqual(self.obj.get_answer_url(institution),
-                         "/monitorings/monitoring-sportowy/wsa/~answer")
+        self.assertEqual(self.obj.get_sheet_list_url(institution),
+                         "/monitorings/monitoring-sportowy/wsa/~sheets")
+
+    def test_get_sheet_create_url(self):
+        institution = InstitutionFactory(name="WSA")
+        self.assertEqual(self.obj.get_sheet_create_url(institution),
+                         "/monitorings/monitoring-sportowy/wsa/~answers")
 
 
 class MonitoringCreateViewTestCase(FixtureMixin, TestCase):
@@ -156,14 +161,14 @@ class MonitoringAutocompleteTestCase(TestCase):
         self.assertNotContains(resp, self.obj.name)
 
 
-class MonitoringAnswerViewTestCase(FixtureMixin, TestCase):
+class SheetCreateViewTestCase(FixtureMixin, TestCase):
     def setUp(self):
         self.user = UserFactory()
         self.monitoring = MonitoringFactory()
         self.institution = InstitutionFactory()
         self.monitoring.institutions.add(self.institution)
         # self.monitoring.institutions.save()
-        self.url = self.monitoring.get_answer_url(self.institution)
+        self.url = self.monitoring.get_sheet_create_url(self.institution)
         self.short_text_q = Question.objects.create(pk=1,
                                                     type=Question.TYPE.short_text,
                                                     name="Short text question",

@@ -97,7 +97,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 ]
 
 TEMPLATES[0]['DIRS'].insert(
-    0, os.path.join(APPS_DIR, "templates_prod")
+    0, str(APPS_DIR.path("templates_prod"))
 )
 
 # DATABASE CONFIGURATION

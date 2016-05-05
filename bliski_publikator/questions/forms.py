@@ -16,7 +16,7 @@ class RelatedInstanceMixin(object):
 class QuestionForm(UserKwargModelFormMixin, RelatedInstanceMixin, forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['name', 'description', 'type']
+        fields = ['name', 'description', 'type', 'count']
 
 
 class ChoiceForm(RelatedInstanceMixin, forms.ModelForm):

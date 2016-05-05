@@ -278,3 +278,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
+
+
+# Django filter
+# See: https://django-filter.readthedocs.io/en/latest/ref/settings.html
+FILTERS_HELP_TEXT_FILTER = False

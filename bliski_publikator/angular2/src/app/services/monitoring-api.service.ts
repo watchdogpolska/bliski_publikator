@@ -12,6 +12,9 @@ import { DropdownQuestion } from '../model/question-dropdown';
 import { isEqualConditional } from '../conditionals/conditional-is-equal'
 import { isNullConditional } from '../conditionals/conditional-is-null'
 
+import { isEqualCountCondition } from '../count.conditions/is-equal.cconditions'
+import { BaseCountCondition } from '../count.conditions/cconditions.base'
+
 import {CsrfService} from '../services/csrf.service';
 
 export class MonitoringService extends BaseApiService {
@@ -22,14 +25,14 @@ export class MonitoringService extends BaseApiService {
 
     saveMonitoring(monitoring: Monitoring){
         var data = monitoring.toPlainObject();
-        return this.simple_post('monitoring/', data, {'url': document.location});
+        return this.simple_post('monitoring/', data);
     }
 
     getMonitoring(id: number):Observable<Monitoring> {
-        return this.simple_get(`monitoring/${id}`)
+        return this.simple_get(`/monitorings/${id}/api`)
             .map(data => {
                 let questions = this.parseQuestionsList(data.questions);
-                this.addHideConditions(data.questions, questions);
+                this.addConditions(data.questions, questions);
                 return new Monitoring(
                     {
                         name: data.name,
@@ -49,6 +52,7 @@ export class MonitoringService extends BaseApiService {
     parseQuestion(question):QuestionBase<any>{
         // console.log('parseQuestion', question);
         switch(question.type){
+            case 'long_text':
             case 'short_text':
                 return new TextboxQuestion(question);
             case 'choice':
@@ -58,11 +62,17 @@ export class MonitoringService extends BaseApiService {
     }
 
     addHideConditions(data:any[], questions:QuestionBase<any>[]){
-        var question_with_conditions = data.filter(t => t.hideConditions && t.hideConditions.length > 0);
-        question_with_conditions.forEach( q => {
-            var question = questions.find(t => t.id == q.id)
-            question.hideConditions = q.hideConditions.map(c => this.parseHideConditions(c, questions))
-        });
+        // data.forEach( (q, i) => {
+        //         var question = questions.find(t => q.id == t.id );
+        //     });
+    }
+
+    addConditions(data: any[], , questions: QuestionBase<any>[]){
+        data.forEach( (q, i) => {
+                var question = questions[i];
+                question.hideConditions = (q.hideConditions || []).map(c => this.parseHideConditions(c, questions));
+                question.countConditions = (q.countConditions || []).map(this.parseCountCondition);
+            });
     }
 
     parseHideConditions(data, questions: QuestionBase<any>[]) {
@@ -78,5 +88,16 @@ export class MonitoringService extends BaseApiService {
 
         }
         throw new Error(`Unsupported hide conditions [${data.hideConditions}].`);
+    }
+
+    parseCountCondition(data){
+        switch(data.type){
+            case 'is-equal': {
+                let value = data.value;
+                let point = data.point;
+                return new isEqualCountCondition({ value, point });
+            }
+        }
+        throw new Error(`Unsupported count conditions [${data}].`);
     }
 }

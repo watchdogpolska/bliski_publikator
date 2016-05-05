@@ -34,11 +34,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'home'%}">
+            <!-- <a class="navbar-brand" href="{% url 'home'%}">
               <img alt="Fedrowanie" src="{% static 'images/logo-short.svg' %}" height="25px">
-            </a>
+            </a> -->
           </div>
-          
+
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -65,7 +65,7 @@
               </li>
               {% endif %}
             </ul>
-            
+
             <ul class="nav navbar-nav navbar-right">
               {% if request.user.is_authenticated %}
               <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
@@ -98,7 +98,7 @@
             02-605 Warszawa</div>
             <div class="footer-left">
               silnik: <a href="http://jawne.info.pl">jawne.info.pl</a> |
-              <a href="https://github.com/watchdogpolska/bliski_publikator"><i class="fa fa-github"></i> Github</a>
+              <a href="https://github.com/watchdogpolska/bliski_publikator"><i class="fa fa-github" aria-hidden="true"></i> Github</a>
             </div>
             <div class="footer-center">Strona wykorzystuje cookies</div>
 

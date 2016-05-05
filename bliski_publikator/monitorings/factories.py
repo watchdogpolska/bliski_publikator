@@ -10,6 +10,7 @@ class MonitoringFactory(factory.django.DjangoModelFactory):
     description = factory.fuzzy.FuzzyText()
     active = True
     logo = factory.django.ImageField()
+    max_point = 250
 
     class Meta:
         model = models.Monitoring

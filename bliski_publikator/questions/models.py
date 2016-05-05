@@ -2,9 +2,11 @@ from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from jsonfield import JSONField
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
 
+from ..institutions.models import Institution
 from ..monitorings.models import Monitoring
 
 
@@ -32,7 +34,7 @@ class Question(TimeStampedModel):
                             verbose_name=_("Answer type"),
                             max_length=25)
     order = models.PositiveSmallIntegerField(verbose_name=_("Order"))
-
+    count = JSONField(blank=True)
     objects = QuestionQuerySet.as_manager()
 
     class Meta:
@@ -107,17 +109,20 @@ class SheetQuerySet(models.QuerySet):
 
 
 class Sheet(TimeStampedModel):
-    monitoring = models.ForeignKey(Monitoring,
+    monitoring = models.ForeignKey(to=Monitoring,
                                    verbose_name=_("Monitoring"))
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                              verbose_name=_("User"))
+    institution = models.ForeignKey(to=Institution,
+                                    verbose_name=_("Institution"))
+    point = models.IntegerField(verbose_name=_("Point"))
     objects = SheetQuerySet.as_manager()
 
     class Meta:
         verbose_name = _("Sheet")
         verbose_name_plural = _("Sheets")
         ordering = ['monitoring', 'user', 'created', ]
-        unique_together = (("monitoring", "user"),)
+        unique_together = (("monitoring", "user", "institution"),)
 
 
 class AnswerQuerySet(models.QuerySet):
@@ -136,6 +141,13 @@ class Answer(TimeStampedModel):
             return 1
         if self.answerchoice:
             return 2
+
+    def value(self):
+        if self.answertext:
+            return self.answertext.value or '-'
+        if self.answerchoice:
+            return self.answerchoice.value or '-'
+        return '-'
 
     class Meta:
         verbose_name = _("Answer")
@@ -160,7 +172,7 @@ class AnswerTextQuerySet(AbstractAnswerTypeQuerySet):
 
 
 class AnswerText(AbstractAnswerType):
-    value = models.CharField(verbose_name=_("Value"), max_length=150)
+    value = models.CharField(verbose_name=_("Value"), blank=True, max_length=150)
     objects = AnswerTextQuerySet.as_manager()
 
     class Meta:

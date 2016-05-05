@@ -20,8 +20,7 @@
 		<accordion-group #group *ngFor="let question of questions, #i = index">
 			<div accordion-heading>
 				<i class="pull-right fa fa-caret-down"
-					[ngClass]="{'fa-rotate-180': group?.isOpen}"></i>
-				<i class="pull-right glyphicon" [ngClass]="{'glyphicon-caret-down': group?.isOpen, 'glyphicon-caret-up': !group?.isOpen}"></i>
+					[ngClass]="{'fa-rotate-180': group?.isOpen}"  aria-hidden="true"></i>
 				Pytanie: {{ question.name }}
 			</div>
 			<div class="text-right">
@@ -47,7 +46,7 @@
 	<div class="col-xs-12 col-md-9">
 		<div class="btn-group" dropdown>
 			<button type="button" class="btn btn-primary" dropdownToggle>
-				<i class="fa fa-plus"></i> Dodaj <span class="caret"></span>
+				<i class="fa fa-plus" aria-hidden="true"></i> Dodaj <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
 				<li role="menuitem">

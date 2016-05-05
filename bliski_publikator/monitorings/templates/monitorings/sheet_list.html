@@ -1,0 +1,25 @@
+{% extends 'monitorings/sheet_base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{% blocktrans with institution_link=institution.get_absolute_url monitoring_link=monitoring.get_absolute_url%}Rank of <a href="{{institution_link}}">{{institution}}</a> in <a href="{{monitoring_link}}">{{monitoring}}</a>{% endblocktrans %}</h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        {% if object_list %}
+            {% for sheet in object_list %}
+                <div class="gray">
+                {% include 'monitorings/_sheet.html' with sheet=sheet %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="gray">
+                {% url 'monitorings:sheet_create' institution_slug=obj.slug slug=monitoring.slug as sheet_create %}
+                {% blocktrans %}No sheets. <a href="{{ sheet_create }}" class="btn btn-primary">Add a new one sheet.</a>{% endblocktrans %}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

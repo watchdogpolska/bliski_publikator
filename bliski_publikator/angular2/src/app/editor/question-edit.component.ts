@@ -5,6 +5,7 @@ import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import { QuestionBase } from '../model/question-base'
 import { QuestionOptionEditComponent } from './question-option-edit.component';
 import { QuestionConditionalsComponent } from './question-conditionals.component'
+import { CountConditionEditComponent } from './count-condition-edit.component'
 
 
 @Component({
@@ -13,7 +14,8 @@ import { QuestionConditionalsComponent } from './question-conditionals.component
     directives: [
         ACCORDION_DIRECTIVES,
         QuestionOptionEditComponent,
-        QuestionConditionalsComponent
+        QuestionConditionalsComponent,
+        CountConditionEditComponent
     ]
 })
 export class QuestionEditComponent{

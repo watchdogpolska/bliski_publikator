@@ -1,0 +1,15 @@
+{% load i18n %}
+<p>{% blocktrans with date=sheet.created user=sheet.user %}Created {{date}} by {{user}}{% endblocktrans %}</p>
+<p>{% trans 'Points count:' %} {{sheet.point}}</p>
+<table class="table table-striped">
+    <tr>
+        <th>{% trans 'Question' %}</th>
+        <th>{% trans 'Answer' %}</th>
+    </tr>
+    {% for answer in sheet.answer_set.all %}
+        <tr>
+            <td>{{answer.question}}</td>
+            <td>{{answer.value}}</td>
+        </tr>
+    {% endfor %}
+</table>

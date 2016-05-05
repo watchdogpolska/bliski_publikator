@@ -17,7 +17,7 @@ class MonitoringForm(UserKwargModelFormMixin, FormHorizontalMixin, SingleButtonM
 
     class Meta:
         model = Monitoring
-        fields = ['name', 'description', 'institutions', 'active']
+        fields = ['name', 'description', 'institutions', 'active', 'max_point']
         widgets = {
             'institutions': autocomplete.ModelSelect2Multiple(url='institutions:autocomplete'),
             'description': TinyMCE(attrs={'cols': 80, 'rows': 30})

@@ -1,12 +1,13 @@
 {
     "name": "Tytuł monitoringu",
     "description": "Opis monitoringu",
-    "institutions": ["1"],
+    "max_point": 250,
     "questions": [
         {
             "name": "Gdzie ja jestem?",
             "description": "WWW",
             "type": "long_text",
+            "count": {},
             "hideConditions": [
                 {
                     "type": "is-equal",

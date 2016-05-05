@@ -6,13 +6,18 @@ export class CsrfService{
 	constructor() {}
 
 	getToken() {
-		return this.parseCookie()['csrftoken'];
+		let cookies = this.parseCookie();
+		let r = cookies['csrftoken'];
+		return r;
 	}
 
 	private parseCookie() {
-		return document.cookie
+		var cookies = {}
+		document.cookie
 			.split(';')
+			.map(t => t.trim())
 			.map(t => t.split('='))
-			.reduce((v, t) => { v[t[0]] = (t[1] || ''); return v }, {})
+			.forEach((t) => cookies[t[0]] = (t[1] || ''));
+		return cookies;
 	}
 }

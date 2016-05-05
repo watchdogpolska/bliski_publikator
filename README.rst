@@ -21,10 +21,6 @@ LICENSE: BSD
 Settings
 ------------
 
-Moved to settings_.
-
-.. _settings: http://cookiecutter-django.readthedocs.org/en/latest/settings.html
-
 Basic Commands
 --------------
 
@@ -48,30 +44,38 @@ To run the tests, check your test coverage, and generate an HTML coverage report
     $ coverage html
     $ open htmlcov/index.html
 
-Running tests with py.test
+Running tests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-  $ py.test
+  $ pip install -r requirements/test.txt
+  $ python manage.py tests
 
-Live reloading and Sass CSS compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you’d like to take advantage of live reloading and Sass / JS compilation you can do so with a little bit of prep work.
+Running tests
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Make sure that nodejs, gulp-cli, bower is installed. Then in the project root run:
+Standard develop server::
 
+  $ pip install -r requirements/local.txt
+  $ python manage.py migrate
+  $ python manage.py runserver
+
+SQL-logging develop server::
+
+  $ SQL_LOG=True python manage.py runserver
+
+Frontend build
+^^^^^^^^^^^^^^
+
+In development
     $ npm install
+    $ gulp
 
-Now you just need:
-
-    $ gulp watch
-
-The base app will now run as it would with the usual manage.py runserver but with live reloading and Sass compilation enabled.
-
-To get live reloading to work you won't need to install an appropriate browser extension.  It's provided by proxying request and injecting script.
-
+In production
+    $ npm install
+    $ gulp prod
 
 Sentry
 ^^^^^^
@@ -82,3 +86,38 @@ The system is setup with reasonable defaults, including 404 logging and integrat
 You must set the DSN url in production.
 
 It's time to write the code!!!
+
+## Gulp
+
+Gulp is a task runner used for automatic style/script compilation, minification, Angular app compilation; etc.
+
+### Defined task:
+* default - Run task `dev`, so build app, run server, proxy and begins to watch files
+  ````
+  gulp
+  ````
+* **prod** - run task ``bower``, ``delete:prod``, ``script``, ``styles``, ``optimzie``, ``inject``, ``webpack``.
+When you run this command, the application is ready to make publicly available. All files will be ready.
+* *build* - Build app for development.
+* bower - run ```bower install```. It download frontend depedencies (TinyMce, Bootstrap, Font-awesome...)-
+  ````
+  gulp bower
+  ````
+* browsersync - Run proxy server. It's a developer tools used for livereloading, scroll synchronization and other. Read more: https://www.browsersync.io/
+  ````
+  gulp browsersync
+  ````
+* delete - Deletes static files created when building applications. Does delete compiled angular 2 app.
+* delete:prod - Delete also production template with injected script/styles (see ``inject``).
+* inject - injects project, django apps and third party dependencies in the base template
+* dev - see ``defualt``
+* fonts - copy fonts files from bower
+* optimize - minify/concat css/js for production
+* script - transpile script from assets to static.
+* styles - compile scss to css.
+* watch - Start watching for changes in styles, script. See ````script````, ````styles````.
+
+Summary:\
+Do you want to prepare applications for production? ``gulp prod``\
+Do you want to start programming ? Just ``gulp``\
+Do you only want to build applications without observing changes for developming? ``gulp build``

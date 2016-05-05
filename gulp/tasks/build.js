@@ -12,6 +12,7 @@ gulp.task('build', function(callback) {
     'styles',
     'deps',
     'fonts',
+    'webpack',
     callback
   );
 });

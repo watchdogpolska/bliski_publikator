@@ -56,20 +56,31 @@ export class QuestionSolverComponent implements OnInit {
     }
 
     onSubmit() {
-        let questions = this.monitoring.questions;
-        let values = this.form.value;
-        let anwers = [];
-        for(let answer_key in values){
-            var question = questions.find(q => q.key == answer_key);
-            anwers.push({ id: question.id, value: values[answer_key] });
-        }
-        console.log("onSubmit");
         this._api
-            .saveAnswers(anwers)
+            .saveAnswers(this.generateAnswerSheet())
             .subscribe(
-                data => { console.log("OK", data) },
+                data => { console.log(data); document.location = data.return_url; },
                 error => { console.log("FAIL", error) }
             );
+    }
+
+    protected generateAnswerSheet(){
+        let questions = this.monitoring.questions;
+        let values = this.form.value;
+        console.log({ values });
+        let answers = [];
+        for (let answer_key in values) {
+            let question = questions.find(q => q.key == answer_key);
+            console.log("answer: ", question);
+            let curr_value = values[answer_key];
+            answers.push({
+                question_id: question.id,
+                value: curr_value,
+                point: question.calc_point_sum(curr_value);
+            });
+        }
+        console.log(answers);
+        return answers;
     }
 
     isHidden(question: QuestionBase<any>) {
