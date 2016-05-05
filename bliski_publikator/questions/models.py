@@ -2,11 +2,12 @@ from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from jsonfield import JSONField
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
 
-from ..monitorings.models import Monitoring
 from ..institutions.models import Institution
+from ..monitorings.models import Monitoring
 
 
 class QuestionQuerySet(models.QuerySet):
@@ -33,6 +34,7 @@ class Question(TimeStampedModel):
                             verbose_name=_("Answer type"),
                             max_length=25)
     order = models.PositiveSmallIntegerField(verbose_name=_("Order"))
+    count = JSONField()
     objects = QuestionQuerySet.as_manager()
 
     class Meta:

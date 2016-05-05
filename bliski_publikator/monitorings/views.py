@@ -73,7 +73,10 @@ class MonitoringCreateView(LoginRequiredMixin, CustomJSONResponseMixin, Permissi
             return self.error(error=NO_QUESTION)
 
         # Validate questions
-        question_forms = [QuestionForm(data=x) for x in questions]
+        def field_mapping(x):
+            x['count'] = x.get('countConditions', [])
+            return x
+        question_forms = [QuestionForm(data=field_mapping(x)) for x in questions]
         if not all(x.is_valid() for x in question_forms):
             return self.error(errors=[self.error_list(x) for x in question_forms])
 

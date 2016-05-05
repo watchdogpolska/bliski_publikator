@@ -1,0 +1,13 @@
+{% extends 'monitorings/monitoring_base.html' %}
+{% load crispy_forms_tags i18n %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{{monitoring.get_absolute_url}}">{{monitoring}}</a></li>
+    <li>{{institution}}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<app mode="solver" monitoring-id="{{monitoring.pk}}" institution-id="{{institution.pk}}">loading...</app>
+{% endblock %}

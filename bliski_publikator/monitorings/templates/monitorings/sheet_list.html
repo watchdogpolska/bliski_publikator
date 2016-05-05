@@ -1,0 +1,14 @@
+{% extends 'monitorings/sheet_base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{% blocktrans with institution_link=institution.get_absolute_url monitoring_link=monitoring.get_absolute_url%}Rank of <a href="{{institution_link}}">{{institution}}</a> in <a href="{{monitoring_link}}">{{monitoring}}</a>{% endblocktrans %}</h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="gray">
+        </div>
+    </div>
+</div>
+{% endblock %}
