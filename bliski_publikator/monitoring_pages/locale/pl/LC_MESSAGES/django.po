@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-19 00:12+0000\n"
-"PO-Revision-Date: 2016-04-17 01:40+0200\n"
+"POT-Creation-Date: 2016-05-05 11:35+0000\n"
+"PO-Revision-Date: 2016-05-05 12:04+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -17,67 +17,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-#: monitoring_pages/apps.py:8
+#: apps.py:8
 msgid "Monitorings pages"
 msgstr "Strony monitoringów"
 
-#: monitoring_pages/models.py:17
+#: models.py:17
 msgid "Monitoring"
 msgstr "Monitoring"
 
-#: monitoring_pages/models.py:18
+#: models.py:18
 msgid "Title"
 msgstr "Tytut"
 
-#: monitoring_pages/models.py:20
+#: models.py:20
 msgid "Slug"
 msgstr "Identyfikator redakcyjny"
 
-#: monitoring_pages/models.py:22
+#: models.py:22
 msgid "Content"
 msgstr "Treść"
 
-#: monitoring_pages/models.py:23
+#: models.py:23
 msgid "Ordering"
 msgstr "Sortowanie"
 
-#: monitoring_pages/models.py:27
+#: models.py:27
 msgid "Page"
 msgstr "Strona"
 
-#: monitoring_pages/models.py:28
+#: models.py:28
 msgid "Pages"
 msgstr "Strony"
 
-#: monitoring_pages/templates/monitoring_pages/page_base.html:8
-#: monitoring_pages/templates/monitoring_pages/page_form.html:11
+#: templates/monitoring_pages/page_base.html:9
+#: templates/monitoring_pages/page_form.html:11
+#: templates/monitoring_pages/page_form.html:18
 msgid "Update page"
 msgstr "Zaktualizuj stronę"
 
-#: monitoring_pages/templates/monitoring_pages/page_base.html:12
-#: monitoring_pages/templates/monitoring_pages/page_confirm_delete.html:8
+#: templates/monitoring_pages/page_base.html:15
+#: templates/monitoring_pages/page_confirm_delete.html:8
 msgid "Delete page"
 msgstr "Usuń stronę"
 
-#: monitoring_pages/templates/monitoring_pages/page_form.html:11
-#, fuzzy
-#| msgid "Update page"
-msgid "Add page"
-msgstr "Zaktualizuj stronę"
+#: templates/monitoring_pages/page_detail.html:21
+msgid "Home"
+msgstr "Strona główna"
 
-#: monitoring_pages/views.py:46
+#: templates/monitoring_pages/page_form.html:11
+#: templates/monitoring_pages/page_form.html:18
+msgid "Add page"
+msgstr "Dodaj stronę"
+
+#: views.py:46
 #, python-brace-format
 msgid "{0} created!"
 msgstr "{0} utworzony!"
 
-#: monitoring_pages/views.py:61
+#: views.py:61
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: monitoring_pages/views.py:73
+#: views.py:73
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"

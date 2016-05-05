@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 22:51+0000\n"
-"PO-Revision-Date: 2016-05-03 00:52+0200\n"
+"POT-Creation-Date: 2016-05-05 11:34+0000\n"
+"PO-Revision-Date: 2016-05-05 13:35+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -19,11 +19,11 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: apps.py:8 models.py:32
+#: apps.py:8 models.py:34
 msgid "Monitorings"
 msgstr "Monitoringi"
 
-#: models.py:18 templates/monitorings/institution_assign.html.py:26
+#: models.py:18 templates/monitorings/institution_assign.html.py:36
 msgid "Name"
 msgstr "Nazwa"
 
@@ -43,88 +43,149 @@ msgstr "Status aktywności"
 msgid "Logo"
 msgstr "Logo"
 
-#: models.py:25
+#: models.py:24
+msgid "Max point"
+msgstr "Maksimum ppunktów"
+
+#: models.py:26
 msgid "Institution"
 msgstr "Instytucja"
 
-#: models.py:26
+#: models.py:27
 msgid "Specifies which institutions are covered by monitoring"
 msgstr "Określ, które instytucje są objęte monitoringiem"
 
-#: models.py:31
+#: models.py:33
 msgid "Monitoring"
 msgstr "Monitoring"
 
+#: templates/monitorings/_sheet.html:2
+#, python-format
+msgid "Created %(date)s by %(user)s"
+msgstr "Utworzone %(date)s przez %(user)s."
+
+#: templates/monitorings/_sheet.html:3
+msgid "Points count:"
+msgstr "Liczba punktów"
+
+#: templates/monitorings/_sheet.html:6
+msgid "Question"
+msgstr "Pytanie"
+
+#: templates/monitorings/_sheet.html:7
+msgid "Answer"
+msgstr "Odpowiedź"
+
 #: templates/monitorings/institution_assign.html:7
-#: templates/monitorings/monitoring_base.html:10
+#: templates/monitorings/institution_assign.html:13
+#: templates/monitorings/monitoring_base.html:15
 msgid "Assign institutions"
 msgstr "Przypisz instytucje"
 
-#: templates/monitorings/institution_assign.html:16
+#: templates/monitorings/institution_assign.html:21
 msgid "Filtr"
 msgstr "Filtr"
 
-#: templates/monitorings/institution_assign.html:22
-#: templates/monitorings/institution_assign.html:41
+#: templates/monitorings/institution_assign.html:30
+#: templates/monitorings/institution_assign.html:54
 #, python-format
 msgid "Assign institutions to %(monitoring)s"
 msgstr "Przypisz instytucje do %(monitoring)s"
 
-#: templates/monitorings/institution_assign.html:27
+#: templates/monitorings/institution_assign.html:37
 msgid "Region"
 msgstr "Region"
 
-#: templates/monitorings/monitoring_base.html:9
+#: templates/monitorings/monitoring_base.html:11
 #: templates/monitorings/monitoring_form.html:8
+#: templates/monitorings/monitoring_form.html:15
 msgid "Update monitoring"
 msgstr "Zaktualizuj monitoring"
 
-#: templates/monitorings/monitoring_base.html:14
+#: templates/monitorings/monitoring_base.html:22
 #: templates/monitorings/monitoring_confirm_delete.html:8
 msgid "Delete monitoring"
 msgstr "Usuń monitoring"
 
-#: templates/monitorings/monitoring_base.html:18
+#: templates/monitorings/monitoring_base.html:29
 msgid "Add page"
 msgstr "Dodaj stronę"
 
-#: templates/monitorings/monitoring_detail.html:27
+#: templates/monitorings/monitoring_detail.html:19
+msgid "Home"
+msgstr "Strona główna"
+
+#: templates/monitorings/monitoring_detail.html:34
 msgid "Design and purpose"
 msgstr "Założenia i cele"
 
-#: templates/monitorings/monitoring_detail.html:36
+#: templates/monitorings/monitoring_detail.html:43
 msgid "Covered institutions"
 msgstr "Instytucje objęte"
 
-#: templates/monitorings/monitoring_detail.html:44
+#: templates/monitorings/monitoring_detail.html:47
+msgid "Institutions"
+msgstr "Instytucje"
+
+#: templates/monitorings/monitoring_detail.html:48
+msgid "Points"
+msgstr "Punkty"
+
+#: templates/monitorings/monitoring_detail.html:49
+msgid "Actions"
+msgstr "Akcje"
+
+#: templates/monitorings/monitoring_detail.html:65
+#: templates/monitorings/monitoring_form_answer.html:13
+msgid "Rank institution"
+msgstr "Ocena instytucji"
+
+#: templates/monitorings/monitoring_detail.html:72
 msgid "No institutions"
 msgstr "Brak instytucji"
 
-#: templates/monitorings/monitoring_form.html:8
+#: templates/monitorings/monitoring_form.html:22
+msgid "Submit"
+msgstr "Zapisz"
+
 #: templates/monitorings/monitoring_form_monitoring.html:12
 #: templates/monitorings/monitoring_list.html:6
 msgid "Add monitoring"
 msgstr "Dodaj monitoring"
 
-#: templates/monitorings/monitoring_form.html:19
-msgid "Submit"
-msgstr "Zapisz"
+#: templates/monitorings/monitoring_list.html:12
+msgid "List of monitorings"
+msgstr "Indeks monitoringów"
 
-#: templates/monitorings/monitoring_form_answer.html:13
-msgid "Rank institution"
-msgstr "Ocena instytucji"
+#: templates/monitorings/sheet_list.html:6
+#, python-format
+msgid ""
+"Rank of <a href=\"%(institution_link)s\">%(institution)s</a> in <a href="
+"\"%(monitoring_link)s\">%(monitoring)s</a>"
+msgstr ""
+"Ocena <a href=\"%(institution_link)s\">%(institution)s</a> w ramach <a href="
+"\"%(monitoring_link)s\">%(monitoring)s</a>"
 
-#: views.py:157
+#: templates/monitorings/sheet_list.html:19
+#, python-format
+msgid ""
+"No sheets. <a href=\"%(sheet_create)s\" class=\"btn btn-primary\">Add a new "
+"one sheet.</a>"
+msgstr ""
+"Brak kwestionariuszy.  <a href=\"%(sheet_create)s\" class=\"btn btn-primary"
+"\">Dodaj nowy kwestionariusz.</a>"
+
+#: views.py:161
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: views.py:186
+#: views.py:191
 #, python-format
 msgid "%(count)d institutions was assigned to %(monitoring)s"
 msgstr "%(count)d instytucji zostało przypisanych do %(monitoring)s"
 
-#: views.py:200
+#: views.py:205
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"

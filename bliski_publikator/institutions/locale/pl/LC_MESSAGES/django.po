@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-19 00:15+0000\n"
+"POT-Creation-Date: 2016-05-05 11:35+0000\n"
 "PO-Revision-Date: 2016-04-19 02:15+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.4\n"
 
-#: apps.py:8 models.py:37
+#: apps.py:8 models.py:38
 msgid "Institutions"
 msgstr "Instytucje"
 
@@ -39,15 +39,15 @@ msgstr "Zaktualizuj"
 msgid "Save"
 msgstr "Zapisz"
 
-#: forms.py:43
+#: forms.py:44
 msgid "Identification"
 msgstr "Identyfikacja"
 
-#: forms.py:49
+#: forms.py:50
 msgid "Location"
 msgstr "Lokalizacja"
 
-#: forms.py:55 models.py:32 templates/institutions/institution_detail.html:30
+#: forms.py:56 models.py:32 templates/institutions/institution_detail.html:30
 msgid "Monitorings"
 msgstr "Monitoringi"
 
@@ -75,12 +75,13 @@ msgstr "REGON"
 msgid "KRS"
 msgstr "KRS"
 
-#: models.py:36
+#: models.py:37
 msgid "Institution"
 msgstr "Instytucja"
 
 #: templates/institutions/institution_base.html:8
 #: templates/institutions/institution_form.html:14
+#: templates/institutions/institution_form.html:22
 msgid "Update institution"
 msgstr "Zaktualizuj instytucje"
 
@@ -89,11 +90,6 @@ msgstr "Zaktualizuj instytucje"
 msgid "Delete institution"
 msgstr "Usuń instytucje"
 
-#: templates/institutions/institution_base.html:16
-#: templates/institutions/institution_form.html:14
-msgid "Add institution"
-msgstr "Dodaj instytucje"
-
 #: templates/institutions/institution_detail.html:22
 msgid "Identfication"
 msgstr "Identyfikacja"
@@ -101,6 +97,13 @@ msgstr "Identyfikacja"
 #: templates/institutions/institution_detail.html:38
 msgid "No monitorings"
 msgstr "Brak monitoringów"
+
+#: templates/institutions/institution_filter.html:6
+#: templates/institutions/institution_filter.html:12
+#: templates/institutions/institution_form.html:14
+#: templates/institutions/institution_form.html:22
+msgid "Add institution"
+msgstr "Dodaj instytucje"
 
 #: views.py:35
 #, python-brace-format
