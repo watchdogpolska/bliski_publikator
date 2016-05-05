@@ -10,6 +10,7 @@ gulp.task('prod', function(callback){
     'styles',
     'optimize',
     'inject',
+    'webpack:prod',
     callback
   );
 });
