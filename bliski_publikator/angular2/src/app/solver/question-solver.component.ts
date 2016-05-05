@@ -59,7 +59,7 @@ export class QuestionSolverComponent implements OnInit {
         this._api
             .saveAnswers(this.generateAnswerSheet())
             .subscribe(
-                data => { document.location = data },
+                data => { console.log(data); document.location = data.return_url; },
                 error => { console.log("FAIL", error) }
             );
     }

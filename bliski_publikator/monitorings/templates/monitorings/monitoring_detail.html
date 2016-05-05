@@ -42,11 +42,32 @@
         <div class="gray">
             <h2>{% trans 'Covered institutions' %}</h2>
             {% if object.institutions.all %}
-            <ul>
+            <table>
+                <tr>
+                    <th>{% trans 'Institutions' %}</th>
+                    <th>{% trans 'Points' %}</th>
+                    <th>{% trans 'Actions' %}</th>
+                </tr>
                 {% for obj in object.institutions.all %}
-                <li><a href="{{obj.get_absolute_url}}">{{obj}}</a></li>
+                <tr>
+                    <td>
+                        <a href="{{obj.get_absolute_url}}">
+                            {{obj}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'monitorings:institution_sheets' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
+                            {{obj.max_point}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'monitorings:institution_answer' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
+                            {% trans 'Rank institution' %}
+                        </a>
+                    </td>
+                </tr>
                 {% endfor %}
-            </ul>
+            </table>
             {% else %}
             <p>{% trans 'No institutions' %}</p>
             {% endif %}

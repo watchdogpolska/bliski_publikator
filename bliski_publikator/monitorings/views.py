@@ -2,7 +2,7 @@ import json
 
 from atom.ext.crispy_forms.forms import BaseTableFormSet
 from atom.views import DeleteMessageMixin
-from braces.views import FormValidMessageMixin, SelectRelatedMixin, UserFormKwargsMixin
+from braces.views import FormValidMessageMixin, SelectRelatedMixin, UserFormKwargsMixin, PrefetchRelatedMixin
 from cached_property import cached_property
 from dal import autocomplete
 from django.contrib import messages
@@ -215,7 +215,7 @@ class MonitoringAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, TemplateView):
+class SheetCreateView(LoginRequiredMixin, CustomJSONResponseMixin, TemplateView):
     template_name = 'monitorings/monitoring_form_answer.html'
 
     def get_object(self):
@@ -224,7 +224,7 @@ class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, Template
                                  institution__slug=self.kwargs['institution_slug'])
 
     def get_context_data(self, *args, **kwargs):
-        context = super(MonitoringAnswerView, self).get_context_data(*args, **kwargs)
+        context = super(SheetCreateView, self).get_context_data(*args, **kwargs)
         thr = self.get_object()
         context['monitoring'] = thr.monitoring
         context['institution'] = thr.institution
@@ -232,7 +232,7 @@ class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, Template
 
     @cached_property
     def answer_dict(self):
-        return {x['question_id']: x for x in  self.data.get('result', [])}
+        return {x['question_id']: x for x in self.data.get('result', [])}
 
     def get_answer_by_pk(self, pk):
         return self.answer_dict[pk]
@@ -323,3 +323,31 @@ class MonitoringApiDetailView(JSONResponseMixin, DetailView):
                                    'question_set__condition_related__target',
                                    'question_set__choice_set',
                                    )
+
+
+class MonitoringInstitutionDetailView(SelectRelatedMixin, PrefetchRelatedMixin, ListView):
+    template_name = 'monitorings/sheet_list.html'
+    model = Sheet
+    select_related = ['user', ]
+    prefetch_related = ['answer_set',
+                        'answer_set__question',
+                        'answer_set__answertext',
+                        'answer_set__answerchoice']
+
+    @cached_property
+    def thr(self):
+        qs = MonitoringInstitution.objects.select_related('monitoring', 'institution')
+        return get_object_or_404(qs,
+                                 monitoring__slug=self.kwargs['slug'],
+                                 institution__slug=self.kwargs['institution_slug'])
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super(MonitoringInstitutionDetailView, self).get_queryset(*args, **kwargs)
+        return qs.filter(institution=self.thr.institution,
+                         monitoring=self.thr.monitoring)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MonitoringInstitutionDetailView, self).get_context_data(*args, **kwargs)
+        context['monitoring'] = self.thr.monitoring
+        context['institution'] = self.thr.institution
+        return context

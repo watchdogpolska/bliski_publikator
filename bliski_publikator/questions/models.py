@@ -142,6 +142,13 @@ class Answer(TimeStampedModel):
         if self.answerchoice:
             return 2
 
+    def value(self):
+        if self.answertext:
+            return self.answertext.value or '-'
+        if self.answerchoice:
+            return self.answerchoice.value or '-'
+        return '-'
+
     class Meta:
         verbose_name = _("Answer")
         verbose_name_plural = _("Answers")
@@ -165,7 +172,7 @@ class AnswerTextQuerySet(AbstractAnswerTypeQuerySet):
 
 
 class AnswerText(AbstractAnswerType):
-    value = models.CharField(verbose_name=_("Value"), max_length=150)
+    value = models.CharField(verbose_name=_("Value"), blank=True, max_length=150)
     objects = AnswerTextQuerySet.as_manager()
 
     class Meta:

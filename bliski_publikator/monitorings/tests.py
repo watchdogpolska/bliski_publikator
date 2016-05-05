@@ -156,7 +156,7 @@ class MonitoringAutocompleteTestCase(TestCase):
         self.assertNotContains(resp, self.obj.name)
 
 
-class MonitoringAnswerViewTestCase(FixtureMixin, TestCase):
+class SheetCreateViewTestCase(FixtureMixin, TestCase):
     def setUp(self):
         self.user = UserFactory()
         self.monitoring = MonitoringFactory()
