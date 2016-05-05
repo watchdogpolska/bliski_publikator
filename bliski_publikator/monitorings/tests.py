@@ -49,10 +49,15 @@ class MonitoringTestCase(TestCase):
         self.assertEqual(Monitoring.get_add_url(),
                          "/monitorings/~create")
 
-    def test_get_answer_url(self):
+    def test_get_sheet_list_url(self):
         institution = InstitutionFactory(name="WSA")
-        self.assertEqual(self.obj.get_answer_url(institution),
+        self.assertEqual(self.obj.get_sheet_list_url(institution),
                          "/monitorings/monitoring-sportowy/wsa/~sheets")
+
+    def test_get_sheet_create_url(self):
+        institution = InstitutionFactory(name="WSA")
+        self.assertEqual(self.obj.get_sheet_create_url(institution),
+                         "/monitorings/monitoring-sportowy/wsa/~answers")
 
 
 class MonitoringCreateViewTestCase(FixtureMixin, TestCase):
@@ -188,12 +193,10 @@ class SheetCreateViewTestCase(FixtureMixin, TestCase):
                                             order=0)
 
     def test_auth(self):
-        print self.url
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 302)
 
     def test_status(self):
-        print self.url
         self.client.login(username=self.user.username, password='pass')
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)
