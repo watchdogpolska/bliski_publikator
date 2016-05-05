@@ -2,7 +2,13 @@ import json
 
 from atom.ext.crispy_forms.forms import BaseTableFormSet
 from atom.views import DeleteMessageMixin
-from braces.views import FormValidMessageMixin, SelectRelatedMixin, UserFormKwargsMixin, PrefetchRelatedMixin
+from braces.views import (
+    FormValidMessageMixin,
+    JSONResponseMixin,
+    PrefetchRelatedMixin,
+    SelectRelatedMixin,
+    UserFormKwargsMixin
+)
 from cached_property import cached_property
 from dal import autocomplete
 from django.contrib import messages
@@ -16,7 +22,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django_filters.views import FilterView
 from extra_views import InlineFormSet, NamedFormsetsMixin, UpdateWithInlinesView
-from braces.views import JSONResponseMixin
+
 from ..institutions.filters import InstitutionFilter
 from ..institutions.models import Institution
 from ..monitoring_pages.forms import MiniPageForm
@@ -218,17 +224,25 @@ class MonitoringAutocomplete(autocomplete.Select2QuerySetView):
 class SheetCreateView(LoginRequiredMixin, CustomJSONResponseMixin, TemplateView):
     template_name = 'monitorings/monitoring_form_answer.html'
 
-    def get_object(self):
+    @cached_property
+    def thr(self):
         return get_object_or_404(MonitoringInstitution,
                                  monitoring__slug=self.kwargs['slug'],
                                  institution__slug=self.kwargs['institution_slug'])
 
     def get_context_data(self, *args, **kwargs):
         context = super(SheetCreateView, self).get_context_data(*args, **kwargs)
-        thr = self.get_object()
-        context['monitoring'] = thr.monitoring
-        context['institution'] = thr.institution
+        context['monitoring'] = self.thr.monitoring
+        context['institution'] = self.thr.institution
         return context
+
+    def get(self, *args, **kwargs):
+        if Sheet.objects.filter(monitoring=self.thr.monitoring,
+                                institution=self.thr.institution,
+                                user=self.request.user).exists():
+            messages.info(self.request, _("Unable to rank once institution twice times."))
+            return HttpResponseRedirect(self.thr.monitoring.get_sheet_list_url(self.thr.institution))
+        return super(SheetCreateView, self).get(*args, **kwargs)
 
     @cached_property
     def answer_dict(self):
@@ -249,7 +263,7 @@ class SheetCreateView(LoginRequiredMixin, CustomJSONResponseMixin, TemplateView)
     def post(self, *args, **kwargs):  # TODO: Transactions in MonitoringAnswerView
         self.data = json.loads(self.request.body.decode('utf-8'))
 
-        thr = self.get_object()
+        thr = self.thr
         (monitoring, institution) = (thr.monitoring, thr.institution)
 
         questions = Question.objects.filter(monitoring=monitoring).all()
@@ -276,7 +290,7 @@ class SheetCreateView(LoginRequiredMixin, CustomJSONResponseMixin, TemplateView)
 
         # Save answers
         [form.save() for form in answer_forms]
-
+        messages.success(self.request, _("Rank saved. Thank you."))
         return JsonResponse({'success': True,
                              'return_url': monitoring.get_institution_url(institution)})
 

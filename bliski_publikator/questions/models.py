@@ -122,7 +122,7 @@ class Sheet(TimeStampedModel):
         verbose_name = _("Sheet")
         verbose_name_plural = _("Sheets")
         ordering = ['monitoring', 'user', 'created', ]
-        unique_together = (("monitoring", "user"),)
+        unique_together = (("monitoring", "user", "institution"),)
 
 
 class AnswerQuerySet(models.QuerySet):
