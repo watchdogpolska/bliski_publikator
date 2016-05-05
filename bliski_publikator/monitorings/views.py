@@ -232,7 +232,7 @@ class MonitoringAnswerView(LoginRequiredMixin, CustomJSONResponseMixin, Template
 
     @cached_property
     def answer_dict(self):
-        return {answer.get('question_id'): answer for answer in self.data.get('result', {})}
+        return {x['question_id']: x for x in  self.data.get('result', [])}
 
     def get_answer_by_pk(self, pk):
         return self.answer_dict[pk]
@@ -313,7 +313,7 @@ class MonitoringApiDetailView(JSONResponseMixin, DetailView):
         context = {}
         context['name'] = self.object.name
         context['description'] = self.object.description
-        context['questons'] = list(self.get_questions())
+        context['questions'] = list(self.get_questions())
         return self.render_json_response(context)
 
     def get_queryset(self, *args, **kwargs):
