@@ -1,3 +1,4 @@
+{% load i18n %}
 <p>{% blocktrans with date=sheet.created user=sheet.user %}Created {{date}} by {{user}}{% endblocktrans %}</p>
 <p>{% trans 'Points count:' %} {{sheet.point}}</p>
 <table class="table table-striped">

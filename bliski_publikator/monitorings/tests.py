@@ -52,7 +52,7 @@ class MonitoringTestCase(TestCase):
     def test_get_answer_url(self):
         institution = InstitutionFactory(name="WSA")
         self.assertEqual(self.obj.get_answer_url(institution),
-                         "/monitorings/monitoring-sportowy/wsa/~answer")
+                         "/monitorings/monitoring-sportowy/wsa/~sheets")
 
 
 class MonitoringCreateViewTestCase(FixtureMixin, TestCase):
