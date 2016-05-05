@@ -7,6 +7,7 @@
             "name": "Gdzie ja jestem?",
             "description": "WWW",
             "type": "long_text",
+            "count": {},
             "hideConditions": [
                 {
                     "type": "is-equal",

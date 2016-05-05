@@ -34,7 +34,7 @@ class Question(TimeStampedModel):
                             verbose_name=_("Answer type"),
                             max_length=25)
     order = models.PositiveSmallIntegerField(verbose_name=_("Order"))
-    count = JSONField()
+    count = JSONField(blank=True)
     objects = QuestionQuerySet.as_manager()
 
     class Meta:

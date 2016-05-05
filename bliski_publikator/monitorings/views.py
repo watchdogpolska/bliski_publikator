@@ -74,7 +74,7 @@ class MonitoringCreateView(LoginRequiredMixin, CustomJSONResponseMixin, Permissi
 
         # Validate questions
         def field_mapping(x):
-            x['count'] = x.get('countConditions', [])
+            x['count'] = json.dumps(x.get('countConditions', []))
             return x
         question_forms = [QuestionForm(data=field_mapping(x)) for x in questions]
         if not all(x.is_valid() for x in question_forms):

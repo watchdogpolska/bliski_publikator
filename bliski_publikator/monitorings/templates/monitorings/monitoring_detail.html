@@ -56,12 +56,12 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{% url 'monitorings:institution_sheets' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
+                        <a href="{% url 'monitorings:sheet_list' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
                             {{obj.max_point}}
                         </a>
                     </td>
                     <td>
-                        <a href="{% url 'monitorings:institution_answer' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
+                        <a href="{% url 'monitorings:sheet_create' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
                             {% trans 'Rank institution' %}
                         </a>
                     </td>

@@ -49,9 +49,13 @@ class Monitoring(TimeStampedModel):
     def get_assign_url(self):
         return reverse('monitorings:assign', kwargs={'slug': self.slug})
 
-    def get_answer_url(self, institution):
+    def get_sheet_create_url(self, institution):
         kwargs = {'slug': self.slug, 'institution_slug': institution.slug}
-        return reverse('monitorings:institution_answer', kwargs=kwargs)
+        return reverse('monitorings:sheet_create', kwargs=kwargs)
+
+    def get_sheet_list_url(self, institution):
+        kwargs = {'slug': self.slug, 'institution_slug': institution.slug}
+        return reverse('monitorings:sheet_list', kwargs=kwargs)
 
     def get_institution_url(self, institution):
         kwargs = {'slug': self.slug, 'institution_slug': institution.slug}

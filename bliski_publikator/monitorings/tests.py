@@ -163,7 +163,7 @@ class SheetCreateViewTestCase(FixtureMixin, TestCase):
         self.institution = InstitutionFactory()
         self.monitoring.institutions.add(self.institution)
         # self.monitoring.institutions.save()
-        self.url = self.monitoring.get_answer_url(self.institution)
+        self.url = self.monitoring.get_sheet_create_url(self.institution)
         self.short_text_q = Question.objects.create(pk=1,
                                                     type=Question.TYPE.short_text,
                                                     name="Short text question",
@@ -188,10 +188,12 @@ class SheetCreateViewTestCase(FixtureMixin, TestCase):
                                             order=0)
 
     def test_auth(self):
+        print self.url
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 302)
 
     def test_status(self):
+        print self.url
         self.client.login(username=self.user.username, password='pass')
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)

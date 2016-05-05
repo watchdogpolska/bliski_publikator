@@ -9,6 +9,7 @@
       "description": "Czy to jest bardzo ważne?",
       "order": 1,
       "type": "short_text",
+      "countConditions": {},
       "hideConditions": []
     },
     {
@@ -17,6 +18,7 @@
       "description": "Czy to jest bardzo ważne?",
       "order": 1,
       "type": "short_text",
+      "countConditions": {},
       "hideConditions": []
     },
     {
@@ -25,6 +27,7 @@
       "description": "Czy to jest bardzo ważne?",
       "order": 1,
       "type": "short_text",
+      "countConditions": {},
       "hideConditions": [
         {
           "type": "is-equal",
@@ -61,6 +64,7 @@
       "description": "Czy to jest bardzo ważne?",
       "order": 1,
       "type": "choice",
+      "countConditions": {},
       "hideConditions": [
         {
           "type": "is-equal",
@@ -97,6 +101,7 @@
       "description": "Publikowanie informacji jest bardzo ważne. Lorem ipsum dolor \n                sit amet, consectetur adipisicing elit. Incidunt, odio, error. \n                Accusantium aspernatur architecto, similique nemo? Illo, \n                neque alias consectetur?",
       "order": 1,
       "type": "choice",
+      "countConditions": {},
       "hideConditions": [],
       "options": [
         {
@@ -115,6 +120,7 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum similique adipisci eveniet deleniti non ad, eaque quae architecto numquam reprehenderit. Repudiandae molestias tempore dolores nihil provident sequi iste atque, explicabo.",
       "order": 1,
       "type": "short_text",
+      "countConditions": {},
       "hideConditions": [
         {
           "type": "is-equal",

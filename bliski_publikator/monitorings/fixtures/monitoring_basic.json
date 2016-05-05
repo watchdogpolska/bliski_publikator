@@ -7,12 +7,14 @@
             "name": "Jaka jest pogoda?",
             "description": "Tekst pomocniczy",
             "type": "short_text",
+            "count": {},
             "hideConditions": []
         },
         {
             "name": "Gdzie ja jestem?",
             "description": "WWW",
             "type": "long_text",
+            "count": {},
             "hideConditions": [
                 {
                     "type": "is-equal",
@@ -25,6 +27,7 @@
             "name": "Pytanie drugie",
             "description": "Opis pytania drugiego",
             "type": "choice",
+            "count": {},
             "hideConditions": [
                 {
                     "type": "is-equal",
