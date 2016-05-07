@@ -1,14 +1,19 @@
 from __future__ import unicode_literals
-from os.path import dirname, join
-from django.core.urlresolvers import reverse
-from django.utils.encoding import force_text
-from django.test import TestCase
 
+from os.path import dirname, join
+
+import django
+from django.contrib.admin.sites import AdminSite
+from django.core.urlresolvers import reverse
+from django.test import TestCase
+from django.utils.encoding import force_text
+
+from ..institutions.factories import InstitutionFactory
+from ..questions.models import Answer, Choice, Question, Sheet
 from ..users.factories import UserFactory
+from .admin import MonitoringAdmin
 from .factories import MonitoringFactory
 from .models import Monitoring
-from ..institutions.factories import InstitutionFactory
-from ..questions.models import Answer, Sheet, Question, Choice
 
 
 class FixtureMixin(object):
@@ -208,3 +213,28 @@ class SheetCreateViewTestCase(FixtureMixin, TestCase):
         self.assertEqual(Answer.objects.count(), 3)
         self.assertTrue(Sheet.objects.filter(monitoring=self.monitoring,
                                              user=self.user).exists())
+
+
+class MixinAdminTestCase(object):
+    admin = None
+    model = None
+
+    def setUp(self):
+        self.site = AdminSite()
+
+    def assertIsValid(self, model_admin, model):  # See django/tests/modeladmin/tests.py#L602
+        admin_obj = model_admin(model, self.site)
+        if django.VERSION > (1, 9):
+            errors = admin_obj.check()
+        else:
+            errors = admin_obj.check(model)
+        expected = []
+        self.assertEqual(errors, expected)
+
+    def test_is_valid(self):
+        self.assertIsValid(self.admin, self.model)
+
+
+class MonitoringAdminTestCase(MixinAdminTestCase, TestCase):
+    admin = MonitoringAdmin
+    model = Monitoring

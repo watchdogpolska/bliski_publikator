@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
-
+import django
+from django.contrib.admin.sites import AdminSite
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
 from django.test import TestCase
@@ -8,6 +9,7 @@ from ..users.factories import UserFactory
 from ..monitorings.factories import MonitoringFactory
 from .factories import PageFactory
 from .models import Page
+from .admin import PageAdmin
 
 
 class PageTestCase(TestCase):
@@ -99,3 +101,28 @@ class PageDeleteViewTestCase(TestCase):
         self.user.assign_perm('monitoring_pages.delete_page')
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)
+
+
+class MixinAdminTestCase(object):
+    admin = None
+    model = None
+
+    def setUp(self):
+        self.site = AdminSite()
+
+    def assertIsValid(self, model_admin, model):  # See django/tests/modeladmin/tests.py#L602
+        admin_obj = model_admin(model, self.site)
+        if django.VERSION > (1, 9):
+            errors = admin_obj.check()
+        else:
+            errors = admin_obj.check(model)
+        expected = []
+        self.assertEqual(errors, expected)
+
+    def test_is_valid(self):
+        self.assertIsValid(self.admin, self.model)
+
+
+class PageAdminTestCase(TestCase):
+    admin = PageAdmin
+    model = Page
