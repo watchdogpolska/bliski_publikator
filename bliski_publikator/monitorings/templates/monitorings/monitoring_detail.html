@@ -33,7 +33,7 @@
         <div class="red">
             <h2>{% trans 'Design and purpose' %}</h2>
             {% if logo %}
-            <img src="{{object.logo.url}}"></img>
+            <img src="{{object.logo.url}}" class="img-responsive"></img>
             {% endif %}
             {{object.description | safe}}
         </div>
