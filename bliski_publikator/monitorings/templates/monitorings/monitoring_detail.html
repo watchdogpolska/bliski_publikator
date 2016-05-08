@@ -42,31 +42,35 @@
         <div class="gray">
             <h2>{% trans 'Covered institutions' %}</h2>
             {% if object.institutions.all %}
-            <table>
-                <tr>
-                    <th>{% trans 'Institutions' %}</th>
-                    <th>{% trans 'Points' %}</th>
-                    <th>{% trans 'Actions' %}</th>
-                </tr>
-                {% for obj in object.institutions.all %}
-                <tr>
-                    <td>
-                        <a href="{{obj.get_absolute_url}}">
-                            {{obj}}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'monitorings:sheet_list' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
-                            {{obj.max_point}}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'monitorings:sheet_create' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
-                            {% trans 'Rank institution' %}
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
+            <table class="table">
+                <thead>
+                  <tr>
+                      <th>{% trans 'Institutions' %}</th>
+                      <th>{% trans 'Points' %}</th>
+                      <th>{% trans 'Actions' %}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for obj in object.institutions.all %}
+                  <tr>
+                      <td>
+                          <a href="{{obj.get_absolute_url}}">
+                              {{obj}}
+                          </a>
+                      </td>
+                      <td>
+                          <a href="{% url 'monitorings:sheet_list' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
+                              {{obj.max_point}}
+                          </a>
+                      </td>
+                      <td>
+                          <a href="{% url 'monitorings:sheet_create' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
+                              {% trans 'Rank institution' %}
+                          </a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
             </table>
             {% else %}
             <p>{% trans 'No institutions' %}</p>
