@@ -4,12 +4,16 @@ import { ACCORDION_DIRECTIVES, DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-boo
 
 import { Monitoring } from '../model/monitoring'
 import { QuestionBase } from '../model/question-base'
-import { DropdownQuestion } from '../model/question-dropdown'
+import { DropdownQuestion, DropdownOption } from '../model/question-dropdown'
 import { TextboxQuestion } from '../model/question-textbox'
 import { QuestionEditComponent } from './question-edit.component'
 import { MonitoringService } from '../services/monitoring-api.service'
 
 import {TinyMceComponent } from '../tinymce/tinymce.value-accessor';
+
+function isNotBlank(obj){
+    return obj != null && typeof obj == "string" && obj.length > 0;
+}
 
 @Component({
     selector: 'sowp-question-editor',
@@ -72,9 +76,56 @@ export class QuestionEditorComponent implements OnInit {
     }
 
     saveMonitoring() {
+        if(!this.validate()){
+            return;
+        }
         this._api.saveMonitoring(this.monitoring).subscribe(
             v => { console.log(v); alert("Zapisano"); },
             v => { console.log(v); alert("Błąd"); },
         );
+    }
+
+    validate(){
+        if (!isNotBlank(this.monitoring.name)){
+            alert("Wypełnij pole `Tytuł`");
+            return false;
+        }
+        if (!isNotBlank(this.monitoring.description)) {
+            alert("Wypełnij pole `Opis`");
+            return false;
+        }
+
+        let questions = this.monitoring.questions;
+        if (questions.length == 0){
+            alert("Dodaj chociaż jedno pytanie");
+            return false;
+        }
+
+        if (questions.every(t => !isNotBlank(t.name))) {
+            alert("Upewnij się, że wszystkie pytania moja swoją etykietę")
+            return false;
+        }
+
+        let choice_question = <Array<DropdownQuestion>>questions.filter(t => t.controlType == 'choice');
+        if (choice_question.length != 0) {
+            if (choice_question.every(t => t.options.length < 2)){
+                alert("Upewnij się, że wszystkie pytania wyboru mają dodane opcje wyboru")
+                return false;
+            }
+
+            let options = <Array<DropdownOption>> Array.prototype.concat.apply([], choice_question.map(t => t.options));
+            if (options.every(t => !isNotBlank(t.key)){
+                alert("Upewnij się, że wszystkie odpowiedzi do pytań wielokrotnego wyboru mają swoje klucz");
+                return false;
+            }
+
+            if (options.every(t => !isNotBlank(t.value)){
+                alert("Upewnij się, że wszystkie odpowiedzi do pytań wielokrotnego wyboru mają swoją wartość");
+                return false;
+            }
+
+        }
+
+        return true;
     }
 }
