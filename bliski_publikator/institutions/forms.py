@@ -38,7 +38,7 @@ class InstitutionForm(UserKwargModelFormMixin, FormHorizontalMixin, forms.ModelF
         super(InstitutionForm, self).__init__(*args, **kwargs)
         button_label = _('Update') if self.instance.pk else _("Save")
         self.instance.user = self.user
-        self.helper.form_class = 'form'
+        self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Fieldset(
                 _('Identification'),
