@@ -5,11 +5,17 @@
 {% if object %}
 <div class="btn-group" role="group">
     {% if perms.institutions.change_institution %}
-    <a href="{{object.get_update_url}}" class="btn btn-primary">{% trans 'Update institution' %}</a>
+    <a href="{{object.get_update_url}}" class="btn btn-primary">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      {% trans 'Update institution' %}
+    </a>
     {% endif %}
 
     {% if perms.institutions.delete_institution %}
-    <a href="{{object.get_delete_url}}" class="btn btn-primary">{% trans 'Delete institution' %}</a>
+    <a href="{{object.get_delete_url}}" class="btn btn-primary">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+      {% trans 'Delete institution' %}
+    </a>
     {% endif %}
 </div>
 {% endif %}
