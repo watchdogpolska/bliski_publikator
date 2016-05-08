@@ -1,5 +1,5 @@
-<h2>{{ monitoring.title }}</h2>
-<p>{{ monitoring.description }}</p>
+<h2>{{ monitoring.name }}</h2>
+<div [innerHTML]="monitoring.description"></div>
 
 <div>
 	<form (ngSubmit)="onSubmit()" class="form-horizontal">
