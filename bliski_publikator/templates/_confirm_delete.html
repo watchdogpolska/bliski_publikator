@@ -2,9 +2,9 @@
 <div class="page-header">
     <h1>{% trans "Confirm delete" %}</h1>
 </div>
-{% blocktrans with object=object %}Are you sure you want to remove "{{object}}"?{% endblocktrans %}
+<p>{% blocktrans with object=object %}Are you sure you want to remove "{{object}}"?{% endblocktrans %}</p>
 <form method="POST">
-  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+  {% csrf_token %}
   <button type="submit" class="btn btn-primary">
     <i class="fa fa-trash" aria-hidden="true"></i>
     {% trans 'Delete' %}
