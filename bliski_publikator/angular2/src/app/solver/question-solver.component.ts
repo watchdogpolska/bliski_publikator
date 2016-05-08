@@ -56,22 +56,41 @@ export class QuestionSolverComponent implements OnInit {
     }
 
     onSubmit() {
+        let values = this.form.value;
+        if(!this.validateAnswer(values)){
+            alert("Sprawdz poprawność wypełnienia formularza")
+            return;
+        }
         this._api
-            .saveAnswers(this.generateAnswerSheet())
+            .saveAnswers(this.generateAnswerSheet(values))
             .subscribe(
                 data => { console.log(data); document.location = data.return_url; },
                 error => { console.log("FAIL", error) }
             );
     }
 
-    protected generateAnswerSheet(){
+    protected validateAnswer(values){
         let questions = this.monitoring.questions;
-        let values = this.form.value;
+
+        let list = Object.getOwnPropertyNames(values)
+            .map(key => {
+                return {
+                    key: key,
+                    value: values[key],
+                    question: questions.find(q => q.key == key)
+                }
+            });
+        let visible_list = list.filter(t => !t.question.isHidden(values));
+        return visible_list.every(t => t.value != null)
+            && visible_list.filter(t => typeof t == "string").every(t => t.value.length > 0);
+    }
+
+    protected generateAnswerSheet(values){
         console.log({ values });
+        let questions = this.monitoring.questions;
         let answers = [];
         for (let answer_key in values) {
             let question = questions.find(q => q.key == answer_key);
-            console.log("answer: ", question);
             let curr_value = values[answer_key];
             answers.push({
                 question_id: question.id,
