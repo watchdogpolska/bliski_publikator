@@ -192,7 +192,8 @@ class MonitoringAssignUpdateView(LoginRequiredMixin, PermissionRequiredMixin, Fi
         qs = Institution.objects.filter(pk__in=ids).exclude(monitorings=self.monitoring.pk)
         count = 0
         for institution in qs:
-            self.monitoring.institutions.add(institution)
+            MonitoringInstitution.objects.create(monitoring=self.monitoring,
+                                                 institution=institution)
             count += 1
         msg = _("%(count)d institutions was assigned " +
                 "to %(monitoring)s") % {'count': count,
@@ -237,8 +238,8 @@ class SheetCreateView(LoginRequiredMixin, CustomJSONResponseMixin, TemplateView)
         return context
 
     def get(self, *args, **kwargs):
-        if Sheet.objects.filter(monitoring=self.thr.monitoring,
-                                institution=self.thr.institution,
+        if Sheet.objects.filter(monitoring_institution__monitoring=self.thr.monitoring,
+                                monitoring_institution__institution=self.thr.institution,
                                 user=self.request.user).exists():
             messages.info(self.request, _("Unable to rank once institution twice times."))
             return HttpResponseRedirect(self.thr.monitoring.get_sheet_list_url(self.thr.institution))
@@ -267,8 +268,10 @@ class SheetCreateView(LoginRequiredMixin, CustomJSONResponseMixin, TemplateView)
         (monitoring, institution) = (thr.monitoring, thr.institution)
 
         questions = Question.objects.filter(monitoring=monitoring).all()
-        sheet, created = Sheet.objects.get_or_create(monitoring=monitoring,
-                                                     institution=institution,
+        thr = get_object_or_404(MonitoringInstitution, monitoring=monitoring,
+                                institution=institution)
+
+        sheet, created = Sheet.objects.get_or_create(monitoring_institution=thr,
                                                      user=self.request.user,
                                                      point=self.data.get('point', 0))
 

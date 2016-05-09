@@ -60,7 +60,7 @@ class AnswerAdmin(admin.ModelAdmin):
         Admin View for Answer
     '''
     list_display = ('pk', 'question', 'sheet', 'sheet__user')
-    list_filter = ('sheet__monitoring', )
+    list_filter = ('question__monitoring', )
     inlines = [
         AnswerChoiceInline,
         AnswerTextInline
@@ -81,8 +81,13 @@ class AnswerChoiceAdmin(admin.ModelAdmin):
     '''
         Admin View for AnswerChoice
     '''
-    list_display = ('pk', 'answer', 'answer__sheet__monitoring', 'answer__question', 'value',)
-    list_filter = ('answer__sheet__monitoring', 'answer__question')
+    list_display = ('pk',
+                    'answer',
+                    # TODO: 'answer__question__monitoring',
+                    # TOOD: 'answer__sheet__monitoring_institution__institution',
+                    'answer__question',
+                    'value',)
+    list_filter = ('answer__question__monitoring', 'answer__question')
 
     def answer__sheet__monitoring(self, obj):
         return obj.answer.sheet.monitoring
@@ -92,7 +97,10 @@ class AnswerChoiceAdmin(admin.ModelAdmin):
 
     def get_queryset(self, *args, **kwargs):
         qs = super(AnswerChoiceAdmin, self).get_queryset(*args, **kwargs)
-        return qs.select_related('answer__question', 'answer__sheet__monitoring')
+        return qs.select_related('answer__question',
+                                 # TODO: 'answer__sheet__monitoring_institution__monitoring',
+                                 # TODO: 'answer__sheet__monitoring_institution__institution',
+                                 )
 
 admin.site.register(AnswerChoice, AnswerChoiceAdmin)
 
@@ -102,7 +110,7 @@ class AnswerTextAdmin(admin.ModelAdmin):
         Admin View for AnswerText
     '''
     list_display = ('answer', 'value',)
-    list_filter = ('answer__sheet__monitoring', 'answer__question')
+    list_filter = ('answer__question', 'answer__question__monitoring')
     search_fields = ('value', )
 
 admin.site.register(AnswerText, AnswerTextAdmin)
@@ -136,8 +144,10 @@ class SheetAdmin(admin.ModelAdmin):
     '''
         Admin View for Sheet
     '''
-    list_display = ('monitoring', 'user')
-    list_filter = ('monitoring',)
+    list_display = ('pk', 'institution', 'monitoring', 'user', 'point')
+    list_filter = (
+        # TODO: 'monitoring_institution__monitoring',
+        )
     inlines = [
         AnswerInline,
     ]

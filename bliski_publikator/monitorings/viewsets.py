@@ -7,7 +7,9 @@ from .serializers import MonitoringSerializer
 class MonitoringFilter(filters.FilterSet):
     class Meta:
         model = Monitoring
-        fields = ['active', 'institutions']
+        fields = ['active', 
+        # 'institutions'
+        ]
 
 
 class MonitoringViewSet(viewsets.ModelViewSet):

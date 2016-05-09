@@ -15,9 +15,8 @@
             {% endfor %}
         {% else %}
             <div class="gray">
-                {% url 'monitorings:sheet_create' institution_slug=obj.slug slug=monitoring.slug as sheet_create %}
-                {% blocktrans %}No sheets. <a href="{{ sheet_create }}" class="btn btn-primary">Add a new one sheet.</a>{% endblocktrans %}
-                </a>
+                {% url 'monitorings:sheet_create' institution_slug=institution.slug slug=monitoring.slug as sheet_create %}
+                {% blocktrans with sheet_create=sheet_create %}No sheets. <a href="{{ sheet_create }}" class="btn btn-primary">Add a new one sheet.</a>{% endblocktrans %}
             </div>
         {% endif %}
     </div>

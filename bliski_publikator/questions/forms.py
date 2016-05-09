@@ -38,7 +38,7 @@ class SheetForm(UserKwargModelFormMixin, RelatedInstanceMixin, forms.ModelForm):
 
     class Meta:
         model = Sheet
-        fields = ['monitoring']
+        fields = ['monitoring_institution']
 
 
 class AnswerMixin(object):

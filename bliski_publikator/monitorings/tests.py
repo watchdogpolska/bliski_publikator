@@ -13,7 +13,7 @@ from ..questions.models import Answer, Choice, Question, Sheet
 from ..users.factories import UserFactory
 from .admin import MonitoringAdmin
 from .factories import MonitoringFactory
-from .models import Monitoring
+from .models import Monitoring, MonitoringInstitution
 
 
 class FixtureMixin(object):
@@ -171,8 +171,8 @@ class SheetCreateViewTestCase(FixtureMixin, TestCase):
         self.user = UserFactory()
         self.monitoring = MonitoringFactory()
         self.institution = InstitutionFactory()
-        self.monitoring.institutions.add(self.institution)
-        # self.monitoring.institutions.save()
+        MonitoringInstitution.objects.create(monitoring=self.monitoring,
+                                             institution=self.institution)
         self.url = self.monitoring.get_sheet_create_url(self.institution)
         self.short_text_q = Question.objects.create(pk=1,
                                                     type=Question.TYPE.short_text,
@@ -211,7 +211,8 @@ class SheetCreateViewTestCase(FixtureMixin, TestCase):
         resp = self._post_fixture('answer_basic')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(Answer.objects.count(), 3)
-        self.assertTrue(Sheet.objects.filter(monitoring=self.monitoring,
+        self.assertTrue(Sheet.objects.filter(monitoring_institution__monitoring=self.monitoring,
+                                             monitoring_institution__institution=self.institution,
                                              user=self.user).exists())
 
 

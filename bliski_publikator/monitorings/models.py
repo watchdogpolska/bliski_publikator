@@ -9,6 +9,17 @@ from model_utils.models import TimeStampedModel
 from versatileimagefield.fields import VersatileImageField
 
 
+class MonitoringInstitution(models.Model):
+    monitoring = models.ForeignKey(to='monitorings.Monitoring',
+                                   verbose_name=_("Monitoring"))
+    institution = models.ForeignKey(to='institutions.Institution',
+                                    verbose_name=_("Institution"))
+
+    class Meta:
+        verbose_name = _("Monitoring of institution")
+        verbose_name_plural = _("Monitorings of institutions")
+
+
 class MonitoringQuerySet(models.QuerySet):
     pass
 
@@ -26,6 +37,8 @@ class Monitoring(TimeStampedModel):
                                           verbose_name=_("Institution"),
                                           help_text=_("Specifies which institutions are " +
                                                       "covered by monitoring"),
+                                          through=MonitoringInstitution,
+                                          through_fields=('monitoring', 'institution'),
                                           blank=True)
     objects = MonitoringQuerySet.as_manager()
 
@@ -64,5 +77,3 @@ class Monitoring(TimeStampedModel):
     @staticmethod
     def get_add_url():
         return reverse('monitorings:create')
-
-MonitoringInstitution = Monitoring.institutions.through

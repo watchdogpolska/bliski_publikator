@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from django.utils.translation import ugettext_lazy as _
 from django_filters import FilterSet
 
 from .models import Institution

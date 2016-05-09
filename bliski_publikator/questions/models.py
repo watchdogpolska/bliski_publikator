@@ -6,8 +6,7 @@ from jsonfield import JSONField
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
 
-from ..institutions.models import Institution
-from ..monitorings.models import Monitoring
+from ..monitorings.models import Monitoring, MonitoringInstitution
 
 
 class QuestionQuerySet(models.QuerySet):
@@ -109,20 +108,25 @@ class SheetQuerySet(models.QuerySet):
 
 
 class Sheet(TimeStampedModel):
-    monitoring = models.ForeignKey(to=Monitoring,
-                                   verbose_name=_("Monitoring"))
+    monitoring_institution = models.ForeignKey(to=MonitoringInstitution)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                              verbose_name=_("User"))
-    institution = models.ForeignKey(to=Institution,
-                                    verbose_name=_("Institution"))
     point = models.IntegerField(verbose_name=_("Point"))
     objects = SheetQuerySet.as_manager()
+
+    @property
+    def monitoring(self):
+        return self.monitoring_institution.monitoring
+
+    @property
+    def institution(self):
+        return self.monitoring_institution.institution
 
     class Meta:
         verbose_name = _("Sheet")
         verbose_name_plural = _("Sheets")
-        ordering = ['monitoring', 'user', 'created', ]
-        unique_together = (("monitoring", "user", "institution"),)
+        ordering = ['monitoring_institution', 'user', 'created', ]
+        unique_together = (("monitoring_institution", "user"),)
 
 
 class AnswerQuerySet(models.QuerySet):

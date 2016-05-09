@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
-
+from ..monitorings.models import MonitoringInstitution, Monitoring
 from ..teryt.models import JST
 
 
@@ -27,8 +27,9 @@ class Institution(TimeStampedModel):
                                db_index=True)
     regon = models.CharField(verbose_name=_("REGON"), max_length=14, blank=True)  # TODO: RegonField
     krs = models.CharField(verbose_name=_("KRS"), max_length=11, blank=True)  # TODO: KRSField
-    monitorings = models.ManyToManyField(to='monitorings.Monitoring',
-                                         through='monitorings.monitoring_institutions',
+    monitorings = models.ManyToManyField(to=Monitoring,
+                                         through=MonitoringInstitution,
+                                         through_fields=('institution', 'monitoring'),
                                          verbose_name=_("Monitorings"),
                                          blank=True)
     objects = InstitutionQuerySet.as_manager()
