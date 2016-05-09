@@ -9,11 +9,18 @@ from model_utils.models import TimeStampedModel
 from versatileimagefield.fields import VersatileImageField
 
 
+class MonitoringInstitutionQuerySet(models.QuerySet):
+    def with_point(self):
+        return self.annotate(avg_point=models.Avg(models.F('sheet__point'))).\
+                    annotate(count=models.Count(models.F('sheet')))
+
+
 class MonitoringInstitution(models.Model):
     monitoring = models.ForeignKey(to='monitorings.Monitoring',
                                    verbose_name=_("Monitoring"))
     institution = models.ForeignKey(to='institutions.Institution',
                                     verbose_name=_("Institution"))
+    objects = MonitoringInstitutionQuerySet.as_manager()
 
     class Meta:
         verbose_name = _("Monitoring of institution")

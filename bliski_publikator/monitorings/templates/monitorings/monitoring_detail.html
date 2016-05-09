@@ -41,7 +41,7 @@
     <div class="col-md-8">
         <div class="gray">
             <h2>{% trans 'Covered institutions' %}</h2>
-            {% if object.institutions.all %}
+            {% if monitoringinstitution %}
             <table class="table">
                 <thead>
                   <tr>
@@ -51,20 +51,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% for obj in object.institutions.all %}
+                  {% for obj in monitoringinstitution %}
                   <tr>
                       <td>
-                          <a href="{{obj.get_absolute_url}}">
-                              {{obj}}
+                          <a href="{{obj.institution.get_absolute_url}}">
+                              {{obj.institution}}
                           </a>
                       </td>
                       <td>
-                          <a href="{% url 'monitorings:sheet_list' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
-                              {{obj.max_point}}
+                          <a href="{% url 'monitorings:sheet_list' institution_slug=obj.institution.slug slug=monitoring.slug %}" class="btn btn-default">
+                              {% if obj.count > 0 %}
+                              {{obj.avg_point}}
+                              {% else %}
+                              -
+                              {% endif %}
                           </a>
                       </td>
                       <td>
-                          <a href="{% url 'monitorings:sheet_create' institution_slug=obj.slug slug=monitoring.slug %}" class="btn btn-default">
+                          <a href="{% url 'monitorings:sheet_create' institution_slug=obj.institution.slug slug=monitoring.slug %}" class="btn btn-default">
                               {% trans 'Rank institution' %}
                           </a>
                       </td>

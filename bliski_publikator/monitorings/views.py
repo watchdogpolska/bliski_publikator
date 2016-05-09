@@ -57,6 +57,18 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
     model = Monitoring
     select_related = ['user', ]
 
+    def get_monitoringinstitution_qs(self):
+        return MonitoringInstitution.objects.\
+                                     filter(monitoring=self.object).\
+                                     with_point().\
+                                     select_related('institution').\
+                                     all()
+
+    def get_context_data(self, **kwargs):
+        context = super(MonitoringDetailView, self).get_context_data(**kwargs)
+        context['monitoringinstitution'] = self.get_monitoringinstitution_qs()
+        return context
+
 
 class MonitoringCreateView(LoginRequiredMixin, CustomJSONResponseMixin, PermissionRequiredMixin,
                            TemplateView):
@@ -361,8 +373,7 @@ class MonitoringInstitutionDetailView(SelectRelatedMixin, PrefetchRelatedMixin, 
 
     def get_queryset(self, *args, **kwargs):
         qs = super(MonitoringInstitutionDetailView, self).get_queryset(*args, **kwargs)
-        return qs.filter(institution=self.thr.institution,
-                         monitoring=self.thr.monitoring)
+        return qs.filter(monitoring_institution=self.thr)
 
     def get_context_data(self, *args, **kwargs):
         context = super(MonitoringInstitutionDetailView, self).get_context_data(*args, **kwargs)
