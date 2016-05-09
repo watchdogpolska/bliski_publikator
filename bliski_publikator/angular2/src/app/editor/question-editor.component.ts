@@ -97,33 +97,37 @@ export class QuestionEditorComponent implements OnInit {
 
         let questions = this.monitoring.questions;
         if (questions.length == 0){
-            alert("Dodaj chociaż jedno pytanie");
+            alert("Dodaj przynajmniej jedno pytanie.");
             return false;
         }
 
         if (questions.every(t => !isNotBlank(t.name))) {
-            alert("Upewnij się, że wszystkie pytania moja swoją etykietę")
+            alert("Upewnij się, że wszystkie pytania moja swoją etykietę.")
             return false;
         }
 
         let choice_question = <Array<DropdownQuestion>>questions.filter(t => t.controlType == 'choice');
         if (choice_question.length != 0) {
             if (choice_question.every(t => t.options.length < 2)){
-                alert("Upewnij się, że wszystkie pytania wyboru mają dodane opcje wyboru")
+                alert("Upewnij się, że wszystkie pytania wyboru mają dodane przynajmneij 2 opcje wyboru.")
                 return false;
             }
 
             let options = <Array<DropdownOption>> Array.prototype.concat.apply([], choice_question.map(t => t.options));
             if (options.every(t => !isNotBlank(t.key)){
-                alert("Upewnij się, że wszystkie odpowiedzi do pytań wielokrotnego wyboru mają swoje klucz");
+                alert("Upewnij się, że wszystkie odpowiedzi do pytań wielokrotnego wyboru mają swoje klucz.");
                 return false;
             }
 
             if (options.every(t => !isNotBlank(t.value)){
-                alert("Upewnij się, że wszystkie odpowiedzi do pytań wielokrotnego wyboru mają swoją wartość");
+                alert("Upewnij się, że wszystkie odpowiedzi do pytań wielokrotnego wyboru mają swoją wartość.");
                 return false;
             }
-
+            let question_key_list = choice_question.map(t => t.options.map(a => a.key));
+            if (!question_key_list.every(a => a.every((b, bi, bc) => bc.indexOf(b) == bi)) ){
+                alert("Wszystkie klucze w opcjach w pytaniach wyboru muszą być unikalne.");
+                return false;
+            }
         }
 
         return true;
