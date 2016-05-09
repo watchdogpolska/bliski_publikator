@@ -135,11 +135,12 @@ class MonitoringCreateView(LoginRequiredMixin, CustomJSONResponseMixin, Permissi
         for i, question in enumerate(questions):
             if 'options' not in question:  # Skip if no options
                 continue
-            if not question.get('type', None) != 'choice':  # Skip if bad type
+            if question.get('type', None) != 'choice':  # Skip if bad type
                 continue
             for j, option in enumerate(question['options']):
                 related = {'question': question_objs[i], 'order': j}
                 choice_objs.append(ChoiceForm(option, related=related).save())
+
         return JsonResponse({'success': True, 'url': monitoring.get_absolute_url()})
 
 
@@ -191,10 +192,10 @@ class MonitoringAssignUpdateView(LoginRequiredMixin, PermissionRequiredMixin, Fi
         ids = request.POST.getlist('to_assign')
         qs = Institution.objects.filter(pk__in=ids).exclude(monitorings=self.monitoring.pk)
         count = 0
-        for institution in qs:
-            MonitoringInstitution.objects.create(monitoring=self.monitoring,
-                                                 institution=institution)
-            count += 1
+        count = len(MonitoringInstitution.objects.bulk_create(
+                    MonitoringInstitution(monitoring=self.monitoring,
+                                          institution=institution)
+                    for institution in qs))
         msg = _("%(count)d institutions was assigned " +
                 "to %(monitoring)s") % {'count': count,
                                         'monitoring': self.monitoring}
