@@ -83,23 +83,26 @@ class AnswerChoiceAdmin(admin.ModelAdmin):
     '''
     list_display = ('pk',
                     'answer',
-                    # TODO: 'answer__question__monitoring',
-                    # TOOD: 'answer__sheet__monitoring_institution__institution',
+                    'answer__question__monitoring',
+                    'answer__sheet__monitoring_institution__institution',
                     'answer__question',
                     'value',)
     list_filter = ('answer__question__monitoring', 'answer__question')
 
-    def answer__sheet__monitoring(self, obj):
-        return obj.answer.sheet.monitoring
+    def answer__question__monitoring(self, obj):
+        return obj.answer.question.monitoring
 
     def answer__question(self, obj):
         return obj.answer.question
 
+    def answer__sheet__monitoring_institution__institution(self, obj):
+        return obj.answer.sheet.monitoring_institution.institution
+
     def get_queryset(self, *args, **kwargs):
         qs = super(AnswerChoiceAdmin, self).get_queryset(*args, **kwargs)
         return qs.select_related('answer__question',
-                                 # TODO: 'answer__sheet__monitoring_institution__monitoring',
-                                 # TODO: 'answer__sheet__monitoring_institution__institution',
+                                 'answer__question__monitoring',
+                                 'answer__sheet__monitoring_institution__institution',
                                  )
 
 admin.site.register(AnswerChoice, AnswerChoiceAdmin)
@@ -127,8 +130,11 @@ class ChoiceAdmin(admin.ModelAdmin):
     '''
         Admin View for Choice
     '''
-    list_display = ('key', 'value', 'question')
+    list_display = ('key', 'value', 'question', 'question__monitoring')
     list_filter = ('question', 'question__monitoring')
+
+    def question__monitoring(self, obj):
+        return obj.question.monitoring
 
 admin.site.register(Choice, ChoiceAdmin)
 
