@@ -319,7 +319,7 @@ class MonitoringApiDetailView(JSONResponseMixin, DetailView):
             yield {'key': choice.key, 'value': choice.value}
 
     def get_conditions(self, question):
-        for condition in question.condition_related.all():  # TODO: Prefetch condition.target
+        for condition in question.condition_related.all():
             data = {}
             data['type'] = condition.type
             data['target'] = condition.target.order  # It's ok, "order"
