@@ -59,22 +59,13 @@ SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 # ------------------------------------------------------------------------------
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['bliski.siecobywatelska.pl'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['kontrole.siecobywatelska.pl'])
 # END SITE CONFIGURATION
 
 INSTALLED_APPS += ("gunicorn", )
 
 # Static Assets
 # ------------------------
-
-STATIC_URL = 'https://s3.amazonaws.com/%s/static/' % AWS_STORAGE_BUCKET_NAME
-STATICFILES_STORAGE = 'config.settings.production.StaticRootS3BotoStorage'
-
-# See: https://github.com/antonagestam/collectfast
-# For Django 1.7+, 'collectfast' should come before
-# 'django.contrib.staticfiles'
-AWS_PRELOAD_METADATA = True
-INSTALLED_APPS = ('collectfast', ) + INSTALLED_APPS
 
 # EMAIL
 # ------------------------------------------------------------------------------
@@ -123,7 +114,6 @@ CACHES = {
 
 # Sentry Configuration
 SENTRY_DSN = env('DJANGO_SENTRY_DSN')
-SENTRY_CLIENT = env('DJANGO_SENTRY_CLIENT', default='raven.contrib.django.raven_compat.DjangoClient')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -179,5 +169,3 @@ RAVEN_CONFIG = {
 
 # Custom Admin URL, use {% url 'admin:index' %}
 ADMIN_URL = env('DJANGO_ADMIN_URL')
-
-# Your production stuff: Below this line define 3rd party library settings
