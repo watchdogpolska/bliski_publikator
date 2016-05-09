@@ -80,8 +80,8 @@ export class QuestionEditorComponent implements OnInit {
             return;
         }
         this._api.saveMonitoring(this.monitoring).subscribe(
-            v => { console.log(v); alert("Zapisano"); },
-            v => { console.log(v); alert("Błąd"); },
+            v => { document.location = v.url; },
+            v => { console.log(v); alert("Błąd. Nie udało się zapisać. Sprawdź poprawność formularza."); },
         );
     }
 
