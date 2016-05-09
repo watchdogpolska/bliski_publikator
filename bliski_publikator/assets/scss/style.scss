@@ -7,6 +7,7 @@
 @import 'grid';
 @import 'monitoring_item';
 @import 'secondary_menu';
+@import 'partners';
 
 $red: #D72626;
 $gray: #F0F0F0;
@@ -104,6 +105,10 @@ $gray: #F0F0F0;
     text-align: center;
 }
 
+.footer-partners{
+  color: #888;
+  font-size: 12px;
+}
 .progress-bar {
   color: #000;
 }
