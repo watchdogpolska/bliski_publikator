@@ -9,7 +9,7 @@ class InstitutionFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: 'Institution-%04d' % n)
     user = factory.SubFactory(UserFactory)
     email = factory.LazyAttribute(lambda x: x.name+"@example.com")
-    region = factory.SubFactory(JSTFactory)
+    region = factory.SubFactory(JSTFactory, category__level=3)
 
     class Meta:
         model = models.Institution

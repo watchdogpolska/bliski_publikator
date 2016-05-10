@@ -7,9 +7,12 @@ from dal import autocomplete
 from ..teryt.models import JST
 from django.utils.translation import ugettext as _
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from ..monitorings.utils import M2MFieldFormMixin
+from ..monitorings.models import Monitoring
 
 
-class InstitutionForm(UserKwargModelFormMixin, FormHorizontalMixin, forms.ModelForm):
+class InstitutionForm(M2MFieldFormMixin, UserKwargModelFormMixin, FormHorizontalMixin,
+                      forms.ModelForm):
     # TODO: Split region,voivodeship,county into forms.MultiWidget
     voivodeship = forms.ModelChoiceField(
         label=_("Voivodeship"),
@@ -25,6 +28,10 @@ class InstitutionForm(UserKwargModelFormMixin, FormHorizontalMixin, forms.ModelF
                                          forward=['voivodeship'],
                                          )
     )
+    monitorings = forms.ModelMultipleChoiceField(queryset=Monitoring.objects.all(),
+                                                 label=_("Monitorings"),
+                                                 required=False,
+                                                 widget=autocomplete.ModelSelect2Multiple(url='monitorings:autocomplete'))
 
     def __init__(self, *args, **kwargs):
         if kwargs.get('instance', None):
@@ -36,8 +43,9 @@ class InstitutionForm(UserKwargModelFormMixin, FormHorizontalMixin, forms.ModelF
                     kwargs['initial']['voivodeship'] = instance.region.parent.parent.pk
 
         super(InstitutionForm, self).__init__(*args, **kwargs)
-        button_label = _('Update') if self.instance.pk else _("Save")
         self.instance.user = self.user
+
+        button_label = _('Update') if self.instance.pk else _("Save")
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Fieldset(
@@ -60,12 +68,18 @@ class InstitutionForm(UserKwargModelFormMixin, FormHorizontalMixin, forms.ModelF
                 Submit('submit', button_label, css_class='button white')
             )
         )
+        if self.instance.pk:
+            self.fields['monitorings'].initial = self.instance.monitorings.all()
+
+    def save(self, *args, **kwargs):
+        super(InstitutionForm, self).save(*args, **kwargs)
+        self.save_m2m_field('monitorings', 'institution', 'monitoring')
+        return self.instance
 
     class Meta:
         model = Institution
-        fields = ['name', 'regon', 'krs', 'region', 'monitorings']
+        fields = ['name', 'regon', 'krs', 'region']
         widgets = {
             'region': autocomplete.ModelSelect2(url='teryt:community-autocomplete',
                                                 forward=['county']),
-            'monitorings': autocomplete.ModelSelect2Multiple(url='monitorings:autocomplete')
         }

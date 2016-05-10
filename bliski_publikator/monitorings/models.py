@@ -25,6 +25,7 @@ class MonitoringInstitution(models.Model):
     class Meta:
         verbose_name = _("Monitoring of institution")
         verbose_name_plural = _("Monitorings of institutions")
+        unique_together = (('monitoring', 'institution'), )
 
 
 class MonitoringQuerySet(models.QuerySet):

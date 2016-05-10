@@ -14,6 +14,7 @@ from ..users.factories import UserFactory
 from .admin import MonitoringAdmin
 from .factories import MonitoringFactory
 from .models import Monitoring, MonitoringInstitution
+from .forms import MonitoringForm
 
 
 class FixtureMixin(object):
@@ -239,3 +240,38 @@ class MixinAdminTestCase(object):
 class MonitoringAdminTestCase(MixinAdminTestCase, TestCase):
     admin = MonitoringAdmin
     model = Monitoring
+
+
+class MonitoringFormTestCase(TestCase):
+    def setUp(self):
+        self.user = UserFactory()
+        self.instance = MonitoringFactory()
+        self.institution_A = InstitutionFactory()
+        self.institution_B = InstitutionFactory()
+        self.institution_C = InstitutionFactory()
+
+    def test_update_institutions(self):
+        """
+        Regression test for watchdogpolska/bliski_publikator#55
+        """
+        data = {'name': 'X', 'description': "X", 'max_point': 25}
+
+        form = MonitoringForm(data=data, user=self.user, instance=self.instance)
+        self.assertEqual(form.is_valid(), True, repr(form.errors))
+        self.assertEqual(list(self.instance.institutions.all()), [])
+
+        data['institutions'] = [self.institution_A.pk, self.institution_B.pk]
+
+        form = MonitoringForm(data=data, user=self.user, instance=self.instance)
+        self.assertEqual(form.is_valid(), True, repr(form.errors))
+        form.save()
+        self.assertEqual(list(self.instance.institutions.all()),
+                         [self.institution_A, self.institution_B])
+
+        data['institutions'] = [self.institution_B.pk, self.institution_C.pk]
+
+        form = MonitoringForm(data=data, user=self.user, instance=self.instance)
+        self.assertEqual(form.is_valid(), True, repr(form.errors))
+        form.save()
+        self.assertEqual(list(self.instance.institutions.all()),
+                         [self.institution_B, self.institution_C])
