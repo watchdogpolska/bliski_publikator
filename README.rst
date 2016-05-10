@@ -63,7 +63,7 @@ SQL-logging develop server::
 For production use gunicorn is recommended.
 
 Sentry
-
+""""""
 
 Sentry is an error logging aggregator service. You can sign up for a free account at http://getsentry.com or download and host it yourself.
 The system is setup with reasonable defaults, including 404 logging and integration with the WSGI application.
