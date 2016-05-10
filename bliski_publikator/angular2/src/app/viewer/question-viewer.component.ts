@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core'
+import {Component, Input} from '@angular/core'
 import {Monitoring} from '../model/monitoring'
 import {QuestionViewComponent} from './question-view.component'
 

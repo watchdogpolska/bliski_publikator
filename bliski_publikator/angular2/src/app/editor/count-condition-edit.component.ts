@@ -1,7 +1,7 @@
 import {
     Component,
     Input
-} from 'angular2/core';
+} from '@angular/core';
 
 import { QuestionBase } from '../model/question-base';
 

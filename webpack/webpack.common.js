@@ -18,11 +18,12 @@ module.exports = {
       'zone.js',
     ],
     vendor: [
-      'angular2/platform/browser',
-      'angular2/core',
-      'angular2/common',
-      'angular2/router',
-      'angular2/http',
+      '@angular/core',
+      '@angular/common',
+      '@angular/compiler',
+      '@angular/http',
+      '@angular/platform-browser-dynamic',
+      '@angular/platform-browser',
       'rxjs/Rx'
     ],
     main: root + '/src/main.ts'

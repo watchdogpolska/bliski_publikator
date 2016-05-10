@@ -1,4 +1,4 @@
-import { EventEmitter } from 'angular2/core'; 
+import { EventEmitter } from '@angular/core';
 import { QuestionBase } from './question-base';
 
 export interface DropdownOption{
