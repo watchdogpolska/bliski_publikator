@@ -7,12 +7,19 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
 from ..monitorings.models import MonitoringInstitution, Monitoring
 from ..teryt.models import JST
+from django.db.models import Prefetch
 
 
 class InstitutionQuerySet(models.QuerySet):
     def area(self, jst):
         return self.filter(region__tree_id=jst.tree_id,
                            region__lft__range=(jst.lft, jst.rght))
+
+    def with_stats(self):
+        queryset = MonitoringInstitution.objects.with_point().with_monitoring()
+        return self.prefetch_related(Prefetch('monitoringinstitution_set',
+                                     queryset=queryset,
+                                     to_attr='stats'))
 
 
 @python_2_unicode_compatible

@@ -14,6 +14,9 @@ class MonitoringInstitutionQuerySet(models.QuerySet):
         return self.annotate(avg_point=models.Avg(models.F('sheet__point'))).\
                     annotate(count=models.Count(models.F('sheet')))
 
+    def with_monitoring(self):
+        return self.select_related('monitoring')
+
 
 class MonitoringInstitution(models.Model):
     monitoring = models.ForeignKey(to='monitorings.Monitoring',
