@@ -170,20 +170,22 @@ class InstitutionFormTestCase(TestCase):
 
         form = InstitutionForm(data=data, user=self.user, instance=self.instance)
         self.assertEqual(form.is_valid(), True, repr(form.errors))
-        self.assertEqual(list(self.instance.monitorings.all()), [])
+        self.assertQuerysetEqual(self.instance.monitorings.all(), [])
 
         data['monitorings'] = [self.monitoring_A.pk, self.monitoring_B.pk]
 
         form = InstitutionForm(data=data, user=self.user, instance=self.instance)
         self.assertEqual(form.is_valid(), True, repr(form.errors))
         form.save()
-        self.assertEqual(list(self.instance.monitorings.all()),
-                         [self.monitoring_A, self.monitoring_B])
+        self.assertQuerysetEqual(self.instance.monitorings.all(),
+                                 [repr(self.monitoring_A), repr(self.monitoring_B)],
+                                 ordered=False)
 
         data['monitorings'] = [self.monitoring_B.pk, self.monitoring_C.pk]
 
         form = InstitutionForm(data=data, user=self.user, instance=self.instance)
         self.assertEqual(form.is_valid(), True, repr(form.errors))
         form.save()
-        self.assertEqual(list(self.instance.monitorings.all()),
-                         [self.monitoring_B, self.monitoring_C])
+        self.assertQuerysetEqual(self.instance.monitorings.all(),
+                                 [repr(self.monitoring_B), repr(self.monitoring_C)],
+                                 ordered=False)

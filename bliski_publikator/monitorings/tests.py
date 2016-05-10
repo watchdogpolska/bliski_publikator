@@ -258,20 +258,22 @@ class MonitoringFormTestCase(TestCase):
 
         form = MonitoringForm(data=data, user=self.user, instance=self.instance)
         self.assertEqual(form.is_valid(), True, repr(form.errors))
-        self.assertEqual(list(self.instance.institutions.all()), [])
+        self.assertQuerysetEqual(self.instance.institutions.all(), [])
 
         data['institutions'] = [self.institution_A.pk, self.institution_B.pk]
 
         form = MonitoringForm(data=data, user=self.user, instance=self.instance)
         self.assertEqual(form.is_valid(), True, repr(form.errors))
         form.save()
-        self.assertEqual(list(self.instance.institutions.all()),
-                         [self.institution_A, self.institution_B])
+        self.assertQuerysetEqual(self.instance.institutions.all(),
+                                 [repr(self.institution_A), repr(self.institution_B)],
+                                 ordered=False)
 
         data['institutions'] = [self.institution_B.pk, self.institution_C.pk]
 
         form = MonitoringForm(data=data, user=self.user, instance=self.instance)
         self.assertEqual(form.is_valid(), True, repr(form.errors))
         form.save()
-        self.assertEqual(list(self.instance.institutions.all()),
-                         [self.institution_B, self.institution_C])
+        self.assertQuerysetEqual(self.instance.institutions.all(),
+                                 [repr(self.institution_B), repr(self.institution_C)],
+                                 ordered=False)
