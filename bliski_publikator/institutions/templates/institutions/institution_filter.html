@@ -23,7 +23,14 @@
     </div>
     <div class="col-xs-12 col-md-9">
         {% for object in object_list %}
-        {% include 'institutions/_institution_meta.html' with object=object %}
+            <div class="gray">
+            <h1><a href="{{object.get_absolute_url}}">{{object}}</a></h1>
+            {% if object.stats %}
+            {% include 'institutions/_stats.html' with object=object%}
+            {% else %}
+            <p>{% trans 'No monitorings' %}</p>
+            {% endif %}
+            </div>
         {% endfor %}
     </div>
 </div>

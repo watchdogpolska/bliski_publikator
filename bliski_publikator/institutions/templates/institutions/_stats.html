@@ -1,0 +1,35 @@
+{%load i18n %}
+<table class="table">
+    <thead>
+      <tr>
+          <th>{% trans 'Monitoring' %}</th>
+          <th>{% trans 'Points' %}</th>
+          <th>{% trans 'Actions' %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in object.stats %}
+      <tr>
+          <td>
+              <a href="{{obj.monitoring.get_absolute_url}}">
+                  {{obj.monitoring}}
+              </a>
+          </td>
+          <td>
+              <a href="{% url 'monitorings:sheet_list' institution_slug=object.slug slug=obj.monitoring.slug %}" class="btn btn-default">
+                  {% if obj.count > 0 %}
+                  {{obj.avg_point}}
+                  {% else %}
+                  -
+                  {% endif %}
+              </a>
+          </td>
+          <td>
+              <a href="{% url 'monitorings:sheet_create' institution_slug=obj.institution.slug slug=obj.monitoring.slug %}" class="btn btn-default">
+                  {% trans 'Rank institution' %}
+              </a>
+          </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>

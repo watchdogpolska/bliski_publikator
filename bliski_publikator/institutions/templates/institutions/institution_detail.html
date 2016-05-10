@@ -27,16 +27,7 @@
     </div>
     <div class="col-md-8">
         <div class="gray">
-            <h2>{% trans 'Monitorings' %}</h2>
-            {% if object.monitorings.all %}
-            <ul>
-                {% for obj in object.monitorings.all %}
-                <li><a href="{{obj.get_absolute_url}}">{{obj}}</a></li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>{% trans 'No monitorings' %}</p>
-            {% endif %}
+            {% include 'institutions/_stats.html' with object=object %}
         </div>
     </div>
 </div>

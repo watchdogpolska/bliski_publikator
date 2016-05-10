@@ -19,10 +19,18 @@ class InstitutionListView(SelectRelatedMixin, FilterView):
     select_related = ['region', ]
     paginate_by = 25
 
+    def get_queryset(self, *args, **kwargs):
+        qs = super(InstitutionListView, self).get_queryset(*args, **kwargs)
+        return qs.with_stats()
+
 
 class InstitutionDetailView(SelectRelatedMixin, DetailView):
     model = Institution
     select_related = ['region', ]
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super(InstitutionDetailView, self).get_queryset(*args, **kwargs)
+        return qs.with_stats()
 
 
 class InstitutionCreateView(LoginRequiredMixin, PermissionRequiredMixin, UserFormKwargsMixin,
