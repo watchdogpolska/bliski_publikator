@@ -59,7 +59,7 @@ SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 # ------------------------------------------------------------------------------
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['kontrola.siecobywatelska.pl'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['kontrole.siecobywatelska.pl'])
 # END SITE CONFIGURATION
 
 INSTALLED_APPS += ("gunicorn", )
@@ -72,12 +72,7 @@ INSTALLED_APPS += ("gunicorn", )
 
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
                          default='bliski_publikator <noreply@bliski.siecobywatelska.pl>')
-EMAIL_CONFIG = env.email_url('EMAIL_URL', default='smtp://user@:password@localhost:25')
-vars().update(EMAIL_CONFIG)
 EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default='[bliski_publikator] ')
-
-DJMAIL_REAL_BACKEND = EMAIL_BACKEND
-EMAIL_BACKEND = "djmail.backends.default.EmailBackend"
 
 
 # TEMPLATE CONFIGURATION
