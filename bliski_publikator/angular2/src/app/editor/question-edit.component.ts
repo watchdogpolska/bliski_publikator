@@ -1,4 +1,4 @@
-import { Component, Input } from 'angular2/core'
+import { Component, Input } from '@angular/core'
 
 import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 

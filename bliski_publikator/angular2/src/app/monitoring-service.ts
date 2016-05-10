@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 import { DropdownQuestion } from './model/question-dropdown'
 import { TextboxQuestion } from './model/question-textbox'
 import { Monitoring } from './model/monitoring'

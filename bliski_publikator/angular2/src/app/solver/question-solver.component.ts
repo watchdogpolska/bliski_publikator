@@ -3,11 +3,11 @@ import {
     Input,
     OnInit,
     SimpleChange
-} from 'angular2/core'
+} from '@angular/core'
 import {
     FormBuilder,
     ControlGroup
-} from 'angular2/common'
+} from '@angular/common'
 import { Monitoring } from '../model/monitoring'
 import { QuestionBase } from '../model/question-base'
 import { QuestionControlService } from './question-control.service'

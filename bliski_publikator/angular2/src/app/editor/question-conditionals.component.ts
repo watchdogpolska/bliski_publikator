@@ -3,7 +3,7 @@ import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap'
 import {
     Component,
     Input
- } from 'angular2/core';
+ } from '@angular/core';
 
 import { QuestionBase } from '../model/question-base';
 

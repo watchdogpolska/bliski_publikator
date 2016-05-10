@@ -4,7 +4,7 @@ import {
     ElementRef,
     Input,
     OnInit,
-} from 'angular2/core'
+} from '@angular/core'
 
 import { QuestionSolverComponent } from './solver/question-solver.component'
 import { QuestionEditorComponent } from './editor/question-editor.component'
