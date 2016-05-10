@@ -36,26 +36,6 @@
     },
     "tinymce": {
       "main": [
-        "./tinymce.js",
-        "./themes/modern/theme.js",
-        "./plugins/lists/plugin.js",
-        "./plugins/autolink/plugin.js",
-        "./plugins/advlist/plugin.js",
-        "./plugins/link/plugin.js",
-        "./plugins/image/plugin.js",
-        "./plugins/print/plugin.js",
-        "./plugins/charmap/plugin.js",
-        "./plugins/preview/plugin.js",
-        "./plugins/anchor/plugin.js",
-        "./plugins/code/plugin.js",
-        "./plugins/searchreplace/plugin.js",
-        "./plugins/fullscreen/plugin.js",
-        "./plugins/insertdatetime/plugin.js",
-        "./plugins/visualblocks/plugin.js",
-        "./plugins/media/plugin.js",
-        "./plugins/table/plugin.js",
-        "./plugins/contextmenu/plugin.js",
-        "./plugins/paste/plugin.js"
       ]
     },
     "bootstrap-sass": {
