@@ -12,16 +12,19 @@
     <h1>{% trans "Add institution" %}</h1>
 </div>
 <div class="row">
-    <div class="col-sm-4">
-        <form>
-            {% crispy filter.form %}
-            <input type="submit" class="btn btn-primary">
+    <div class="col-xs-12 col-md-3">
+        <form method="GET">
+            {{ filter.form | crispy }}
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                {% trans 'Filtr' %}
+            </button>
         </form>
-        <div class="col-sm-4">
-            {% for object in object_list %}
-            {% include 'institutions/_institution_meta.html' with object=object %}
-            {% endfor %}
-        </div>
+    </div>
+    <div class="col-xs-12 col-md-9">
+        {% for object in object_list %}
+        {% include 'institutions/_institution_meta.html' with object=object %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
