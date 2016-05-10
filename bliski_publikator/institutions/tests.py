@@ -7,9 +7,12 @@ from django.test import TestCase
 from django.utils.encoding import force_text
 
 from ..users.factories import UserFactory
+from ..monitorings.factories import MonitoringFactory
 from .factories import InstitutionFactory
 from .models import Institution
 from .admin import InstitutionAdmin
+from .forms import InstitutionForm
+from ..teryt.factories import JSTFactory
 
 
 class InstitutionTestCase(TestCase):
@@ -149,3 +152,38 @@ class MixinAdminTestCase(object):
 class InstitutionAdminTestCase(MixinAdminTestCase, TestCase):
     admin = InstitutionAdmin
     model = Institution
+
+
+class InstitutionFormTestCase(TestCase):
+    def setUp(self):
+        self.user = UserFactory()
+        self.instance = InstitutionFactory()
+        self.monitoring_A = MonitoringFactory()
+        self.monitoring_B = MonitoringFactory()
+        self.monitoring_C = MonitoringFactory()
+
+    def test_update_monitorings(self):
+        """
+        Regression test for watchdogpolska/bliski_publikator#55
+        """
+        data = {'name': 'X', 'regon': 'X', 'krs': 'X', 'region': JSTFactory(category__level=3).pk}
+
+        form = InstitutionForm(data=data, user=self.user, instance=self.instance)
+        self.assertEqual(form.is_valid(), True, repr(form.errors))
+        self.assertEqual(list(self.instance.monitorings.all()), [])
+
+        data['monitorings'] = [self.monitoring_A.pk, self.monitoring_B.pk]
+
+        form = InstitutionForm(data=data, user=self.user, instance=self.instance)
+        self.assertEqual(form.is_valid(), True, repr(form.errors))
+        form.save()
+        self.assertEqual(list(self.instance.monitorings.all()),
+                         [self.monitoring_A, self.monitoring_B])
+
+        data['monitorings'] = [self.monitoring_B.pk, self.monitoring_C.pk]
+
+        form = InstitutionForm(data=data, user=self.user, instance=self.instance)
+        self.assertEqual(form.is_valid(), True, repr(form.errors))
+        form.save()
+        self.assertEqual(list(self.instance.monitorings.all()),
+                         [self.monitoring_B, self.monitoring_C])
