@@ -41,6 +41,25 @@
                     "value": "XX"
                 }
             ]
+        },
+        {
+            "name": "Pytanie trzecie",
+            "description": "Opis pytania trzeciego",
+            "type": "choice",
+            "count": {},
+            "hideConditions": [
+                {
+                    "type": "is-equal",
+                    "target": 1,
+                    "value": "qa"
+                }
+            ],
+            "options": [
+                {
+                    "key": "YXZ",
+                    "value": "Klucz sie powtarza"
+                }
+            ]
         }
     ]
 }

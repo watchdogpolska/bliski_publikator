@@ -187,16 +187,26 @@ class SheetCreateViewTestCase(FixtureMixin, TestCase):
                                                    monitoring=self.monitoring,
                                                    created_by=self.user,
                                                    order=1)
-        self.long_text_q = Question.objects.create(pk=3,
-                                                   type=Question.TYPE.choice,
-                                                   name="Choicetext question",
-                                                   monitoring=self.monitoring,
-                                                   created_by=self.user,
-                                                   order=2)
-        self.choice = Choice.objects.create(question=self.long_text_q,
+        self.choice_q = Question.objects.create(pk=3,
+                                                type=Question.TYPE.choice,
+                                                name="Choicetext question",
+                                                monitoring=self.monitoring,
+                                                created_by=self.user,
+                                                order=2)
+        self.choice = Choice.objects.create(question=self.choice_q,
                                             key="key",
                                             value="Value of choice",
                                             order=0)
+        self.choice_q_2 = Question.objects.create(pk=4,
+                                                  type=Question.TYPE.choice,
+                                                  name="Choicetext question",
+                                                  monitoring=self.monitoring,
+                                                  created_by=self.user,
+                                                  order=2)
+        self.choice_2 = Choice.objects.create(question=self.choice_q_2,
+                                              key="key",
+                                              value="Value of choice",
+                                              order=0)
 
     def test_auth(self):
         resp = self.client.get(self.url)
@@ -210,8 +220,8 @@ class SheetCreateViewTestCase(FixtureMixin, TestCase):
     def test_answer_pass(self):
         self.client.login(username=self.user.username, password='pass')
         resp = self._post_fixture('answer_basic')
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(Answer.objects.count(), 3)
+        self.assertEqual(resp.status_code, 200, resp.content)
+        self.assertEqual(Answer.objects.count(), 4)
         self.assertTrue(Sheet.objects.filter(monitoring_institution__monitoring=self.monitoring,
                                              monitoring_institution__institution=self.institution,
                                              user=self.user).exists())

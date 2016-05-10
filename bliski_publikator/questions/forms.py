@@ -20,6 +20,7 @@ class QuestionForm(UserKwargModelFormMixin, RelatedInstanceMixin, forms.ModelFor
 
 
 class ChoiceForm(RelatedInstanceMixin, forms.ModelForm):
+
     class Meta:
         model = Choice
         fields = ['key', 'value']
@@ -43,18 +44,19 @@ class SheetForm(UserKwargModelFormMixin, RelatedInstanceMixin, forms.ModelForm):
 
 class AnswerMixin(object):
     def __init__(self, *args, **kwargs):
-        question = kwargs.pop('question')
-        sheet = kwargs.pop('sheet')
+        self.question = kwargs.pop('question')
+        self.sheet = kwargs.pop('sheet')
         super(AnswerMixin, self).__init__(*args, **kwargs)
-        self.instance.answer = Answer.objects.create(sheet=sheet,
-                                                     question=question)
+        self.instance.answer = Answer.objects.create(sheet=self.sheet,
+                                                     question=self.question)
 
 
 class AnswerChoiceForm(AnswerMixin, forms.ModelForm):
-    value = forms.ModelChoiceField(queryset=Choice.objects.all(), to_field_name="key")
+    value = forms.ModelChoiceField(queryset=Choice.objects.none(), to_field_name="key")
 
-    def __int__(self, *args, **kwargs):
-        super(AnswerChoiceForm, self).__int__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(AnswerChoiceForm, self).__init__(*args, **kwargs)
+        self.fields['value'].queryset = Choice.objects.filter(question=self.question).all()
 
     class Meta:
         model = AnswerChoice
