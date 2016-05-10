@@ -11,7 +11,7 @@
 gevent==1.1.1
 
 gunicorn==19.4.5
-
+setproctitle==1.1.9
 # Raven is the Sentry client
 # --------------------------
 raven
