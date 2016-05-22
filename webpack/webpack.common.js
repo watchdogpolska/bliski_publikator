@@ -24,7 +24,11 @@ module.exports = {
       '@angular/http',
       '@angular/platform-browser-dynamic',
       '@angular/platform-browser',
-      'rxjs/Rx'
+      'ng2-dragula/ng2-dragula',
+      // 'rxjs/Rx'
+      'rxjs/add/operator/map',
+      'rxjs/add/operator/catch',
+      'rxjs/add/observable/from'
     ],
     main: root + '/src/main.ts'
   },

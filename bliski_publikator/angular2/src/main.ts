@@ -7,7 +7,10 @@ import {AppComponent} from './app/app.component';
 
 import {CsrfService} from './app/services/csrf.service';
 
-import 'rxjs/Rx';
+// import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/from';
 
 if ('prod' === ENV) {
   enableProdMode();
