@@ -1,13 +1,15 @@
 from atom.views import DeleteMessageMixin
-from braces.views import (FormValidMessageMixin, SelectRelatedMixin,
-                          UserFormKwargsMixin)
+from braces.views import FormValidMessageMixin, SelectRelatedMixin, UserFormKwargsMixin
+from cached_property import cached_property
 from dal import autocomplete
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from django_filters.views import FilterView
 
+from ..monitorings.models import Monitoring
 from .filters import InstitutionFilter
 from .forms import InstitutionForm
 from .models import Institution
@@ -38,6 +40,21 @@ class InstitutionCreateView(LoginRequiredMixin, PermissionRequiredMixin, UserFor
     model = Institution
     form_class = InstitutionForm
     permission_required = 'institutions.add_institution'
+
+    @cached_property
+    def monitoring(self):
+        if 'monitoring' in self.request.GET:
+            return get_object_or_404(Monitoring, pk=self.request.GET['monitoring'])
+        return None
+
+    def get_initial(self):
+        return {'monitorings': [self.monitoring]}
+
+    def get_context_data(self):
+        context = super(InstitutionCreateView, (self)).get_context_data()
+        if self.monitoring:
+            context['monitoring'] = self.monitoring
+        return context
 
     def get_form_valid_message(self):
         return _("{0} created!").format(self.object)
