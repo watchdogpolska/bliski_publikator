@@ -26,6 +26,65 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+{{block.super}}
 {{ form.media }}
+  <script>
+    $(function() {
+      var monitoring = +'{{ monitoring.pk | default:'-1' }}';
+      var debounce = function(wait, func, immediate) {
+        var timeout;
+        return function() {
+          var context = this, args = arguments;
+          var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) func.apply(context, args);
+        };
+      };
+
+      function handleResponse(data){
+          console.log(data);
+          var group = $(this).closest('.form-group');
+          var controls = $(this).closest('.controls');
+          controls.find('.help-block').remove();
+          if(data.count > 0){
+            var institution = data.results[0];
+
+            var help_block = $('<div class="help-block">Już taka istnieje. </div>');
+
+            var link = $('<a></a>');
+            link.text(institution.name);
+            link.attr('href', '/institutions/institution-' + institution.slug);
+            link.appendTo(help_block);
+
+            controls.append(help_block);
+
+            group.addClass('has-error');
+          }else{
+            group.removeClass('has-error');
+          }
+      };
+
+      $('#id_krs').on('keyup input', debounce(250, function(ev){
+        var input = ev.target;
+        var value = input.value;
+        $.ajax('/api/institutions/?krs=' + value)
+          .then(handleResponse.bind(input));
+      }));
+
+      $('#id_regon').on('keyup input', debounce(250, function(ev){
+        var input = ev.target;
+        var value = input.value;
+        $.ajax('/api/institutions/?regon=' + value)
+          .then(handleResponse.bind(input));
+      }));
+
+    });
+  </script>
+
+
 {% endblock %}
