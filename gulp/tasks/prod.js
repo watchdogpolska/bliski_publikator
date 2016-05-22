@@ -6,7 +6,6 @@ gulp.task('prod', function(callback){
   runSequence(
     'bower',
     'delete:prod',
-    'deps',
     'fonts',
     'scripts',
     'styles',
