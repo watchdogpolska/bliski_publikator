@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { ACCORDION_DIRECTIVES, DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap'
+import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula'
 
 import { Monitoring } from '../model/monitoring'
 import { QuestionBase } from '../model/question-base'
@@ -22,12 +23,13 @@ function isNotBlank(obj){
         QuestionEditComponent,
         ACCORDION_DIRECTIVES,
         DROPDOWN_DIRECTIVES,
-        TinyMceComponent
+        TinyMceComponent,
+        Dragula
     ],
+    viewProviders: [DragulaService],
     providers: [
         MonitoringService
     ]
-    // viewProviders: [DragulaService],
 })
 export class QuestionEditorComponent implements OnInit {
 
@@ -38,8 +40,12 @@ export class QuestionEditorComponent implements OnInit {
 
     preview: Object;
 
-    constructor(private _api:MonitoringService ){
-
+    constructor(private _api: MonitoringService, private _dragula: DragulaService) {
+        this._dragula.setOptions('questions', {
+            moves: function(el, container, handle:HTMLElement) {
+                return handle.classList.contains('dragula-handle');
+            }
+        })
     }
     ngOnInit() {
         this.questions = this.monitoring.questions;

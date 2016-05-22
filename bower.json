@@ -19,7 +19,8 @@
     "bootstrap-sass": "~3.3.4",
     "font-awesome": "^4.6.1",
     "masonry": "^4.1.0",
-    "tinymce": "^4.3.11"
+    "tinymce": "^4.3.11",
+    "dragula.js": "dragula#^3.7.0"
   },
   "overrides": {
     "font-awesome": {
@@ -35,8 +36,7 @@
       ]
     },
     "tinymce": {
-      "main": [
-      ]
+      "main": []
     },
     "bootstrap-sass": {
       "main": [
@@ -79,6 +79,11 @@
         "./assets/stylesheets/bootstrap/_utilities.scss",
         "./assets/stylesheets/bootstrap/_responsive-utilities.scss",
         "./assets/javascripts/bootstrap.js"
+      ]
+    },
+    "dragula": {
+      "main": [
+        "dist/dragula.css"
       ]
     },
     "outlayer": {

@@ -24,6 +24,7 @@ module.exports = {
       '@angular/http',
       '@angular/platform-browser-dynamic',
       '@angular/platform-browser',
+      'ng2-dragula/ng2-dragula',
       'rxjs/Rx'
     ],
     main: root + '/src/main.ts'
