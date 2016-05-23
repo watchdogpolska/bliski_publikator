@@ -72,7 +72,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 ]
 
 TEMPLATES[0]['DIRS'].insert(
-    0, str(APPS_DIR.path("templates_prod"))
+    0, str(APPS_DIR.path("main/templates_prod"))
 )
 
 # DATABASE CONFIGURATION

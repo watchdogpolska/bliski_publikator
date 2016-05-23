@@ -5,9 +5,9 @@ var srcAssets         = packageName + '/assets/';
 var devStatic         = packageName + '/static/dev';
 var prodStatic        = packageName + '/static/prod';
 
-var srcTemplates      = packageName + '/templates';
-var devTemplates      = packageName + '/templates_dev';
-var prodTemplates     = packageName + '/templates_prod';
+var srcTemplates      = packageName + '/main/templates';
+var devTemplates      = packageName + '/main/templates_dev';
+var prodTemplates     = packageName + '/main/templates_prod';
 
 var baseTemplate      = srcTemplates + '/base.html';
 var baseScss          = srcAssets + '/scss/style.scss';
