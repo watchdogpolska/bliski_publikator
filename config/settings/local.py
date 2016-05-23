@@ -22,7 +22,7 @@ STATICFILES_DIRS += (
 
 
 TEMPLATES[0]['DIRS'].insert(
-    0, str(APPS_DIR.path("templates_dev"))
+    0, str(APPS_DIR.path("main/templates_dev"))
 )
 
 # SECRET CONFIGURATION
