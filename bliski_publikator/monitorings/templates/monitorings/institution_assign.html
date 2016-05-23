@@ -27,7 +27,7 @@
     <form method="POST">
         <button type="submit" class="btn btn-primary">
           <i class="fa fa-search-plus" aria-hidden="true"></i>
-          {% blocktrans with monitoring=monitoring %}Assign institutions to {{monitoring}}{%endblocktrans %}
+          {% blocktrans with monitoring=monitoring %}Assign selected institutions to {{monitoring}}{%endblocktrans %}
         </button>
         <table  class="table table-striped">
           <thead>
@@ -51,7 +51,7 @@
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <button type="submit" class="btn btn-primary">
           <i class="fa fa-search-plus" aria-hidden="true"></i>
-          {% blocktrans with monitoring=monitoring %}Assign institutions to {{monitoring}}{%endblocktrans %}
+          {% blocktrans with monitoring=monitoring %}Assign selected institutions to {{monitoring}}{%endblocktrans %}
         </button>
     </form>
     {% endif %}
