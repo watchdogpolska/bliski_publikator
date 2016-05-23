@@ -59,10 +59,10 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
 
     def get_monitoringinstitution_qs(self):
         return MonitoringInstitution.objects.\
-                                     filter(monitoring=self.object).\
-                                     with_point().\
-                                     select_related('institution').\
-                                     all()
+            filter(monitoring=self.object).\
+            with_point().\
+            select_related('institution').\
+            all()
 
     def get_context_data(self, **kwargs):
         context = super(MonitoringDetailView, self).get_context_data(**kwargs)
@@ -213,6 +213,41 @@ class MonitoringAssignUpdateView(LoginRequiredMixin, PermissionRequiredMixin, Fi
                                         'monitoring': self.monitoring}
         messages.success(self.request, msg)
         return HttpResponseRedirect(request.get_full_path())
+
+
+class MonitoringSignleAssingUpdateView(LoginRequiredMixin, TemplateView):
+    template_name = 'monitoring/institution_assing_single.html'
+
+    @cached_property
+    def monitoring(self):
+        return get_object_or_404(Monitoring, slug=self.kwargs['slug'])
+
+    @cached_property
+    def institution(self):
+        return get_object_or_404(Institution, slug=self.kwargs['institution_slug'])
+
+    def check_thr(self):
+        thr = MonitoringInstitution.objects.filter(monitoring=self.monitoring,
+                                                   institution=self.institution).first()
+        if thr:
+            return HttpResponseRedirect(thr.get_absolute_url())
+        return None
+
+    def get(self, *args, **kwargs):
+        return (self.check_thr() or
+                super(MonitoringSignleAssingUpdateView, self).get(*args, **kwargs))
+
+    def post(self, *args, **kwargs):
+        thr = self.check_thr()
+        if thr:
+            return thr
+        new_thr = MonitoringInstitution.objects.create(monitoring=self.monitoring,
+                                                       institution=self.institution)
+        msg = _("Institution %(institution)s assigned to " +
+                "monitoring %(monitoring)s") % {'institution': self.institution,
+                                                'monitoring': self.monitoring}
+        messages.success(self.requests, msg)
+        return HttpResponseRedirect(new_thr.get_absolute_url())
 
 
 class MonitoringDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteMessageMixin,

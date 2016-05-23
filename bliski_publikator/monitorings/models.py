@@ -30,6 +30,10 @@ class MonitoringInstitution(models.Model):
         verbose_name_plural = _("Monitorings of institutions")
         unique_together = (('monitoring', 'institution'), )
 
+    def get_absolute_url(self):
+        return reverse('monitorings:sheet_list', kwargs={'institution_slug': self.institution.slug,
+                                                         'slug': self.monitoring.slug})
+
 
 class MonitoringQuerySet(models.QuerySet):
     pass
