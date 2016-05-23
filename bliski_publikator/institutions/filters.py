@@ -6,6 +6,7 @@ from ..teryt.models import JST
 from django.utils.translation import ugettext as _
 
 from .models import Institution
+from ..monitorings.models import Monitoring
 
 
 class InstitutionFilter(FilterSet):
@@ -32,9 +33,19 @@ class InstitutionFilter(FilterSet):
         widget=autocomplete.ModelSelect2(url='teryt:community-autocomplete',
                                          forward=['county'])
     )
+    monitoring = ModelChoiceFilter(
+        label=_("Monitoring"),
+        required=False,
+        queryset=Monitoring.objects.all(),
+        widget=autocomplete.ModelSelect2(url='monitorings:autocomplete'),
+    )
 
     def __init__(self, *args, **kwargs):
+        self.monitoring = kwargs.pop('monitoring', None)
         super(InstitutionFilter, self).__init__(*args, **kwargs)
+        if self.monitoring:
+            qs = Monitoring.objects.exclude(pk=self.monitoring.pk).all()
+            self.filters['monitoring'].field.queryset = qs
 
     class Meta:
         model = Institution

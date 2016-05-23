@@ -200,6 +200,11 @@ class MonitoringAssignUpdateView(LoginRequiredMixin, PermissionRequiredMixin, Fi
         context['monitoring'] = self.monitoring
         return context
 
+    def get_filterset_kwargs(self, filterset_class):
+        kw = super(MonitoringAssignUpdateView, self).get_filterset_kwargs(filterset_class)
+        kw['monitoring'] = self.monitoring
+        return kw
+
     def post(self, request, *args, **kwargs):
         ids = request.POST.getlist('to_assign')
         qs = Institution.objects.filter(pk__in=ids).exclude(monitorings=self.monitoring.pk)
