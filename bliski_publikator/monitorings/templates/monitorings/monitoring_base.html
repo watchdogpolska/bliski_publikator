@@ -29,6 +29,12 @@
       {% trans 'Add page' %}
     </a>
     {% endif %}
+
+    <a href="{% url 'institutions:create' monitoring_slug=object.slug%}" class="btn btn-primary">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      {% trans 'Add institution' %}
+    </a>
+
 </div>
 {% endif %}
 {% endif %}

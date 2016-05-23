@@ -25,6 +25,9 @@ urlpatterns = [
 
     # Answer views
     url(r'^(?P<pk>[\d]+)/api$', views.MonitoringApiDetailView.as_view(), name="details_api"),
+    url(r'^(?P<slug>[\w-]+)/(?P<institution_slug>[\w-]+)/~assign$',
+        views.MonitoringSignleAssingUpdateView.as_view(),
+        name="assign"),
     url(r'^(?P<slug>[\w-]+)/(?P<institution_slug>[\w-]+)/~sheets$',
         views.MonitoringInstitutionDetailView.as_view(),
         name="sheet_list"),

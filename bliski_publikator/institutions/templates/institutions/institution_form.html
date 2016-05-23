@@ -30,7 +30,10 @@
 {{ form.media }}
   <script>
     $(function() {
-      var monitoring = +'{{ monitoring.pk | default:'-1' }}';
+      var monitoring = {};
+      monitoring['id'] = +'{{ monitoring.pk | default:'-1' }}';
+      monitoring['slug'] = '{{monitoring.slug}}';
+
       var debounce = function(wait, func, immediate) {
         var timeout;
         return function() {
@@ -54,12 +57,19 @@
           if(data.count > 0){
             var institution = data.results[0];
 
-            var help_block = $('<div class="help-block">Już taka istnieje. </div>');
+            var help_block = $('<div class="help-block">Taka instytucja już istnieje. </div>');
 
-            var link = $('<a></a>');
-            link.text(institution.name);
-            link.attr('href', '/institutions/institution-' + institution.slug);
-            link.appendTo(help_block);
+            if(monitoring.id > 0){
+              var link = $('<a></a>');
+              link.text('Przypisz do monitoringu');
+              link.attr('href', '/monitorings/' + monitoring.slug + '/' + institution.slug + '/~assign');
+              link.appendTo(help_block);
+            }else{
+              var link = $('<a></a>');
+              link.text(institution.name);
+              link.attr('href', '/institutions/institution-' + institution.slug);
+              link.appendTo(help_block);
+            };
 
             controls.append(help_block);
 

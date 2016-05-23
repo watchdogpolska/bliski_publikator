@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-05 11:34+0000\n"
-"PO-Revision-Date: 2016-05-05 13:35+0200\n"
+"POT-Creation-Date: 2016-05-22 23:39+0000\n"
+"PO-Revision-Date: 2016-05-23 01:40+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -19,45 +19,57 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: apps.py:8 models.py:34
+#: apps.py:8 models.py:58
 msgid "Monitorings"
 msgstr "Monitoringi"
 
-#: models.py:18 templates/monitorings/institution_assign.html.py:36
-msgid "Name"
-msgstr "Nazwa"
+#: forms.py:17 templates/monitorings/monitoring_detail.html.py:48
+msgid "Institutions"
+msgstr "Instytucje"
 
-#: models.py:19
-msgid "Slug"
-msgstr "Identyfikator redakcyjny"
+#: models.py:23 models.py:57
+msgid "Monitoring"
+msgstr "Monitoring"
 
-#: models.py:21
-msgid "Description"
-msgstr "Opis"
-
-#: models.py:22
-msgid "Active status"
-msgstr "Status aktywności"
-
-#: models.py:23
-msgid "Logo"
-msgstr "Logo"
-
-#: models.py:24
-msgid "Max point"
-msgstr "Maksimum ppunktów"
-
-#: models.py:26
+#: models.py:25 models.py:48
 msgid "Institution"
 msgstr "Instytucja"
 
-#: models.py:27
+#: models.py:29
+msgid "Monitoring of institution"
+msgstr "Monitoring instytucji"
+
+#: models.py:30
+msgid "Monitorings of institutions"
+msgstr "Monitoringi instytucji"
+
+#: models.py:40 templates/monitorings/institution_assign.html.py:36
+msgid "Name"
+msgstr "Nazwa"
+
+#: models.py:41
+msgid "Slug"
+msgstr "Identyfikator redakcyjny"
+
+#: models.py:43
+msgid "Description"
+msgstr "Opis"
+
+#: models.py:44
+msgid "Active status"
+msgstr "Status aktywności"
+
+#: models.py:45
+msgid "Logo"
+msgstr "Logo"
+
+#: models.py:46
+msgid "Max point"
+msgstr "Maksimum ppunktów"
+
+#: models.py:49
 msgid "Specifies which institutions are covered by monitoring"
 msgstr "Określ, które instytucje są objęte monitoringiem"
-
-#: models.py:33
-msgid "Monitoring"
-msgstr "Monitoring"
 
 #: templates/monitorings/_sheet.html:2
 #, python-format
@@ -123,24 +135,20 @@ msgstr "Założenia i cele"
 msgid "Covered institutions"
 msgstr "Instytucje objęte"
 
-#: templates/monitorings/monitoring_detail.html:47
-msgid "Institutions"
-msgstr "Instytucje"
-
-#: templates/monitorings/monitoring_detail.html:48
+#: templates/monitorings/monitoring_detail.html:49
 msgid "Points"
 msgstr "Punkty"
 
-#: templates/monitorings/monitoring_detail.html:49
+#: templates/monitorings/monitoring_detail.html:50
 msgid "Actions"
 msgstr "Akcje"
 
-#: templates/monitorings/monitoring_detail.html:65
+#: templates/monitorings/monitoring_detail.html:72
 #: templates/monitorings/monitoring_form_answer.html:13
 msgid "Rank institution"
 msgstr "Ocena instytucji"
 
-#: templates/monitorings/monitoring_detail.html:72
+#: templates/monitorings/monitoring_detail.html:80
 msgid "No institutions"
 msgstr "Brak instytucji"
 
@@ -175,20 +183,34 @@ msgstr ""
 "Brak kwestionariuszy.  <a href=\"%(sheet_create)s\" class=\"btn btn-primary"
 "\">Dodaj nowy kwestionariusz.</a>"
 
-#: views.py:161
+#: views.py:180
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: views.py:191
+#: views.py:211
 #, python-format
 msgid "%(count)d institutions was assigned to %(monitoring)s"
 msgstr "%(count)d instytucji zostało przypisanych do %(monitoring)s"
 
-#: views.py:205
+#: views.py:241
+#, python-format
+msgid "Institution %(institution)s assigned to monitoring %(monitoring)s"
+msgstr ""
+"Instytucja %(institution)s została przypisana do monitoringu %(monitoring)s"
+
+#: views.py:255
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
+
+#: views.py:287
+msgid "Unable to rank once institution twice times."
+msgstr "Nie możesz oceniać jednej instytucji wielokrotnie."
+
+#: views.py:339
+msgid "Rank saved. Thank you."
+msgstr "Ocena zapisana. Dziękuje."
 
 #~ msgid "{0} created!"
 #~ msgstr "{0} utworzony!"

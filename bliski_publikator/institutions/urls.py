@@ -9,6 +9,8 @@ urlpatterns = [
         name="list"),
     url(r'^~create$', views.InstitutionCreateView.as_view(),
         name="create"),
+    url(r'^~create-(?P<monitoring_slug>[\w-]+)$', views.InstitutionCreateView.as_view(),
+        name="create"),
     url(r'^institution-autocomplete$', views.InstitutionAutocomplete.as_view(),
         name="autocomplete"),
     url(r'^institution-(?P<slug>[\w-]+)$', views.InstitutionDetailView.as_view(),

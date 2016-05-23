@@ -43,8 +43,8 @@ class InstitutionCreateView(LoginRequiredMixin, PermissionRequiredMixin, UserFor
 
     @cached_property
     def monitoring(self):
-        if 'monitoring' in self.request.GET:
-            return get_object_or_404(Monitoring, pk=self.request.GET['monitoring'])
+        if 'monitoring_slug' in self.kwargs:
+            return get_object_or_404(Monitoring, slug=self.kwargs['monitoring_slug'])
         return None
 
     def get_initial(self):
