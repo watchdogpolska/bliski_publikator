@@ -35,3 +35,9 @@
     </div>
 </div>
 {% endblock %}
+
+
+{% block javascript %}
+{{block.super}}
+{{filter.form.media}}
+{% endblock %}
