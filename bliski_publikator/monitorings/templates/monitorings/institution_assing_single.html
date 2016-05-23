@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="page-header">
+    <h1>{% trans "Confirm assigment" %}</h1>
+</div>
+<p>{% blocktrans with object=object %}Are you sure you want to assing "{{institution}}" to monitoring "{{monitoring}}"?{% endblocktrans %}</p>
+<form method="POST">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary">
+    {% trans 'Assign' %}
+  </button>
+</form>
+{% endblock %}

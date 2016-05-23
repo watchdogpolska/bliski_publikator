@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 03:49+0000\n"
-"PO-Revision-Date: 2016-05-23 02:29+0200\n"
+"POT-Creation-Date: 2016-05-23 05:26+0000\n"
+"PO-Revision-Date: 2016-05-23 07:27+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -108,6 +108,23 @@ msgstr "Przypisz wybrane instytucje do %(monitoring)s"
 msgid "Region"
 msgstr "Region"
 
+#: templates/monitorings/institution_assing_single.html:5
+msgid "Confirm assigment"
+msgstr "Potwierdzenie przypisania"
+
+#: templates/monitorings/institution_assing_single.html:7
+#, python-format
+msgid ""
+"Are you sure you want to assing \"%(institution)s\" to monitoring "
+"\"%(monitoring)s\"?"
+msgstr ""
+"Czy jesteś pewien, że chcesz przypisać instytucje \"%(institution)s\" do "
+"monitoringu \"%(monitoring)s\"?"
+
+#: templates/monitorings/institution_assing_single.html:11
+msgid "Assign"
+msgstr "Przypisz"
+
 #: templates/monitorings/monitoring_base.html:11
 #: templates/monitorings/monitoring_form.html:8
 #: templates/monitorings/monitoring_form.html:15
@@ -197,22 +214,22 @@ msgstr "{0} zaktualizowany!"
 msgid "%(count)d institutions was assigned to %(monitoring)s"
 msgstr "%(count)d instytucji zostało przypisanych do %(monitoring)s"
 
-#: views.py:246
+#: views.py:252
 #, python-format
 msgid "Institution %(institution)s assigned to monitoring %(monitoring)s"
 msgstr ""
 "Instytucja %(institution)s została przypisana do monitoringu %(monitoring)s"
 
-#: views.py:260
+#: views.py:266
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
 
-#: views.py:292
+#: views.py:298
 msgid "Unable to rank once institution twice times."
 msgstr "Nie możesz oceniać jednej instytucji wielokrotnie."
 
-#: views.py:344
+#: views.py:350
 msgid "Rank saved. Thank you."
 msgstr "Ocena zapisana. Dziękuje."
 

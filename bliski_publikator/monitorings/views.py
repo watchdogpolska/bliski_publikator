@@ -216,7 +216,7 @@ class MonitoringAssignUpdateView(LoginRequiredMixin, PermissionRequiredMixin, Fi
 
 
 class MonitoringSignleAssingUpdateView(LoginRequiredMixin, TemplateView):
-    template_name = 'monitoring/institution_assing_single.html'
+    template_name = 'monitorings/institution_assing_single.html'
 
     @cached_property
     def monitoring(self):
@@ -232,6 +232,12 @@ class MonitoringSignleAssingUpdateView(LoginRequiredMixin, TemplateView):
         if thr:
             return HttpResponseRedirect(thr.get_absolute_url())
         return None
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MonitoringSignleAssingUpdateView, self).get_context_data(*args, **kwargs)
+        context['monitoring'] = self.monitoring
+        context['institution'] = self.institution
+        return context
 
     def get(self, *args, **kwargs):
         return (self.check_thr() or
