@@ -1,9 +1,12 @@
 {% extends 'institutions/institution_base.html' %}
-{% load i18n crispy_forms_tags %}
+{% load i18n crispy_forms_tags bootstrap_pagination %}
 
 {% block buttons %}
 {% if perms.institutions.add_institution %}
-<a href="{{view.model.get_add_url}}" class="btn btn-primary">{% trans 'Add institution' %}</a>
+<a href="{{view.model.get_add_url}}" class="btn btn-primary">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    {% trans 'Add institution' %}
+</a>
 {% endif %}
 {% endblock %}
 
@@ -22,6 +25,7 @@
         </form>
     </div>
     <div class="col-xs-12 col-md-9">
+        {% bootstrap_paginate page_obj %}
         {% for object in object_list %}
             <div class="gray">
             <h1><a href="{{object.get_absolute_url}}">{{object}}</a></h1>
@@ -32,6 +36,7 @@
             {% endif %}
             </div>
         {% endfor %}
+        {% bootstrap_paginate page_obj %}
     </div>
 </div>
 {% endblock %}
