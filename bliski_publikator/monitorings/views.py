@@ -252,7 +252,7 @@ class MonitoringSignleAssingUpdateView(LoginRequiredMixin, TemplateView):
         msg = _("Institution %(institution)s assigned to " +
                 "monitoring %(monitoring)s") % {'institution': self.institution,
                                                 'monitoring': self.monitoring}
-        messages.success(self.requests, msg)
+        messages.success(self.request, msg)
         return HttpResponseRedirect(new_thr.get_absolute_url())
 
 
