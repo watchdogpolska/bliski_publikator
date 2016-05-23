@@ -81,10 +81,8 @@
         "./assets/javascripts/bootstrap.js"
       ]
     },
-    "dragula": {
-      "main": [
-        "dist/dragula.css"
-      ]
+    "dragula.js": {
+      "main": []
     },
     "outlayer": {
       "main": [
