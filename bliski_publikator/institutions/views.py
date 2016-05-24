@@ -50,8 +50,8 @@ class InstitutionCreateView(LoginRequiredMixin, PermissionRequiredMixin, UserFor
     def get_initial(self):
         return {'monitorings': [self.monitoring]}
 
-    def get_context_data(self):
-        context = super(InstitutionCreateView, (self)).get_context_data()
+    def get_context_data(self, *args, **kwargs):
+        context = super(InstitutionCreateView, self).get_context_data(*args, **kwargs)
         if self.monitoring:
             context['monitoring'] = self.monitoring
         return context

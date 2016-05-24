@@ -1,9 +1,12 @@
 {% extends 'monitorings/monitoring_base.html' %}
-{% load i18n %}
+{% load i18n bootstrap_pagination %}
 
 {% block buttons %}
 {% if perms.monitorings.add_monitoring %}
-<a href="{{view.model.get_add_url}}" class="btn btn-primary">{% trans 'Add monitoring' %}</a>
+<a href="{{view.model.get_add_url}}" class="btn btn-primary">
+  <i class="fa fa-plus" aria-hidden="true"></i>
+  {% trans 'Add monitoring' %}
+</a>
 {% endif %}
 {% endblock %}
 
@@ -11,6 +14,7 @@
 <div class="page-header">
     <h1>{% trans 'List of monitorings' %}</h1>
 </div>
+{% bootstrap_paginate page_obj %}
 <div class="grid">
   <div class="grid__sizer">
   </div>
@@ -31,6 +35,7 @@
     </div>
   {% endfor %}
 </div>
+{% bootstrap_paginate page_obj %}
 {% endblock %}
 
 {% block javascript %}

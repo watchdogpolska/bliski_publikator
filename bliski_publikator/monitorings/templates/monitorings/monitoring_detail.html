@@ -16,7 +16,7 @@
 <nav class="secondary__menu" role="group">
     <ul class="secondary__list">
         <li class="secondary__item secondary__item--active">
-          {% trans 'Home' %}
+          {% trans 'Institutions' %}
         </li>
       {% for obj in monitoring.page_set.all %}
       <li class="secondary__item">
@@ -31,7 +31,6 @@
 <div class="row">
     <div class="col-md-4">
         <div class="red">
-            <h2>{% trans 'Design and purpose' %}</h2>
             {% if logo %}
             <img src="{{object.logo.url}}" class="img-responsive"></img>
             {% endif %}
@@ -79,6 +78,8 @@
             {% else %}
             <p>{% trans 'No institutions' %}</p>
             {% endif %}
+            {% url 'institutions:create' monitoring_slug=object.slug as add_url %}
+            {% blocktrans with add_url=add_url %}Missing interests you institutions? <a href="{{add_url}}">Add it</a>.{% endblocktrans %}
         </div>
     </div>
 </div>

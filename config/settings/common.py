@@ -46,7 +46,8 @@ THIRD_PARTY_APPS = (
     'dal_select2',
     'tinymce',
     'mptt',
-    'rest_framework'
+    'rest_framework',
+    'bootstrap_pagination',
 )
 
 # Apps specific for this project go here.
