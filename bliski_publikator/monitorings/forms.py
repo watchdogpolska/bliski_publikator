@@ -36,7 +36,7 @@ class MonitoringForm(UserKwargModelFormMixin, FormHorizontalMixin, SingleButtonM
 
     class Meta:
         model = Monitoring
-        fields = ['name', 'description', 'active', 'max_point', ]
+        fields = ['name', 'logo', 'description', 'active', 'max_point', ]
         widgets = {
             'description': TinyMCE(attrs={'cols': 80, 'rows': 30}),
         }
