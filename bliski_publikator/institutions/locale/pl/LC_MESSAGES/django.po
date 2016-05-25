@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-25 19:25+0000\n"
-"PO-Revision-Date: 2016-04-19 02:15+0200\n"
+"POT-Creation-Date: 2016-05-25 20:23+0000\n"
+"PO-Revision-Date: 2016-05-25 22:24+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -17,141 +17,128 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-#: bliski_publikator/institutions/apps.py:8
-#: bliski_publikator/institutions/models.py:46
+#: apps.py:8 models.py:46
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: bliski_publikator/institutions/filters.py:14
-#: bliski_publikator/institutions/forms.py:18
+#: filters.py:14 forms.py:18
 msgid "Voivodeship"
 msgstr "Województwo"
 
-#: bliski_publikator/institutions/filters.py:21
-#: bliski_publikator/institutions/forms.py:24
+#: filters.py:21 forms.py:24
 msgid "County"
 msgstr "Powiat"
 
-#: bliski_publikator/institutions/filters.py:29
-#: bliski_publikator/institutions/models.py:33
+#: filters.py:29 models.py:33
 msgid "Community"
 msgstr "Gmina"
 
-#: bliski_publikator/institutions/filters.py:37
-#: bliski_publikator/institutions/templates/institutions/_stats.html:5
-#, fuzzy
-#| msgid "Monitorings"
+#: filters.py:37 templates/institutions/_stats.html.py:5
 msgid "Monitoring"
-msgstr "Monitoringi"
+msgstr "Monitoring"
 
-#: bliski_publikator/institutions/forms.py:32
-#: bliski_publikator/institutions/forms.py:64
-#: bliski_publikator/institutions/models.py:40
+#: forms.py:32 forms.py:64 models.py:40
 msgid "Monitorings"
 msgstr "Monitoringi"
 
-#: bliski_publikator/institutions/forms.py:48
+#: forms.py:48
 msgid "Update"
 msgstr "Zaktualizuj"
 
-#: bliski_publikator/institutions/forms.py:48
+#: forms.py:48
 msgid "Save"
 msgstr "Zapisz"
 
-#: bliski_publikator/institutions/forms.py:52
+#: forms.py:52
 msgid "Identification"
 msgstr "Identyfikacja"
 
-#: bliski_publikator/institutions/forms.py:58
+#: forms.py:58
 msgid "Location"
 msgstr "Lokalizacja"
 
-#: bliski_publikator/institutions/models.py:27
+#: models.py:27
 msgid "Name"
 msgstr "Nazwa"
 
-#: bliski_publikator/institutions/models.py:28
+#: models.py:28
 msgid "Slug"
 msgstr "Identyfikator redakcyjny"
 
-#: bliski_publikator/institutions/models.py:30
-#: bliski_publikator/institutions/templates/institutions/institution_detail.html:25
+#: models.py:30 templates/institutions/institution_detail.html.py:25
 msgid "E-mail"
 msgstr "E-mail"
 
-#: bliski_publikator/institutions/models.py:35
-#: bliski_publikator/institutions/templates/institutions/institution_detail.html:23
+#: models.py:35 templates/institutions/institution_detail.html.py:23
 msgid "REGON"
 msgstr "REGON"
 
-#: bliski_publikator/institutions/models.py:36
-#: bliski_publikator/institutions/templates/institutions/institution_detail.html:24
+#: models.py:36 templates/institutions/institution_detail.html.py:24
 msgid "KRS"
 msgstr "KRS"
 
-#: bliski_publikator/institutions/models.py:45
+#: models.py:45
 msgid "Institution"
 msgstr "Instytucja"
 
-#: bliski_publikator/institutions/templates/institutions/_stats.html:6
+#: templates/institutions/_stats.html:6
 msgid "Points"
-msgstr ""
+msgstr "Punkty"
 
-#: bliski_publikator/institutions/templates/institutions/_stats.html:7
-#, fuzzy
-#| msgid "Location"
+#: templates/institutions/_stats.html:7
 msgid "Actions"
-msgstr "Lokalizacja"
+msgstr "Akcje"
 
-#: bliski_publikator/institutions/templates/institutions/_stats.html:29
-#, fuzzy
-#| msgid "Add institution"
+#: templates/institutions/_stats.html:29
 msgid "Rank institution"
-msgstr "Dodaj instytucje"
+msgstr "Ocena instytucji"
 
-#: bliski_publikator/institutions/templates/institutions/institution_base.html:10
-#: bliski_publikator/institutions/templates/institutions/institution_form.html:14
-#: bliski_publikator/institutions/templates/institutions/institution_form.html:22
+#: templates/institutions/institution_base.html:10
+#: templates/institutions/institution_form.html:14
+#: templates/institutions/institution_form.html:22
 msgid "Update institution"
 msgstr "Zaktualizuj instytucje"
 
-#: bliski_publikator/institutions/templates/institutions/institution_base.html:17
-#: bliski_publikator/institutions/templates/institutions/institution_confirm_delete.html:11
+#: templates/institutions/institution_base.html:17
+#: templates/institutions/institution_confirm_delete.html:11
 msgid "Delete institution"
 msgstr "Usuń instytucje"
 
-#: bliski_publikator/institutions/templates/institutions/institution_detail.html:22
+#: templates/institutions/institution_detail.html:22
 msgid "Identfication"
 msgstr "Identyfikacja"
 
-#: bliski_publikator/institutions/templates/institutions/institution_filter.html:8
-#: bliski_publikator/institutions/templates/institutions/institution_filter.html:15
-#: bliski_publikator/institutions/templates/institutions/institution_form.html:14
-#: bliski_publikator/institutions/templates/institutions/institution_form.html:22
+#: templates/institutions/institution_filter.html:8
+#: templates/institutions/institution_form.html:14
+#: templates/institutions/institution_form.html:22
 msgid "Add institution"
 msgstr "Dodaj instytucje"
 
-#: bliski_publikator/institutions/templates/institutions/institution_filter.html:23
-msgid "Filtr"
-msgstr ""
+#: templates/institutions/institution_filter.html:15
+msgid "Index of institutions"
+msgstr "Indeks instytucji"
 
-#: bliski_publikator/institutions/templates/institutions/institution_filter.html:35
+#: templates/institutions/institution_filter.html:23
+msgid "Filtr"
+msgstr "Filtruj"
+
+#: templates/institutions/institution_filter.html:35
 msgid "No monitorings"
 msgstr "Brak monitoringów"
 
-#: bliski_publikator/institutions/views.py:59
+#: views.py:59
 #, python-brace-format
 msgid "{0} created!"
 msgstr "{0} utworzony!"
 
-#: bliski_publikator/institutions/views.py:69
+#: views.py:69
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: bliski_publikator/institutions/views.py:79
+#: views.py:79
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
