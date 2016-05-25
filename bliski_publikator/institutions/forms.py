@@ -16,13 +16,13 @@ class InstitutionForm(M2MFieldFormMixin, UserKwargModelFormMixin, FormHorizontal
     # TODO: Split region,voivodeship,county into forms.MultiWidget
     voivodeship = forms.ModelChoiceField(
         label=_("Voivodeship"),
-        required=False,
+        required=True,
         queryset=JST.objects.voivodeship().all(),
         widget=autocomplete.ModelSelect2(url='teryt:voivodeship-autocomplete')
     )
     county = forms.ModelChoiceField(
         label=_("County"),
-        required=False,
+        required=True,
         queryset=JST.objects.county().all(),
         widget=autocomplete.ModelSelect2(url='teryt:county-autocomplete',
                                          forward=['voivodeship'],
