@@ -3,7 +3,6 @@
 
 {% block buttons %}
 {% if object %}
-{% if perms.monitorings.change_monitoring or perms.monitorings.delete_monitoring or perms.monitoring_pages.add_page %}
 <div class="btn-group pull-right" role="group">
     {% if perms.monitorings.change_monitoring %}
     <a href="{{object.get_update_url}}" class="btn btn-primary">
@@ -36,6 +35,5 @@
     </a>
 
 </div>
-{% endif %}
 {% endif %}
 {% endblock %}

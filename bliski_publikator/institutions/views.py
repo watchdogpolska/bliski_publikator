@@ -35,11 +35,10 @@ class InstitutionDetailView(SelectRelatedMixin, DetailView):
         return qs.with_stats()
 
 
-class InstitutionCreateView(LoginRequiredMixin, PermissionRequiredMixin, UserFormKwargsMixin,
+class InstitutionCreateView(LoginRequiredMixin, UserFormKwargsMixin,
                             CreateView):
     model = Institution
     form_class = InstitutionForm
-    permission_required = 'institutions.add_institution'
 
     @cached_property
     def monitoring(self):
