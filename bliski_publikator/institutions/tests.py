@@ -67,7 +67,7 @@ class InstitutionCreateViewTestCase(TestCase):
     def test_status(self):
         self.client.login(username=self.user.username, password='pass')
         resp = self.client.get(self.url)
-        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.status_code, 200)
 
     def test_permitted(self):
         self.client.login(username=self.user.username, password='pass')
@@ -161,12 +161,20 @@ class InstitutionFormTestCase(TestCase):
         self.monitoring_A = MonitoringFactory()
         self.monitoring_B = MonitoringFactory()
         self.monitoring_C = MonitoringFactory()
+        self.voivodeship = JSTFactory(category__level=1)
+        self.county = JSTFactory(parent=self.voivodeship, category__level=2)
+        self.communinity = JSTFactory(parent=self.county, category__level=3)
 
     def test_update_monitorings(self):
         """
         Regression test for watchdogpolska/bliski_publikator#55
         """
-        data = {'name': 'X', 'regon': 'X', 'krs': 'X', 'region': JSTFactory(category__level=3).pk}
+        data = {'name': 'X',
+                'regon': 'X',
+                'krs': 'X',
+                'region': self.communinity.pk,
+                'county': self.county.pk,
+                'voivodeship': self.voivodeship.pk}
 
         form = InstitutionForm(data=data, user=self.user, instance=self.instance)
         self.assertEqual(form.is_valid(), True, repr(form.errors))
