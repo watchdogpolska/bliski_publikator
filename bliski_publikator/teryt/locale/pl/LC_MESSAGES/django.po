@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-05 11:34+0000\n"
+"POT-Creation-Date: 2016-05-25 19:25+0000\n"
 "PO-Revision-Date: 2016-05-05 13:33+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
@@ -20,91 +20,91 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: templates/teryt/_voivodeship_map.svg.html:16
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:16
 msgid "Subcarpathian"
 msgstr "Podkarpackie"
 
-#: templates/teryt/_voivodeship_map.svg.html:21
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:21
 msgid "Lesser Poland"
 msgstr "Małopolskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:26
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:26
 msgid "Silesian"
 msgstr "Śląskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:31
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:31
 msgid "Opole"
 msgstr "Opolskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:36
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:36
 msgid "Lower Silesian"
 msgstr "Dolnośląskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:41
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:41
 msgid "Świętokrzyskie"
 msgstr "Świętokrzyskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:46
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:46
 msgid "Lublin"
 msgstr "Lubelskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:51
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:51
 msgid "Łódź"
 msgstr "Łódzkie"
 
-#: templates/teryt/_voivodeship_map.svg.html:56
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:56
 msgid "Mazovian"
 msgstr "Mazowieckie"
 
-#: templates/teryt/_voivodeship_map.svg.html:61
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:61
 msgid "Greater Poland"
 msgstr "Wielkopolska"
 
-#: templates/teryt/_voivodeship_map.svg.html:66
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:66
 msgid "Lubusz"
 msgstr "Lubuskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:71
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:71
 msgid "Kuyavian-Pomeranian"
 msgstr "Kujawsko-pomorskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:76
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:76
 msgid "Podlaskie"
 msgstr "Pomorskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:81
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:81
 msgid "West Pomeranian"
 msgstr "Zachodniopomorskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:86
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:86
 msgid "Warmian-Masurian"
 msgstr "Warmińskomazurskie"
 
-#: templates/teryt/_voivodeship_map.svg.html:91
+#: bliski_publikator/teryt/templates/teryt/_voivodeship_map.svg.html:91
 msgid "Pomeranian"
 msgstr "Pomorskie"
 
-#: templates/teryt/jst_detail.html:25
+#: bliski_publikator/teryt/templates/teryt/jst_detail.html:25
 msgid "Voivodeships"
 msgstr "Województwa"
 
-#: templates/teryt/jst_detail.html:30
+#: bliski_publikator/teryt/templates/teryt/jst_detail.html:30
 msgid "Subordinate units"
 msgstr "Jednostki podrzędne"
 
-#: templates/teryt/jst_detail.html:44
+#: bliski_publikator/teryt/templates/teryt/jst_detail.html:44
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: templates/teryt/jst_detail.html:49
+#: bliski_publikator/teryt/templates/teryt/jst_detail.html:49
 msgid "No institutions."
 msgstr "Brak instytucji"
 
-#: templates/teryt/jst_list.html:6
+#: bliski_publikator/teryt/templates/teryt/jst_list.html:6
 msgid "Voivodeship"
 msgstr "Województwa"
 
-#: templates/teryt/jst_list.html:7
+#: bliski_publikator/teryt/templates/teryt/jst_list.html:7
 msgid "Select voivodeship."
 msgstr "Wybierz województwo"
 

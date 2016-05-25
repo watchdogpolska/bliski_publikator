@@ -1,12 +1,23 @@
 {% extends 'monitorings/sheet_base.html' %}
 {% load i18n %}
 
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{{monitoring.get_absolute_url}}">{{monitoring}}</a></li>
+    <li class="active">{{institution}}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{% blocktrans with institution_link=institution.get_absolute_url monitoring_link=monitoring.get_absolute_url%}Rank of <a href="{{institution_link}}">{{institution}}</a> in <a href="{{monitoring_link}}">{{monitoring}}</a>{% endblocktrans %}</h1>
+  <h1><i class="fa fa-search" aria-hidden="true"></i> {{monitoring}}</h1>
 </div>
+
+<h2><i class="fa fa-home" aria-hidden="true"></i> {{institution}}</h2>
+
 <div class="row">
     <div class="col-md-12">
+        <p>{% blocktrans with institution_link=institution.get_absolute_url monitoring_link=monitoring.get_absolute_url%}This pages presents individuals ranks of <a href="{{institution_link}}">{{institution}}</a> in <a href="{{monitoring_link}}">{{monitoring}}</a>{% endblocktrans %}</p>
         {% if object_list %}
             {% for sheet in object_list %}
                 <div class="gray">

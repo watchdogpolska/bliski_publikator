@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-05 11:35+0000\n"
+"POT-Creation-Date: 2016-05-25 19:25+0000\n"
 "PO-Revision-Date: 2016-05-05 12:04+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
@@ -19,69 +19,72 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: apps.py:8
+#: bliski_publikator/monitoring_pages/apps.py:8
 msgid "Monitorings pages"
 msgstr "Strony monitoringów"
 
-#: models.py:17
+#: bliski_publikator/monitoring_pages/models.py:17
 msgid "Monitoring"
 msgstr "Monitoring"
 
-#: models.py:18
+#: bliski_publikator/monitoring_pages/models.py:18
 msgid "Title"
 msgstr "Tytut"
 
-#: models.py:20
+#: bliski_publikator/monitoring_pages/models.py:20
 msgid "Slug"
 msgstr "Identyfikator redakcyjny"
 
-#: models.py:22
+#: bliski_publikator/monitoring_pages/models.py:22
 msgid "Content"
 msgstr "Treść"
 
-#: models.py:23
+#: bliski_publikator/monitoring_pages/models.py:23
 msgid "Ordering"
 msgstr "Sortowanie"
 
-#: models.py:27
+#: bliski_publikator/monitoring_pages/models.py:27
 msgid "Page"
 msgstr "Strona"
 
-#: models.py:28
+#: bliski_publikator/monitoring_pages/models.py:28
 msgid "Pages"
 msgstr "Strony"
 
-#: templates/monitoring_pages/page_base.html:9
-#: templates/monitoring_pages/page_form.html:11
-#: templates/monitoring_pages/page_form.html:18
+#: bliski_publikator/monitoring_pages/templates/monitoring_pages/page_base.html:9
+#: bliski_publikator/monitoring_pages/templates/monitoring_pages/page_form.html:11
+#: bliski_publikator/monitoring_pages/templates/monitoring_pages/page_form.html:18
 msgid "Update page"
 msgstr "Zaktualizuj stronę"
 
-#: templates/monitoring_pages/page_base.html:15
-#: templates/monitoring_pages/page_confirm_delete.html:8
+#: bliski_publikator/monitoring_pages/templates/monitoring_pages/page_base.html:15
+#: bliski_publikator/monitoring_pages/templates/monitoring_pages/page_confirm_delete.html:8
 msgid "Delete page"
 msgstr "Usuń stronę"
 
-#: templates/monitoring_pages/page_detail.html:21
-msgid "Home"
-msgstr "Strona główna"
+#: bliski_publikator/monitoring_pages/templates/monitoring_pages/page_detail.html:21
+msgid "Institutions"
+msgstr ""
 
-#: templates/monitoring_pages/page_form.html:11
-#: templates/monitoring_pages/page_form.html:18
+#: bliski_publikator/monitoring_pages/templates/monitoring_pages/page_form.html:11
+#: bliski_publikator/monitoring_pages/templates/monitoring_pages/page_form.html:18
 msgid "Add page"
 msgstr "Dodaj stronę"
 
-#: views.py:46
+#: bliski_publikator/monitoring_pages/views.py:46
 #, python-brace-format
 msgid "{0} created!"
 msgstr "{0} utworzony!"
 
-#: views.py:61
+#: bliski_publikator/monitoring_pages/views.py:61
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: views.py:73
+#: bliski_publikator/monitoring_pages/views.py:73
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
+
+#~ msgid "Home"
+#~ msgstr "Strona główna"
