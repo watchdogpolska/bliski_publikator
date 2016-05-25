@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-25 19:26+0000\n"
-"PO-Revision-Date: 2016-05-25 21:26+0200\n"
+"POT-Creation-Date: 2016-05-25 20:25+0000\n"
+"PO-Revision-Date: 2016-05-25 22:25+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -23,8 +23,9 @@ msgstr ""
 msgid "Monitorings"
 msgstr "Monitoringi"
 
-#: forms.py:17 templates/monitorings/monitoring_detail.html.py:19
-#: templates/monitorings/monitoring_detail.html:47
+#: forms.py:17 templates/monitorings/monitoring_detail.html.py:15
+#: templates/monitorings/monitoring_detail.html:21
+#: templates/monitorings/monitoring_detail.html:49
 msgid "Institutions"
 msgstr "Instytucje"
 
@@ -145,28 +146,27 @@ msgstr "Dodaj stronę"
 msgid "Add institution"
 msgstr "Dodaj instytucje"
 
-#: templates/monitorings/monitoring_detail.html:42
+#: templates/monitorings/monitoring_detail.html:44
 msgid "Covered institutions"
 msgstr "Instytucje objęte"
 
-#: templates/monitorings/monitoring_detail.html:48
+#: templates/monitorings/monitoring_detail.html:50
 msgid "Points"
 msgstr "Punkty"
 
-#: templates/monitorings/monitoring_detail.html:49
+#: templates/monitorings/monitoring_detail.html:51
 msgid "Actions"
 msgstr "Akcje"
 
-#: templates/monitorings/monitoring_detail.html:71
-#: templates/monitorings/monitoring_form_answer.html:13
-msgid "Rank institution"
-msgstr "Ocena instytucji"
+#: templates/monitorings/monitoring_detail.html:73
+msgid "Inspect"
+msgstr "Skontroluj"
 
-#: templates/monitorings/monitoring_detail.html:79
+#: templates/monitorings/monitoring_detail.html:81
 msgid "No institutions"
 msgstr "Brak instytucji"
 
-#: templates/monitorings/monitoring_detail.html:82
+#: templates/monitorings/monitoring_detail.html:84
 #, python-format
 msgid "Missing interests you institutions? <a href=\"%(add_url)s\">Add it</a>."
 msgstr ""
@@ -175,6 +175,10 @@ msgstr ""
 #: templates/monitorings/monitoring_form.html:22
 msgid "Submit"
 msgstr "Zapisz"
+
+#: templates/monitorings/monitoring_form_answer.html:13
+msgid "Rank institution"
+msgstr "Ocena instytucji"
 
 #: templates/monitorings/monitoring_form_monitoring.html:12
 #: templates/monitorings/monitoring_list.html:8
