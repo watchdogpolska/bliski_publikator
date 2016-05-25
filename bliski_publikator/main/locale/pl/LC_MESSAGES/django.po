@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-25 19:25+0000\n"
-"PO-Revision-Date: 2016-05-23 06:33+0200\n"
+"POT-Creation-Date: 2016-05-25 20:22+0000\n"
+"PO-Revision-Date: 2016-05-25 22:22+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -19,26 +19,24 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: bliski_publikator/main/templates/_confirm_delete.html:3
+#: templates/_confirm_delete.html:3
 msgid "Confirm delete"
 msgstr "Potwierdź usuwanie"
 
-#: bliski_publikator/main/templates/_confirm_delete.html:5
+#: templates/_confirm_delete.html:5
 #, python-format
 msgid "Are you sure you want to remove \"%(object)s\"?"
 msgstr "Czy jesteś pewien, że chcesz usunąć \"%(object)s\"?"
 
-#: bliski_publikator/main/templates/_confirm_delete.html:10
+#: templates/_confirm_delete.html:10
 msgid "Delete"
 msgstr "Usuń"
 
-#: bliski_publikator/main/templates/_index.html:3
-#: bliski_publikator/main/templates/base.html:6
-#: bliski_publikator/main/templates_dev/base.html:6
+#: templates/_index.html:3 templates/base.html.py:6 templates_dev/base.html:6
 msgid "Near-perfect bulletin!"
 msgstr "Bliski ideałowi publikator"
 
-#: bliski_publikator/main/templates/_index.html:4
+#: templates/_index.html:4
 msgid ""
 "We want helpful bulletin of public information which will be basic source of "
 "information about activities of public bodies."
@@ -46,7 +44,7 @@ msgstr ""
 "Chcemy pomocnych biuletynów informacji publicznej, które będą podstawowym "
 "źródłem informacji o działalności instytucji publicznych."
 
-#: bliski_publikator/main/templates/_index.html:6
+#: templates/_index.html:6
 msgid ""
 "The published information should be current and meet the needs of the "
 "community."
@@ -54,59 +52,59 @@ msgstr ""
 "Publikowane informacje powinny być aktualne i odpowiadać potrzebom "
 "społeczności."
 
-#: bliski_publikator/main/templates/_index.html:8
+#: templates/_index.html:8
 msgid "Learn more"
 msgstr "Czytaj więcej"
 
-#: bliski_publikator/main/templates/_index.html:15
+#: templates/_index.html:15
 msgid "Voivodeships"
 msgstr "Województwa"
 
-#: bliski_publikator/main/templates/_index.html:21
+#: templates/_index.html:21
 msgid "Last monitorings"
 msgstr "Ostatnie monitoringi"
 
-#: bliski_publikator/main/templates/account/email.html:6
+#: templates/account/email.html:6
 msgid "Account"
 msgstr "Konto"
 
-#: bliski_publikator/main/templates/account/email.html:11
+#: templates/account/email.html:11
 msgid "E-mail Addresses"
 msgstr "Adresy e-mail"
 
-#: bliski_publikator/main/templates/account/email.html:13
+#: templates/account/email.html:13
 msgid "The following e-mail addresses are associated with your account:"
 msgstr "Następujące adresy e-mail są skojarzone z kontem:"
 
-#: bliski_publikator/main/templates/account/email.html:27
+#: templates/account/email.html:27
 msgid "Verified"
 msgstr "Zweryfikowany"
 
-#: bliski_publikator/main/templates/account/email.html:29
+#: templates/account/email.html:29
 msgid "Unverified"
 msgstr "Niezweryfikowany"
 
-#: bliski_publikator/main/templates/account/email.html:31
+#: templates/account/email.html:31
 msgid "Primary"
 msgstr "Podstawowy"
 
-#: bliski_publikator/main/templates/account/email.html:37
+#: templates/account/email.html:37
 msgid "Make Primary"
 msgstr "Ustaw podstawowym"
 
-#: bliski_publikator/main/templates/account/email.html:38
+#: templates/account/email.html:38
 msgid "Re-send Verification"
 msgstr "Wyślij ponownie kod weryfikacyjny"
 
-#: bliski_publikator/main/templates/account/email.html:39
+#: templates/account/email.html:39
 msgid "Remove"
 msgstr "Usuń"
 
-#: bliski_publikator/main/templates/account/email.html:46
+#: templates/account/email.html:46
 msgid "Warning:"
 msgstr "Ostrzeżenie:"
 
-#: bliski_publikator/main/templates/account/email.html:46
+#: templates/account/email.html:46
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
 "an e-mail address so you can receive notifications, reset your password, etc."
@@ -114,26 +112,94 @@ msgstr ""
 "Obecnie nie masz ustawionego adresu e-mail. Powinieneś ustawić adres e-mail, "
 "aby móc otrzymywać powiadomienia, zresetować hasło itd."
 
-#: bliski_publikator/main/templates/account/email.html:51
+#: templates/account/email.html:51
 msgid "Add E-mail Address"
 msgstr "Dodaj adres e-mail"
 
-#: bliski_publikator/main/templates/account/email.html:56
+#: templates/account/email.html:56
 msgid "Add E-mail"
 msgstr "Dodaj e-mail"
 
-#: bliski_publikator/main/templates/account/email.html:66
+#: templates/account/email.html:66
 msgid "Do you really want to remove the selected e-mail address?"
 msgstr "Czy na pewno chcesz usunąć wybrany adres e-mail?"
 
-#: bliski_publikator/main/templates/account/email_confirm.html:6
-#: bliski_publikator/main/templates/account/email_confirm.html:12
-#: bliski_publikator/main/templates/account/email_confirmed.html:6
-#: bliski_publikator/main/templates/account/email_confirmed.html:12
+#: templates/account/email/email_confirmation_message.txt:1
+#, python-format
+msgid ""
+"Hello from %(site_name)s!\n"
+"\n"
+"You're receiving this e-mail because user %(user_display)s at "
+"%(site_domain)s has given yours as an e-mail address to connect their "
+"account.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s\n"
+msgstr ""
+"Witam w imieniu%(site_name)s!\n"
+"\n"
+"Otrzymujesz ten e-mail ,ponieważ użytkownik %(user_display)s na "
+"%(site_domain)s podał niniejszy adres e-mail, aby powiązać z swoim kontem.\n"
+"\n"
+"Aby potwierdzić, że jest to poprawne kliknij w link: %(activate_url)s\n"
+
+#: templates/account/email/email_confirmation_message.txt:7
+#, python-format
+msgid ""
+"Thank you from %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+"Dziekuje z %(site_name)s!\n"
+"%(site_domain)s"
+
+#: templates/account/email/email_confirmation_subject.txt:3
+msgid "Please Confirm Your E-mail Address"
+msgstr "Proszę potwierdź adres e-mail"
+
+#: templates/account/email/password_reset_key_message.txt:1
+#, python-format
+msgid ""
+"Hello from %(site_name)s!\n"
+"\n"
+"You're receiving this e-mail because you or someone else has requested a "
+"password for your user account at %(site_domain)s.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password."
+msgstr ""
+"Witam z %(site_name)s!\n"
+"\n"
+"Otrzymujesz tą wiadomość, ponieważ Ty lub ktoś inny zażądał zresetowania "
+"hasła do Twojego konta na stronie  %(site_domain)s.\n"
+"Niniejszą wiadomość możesz spokojnie zignorować, jeżeli nie żądałeś "
+"zresetowania hasła. Kliknij w link poniżej, aby zresetować hasło."
+
+#: templates/account/email/password_reset_key_message.txt:8
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr ""
+"Na wypadek, gdybyś zapomniał/-a swojej nazwy użytkownika jest to "
+"%(username)s."
+
+#: templates/account/email/password_reset_key_message.txt:10
+#, python-format
+msgid ""
+"Thank you for using %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+"Dziękuje za wykorzystywanie %(site_name)s!\n"
+"%(site_domain)s"
+
+#: templates/account/email/password_reset_key_subject.txt:3
+msgid "Password Reset E-mail"
+msgstr "E-mail dotyczący resetowania hasła"
+
+#: templates/account/email_confirm.html:6
+#: templates/account/email_confirm.html:12
+#: templates/account/email_confirmed.html:6
+#: templates/account/email_confirmed.html:12
 msgid "Confirm E-mail Address"
 msgstr "Potwierdź usuwanie adresu e-mail"
 
-#: bliski_publikator/main/templates/account/email_confirm.html:18
+#: templates/account/email_confirm.html:18
 #, python-format
 msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
@@ -142,11 +208,11 @@ msgstr ""
 "Proszę o potwierdzenie, że adres <a href=\"mailto:%(email)s\">%(email)s</a> "
 "należy do użytkownika %(user_display)s."
 
-#: bliski_publikator/main/templates/account/email_confirm.html:22
+#: templates/account/email_confirm.html:22
 msgid "Confirm"
 msgstr "Potwierdź"
 
-#: bliski_publikator/main/templates/account/email_confirm.html:29
+#: templates/account/email_confirm.html:29
 #, python-format
 msgid ""
 "This e-mail confirmation link expired or is invalid. Please <a href="
@@ -155,7 +221,7 @@ msgstr ""
 "Ten e-mailowy link potwierdzający jest wygasły lub nieprawidłowy. Proszę <a "
 "href=\"%(email_url)s\">zawnioskuj o ponowne przeprowadzenie weryfikacji</a>."
 
-#: bliski_publikator/main/templates/account/email_confirmed.html:16
+#: templates/account/email_confirmed.html:16
 #, python-format
 msgid ""
 "You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
@@ -164,13 +230,12 @@ msgstr ""
 "Potwierdzono, że adres <a href=\"mailto:%(email)s\">%(email)s</a> należy do "
 "użytkownika %(user_display)s."
 
-#: bliski_publikator/main/templates/account/login.html:8
-#: bliski_publikator/main/templates/account/login.html:13
-#: bliski_publikator/main/templates/account/login.html:42
+#: templates/account/login.html:8 templates/account/login.html.py:13
+#: templates/account/login.html:42
 msgid "Sign In"
 msgstr "Zaloguj"
 
-#: bliski_publikator/main/templates/account/login.html:17
+#: templates/account/login.html:17
 #, python-format
 msgid ""
 "Please sign in with one\n"
@@ -179,42 +244,41 @@ msgid ""
 "      for a %(site_name)s account and sign in below:"
 msgstr ""
 
-#: bliski_publikator/main/templates/account/login.html:28
+#: templates/account/login.html:28
 msgid "or"
-msgstr ""
+msgstr "lub"
 
-#: bliski_publikator/main/templates/account/login.html:43
+#: templates/account/login.html:43
 msgid "Forgot Password?"
 msgstr "Zapomniane hasło?"
 
-#: bliski_publikator/main/templates/account/logout.html:5
-#: bliski_publikator/main/templates/account/logout.html:10
-#: bliski_publikator/main/templates/account/logout.html:19
+#: templates/account/logout.html:5 templates/account/logout.html.py:10
+#: templates/account/logout.html:19
 msgid "Sign Out"
 msgstr "Wyloguj"
 
-#: bliski_publikator/main/templates/account/logout.html:12
+#: templates/account/logout.html:12
 msgid "Are you sure you want to sign out?"
 msgstr "Czy jesteś pewien/-a, że chcesz się wylogować?"
 
-#: bliski_publikator/main/templates/account/password_change.html:5
-#: bliski_publikator/main/templates/account/password_change.html:10
-#: bliski_publikator/main/templates/account/password_change.html:15
-#: bliski_publikator/main/templates/account/password_reset_from_key.html:6
-#: bliski_publikator/main/templates/account/password_reset_from_key.html:11
-#: bliski_publikator/main/templates/account/password_reset_from_key_done.html:4
-#: bliski_publikator/main/templates/account/password_reset_from_key_done.html:9
+#: templates/account/password_change.html:5
+#: templates/account/password_change.html:10
+#: templates/account/password_change.html:15
+#: templates/account/password_reset_from_key.html:6
+#: templates/account/password_reset_from_key.html:11
+#: templates/account/password_reset_from_key_done.html:4
+#: templates/account/password_reset_from_key_done.html:9
 msgid "Change Password"
 msgstr "Zmień hasło"
 
-#: bliski_publikator/main/templates/account/password_reset.html:7
-#: bliski_publikator/main/templates/account/password_reset.html:12
-#: bliski_publikator/main/templates/account/password_reset_done.html:6
-#: bliski_publikator/main/templates/account/password_reset_done.html:11
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset.html:12
+#: templates/account/password_reset_done.html:6
+#: templates/account/password_reset_done.html:11
 msgid "Password Reset"
 msgstr "Zresetuj hasło"
 
-#: bliski_publikator/main/templates/account/password_reset.html:18
+#: templates/account/password_reset.html:18
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
@@ -222,17 +286,17 @@ msgstr ""
 "Zapomniałeś hasła? Podaj swój adres e-mail poniżej, aby otrzymać na e-mail "
 "link do resetowania hasła. "
 
-#: bliski_publikator/main/templates/account/password_reset.html:23
+#: templates/account/password_reset.html:23
 msgid "Reset My Password"
 msgstr "Zresetuj moje hasło"
 
-#: bliski_publikator/main/templates/account/password_reset.html:26
+#: templates/account/password_reset.html:26
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
 "Prosimy o kontakt, gdyby wystąpiły jakiekolwiek trudności podczas "
 "resetowania hasła."
 
-#: bliski_publikator/main/templates/account/password_reset_done.html:17
+#: templates/account/password_reset_done.html:17
 msgid ""
 "We have sent you an e-mail. Please contact us if you do not receive it "
 "within a few minutes."
@@ -240,11 +304,11 @@ msgstr ""
 "Wysłaliśmy Tobie wiadomość e-mail. Prosimy o kontakt, w przypadku "
 "nieotrzymania jej w ciągu kilku minut."
 
-#: bliski_publikator/main/templates/account/password_reset_from_key.html:11
+#: templates/account/password_reset_from_key.html:11
 msgid "Bad Token"
 msgstr "Zły token"
 
-#: bliski_publikator/main/templates/account/password_reset_from_key.html:15
+#: templates/account/password_reset_from_key.html:15
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
@@ -255,55 +319,52 @@ msgstr ""
 "zużycia. Proszę zawnioskuj o <a href=\"%(passwd_reset_url)s\">ponowne "
 "zresetowanie hasła</a>."
 
-#: bliski_publikator/main/templates/account/password_reset_from_key.html:21
+#: templates/account/password_reset_from_key.html:21
 msgid "change password"
 msgstr "zmiana hasła"
 
-#: bliski_publikator/main/templates/account/password_reset_from_key.html:24
-#: bliski_publikator/main/templates/account/password_reset_from_key_done.html:10
+#: templates/account/password_reset_from_key.html:24
+#: templates/account/password_reset_from_key_done.html:10
 msgid "Your password is now changed."
 msgstr "Twoje hasło zostało zmienione."
 
-#: bliski_publikator/main/templates/account/password_set.html:6
-#: bliski_publikator/main/templates/account/password_set.html:11
-#: bliski_publikator/main/templates/account/password_set.html:16
+#: templates/account/password_set.html:6 templates/account/password_set.html:11
+#: templates/account/password_set.html:16
 msgid "Set Password"
 msgstr "Ustaw hasło"
 
-#: bliski_publikator/main/templates/account/signup.html:6
+#: templates/account/signup.html:6
 msgid "Signup"
 msgstr "Zarejestruj"
 
-#: bliski_publikator/main/templates/account/signup.html:12
-#: bliski_publikator/main/templates/account/signup.html:22
-#: bliski_publikator/main/templates/base.html:75
-#: bliski_publikator/main/templates_dev/base.html:76
+#: templates/account/signup.html:12 templates/account/signup.html.py:22
+#: templates/base.html:75 templates_dev/base.html.py:76
 msgid "Sign Up"
 msgstr "Zarejestruj"
 
-#: bliski_publikator/main/templates/account/signup.html:14
+#: templates/account/signup.html:14
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
 msgstr "Masz już konto? Prosimy <a href=\"%(login_url)s\">zaloguj się</a>."
 
-#: bliski_publikator/main/templates/account/signup_closed.html:5
-#: bliski_publikator/main/templates/account/signup_closed.html:10
+#: templates/account/signup_closed.html:5
+#: templates/account/signup_closed.html:10
 msgid "Sign Up Closed"
 msgstr "Rejestracja wyłączona"
 
-#: bliski_publikator/main/templates/account/signup_closed.html:12
+#: templates/account/signup_closed.html:12
 msgid "We are sorry, but the sign up is currently closed."
 msgstr "Przepraszamy, ale rejestracja jest obecnie wyłączona."
 
-#: bliski_publikator/main/templates/account/verification_sent.html:5
-#: bliski_publikator/main/templates/account/verification_sent.html:10
-#: bliski_publikator/main/templates/account/verified_email_required.html:5
-#: bliski_publikator/main/templates/account/verified_email_required.html:10
+#: templates/account/verification_sent.html:5
+#: templates/account/verification_sent.html:10
+#: templates/account/verified_email_required.html:5
+#: templates/account/verified_email_required.html:10
 msgid "Verify Your E-mail Address"
 msgstr "Zweryfikuj adres e-mail"
 
-#: bliski_publikator/main/templates/account/verification_sent.html:12
+#: templates/account/verification_sent.html:12
 #, python-format
 msgid ""
 "We have sent an e-mail to <a href=\"mailto:%(email)s\">%(email)s</a> for "
@@ -315,7 +376,7 @@ msgstr ""
 "ukończyć proces rejestracji. Prosimy o kontakt, w przypadku nieotrzymania "
 "jej w ciągu kilku minut."
 
-#: bliski_publikator/main/templates/account/verified_email_required.html:14
+#: templates/account/verified_email_required.html:14
 msgid ""
 "This part of the site requires us to verify that\n"
 "    you are who you claim to be. For this purpose, we require that you\n"
@@ -324,7 +385,7 @@ msgstr ""
 "Ta część strony internetowej wymaga weryfikacji, że jesteś tym za kogo się "
 "podajesz. W tym celu wymagamy potwierdzenia adresu e-mail."
 
-#: bliski_publikator/main/templates/account/verified_email_required.html:18
+#: templates/account/verified_email_required.html:18
 msgid ""
 "We have sent an e-mail to you for\n"
 "    verification. Please click on the link inside this e-mail. Please\n"
@@ -333,7 +394,7 @@ msgstr ""
 "Wysłaliśmy wiadomość w celu weryfikacji. Prosimy o kontakt, w przypadku "
 "nieotrzymania jej w ciągu kilku minut."
 
-#: bliski_publikator/main/templates/account/verified_email_required.html:22
+#: templates/account/verified_email_required.html:22
 #, python-format
 msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
@@ -342,43 +403,35 @@ msgstr ""
 "<strong>Note:</strong> możesz wciąż <a href=\"%(email_url)s\">zmienić swój "
 "adres e-mail</a>."
 
-#: bliski_publikator/main/templates/base.html:45
-#: bliski_publikator/main/templates_dev/base.html:46
+#: templates/base.html:45 templates_dev/base.html.py:46
 msgid "Homepage"
 msgstr "Strona główna"
 
-#: bliski_publikator/main/templates/base.html:46
-#: bliski_publikator/main/templates_dev/base.html:47
+#: templates/base.html:46 templates_dev/base.html.py:47
 msgid "About"
 msgstr "O stronie"
 
-#: bliski_publikator/main/templates/base.html:47
-#: bliski_publikator/main/templates_dev/base.html:48
+#: templates/base.html:47 templates_dev/base.html.py:48
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: bliski_publikator/main/templates/base.html:55
-#: bliski_publikator/main/templates_dev/base.html:56
+#: templates/base.html:55 templates_dev/base.html.py:56
 msgid "Others"
 msgstr "Inne"
 
-#: bliski_publikator/main/templates/base.html:64
-#: bliski_publikator/main/templates_dev/base.html:65
+#: templates/base.html:64 templates_dev/base.html.py:65
 msgid "Add monitoring"
 msgstr "Dodaj monitoring"
 
-#: bliski_publikator/main/templates/base.html:72
-#: bliski_publikator/main/templates_dev/base.html:73
+#: templates/base.html:72 templates_dev/base.html.py:73
 msgid "My Profile"
 msgstr "Mój profil"
 
-#: bliski_publikator/main/templates/base.html:73
-#: bliski_publikator/main/templates_dev/base.html:74
+#: templates/base.html:73 templates_dev/base.html.py:74
 msgid "Logout"
 msgstr "Wyloguj"
 
-#: bliski_publikator/main/templates/base.html:76
-#: bliski_publikator/main/templates_dev/base.html:77
+#: templates/base.html:76 templates_dev/base.html.py:77
 msgid "Log In"
 msgstr "Zaloguj"
 
