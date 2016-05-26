@@ -4,9 +4,12 @@ import { ACCORDION_DIRECTIVES, DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-boo
 import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula'
 
 import { Monitoring } from '../model/monitoring'
+
 import { QuestionBase } from '../model/question-base'
 import { DropdownQuestion, DropdownOption } from '../model/question-dropdown'
 import { TextboxQuestion } from '../model/question-textbox'
+import { LongTextQuestion } from '../model/question-longtext'
+
 import { QuestionEditComponent } from './question-edit.component'
 import { MonitoringService } from '../services/monitoring-api.service'
 
@@ -60,6 +63,10 @@ export class QuestionEditorComponent implements OnInit {
 
     addTextBoxQuestion(){
         this.monitoring.questions = [...this.questions, new TextboxQuestion()];
+    }
+
+    addLongTextQuestion(){
+        this.monitoring.questions = [...this.questions, new LongTextQuestion()];
     }
 
     removeQuestion(question: QuestionBase<any>){

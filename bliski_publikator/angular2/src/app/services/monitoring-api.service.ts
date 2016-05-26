@@ -8,6 +8,7 @@ import { Monitoring } from '../model/monitoring';
 import { QuestionBase } from '../model/question-base';
 import { TextboxQuestion } from '../model/question-textbox';
 import { DropdownQuestion } from '../model/question-dropdown';
+import { LongTextQuestion } from '../model/question-longtext';
 
 import { isEqualConditional } from '../conditionals/conditional-is-equal'
 import { isNullConditional } from '../conditionals/conditional-is-null'
@@ -53,6 +54,7 @@ export class MonitoringService extends BaseApiService {
         // console.log('parseQuestion', question);
         switch(question.type){
             case 'long_text':
+                return new LongTextQuestion(question);
             case 'short_text':
                 return new TextboxQuestion(question);
             case 'choice':

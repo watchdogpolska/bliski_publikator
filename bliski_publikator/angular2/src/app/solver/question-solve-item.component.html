@@ -8,6 +8,9 @@
       <div *ngSwitchWhen="'short_text'">
         <input [id]="question.key" [ngControl]="question.key" class="form-control"/>
       </div>
+      <div *ngSwitchWhen="'long_text'">
+        <textarea [id]="question.key" [ngControl]="question.key" class="form-control"></textarea>
+      </div>
       <div *ngSwitchWhen="'choice'">
         <select [id]="question.key" [name]="question.key" [ngControl]="question.key" class="form-control">
           <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
