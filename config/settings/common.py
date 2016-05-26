@@ -281,3 +281,10 @@ REST_FRAMEWORK = {
 # Django filter
 # See: https://django-filter.readthedocs.io/en/latest/ref/settings.html
 FILTERS_HELP_TEXT_FILTER = False
+
+# TinyMCE
+# See:
+# TINYMCE_JS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/3.5.8/tiny_mce.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+}
