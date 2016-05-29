@@ -5,6 +5,7 @@ import { QuestionBase } from './question-base';
 export class Monitoring{
     name: string;
     description: string;
+    instruction: string;
     private _questions: QuestionBase<any>[];
     questions_changes = new EventEmitter();
     max_point: number;
@@ -12,11 +13,13 @@ export class Monitoring{
     constructor(options: {
         name?: string,
         description?: string,
+        instruction?: string,
         questions?: QuestionBase<any>[],
         max_point?: number
     } = {}) {
         this.name = options.name || '';
         this.description = options.description || '';
+        this.instruction = options.instruction || '';
         this._questions = options.questions || [];
         this.max_point = options.max_point || 0;
     }
@@ -25,6 +28,7 @@ export class Monitoring{
         let obj = {
             'name': this.name,
             'description': this.description,
+            'instruction': this.instruction,
             'max_point': this.max_points,
             'questions': this._questions.map(t => t.toPlainObject(this.questions))
         };
