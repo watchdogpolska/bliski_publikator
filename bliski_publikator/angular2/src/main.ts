@@ -11,6 +11,7 @@ import {CsrfService} from './app/services/csrf.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/throw';
 
 if ('prod' === ENV) {
   enableProdMode();

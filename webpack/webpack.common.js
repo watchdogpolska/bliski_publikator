@@ -28,7 +28,8 @@ module.exports = {
       // 'rxjs/Rx'
       'rxjs/add/operator/map',
       'rxjs/add/operator/catch',
-      'rxjs/add/observable/from'
+      'rxjs/add/observable/from',
+      'rxjs/add/observable/throw'
     ],
     main: root + '/src/main.ts'
   },
