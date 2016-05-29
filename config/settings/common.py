@@ -245,26 +245,9 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'atom.ext.slugify.slugifier.ascii_slugify'
 ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
-BLEACH_ALLOWED_TAGS = [
-    # bleach default
-    'a',
-    'abbr',
-    'acronym',
-    'b',
-    'blockquote',
-    'code',
-    'em',
-    'i',
-    'li',
-    'ol',
-    'strong',
-    'ul',
-    # extra
-    'br',
-    'p',
-    'u',
-    'div',
-]
+BLEACH_ALLOWED_TAGS = 'a,abbr,acronym,b,blockquote,br,code,div,em,h1,h2,h3,'\
+                      'h4,h5,h6,i,li,ol,p,sb,span,strong,sub,sup,table,tbody,'\
+                      'td,tfoot,thead,tr,u,ul'.split(',')
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
