@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}<!DOCTYPE html>
+{% load staticfiles i18n raven %}<!DOCTYPE html>
 <html lang="en" ng-app>
 <head>
   <meta charset="utf-8">
@@ -23,7 +23,7 @@
       {% if not debug %}
         <script src="https://cdn.ravenjs.com/3.0.4/raven.min.js"></script>
         <script type="text/javascript">
-          Raven.config('https://<key>@app.getsentry.com/<project>').install()
+          Raven.config('{% sentry_public_dsn %}').install()
         </script>
       {% endif %}
     </head>
