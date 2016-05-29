@@ -264,7 +264,12 @@ class MonitoringFormTestCase(TestCase):
         """
         Regression test for watchdogpolska/bliski_publikator#55
         """
-        data = {'name': 'X', 'description': "X", 'max_point': 25}
+        data = {
+            'name': 'X',
+            'description': "X",
+            'instruction': "X",
+            'max_point': 25
+        }
 
         form = MonitoringForm(data=data, user=self.user, instance=self.instance)
         self.assertEqual(form.is_valid(), True, repr(form.errors))

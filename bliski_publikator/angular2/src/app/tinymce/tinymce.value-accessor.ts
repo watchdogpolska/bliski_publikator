@@ -5,7 +5,10 @@ import {
     Input,
     Output,
     EventEmitter,
-    OnChanges
+    OnChanges,
+    Query,
+    QueryList,
+    Renderer
 } from '@angular/core';
 
 declare var tinymce: any;
@@ -16,18 +19,34 @@ declare var tinymce: any;
 })
 export class TinyMceComponent implements OnInit{
 
-    @Input() value: any;
-    @Output() valueChange = new EventEmitter();
+    static instance_count: number = 0;
 
-    elementRef: ElementRef;
-    constructor(elementRef: ElementRef) {
-        this.elementRef = elementRef;
+    @Input()
+    value: any;
+
+    @Output()
+    valueChange = new EventEmitter();
+
+    instance_id: number;
+
+    // element: HTMLTextAreaElement;
+
+    constructor(
+        private renderer: Renderer,
+        private component_elment: ElementRef) {
+
+        this.instance_id = TinyMceComponent.instance_count++;
     }
     ngOnInit() {
-        var that = this;
+        let element = this.component_elment.nativeElement.firstChild;
+        // Generate fake id based on component id
+        let generated_id = "tinymce-instance-" + this.instance_id;
+        // Set
+        element.id = generated_id;
+        // Init TinyMCE
         tinymce.init(
             {
-                selector: ".tinyMCE",
+                selector: `#${generated_id}`,
                 plugins: ["code"],
                 menubar: false,
                 toolbar: [
@@ -56,7 +75,8 @@ export class TinyMceComponent implements OnInit{
                 ],
                 setup: (editor) => {
                     let emmiter = () => {
-                        that.valueChange.emit(editor.getContent());
+                        let value = editor.getContent();
+                        this.valueChange.emit(value);
                     }
                     editor.on('change', emmiter);
                     editor.on('keyup', emmiter);

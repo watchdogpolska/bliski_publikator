@@ -10,6 +10,7 @@ class MonitoringForm(forms.ModelForm):
     class Meta:
         widgets = {
             'description': TinyMCE(attrs={'cols': 80, 'rows': 30}),
+            'instruction': TinyMCE(attrs={'cols': 80, 'rows': 30}),
         }
 
 

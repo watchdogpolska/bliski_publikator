@@ -45,6 +45,7 @@ class Monitoring(TimeStampedModel):
     slug = AutoSlugField(populate_from='name', verbose_name=_("Slug"), unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     description = BleachField(verbose_name=_("Description"))
+    instruction = BleachField(verbose_name=_("Instruction"), blank=True)
     active = models.BooleanField(verbose_name=_("Active status"), default=True)
     logo = VersatileImageField(verbose_name=_("Logo"), null=True, blank=True)
     max_point = models.IntegerField(verbose_name=_("Max point"))
