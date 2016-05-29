@@ -20,6 +20,12 @@
       <!-- endinject -->
       {% endblock %}
 
+      {% if not debug %}
+        <script src="https://cdn.ravenjs.com/3.0.4/raven.min.js"></script>
+        <script type="text/javascript">
+          Raven.config('https://<key>@app.getsentry.com/<project>').install()
+        </script>
+      {% endif %}
     </head>
 
     <body>
