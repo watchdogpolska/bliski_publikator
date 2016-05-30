@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-25 20:22+0000\n"
-"PO-Revision-Date: 2016-05-25 22:22+0200\n"
+"POT-Creation-Date: 2016-05-30 08:32+0000\n"
+"PO-Revision-Date: 2016-05-30 10:32+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -32,11 +32,11 @@ msgstr "Czy jesteś pewien, że chcesz usunąć \"%(object)s\"?"
 msgid "Delete"
 msgstr "Usuń"
 
-#: templates/_index.html:3 templates/base.html.py:6 templates_dev/base.html:6
+#: templates/_index.html:4 templates/base.html.py:6 templates_dev/base.html:6
 msgid "Near-perfect bulletin!"
 msgstr "Bliski ideałowi publikator"
 
-#: templates/_index.html:4
+#: templates/_index.html:5
 msgid ""
 "We want helpful bulletin of public information which will be basic source of "
 "information about activities of public bodies."
@@ -44,7 +44,7 @@ msgstr ""
 "Chcemy pomocnych biuletynów informacji publicznej, które będą podstawowym "
 "źródłem informacji o działalności instytucji publicznych."
 
-#: templates/_index.html:6
+#: templates/_index.html:7
 msgid ""
 "The published information should be current and meet the needs of the "
 "community."
@@ -52,15 +52,15 @@ msgstr ""
 "Publikowane informacje powinny być aktualne i odpowiadać potrzebom "
 "społeczności."
 
-#: templates/_index.html:8
+#: templates/_index.html:9
 msgid "Learn more"
 msgstr "Czytaj więcej"
 
-#: templates/_index.html:15
+#: templates/_index.html:16
 msgid "Voivodeships"
 msgstr "Województwa"
 
-#: templates/_index.html:21
+#: templates/_index.html:23
 msgid "Last monitorings"
 msgstr "Ostatnie monitoringi"
 
@@ -338,7 +338,7 @@ msgid "Signup"
 msgstr "Zarejestruj"
 
 #: templates/account/signup.html:12 templates/account/signup.html.py:22
-#: templates/base.html:75 templates_dev/base.html.py:76
+#: templates/base.html:81 templates_dev/base.html.py:83
 msgid "Sign Up"
 msgstr "Zarejestruj"
 
@@ -403,37 +403,40 @@ msgstr ""
 "<strong>Note:</strong> możesz wciąż <a href=\"%(email_url)s\">zmienić swój "
 "adres e-mail</a>."
 
-#: templates/base.html:45 templates_dev/base.html.py:46
+#: templates/base.html:51 templates_dev/base.html.py:53
 msgid "Homepage"
 msgstr "Strona główna"
 
-#: templates/base.html:46 templates_dev/base.html.py:47
-msgid "About"
-msgstr "O stronie"
+#: templates/base.html:52 templates_dev/base.html.py:54
+msgid "Contact"
+msgstr "Kontakt"
 
-#: templates/base.html:47 templates_dev/base.html.py:48
+#: templates/base.html:53 templates_dev/base.html.py:55
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: templates/base.html:55 templates_dev/base.html.py:56
+#: templates/base.html:61 templates_dev/base.html.py:63
 msgid "Others"
 msgstr "Inne"
 
-#: templates/base.html:64 templates_dev/base.html.py:65
+#: templates/base.html:70 templates_dev/base.html.py:72
 msgid "Add monitoring"
 msgstr "Dodaj monitoring"
 
-#: templates/base.html:72 templates_dev/base.html.py:73
+#: templates/base.html:78 templates_dev/base.html.py:80
 msgid "My Profile"
 msgstr "Mój profil"
 
-#: templates/base.html:73 templates_dev/base.html.py:74
+#: templates/base.html:79 templates_dev/base.html.py:81
 msgid "Logout"
 msgstr "Wyloguj"
 
-#: templates/base.html:76 templates_dev/base.html.py:77
+#: templates/base.html:82 templates_dev/base.html.py:84
 msgid "Log In"
 msgstr "Zaloguj"
+
+#~ msgid "About"
+#~ msgstr "O stronie"
 
 #~ msgid "Home"
 #~ msgstr "Strona główna"
