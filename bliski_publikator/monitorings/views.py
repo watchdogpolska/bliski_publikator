@@ -61,7 +61,7 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
         return MonitoringInstitution.objects.\
             filter(monitoring=self.object).\
             with_point().\
-            select_related('institution').\
+            select_related('institution', 'institution__region').\
             all()
 
     def get_context_data(self, **kwargs):

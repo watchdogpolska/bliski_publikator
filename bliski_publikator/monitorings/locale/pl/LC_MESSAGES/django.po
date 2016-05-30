@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-25 20:25+0000\n"
-"PO-Revision-Date: 2016-05-25 22:25+0200\n"
+"POT-Creation-Date: 2016-05-30 14:28+0000\n"
+"PO-Revision-Date: 2016-05-30 16:29+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: apps.py:8 models.py:62
+#: apps.py:8 models.py:63
 msgid "Monitorings"
 msgstr "Monitoringi"
 
@@ -29,11 +29,11 @@ msgstr "Monitoringi"
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: models.py:23 models.py:61
+#: models.py:23 models.py:62
 msgid "Monitoring"
 msgstr "Monitoring"
 
-#: models.py:25 models.py:52
+#: models.py:25 models.py:53
 msgid "Institution"
 msgstr "Instytucja"
 
@@ -58,18 +58,22 @@ msgid "Description"
 msgstr "Opis"
 
 #: models.py:48
+msgid "Instruction"
+msgstr "Instrukcja"
+
+#: models.py:49
 msgid "Active status"
 msgstr "Status aktywności"
 
-#: models.py:49
+#: models.py:50
 msgid "Logo"
 msgstr "Logo"
 
-#: models.py:50
+#: models.py:51
 msgid "Max point"
 msgstr "Maksimum ppunktów"
 
-#: models.py:53
+#: models.py:54
 msgid "Specifies which institutions are covered by monitoring"
 msgstr "Określ, które instytucje są objęte monitoringiem"
 
@@ -158,15 +162,24 @@ msgstr "Punkty"
 msgid "Actions"
 msgstr "Akcje"
 
-#: templates/monitorings/monitoring_detail.html:73
+#: templates/monitorings/monitoring_detail.html:58
+#, python-format
+msgid ""
+"<a href=\"%(institution_link)s\">%(institution)s</a> in <a href="
+"\"%(region_link)s\">%(region)s</a>"
+msgstr ""
+"<a href=\"%(institution_link)s\">%(institution)s</a> w <a href="
+"\"%(region_link)s\">%(region)s</a>"
+
+#: templates/monitorings/monitoring_detail.html:71
 msgid "Inspect"
 msgstr "Skontroluj"
 
-#: templates/monitorings/monitoring_detail.html:81
+#: templates/monitorings/monitoring_detail.html:79
 msgid "No institutions"
 msgstr "Brak instytucji"
 
-#: templates/monitorings/monitoring_detail.html:84
+#: templates/monitorings/monitoring_detail.html:82
 #, python-format
 msgid "Missing interests you institutions? <a href=\"%(add_url)s\">Add it</a>."
 msgstr ""

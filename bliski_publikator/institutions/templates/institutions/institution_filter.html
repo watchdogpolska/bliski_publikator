@@ -28,7 +28,7 @@
         {% bootstrap_paginate page_obj %}
         {% for object in object_list %}
             <div class="gray">
-            <h1><a href="{{object.get_absolute_url}}">{{object}}</a></h1>
+            <h1>{% blocktrans with institution=object institution_link=object.get_absolute_url region=object.region region_link=object.region.get_absolute_url %}<a href="{{institution_link}}">{{institution}}</a> in <a href="{{region_link}}">{{region}}</a>{% endblocktrans %}</h1>
             {% if object.stats %}
             {% include 'institutions/_stats.html' with object=object%}
             {% else %}
