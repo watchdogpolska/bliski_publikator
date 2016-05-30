@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-25 20:23+0000\n"
-"PO-Revision-Date: 2016-05-25 22:24+0200\n"
+"POT-Creation-Date: 2016-05-30 14:01+0000\n"
+"PO-Revision-Date: 2016-05-30 16:01+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -117,8 +117,8 @@ msgid "Add institution"
 msgstr "Dodaj instytucje"
 
 #: templates/institutions/institution_filter.html:15
-msgid "Index of institutions"
-msgstr "Indeks instytucji"
+msgid "Search institutions"
+msgstr "Wyszukiwanie instytucji"
 
 #: templates/institutions/institution_filter.html:23
 msgid "Filtr"
@@ -142,6 +142,9 @@ msgstr "{0} zaktualizowany!"
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
+
+#~ msgid "Index of institutions"
+#~ msgstr "Indeks instytucji"
 
 #~ msgid "Unit of administrative division"
 #~ msgstr "Jednostka podziału terytorialnego"
