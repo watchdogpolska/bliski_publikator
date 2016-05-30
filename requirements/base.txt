@@ -38,6 +38,7 @@ django-redis==4.4.3
 redis>=2.10.0
 
 # Your custom requirements go here
+django-tinycontent==0.5.1
 django-bleach==0.3.0
 django-teryt-tree==0.5.0
 django-versatileimagefield==1.4
@@ -51,3 +52,7 @@ djangorestframework==3.3.3
 Markdown==2.6.6
 jsonfield==1.0.3
 django-bootstrap-pagination==1.6.1
+# Raven is the Sentry client
+# --------------------------
+raven
+

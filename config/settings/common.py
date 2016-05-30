@@ -48,6 +48,8 @@ THIRD_PARTY_APPS = (
     'mptt',
     'rest_framework',
     'bootstrap_pagination',
+    'tinycontent',
+    'raven.contrib.django.raven_compat',
 )
 
 # Apps specific for this project go here.

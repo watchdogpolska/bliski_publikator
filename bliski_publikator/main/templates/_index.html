@@ -1,23 +1,25 @@
-{% load i18n %}
+{% load i18n %} {% load tinycontent_tags %}
 <div class="jumbotron">
-  <h1 class="display-3">{% trans 'Near-perfect bulletin!'%}</h1>
-  <p class="lead">{% trans 'We want helpful bulletin of public information which will be basic source of information about activities of public bodies.' %}</p>
-  <hr class="m-y-2">
-  <p>{% trans 'The published information should be current and meet the needs of the community.' %}</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">{% trans 'Learn more' %}</a>
-  </p>
+    {% load tinycontent_tags %} {% tinycontent 'jumbotron' %}
+    <h1 class="display-3">{% trans 'Near-perfect bulletin!'%}</h1>
+    <p class="lead">{% trans 'We want helpful bulletin of public information which will be basic source of information about activities of public bodies.' %}</p>
+    <hr class="m-y-2">
+    <p>{% trans 'The published information should be current and meet the needs of the community.' %}</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">{% trans 'Learn more' %}</a>
+    </p>
+    {% endtinycontent %}
 </div>
-
 <div class="row">
     <div class="col-md-7">
-      <div class="red">
-        <h2 class="title"><i class="fa fa-globe" aria-hidden="true"></i> {% trans 'Voivodeships' %}</h3>
+        <div class="red">
+            <h2 class="title"><i class="fa fa-globe" aria-hidden="true"></i> {% trans 'Voivodeships' %}</h3>
         {% include 'teryt/_voivodeship_map.svg.html' %}
       </div>
     </div>
     <div class="col-md-5">
     <div class="gray">
+      {% tinycontent 'home_description' %}
       <h2 class="title"><i class="fa fa-search" aria-hidden="true"></i> {% trans 'Last monitorings' %}</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -25,6 +27,7 @@
       consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
       cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
       proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      {% endtinycontent %}
     </div>
     </div>
 </div>
