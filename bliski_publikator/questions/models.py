@@ -146,10 +146,26 @@ class Answer(TimeStampedModel):
         if self.answerchoice:
             return 2
 
+    @property
+    def has_answerchoice(self):
+        try:
+            self.answerchoice
+            return True
+        except AnswerChoice.DoesNotExist:
+            return False
+
+    @property
+    def has_answertext(self):
+        try:
+            self.answertext
+            return True
+        except AnswerText.DoesNotExist:
+            return False
+
     def value(self):
-        if self.answertext:
+        if self.has_answertext:
             return self.answertext.value or '-'
-        if self.answerchoice:
+        if self.has_answerchoice:
             return self.answerchoice.value or '-'
         return '-'
 
