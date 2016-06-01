@@ -379,6 +379,7 @@ class MonitoringApiDetailView(JSONResponseMixin, DetailView):
             data['name'] = question.name
             data['description'] = question.description
             data['type'] = question.type
+            data['countConditions'] = question.count
             data['hideConditions'] = list(self.get_conditions(question))
             if question.type == Question.TYPE.choice:
                 data['options'] = list(self.get_options(question))
