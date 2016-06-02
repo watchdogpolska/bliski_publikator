@@ -64,29 +64,21 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
             select_related('institution', 'institution__region').\
             all()
 
+    def get_queryset(self, *args, **kwargs):
+        qs = super(MonitoringDetailView, self).get_queryset(*args, **kwargs)
+        return qs.with_started()
+
     def get_context_data(self, **kwargs):
         context = super(MonitoringDetailView, self).get_context_data(**kwargs)
         context['monitoringinstitution'] = self.get_monitoringinstitution_qs()
         return context
 
 
-class MonitoringCreateView(LoginRequiredMixin, CustomJSONResponseMixin, PermissionRequiredMixin,
-                           TemplateView):
-    model = Monitoring
-    permission_required = 'monitorings.add_monitoring'
-    template_name = 'monitorings/monitoring_form_monitoring.html'
-
-    def post(self, *args, **kwargs):  # TODO: Transactions in MonitoringCreateView
-        data = json.loads(self.request.body.decode('utf-8'))
-
-        # Validate
-        # Validate monitoring
-        form = MonitoringForm(data=data, user=self.request.user)
-        if not form.is_valid():
-            return self.error(errors=self.error_list(form))
+class MonitoringQuestionMixin(object):
+    def save_questions(self, data, monitoring):
+        questions = data.get('questions', [])
 
         # Validate provided any questions
-        questions = data.get('questions', None)
         if not questions:
             return self.error(error=NO_QUESTION)
 
@@ -120,9 +112,6 @@ class MonitoringCreateView(LoginRequiredMixin, CustomJSONResponseMixin, Permissi
             return self.error(errors=[self.error_list(x) for x in choices_forms])
 
         # Save
-        # Save monitoring
-        monitoring = form.save()
-
         # Save question
         question_objs = []
         for i, x in enumerate(questions):
@@ -153,7 +142,77 @@ class MonitoringCreateView(LoginRequiredMixin, CustomJSONResponseMixin, Permissi
                 related = {'question': question_objs[i], 'order': j}
                 choice_objs.append(ChoiceForm(option, related=related).save())
 
+        self.question_objs = question_objs
+        self.condition_objs = condition_objs
+        self.choice_objs = choice_objs
+
+        return None
+
+
+class MonitoringAPICreateView(LoginRequiredMixin, CustomJSONResponseMixin, PermissionRequiredMixin,
+                              MonitoringQuestionMixin, TemplateView):
+    model = Monitoring
+    permission_required = 'monitorings.add_monitoring'
+    template_name = 'monitorings/monitoring_form_monitoring.html'
+
+    def post(self, *args, **kwargs):  # TODO: Transactions in MonitoringCreateView
+        data = json.loads(self.request.body.decode('utf-8'))
+
+        # Validate
+        # Validate monitoring
+        form = MonitoringForm(data=data, user=self.request.user)
+        if not form.is_valid():
+            return self.error(errors=self.error_list(form))
+        monitoring = form.save()
+
+        resp = self.save_questions(data, monitoring)
+        if resp:
+            return resp
+
         return JsonResponse({'success': True, 'url': monitoring.get_absolute_url()})
+
+
+class MonitoringAPIUpdateView(LoginRequiredMixin, CustomJSONResponseMixin, PermissionRequiredMixin,
+                              MonitoringQuestionMixin, DetailView):
+    model = Monitoring
+    permission_required = 'monitorings.update_monitoring'
+    template_name = 'monitorings/monitoring_form_monitoring.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super(MonitoringAPIUpdateView, self).get_queryset(*args, **kwargs)
+        return qs.with_started()
+
+    def get_sheet_exists_message(self):
+        return _("You can not modify this way of " +
+                 " monitoring that is already in progress.") % {'monitoring': self.object}
+
+    def get_success_message(self):
+        return _("You modification of %(monitoring)s was saved.") % {'monitoring': self.object}
+
+    def get(self, *args, **kwargs):
+        if self.get_object().started:
+            messages.error(self.request, self.get_sheet_exists_message())
+            return HttpResponseRedirect(self.monitoring.get_absolute_url())
+        return super(MonitoringAPIUpdateView, self).get(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.started:
+            messages.error(self.request, self.get_sheet_exists_message())
+            return HttpResponseRedirect(self.monitoring.get_absolute_url())
+        Question.objects.filter(monitoring=self.object).all().delete()
+        data = json.loads(self.request.body.decode('utf-8'))
+
+        form = MonitoringForm(instance=self.object, data=data, user=self.request.user)
+        if not form.is_valid():
+            return self.error(errors=self.error_list(form))
+        monitoring = form.save()
+
+        resp = self.save_questions(data, monitoring)
+        if resp:
+            return resp
+        messages.success(self.request, self.get_success_message())
+        return JsonResponse({'success': True, 'url': self.object.get_absolute_url()})
 
 
 class PageInline(InlineFormSet):

@@ -14,7 +14,11 @@
 {% endblock %}
 
 {% block content %}
+{% if object %}
+<app mode="editor" monitoring-id="{{monitoring.pk}}">loading...</app>
+{% else %}
 <app mode="editor">loading...</app>
+{% endif %}
 {% endblock %}
 
 {% block javascript %}

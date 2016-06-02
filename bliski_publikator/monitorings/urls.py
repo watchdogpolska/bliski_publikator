@@ -11,12 +11,14 @@ urlpatterns = [
         name="autocomplete"),
 
     # CRUD
-    url(r'^~create$', views.MonitoringCreateView.as_view(),
+    url(r'^~create$', views.MonitoringAPICreateView.as_view(),
         name="create"),
     url(r'^(?P<slug>[\w-]+)$', views.MonitoringDetailView.as_view(),
         name="details"),
     url(r'^(?P<slug>[\w-]+)/~update$', views.MonitoringUpdateView.as_view(),
         name="update"),
+    url(r'^(?P<slug>[\w-]+)/~reinitalize$', views.MonitoringAPIUpdateView.as_view(),
+        name="reinitalize"),
     url(r'^(?P<slug>[\w-]+)/~delete$', views.MonitoringDeleteView.as_view(),
         name="delete"),
     # Extra action

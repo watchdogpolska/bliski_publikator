@@ -104,7 +104,11 @@ class Condition(TimeStampedModel):
 
 
 class SheetQuerySet(models.QuerySet):
-    pass
+    def monitoring(self, monitoring):
+        return self.filter(monitoring_institution__monitoring=monitoring)
+
+    def institution(self, institution):
+        return self.filter(monitoring_institution__institution=institution)
 
 
 class Sheet(TimeStampedModel):

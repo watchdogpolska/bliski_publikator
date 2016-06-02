@@ -7,12 +7,13 @@ from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
 from model_utils.models import TimeStampedModel
 from versatileimagefield.fields import VersatileImageField
+from django.db.models import Count, Avg, Case, When, Value
 
 
 class MonitoringInstitutionQuerySet(models.QuerySet):
     def with_point(self):
-        return self.annotate(avg_point=models.Avg(models.F('sheet__point'))).\
-                    annotate(count=models.Count(models.F('sheet')))
+        return self.annotate(avg_point=Avg(models.F('sheet__point'))).\
+                    annotate(count=Count(models.F('sheet')))
 
     def with_monitoring(self):
         return self.select_related('monitoring')
@@ -36,7 +37,12 @@ class MonitoringInstitution(models.Model):
 
 
 class MonitoringQuerySet(models.QuerySet):
-    pass
+    def with_started(self):
+        return self.annotate(sheet_count=Count('monitoringinstitution__sheet'))\
+                   .annotate(started=Case(
+                                        When(sheet_count=0, then=Value(False)),
+                                        default=Value(True),
+                             output_field=models.BooleanField()))
 
 
 @python_2_unicode_compatible
@@ -77,6 +83,9 @@ class Monitoring(TimeStampedModel):
 
     def get_assign_url(self):
         return reverse('monitorings:assign', kwargs={'slug': self.slug})
+
+    def get_reinitalize_url(self):
+        return reverse('monitorings:reinitalize', kwargs={'slug': self.slug})
 
     def get_sheet_create_url(self, institution):
         kwargs = {'slug': self.slug, 'institution_slug': institution.slug}
