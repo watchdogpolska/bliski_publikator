@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-30 14:28+0000\n"
-"PO-Revision-Date: 2016-05-30 16:29+0200\n"
+"POT-Creation-Date: 2016-06-02 04:38+0000\n"
+"PO-Revision-Date: 2016-06-02 06:38+0200\n"
 "Last-Translator: Adam Dobrawy <naczelnik@jawnosc.tk>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: apps.py:8 models.py:63
+#: apps.py:8 models.py:69
 msgid "Monitorings"
 msgstr "Monitoringi"
 
@@ -29,51 +29,51 @@ msgstr "Monitoringi"
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: models.py:23 models.py:62
+#: models.py:24 models.py:68
 msgid "Monitoring"
 msgstr "Monitoring"
 
-#: models.py:25 models.py:53
+#: models.py:26 models.py:59
 msgid "Institution"
 msgstr "Instytucja"
 
-#: models.py:29
+#: models.py:30
 msgid "Monitoring of institution"
 msgstr "Monitoring instytucji"
 
-#: models.py:30
+#: models.py:31
 msgid "Monitorings of institutions"
 msgstr "Monitoringi instytucji"
 
-#: models.py:44 templates/monitorings/institution_assign.html.py:36
+#: models.py:50 templates/monitorings/institution_assign.html.py:36
 msgid "Name"
 msgstr "Nazwa"
 
-#: models.py:45
+#: models.py:51
 msgid "Slug"
 msgstr "Identyfikator redakcyjny"
 
-#: models.py:47
+#: models.py:53
 msgid "Description"
 msgstr "Opis"
 
-#: models.py:48
+#: models.py:54
 msgid "Instruction"
 msgstr "Instrukcja"
 
-#: models.py:49
+#: models.py:55
 msgid "Active status"
 msgstr "Status aktywności"
 
-#: models.py:50
+#: models.py:56
 msgid "Logo"
 msgstr "Logo"
 
-#: models.py:51
+#: models.py:57
 msgid "Max point"
 msgstr "Maksimum ppunktów"
 
-#: models.py:54
+#: models.py:60
 msgid "Specifies which institutions are covered by monitoring"
 msgstr "Określ, które instytucje są objęte monitoringiem"
 
@@ -96,7 +96,7 @@ msgstr "Odpowiedź"
 
 #: templates/monitorings/institution_assign.html:7
 #: templates/monitorings/institution_assign.html:13
-#: templates/monitorings/monitoring_base.html:14
+#: templates/monitorings/monitoring_base.html:28
 msgid "Assign institutions"
 msgstr "Przypisz instytucje"
 
@@ -137,16 +137,21 @@ msgstr "Przypisz"
 msgid "Update monitoring"
 msgstr "Zaktualizuj monitoring"
 
+#: templates/monitorings/monitoring_base.html:16
 #: templates/monitorings/monitoring_base.html:21
+msgid "Reinitialize monitoring"
+msgstr "Reinicjalizuj monitoring"
+
+#: templates/monitorings/monitoring_base.html:35
 #: templates/monitorings/monitoring_confirm_delete.html:8
 msgid "Delete monitoring"
 msgstr "Usuń monitoring"
 
-#: templates/monitorings/monitoring_base.html:28
+#: templates/monitorings/monitoring_base.html:42
 msgid "Add page"
 msgstr "Dodaj stronę"
 
-#: templates/monitorings/monitoring_base.html:34
+#: templates/monitorings/monitoring_base.html:48
 msgid "Add institution"
 msgstr "Dodaj instytucje"
 
@@ -221,32 +226,42 @@ msgstr ""
 "Brak kwestionariuszy.  <a href=\"%(sheet_create)s\" class=\"btn btn-primary"
 "\">Dodaj nowy kwestionariusz.</a>"
 
-#: views.py:180
+#: views.py:186
+msgid "You can not modify this way of  monitoring that is already in progress."
+msgstr ""
+"Nie możesz modyfikować w ten sposób monitoringu, który jest obecnie w toku."
+
+#: views.py:190
+#, python-format
+msgid "You modification of %(monitoring)s was saved."
+msgstr "Twoja modyfikacja monitoringu %(monitoring)s została zapisana."
+
+#: views.py:239
 #, python-brace-format
 msgid "{0} updated!"
 msgstr "{0} zaktualizowany!"
 
-#: views.py:216
+#: views.py:275
 #, python-format
 msgid "%(count)d institutions was assigned to %(monitoring)s"
 msgstr "%(count)d instytucji zostało przypisanych do %(monitoring)s"
 
-#: views.py:257
+#: views.py:316
 #, python-format
 msgid "Institution %(institution)s assigned to monitoring %(monitoring)s"
 msgstr ""
 "Instytucja %(institution)s została przypisana do monitoringu %(monitoring)s"
 
-#: views.py:271
+#: views.py:330
 #, python-brace-format
 msgid "{0} deleted!"
 msgstr "{0} usunięty!"
 
-#: views.py:303
+#: views.py:362
 msgid "Unable to rank once institution twice times."
 msgstr "Nie możesz oceniać jednej instytucji wielokrotnie."
 
-#: views.py:355
+#: views.py:414
 msgid "Rank saved. Thank you."
 msgstr "Ocena zapisana. Dziękuje."
 
