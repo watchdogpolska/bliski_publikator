@@ -7,8 +7,8 @@
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
                 <li role="menuitem">
-                    <a class="dropdown-item" href="#" (click)="addIsEqualCondional()">Jest równy wartości</a>
-                    <a class="dropdown-item" href="#" (click)="addIsNullCondional()">Jest pusty</a>
+                    <a class="dropdown-item" href="#" (click)="addIsEqualCondional(); $event.preventDefault();">Jest równy wartości</a>
+                    <a class="dropdown-item" href="#" (click)="addIsNullCondional(); $event.preventDefault();">Jest pusty</a>
                 </li>
             </ul>
         </div>
