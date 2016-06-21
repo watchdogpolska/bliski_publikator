@@ -1,0 +1,2 @@
+# Przypisywanie instytucji
+
