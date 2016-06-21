@@ -59,13 +59,13 @@
       </button>
       <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
         <li role="menuitem">
-          <a class="dropdown-item" href="#" (click)="addTextBoxQuestion()">Pytanie tekstowe</a>
+          <a class="dropdown-item" href="#" (click)="addTextBoxQuestion(); $event.preventDefault();">Pytanie tekstowe</a>
         </li>
         <li role="menuitem">
-          <a class="dropdown-item" href="#" (click)="addDropdownQuestion()">Pytanie wyboru</a>
+          <a class="dropdown-item" href="#" (click)="addDropdownQuestion(); $event.preventDefault();">Pytanie wyboru</a>
         </li>
         <li role="menuitem">
-          <a class="dropdown-item" href="#" (click)="addLongTextQuestion()">Pytanie długie tekstowe</a>
+          <a class="dropdown-item" href="#" (click)="addLongTextQuestion(); $event.preventDefault();">Pytanie długie tekstowe</a>
         </li>
       </ul>
     </div>
