@@ -35,7 +35,7 @@ export class QuestionConditionalsComponent{
 
     addIsNullCondional() {
         let target = this.questions[0];
-        let conditionals = new isEqualConditional({ target: target, value: "" });
+        let conditionals = new isNullConditional({ target: target });
         this.current.hideConditions = [
             ...this.current.hideConditions,
             conditionals
