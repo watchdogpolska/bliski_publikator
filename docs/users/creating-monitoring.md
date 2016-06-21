@@ -2,9 +2,12 @@
 Aby utworzyć ankiety należy być użytkownikiem z odpowiednimi uprawnieniami. Nie wszyscy użytkownicy zarejestrowani w systemie mogą tworzyć ankiety. 
 
 1. Uruchamiamy formularz tworzenia pytań. W tym celu wybieramy z menu górnego `Inne`, a następnie `Dodaj monitoring`
-![](creating-monitoring/1.png)
+
+    ![](creating-monitoring/1.png)
+
 2. Uruchomi się edytor monitoringu, który pozwoli utworzyć nowy monitoring
-![](creating-monitoring/2.png)
+
+    ![](creating-monitoring/2.png)
 
 ## Wprowadzanie informacji podstawowych 
 1. Rozpoczynam o wpisania w pole `Tytuł` tytułu monitoringu.
