@@ -2,7 +2,7 @@ import { BaseConditional } from './condititional-base';
 import { QuestionBase } from '../model/question-base';
 
 
-export class isEqualConditional extends BaseConditional{
+export class IsEqualConditional extends BaseConditional {
     type = 'is-equal';
     target: QuestionBase<any>;
     value: string;
@@ -10,7 +10,7 @@ export class isEqualConditional extends BaseConditional{
         target: QuestionBase<any>,
         value: string
     }) {
-        super(options)
+        super(options);
         this.target = options['target'];
         this.value = options['value'];
     }

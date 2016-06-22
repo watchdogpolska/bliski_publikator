@@ -1,4 +1,3 @@
-import { Serializable } from '../serializable';
 import { QuestionBase } from '../model/question-base';
 
 
@@ -6,7 +5,7 @@ export abstract class BaseConditional {
     type: string;
     constructor(options: {
         type?:string,
-    }){
+    }) {
         this.type = options['type'] || '';
     }
 

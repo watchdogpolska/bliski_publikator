@@ -2,13 +2,13 @@ import { EventEmitter } from '@angular/core';
 
 import { QuestionBase } from './question-base';
 
-export class Monitoring{
+export class Monitoring {
     name: string;
     description: string;
     instruction: string;
-    private _questions: QuestionBase<any>[];
     questions_changes = new EventEmitter();
     max_point: number;
+    private _questions: QuestionBase<any>[];
 
     constructor(options: {
         name?: string,
@@ -39,7 +39,7 @@ export class Monitoring{
         return this._questions;
     }
 
-    get max_points(){
+    get max_points() {
         return this._questions.reduce((prev, curr) => prev + curr.max_point_sum, 0);
     }
 

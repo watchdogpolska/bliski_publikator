@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core';
 import {
     DropdownQuestion,
     DropdownOption
@@ -8,35 +8,33 @@ import {
     selector: 'sowp-question-option-edit',
     template: require('./question-option-edit.component.html')
 })
-export class QuestionOptionEditComponent implements OnInit{
-    constructor() {}
-
+export class QuestionOptionEditComponent implements OnInit {
     @Input()
     question: DropdownQuestion;
 
-    options: DropdownOption[] = []
+    options: DropdownOption[] = [];
 
     ngOnInit() {
         this.options = this.question.options;
         this.question.options_changes.subscribe(
             options => this.options = options
-        )
+        );
     }
 
-    removeOption(option:any){
+    removeOption(option:any) {
         let index = this.options.indexOf(option);
-        if(index >= 0){
+        if(index >= 0) {
             this.question.options = [
                 ...this.options.slice(0, index),
                 ...this.options.slice(index + 1)
-            ]
+            ];
         }
     }
 
-    addOption(){
+    addOption() {
         this.question.options = [
             ...this.options,
-            { key: "", value: "" }
+            { key: '', value: '' }
         ];
     }
 }

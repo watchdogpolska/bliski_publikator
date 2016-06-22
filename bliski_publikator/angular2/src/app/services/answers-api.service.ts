@@ -1,12 +1,11 @@
-import { Observable }     from 'rxjs/Observable';
-
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { BaseApiService } from './api.base.service';
 
-import {CsrfService} from '../services/csrf.service';
+import { CsrfService } from '../services/csrf.service';
 
+@Injectable()
 export class AnswerService extends BaseApiService {
 
     constructor(http: Http, csrf: CsrfService) {

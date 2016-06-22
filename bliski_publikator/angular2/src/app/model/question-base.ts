@@ -1,9 +1,8 @@
-import { EventEmitter } from '@angular/core'
+import { EventEmitter } from '@angular/core';
 
 import { slugify } from '../utils';
 import { BaseConditional } from '../conditionals/condititional-base';
 import { BaseCountCondition } from '../count.conditions/cconditions.base';
-import { Serializable } from '../serializable';
 
 export class QuestionBase<T> {
     defaultValue: T;
@@ -13,10 +12,10 @@ export class QuestionBase<T> {
     description: string;
     order: number;
     controlType: string;
-    private _hideConditions: BaseConditional[] = [];
-    private _countConditions: BaseCountCondition[] = [];
     hideConditions_changes = new EventEmitter<BaseConditional[]>();
     countConditions_changes = new EventEmitter<BaseCountCondition[]>();
+    private _hideConditions: BaseConditional[] = [];
+    private _countConditions: BaseCountCondition[] = [];
 
     constructor(options: {
         defaultValue?: T,
@@ -37,15 +36,15 @@ export class QuestionBase<T> {
     get key(){
         if (this._key)
             return this._key;
-        this._key = slugify(this.name) + ( ( Math.random() * 1000 ) | 0)
+        this._key = slugify(this.name) + ((Math.random() * 1000) | 0);;
         return this._key;
     }
 
-    set key(value){
+    set key(value) {
         this._key = value;
     }
 
-    get hideConditions(){
+    get hideConditions() {
         return this._hideConditions;
     }
 
@@ -54,7 +53,7 @@ export class QuestionBase<T> {
         this.hideConditions_changes.emit(conditions);
     }
 
-    get countConditions(){
+    get countConditions() {
         return this._countConditions;
     }
 
@@ -63,7 +62,7 @@ export class QuestionBase<T> {
         this.countConditions_changes.emit(conditions);
     }
 
-    get max_point_sum(){
+    get max_point_sum() {
         return this._countConditions
             .reduce((prev, curr) => prev + curr.point, 0);
     }
@@ -74,7 +73,7 @@ export class QuestionBase<T> {
             .reduce((prev, curr) => prev + curr.point, 0);
     }
 
-    isHidden(answers:any){
+    isHidden(answers:any) {
         if (this.hideConditions.length == 0)
             return false;
         return this.hideConditions.some(t => t.isValid(answers));
@@ -82,7 +81,7 @@ export class QuestionBase<T> {
 
     toPlainObject(questions: QuestionBase<any>[]) {
         let obj = {};
-        if(this.id > 0){
+        if(this.id > 0) {
             obj[ 'id' ] = this.id;
         }
         obj['name'] = this.name;

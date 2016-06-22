@@ -1,6 +1,6 @@
 import {BaseCountCondition} from './cconditions.base';
 
-export class isEqualCountCondition extends BaseCountCondition{
+export class IsEqualCountCondition extends BaseCountCondition {
 	type = 'is-equal';
 	value: string;
 
@@ -8,12 +8,12 @@ export class isEqualCountCondition extends BaseCountCondition{
 		type?: string,
 		point?: number,
 		value?: string
-	} = {}){
+	} = {}) {
 		super(options);
 		this.value = options['value'] || '';
 	}
 
-	isValid(answer){
+	isValid(answer) {
 		return answer == this.value;
 	}
 

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input } from '@angular/core';
 import { ControlGroup } from '@angular/common';
-import { QuestionBase } from '../model/question-base'
+import { QuestionBase } from '../model/question-base';
 
 @Component({
     selector: 'sowp-question-view',
@@ -9,12 +9,8 @@ import { QuestionBase } from '../model/question-base'
 export class QuestionSolveItemComponent {
 
     @Input()
-    question: QuestionBase<any>
+    question: QuestionBase<any>;
 
     @Input()
-    form: ControlGroup
-
-    constructor() {
-
-    }
+    form: ControlGroup;
 }

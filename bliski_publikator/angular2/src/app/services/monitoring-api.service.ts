@@ -10,11 +10,10 @@ import { TextboxQuestion } from '../model/question-textbox';
 import { DropdownQuestion } from '../model/question-dropdown';
 import { LongTextQuestion } from '../model/question-longtext';
 
-import { isEqualConditional } from '../conditionals/conditional-is-equal'
-import { isNullConditional } from '../conditionals/conditional-is-null'
+import { IsEqualConditional } from '../conditionals/conditional-is-equal';
+import { IsNullConditional } from '../conditionals/conditional-is-null';
 
-import { isEqualCountCondition } from '../count.conditions/is-equal.cconditions'
-import { BaseCountCondition } from '../count.conditions/cconditions.base'
+import { IsEqualCountCondition } from '../count.conditions/is-equal.cconditions';
 
 import {CsrfService} from '../services/csrf.service';
 
@@ -24,7 +23,7 @@ export class MonitoringService extends BaseApiService {
         super(http, csrf);
     }
 
-    saveMonitoring(monitoring: Monitoring){
+    saveMonitoring(monitoring: Monitoring) {
         var data = monitoring.toPlainObject();
         return this.simple_post(document.location.href, data);
     }
@@ -42,17 +41,17 @@ export class MonitoringService extends BaseApiService {
                     }
                 );
             })
-            .map(data => data)
+            .map(data => data);
     }
 
-    parseQuestionsList(questions:any[]):QuestionBase<any>[]{
+    parseQuestionsList(questions:any[]):QuestionBase<any>[] {
         // console.log('parseQuestionsList', questions);
-        return questions.map(this.parseQuestion)
+        return questions.map(this.parseQuestion);
     }
 
-    parseQuestion(question):QuestionBase<any>{
+    parseQuestion(question):QuestionBase<any> {
         // console.log('parseQuestion', question);
-        switch(question.type){
+        switch(question.type) {
             case 'long_text':
                 return new LongTextQuestion(question);
             case 'short_text':
@@ -63,13 +62,13 @@ export class MonitoringService extends BaseApiService {
         throw new Error(`Unsupported controlType [${question.controlType}].`);
     }
 
-    addHideConditions(data:any[], questions:QuestionBase<any>[]){
+    addHideConditions(data:any[], questions:QuestionBase<any>[]) {
         // data.forEach( (q, i) => {
         //         var question = questions.find(t => q.id == t.id );
         //     });
     }
 
-    addConditions(data: any[], , questions: QuestionBase<any>[]){
+    addConditions(data: any[], questions: QuestionBase<any>[]) {
         data.forEach( (q, i) => {
                 var question = questions[i];
                 question.hideConditions = (q.hideConditions || []).map(c => this.parseHideConditions(c, questions));
@@ -79,25 +78,25 @@ export class MonitoringService extends BaseApiService {
 
     parseHideConditions(data, questions: QuestionBase<any>[]) {
         let target = questions[data.target];
-        switch(data.type){
+        switch(data.type) {
             case 'is-equal':{
                 let value = data.value;
-                return new isEqualConditional({ target, value });
+                return new IsEqualConditional({ target, value });
             }
             case 'is-null':{
-                return new isNullConditional({ target });
+                return new IsNullConditional({ target });
             }
 
         }
         throw new Error(`Unsupported hide conditions [${data.hideConditions}].`);
     }
 
-    parseCountCondition(data){
-        switch(data.type){
+    parseCountCondition(data) {
+        switch(data.type) {
             case 'is-equal': {
                 let value = data.value;
                 let point = data.point;
-                return new isEqualCountCondition({ value, point });
+                return new IsEqualCountCondition({ value, point });
             }
         }
         throw new Error(`Unsupported count conditions [${data}].`);

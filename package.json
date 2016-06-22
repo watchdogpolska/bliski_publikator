@@ -57,6 +57,13 @@
     "webpack":                            "1.13.1",
     "webpack-merge":                      "0.14.0"
   },
+  "devDependencies": {
+    "gulp-tslint": "5.0.0",
+    "tslint": "3.11.0",
+    "tslint-stylish": "2.1.0-beta",
+    "is-ci": "^1.0.8",
+    "codelyzer": "0.0.20"
+  },
   "scripts": {
     "postinstall": "typings install",
     "typings": "typings"

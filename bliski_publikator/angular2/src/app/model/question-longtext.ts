@@ -1,6 +1,6 @@
 import {QuestionBase} from './question-base';
 
-export class LongTextQuestion extends QuestionBase<string>{
+export class LongTextQuestion extends QuestionBase<string> {
     controlType = 'long_text';
     inputType: string;
 

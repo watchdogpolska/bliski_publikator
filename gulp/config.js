@@ -121,11 +121,6 @@ module.exports = {
       }
     }
   },
-  watch: {
-    scss: srcAssets  + '/scss/*.scss',
-    js: srcAssets + '/scripts/*.js',
-    html: baseTemplate
-  },
   webpack: {
     entry: packageName + '/angular2/src/main.ts',
     dev: {
@@ -134,5 +129,16 @@ module.exports = {
     prod: {
       dest: prodStatic + '/angular2/'
     }
-  }
+  },
+  tslint: {
+    src: [
+      packageName + '/angular2/src/**/*.ts',
+      '!' + packageName + '/angular2/src/**/*.d.ts'
+    ]
+  },
+  watch: {
+    scss: srcAssets  + '/scss/*.scss',
+    js: srcAssets + '/scripts/*.js',
+    html: baseTemplate
+  },
 };

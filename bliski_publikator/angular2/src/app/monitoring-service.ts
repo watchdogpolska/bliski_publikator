@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { DropdownQuestion } from './model/question-dropdown'
-import { TextboxQuestion } from './model/question-textbox'
-import { Monitoring } from './model/monitoring'
-import { isEqualConditional } from './conditionals/conditional-is-equal'
+import { DropdownQuestion } from './model/question-dropdown';
+import { TextboxQuestion } from './model/question-textbox';
+import { Monitoring } from './model/monitoring';
+import { IsEqualConditional } from './conditionals/conditional-is-equal';
 
 
 @Injectable()
-export class MonitoringService{
-    getMonitoring(id:number):Promise<Monitoring>{
+export class MonitoringService {
+    getMonitoring(id:number):Promise<Monitoring> {
         let name = 'Monitoring spółek komunalnych';
-        let description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum atque necessitatibus odio, quos ipsum numquam ipsam minus accusantium animi alias?'
+        let description = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum atque necessitatibus odio, quos ipsum numquam
+ ipsam minus accusantium animi alias?`;
         let q1 = new TextboxQuestion(
             {
                 id: 1,
@@ -43,7 +44,7 @@ export class MonitoringService{
                     { key: '5', value: 'Nie istotne' },
                 ],
                 hideConditions: [
-                    new isEqualConditional({ target: q2, value: "TAK" })
+                    new IsEqualConditional({ target: q2, value: 'TAK' })
                 ]
             }
         );
@@ -61,7 +62,7 @@ export class MonitoringService{
                        { key: '5', value: 'Nie istotne' },
                 ],
                 hideConditions: [
-                       new isEqualConditional({ target: q1, value: "TAK" })
+                       new IsEqualConditional({ target: q1, value: 'TAK' })
                 ]
              }
         );
@@ -87,10 +88,11 @@ export class MonitoringService{
             {
                 id: 6,
                 name: 'Od kiedy ta informacja jest widoczna?',
-                description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum similique adipisci eveniet deleniti non ad, eaque quae architecto numquam reprehenderit. Repudiandae molestias tempore dolores nihil provident sequi iste atque, explicabo.`,
+                description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum similique adipisci eveniet deleniti non
+ ad, eaque quae architecto numquam reprehenderit. Repudiandae molestias tempore dolores nihil provident sequi iste atque, explicabo.`,
                 hideConditions: [
-                       new isEqualConditional({ target: q5, value: "2" }),
-                       new isEqualConditional({ target: q5, value: null })
+                       new IsEqualConditional({ target: q5, value: '2' }),
+                       new IsEqualConditional({ target: q5, value: null })
                 ]
             }
         );

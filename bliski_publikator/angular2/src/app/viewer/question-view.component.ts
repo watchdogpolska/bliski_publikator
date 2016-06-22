@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core'
-import {QuestionBase} from '../model/question-base'
+import {Component, Input} from '@angular/core';
+import {QuestionBase} from '../model/question-base';
 
 @Component({
     selector: 'sowp-question-view',
@@ -9,12 +9,8 @@ import {QuestionBase} from '../model/question-base'
             border: 8px solid #DDD
         }`]
 })
-export class QuestionViewComponent{
+export class QuestionViewComponent {
 
     @Input('question')
-    question: QuestionBase<any>
-
-    constructor(){
-
-    }
+    question: QuestionBase<any>;
 }

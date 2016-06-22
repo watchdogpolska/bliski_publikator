@@ -1,12 +1,12 @@
 import { EventEmitter } from '@angular/core';
 import { QuestionBase } from './question-base';
 
-export interface DropdownOption{
+export interface DropdownOption {
     key: string;
     value: string;
 }
 
-export class DropdownQuestion extends QuestionBase<string>{
+export class DropdownQuestion extends QuestionBase<string> {
     controlType = 'choice';
     _options: DropdownOption[] = [];
     options_changes = new EventEmitter();

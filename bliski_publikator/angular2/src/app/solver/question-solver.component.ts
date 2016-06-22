@@ -1,17 +1,16 @@
 import {
     Component,
     Input,
-    OnInit,
-    SimpleChange
-} from '@angular/core'
+    OnInit
+} from '@angular/core';
 import {
     FormBuilder,
     ControlGroup
-} from '@angular/common'
-import { Monitoring } from '../model/monitoring'
-import { QuestionBase } from '../model/question-base'
-import { QuestionControlService } from './question-control.service'
-import { QuestionSolveItemComponent } from './question-solve-item.component'
+} from '@angular/common';
+import { Monitoring } from '../model/monitoring';
+import { QuestionBase } from '../model/question-base';
+import { QuestionControlService } from './question-control.service';
+import { QuestionSolveItemComponent } from './question-solve-item.component';
 import { AnswerService } from '../services/answers-api.service';
 
 @Component({
@@ -32,6 +31,7 @@ export class QuestionSolverComponent implements OnInit {
     form: ControlGroup;
     visibility: { key:string, hidden:boolean }[] = [];
 
+
     constructor(private _fb: FormBuilder, private _api: AnswerService) {
         console.log(this._fb);
     }
@@ -39,37 +39,38 @@ export class QuestionSolverComponent implements OnInit {
     ngOnInit() {
         this.buildForm();
         console.log(this.form);
-        this.form.valueChanges.subscribe((v) => { this.validateVisibility(v) });
+        this.form.valueChanges.subscribe((v) => this.validateVisibility(v));
         this.validateVisibility(this.form.value);
     }
 
-    private validateVisibility(values){
+    onSubmit() {
+        let values = this.form.value;
+        if(!this.validateAnswer(values)) {
+            alert('Sprawdz poprawność wypełnienia formularza');
+            return;
+        };
+        this._api
+            .saveAnswers(this.generateAnswerSheet(values))
+            .subscribe(
+                data => { console.log(data); document.location = data.return_url; },
+                error => { console.log('FAIL', error); }
+            );
+    }
+
+    validateVisibility(values) {
         let questions = this.monitoring.questions;
         let visibility = [];
         questions.forEach(q => visibility.push({ key: q.key, hidden: q.isHidden(values) }) );
         this.visibility = visibility;
     }
-    private buildForm(){
-        let group = {}
+
+     buildForm() {
+        let group = {};
         this.monitoring.questions.forEach(t => group[t.key] = []);
         this.form = this._fb.group(group);
     }
 
-    onSubmit() {
-        let values = this.form.value;
-        if(!this.validateAnswer(values)){
-            alert("Sprawdz poprawność wypełnienia formularza")
-            return;
-        }
-        this._api
-            .saveAnswers(this.generateAnswerSheet(values))
-            .subscribe(
-                data => { console.log(data); document.location = data.return_url; },
-                error => { console.log("FAIL", error) }
-            );
-    }
-
-    protected validateAnswer(values){
+    validateAnswer(values) {
         let questions = this.monitoring.questions;
 
         let list = Object.getOwnPropertyNames(values)
@@ -78,14 +79,14 @@ export class QuestionSolverComponent implements OnInit {
                     key: key,
                     value: values[key],
                     question: questions.find(q => q.key == key)
-                }
+                };
             });
         let visible_list = list.filter(t => !t.question.isHidden(values));
         return visible_list.every(t => t.value != null)
-            && visible_list.filter(t => typeof t == "string").every(t => t.value.length > 0);
+            && visible_list.filter(t => typeof t == 'string').every(t => t.value.length > 0);
     }
 
-    protected generateAnswerSheet(values){
+    generateAnswerSheet(values) {
         console.log({ values });
         let questions = this.monitoring.questions;
         let answers = [];
@@ -104,8 +105,9 @@ export class QuestionSolverComponent implements OnInit {
 
     isHidden(question: QuestionBase<any>) {
         let o = this.visibility.find(t => t.key == question.key);
-        if (!o)
+        if (!o) {
             return false;
+        }
         return o.hidden;
     }
 }

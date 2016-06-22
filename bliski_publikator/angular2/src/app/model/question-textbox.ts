@@ -1,6 +1,6 @@
 import {QuestionBase} from './question-base';
 
-export class TextboxQuestion extends QuestionBase<string>{
+export class TextboxQuestion extends QuestionBase<string> {
     controlType = 'short_text';
     inputType: string;
 
@@ -9,7 +9,7 @@ export class TextboxQuestion extends QuestionBase<string>{
         this.inputType = options['inputType'] || 'text';
     }
 
-    toPlainObject(questions:QuestionBase<any>[]){
+    toPlainObject(questions:QuestionBase<any>[]) {
         let obj = super.toPlainObject(questions);
         obj['inputType'] = this.inputType;
         return obj;

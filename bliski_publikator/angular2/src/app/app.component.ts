@@ -1,15 +1,13 @@
 import {
     Component,
-    Directive,
     ElementRef,
-    Input,
     OnInit,
-} from '@angular/core'
+} from '@angular/core';
 
-import { QuestionSolverComponent } from './solver/question-solver.component'
-import { QuestionEditorComponent } from './editor/question-editor.component'
-import { MonitoringService } from './services/monitoring-api.service'
-import { Monitoring } from './model/monitoring'
+import { QuestionSolverComponent } from './solver/question-solver.component';
+import { QuestionEditorComponent } from './editor/question-editor.component';
+import { MonitoringService } from './services/monitoring-api.service';
+import { Monitoring } from './model/monitoring';
 
 
 @Component({
@@ -37,7 +35,7 @@ export class AppComponent implements OnInit {
     monitoring_id: number;
     organizaiton_id: number;
     mode: string;
-    monitoring: Monitoring
+    monitoring: Monitoring;
     constructor(
         private _montiroingSrvice: MonitoringService,
         private _el: ElementRef
@@ -48,15 +46,15 @@ export class AppComponent implements OnInit {
         this.mode = nativeElement.getAttribute('mode') || 'editor';
     }
 
-    ngOnInit(){
-        if(this.monitoring_id > 0){
+    ngOnInit() {
+        if(this.monitoring_id > 0) {
             this._montiroingSrvice
                 .getMonitoring(this.monitoring_id)
                 .subscribe(
                     (m => this.monitoring = m),
-                    (error => { console.log(error) })
-                )
-        }else{
+                    (error => console.log(error) )
+                );
+        }else {
             this.monitoring = new Monitoring();
         }
     }

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable();
-export class CsrfService{
-
-	constructor() {}
+export class CsrfService {
 
 	getToken() {
 		let cookies = this.parseCookie();
@@ -12,7 +10,7 @@ export class CsrfService{
 	}
 
 	private parseCookie() {
-		var cookies = {}
+		var cookies = {};
 		document.cookie
 			.split(';')
 			.map(t => t.trim())

@@ -5,18 +5,18 @@ import {
 
 import { QuestionBase } from '../model/question-base';
 
-import {isEqualCountCondition} from '../count.conditions/is-equal.cconditions'
+import {IsEqualCountCondition} from '../count.conditions/is-equal.cconditions';
 
 @Component({
 	'selector': 'sowp-count-condition';
 	'template': require('./count-condition-edit.component.html')
 })
-export class CountConditionEditComponent{
+export class CountConditionEditComponent {
     @Input()
-    current: QuestionBase<any>
+    current: QuestionBase<any>;
 
     addIsEqualCondional() {
-        let conditions = new isEqualCountCondition({});
+        let conditions = new IsEqualCountCondition({});
         this.current.countConditions = [
             ...this.current.countConditions,
             conditions

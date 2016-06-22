@@ -1,4 +1,4 @@
-import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap'
+import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 import {
     Component,
@@ -7,8 +7,8 @@ import {
 
 import { QuestionBase } from '../model/question-base';
 
-import { isEqualConditional } from '../conditionals/conditional-is-equal'
-import { isNullConditional } from '../conditionals/conditional-is-null'
+import { IsEqualConditional } from '../conditionals/conditional-is-equal';
+import { IsNullConditional } from '../conditionals/conditional-is-null';
 
 @Component({
     selector: 'sowp-question-conditionals',
@@ -17,16 +17,16 @@ import { isNullConditional } from '../conditionals/conditional-is-null'
         DROPDOWN_DIRECTIVES
     ]
 })
-export class QuestionConditionalsComponent{
+export class QuestionConditionalsComponent {
     @Input()
-    questions: QuestionBase<any>[]
+    questions: QuestionBase<any>[];
 
     @Input()
-    current: QuestionBase<any>
+    current: QuestionBase<any>;
 
     addIsEqualCondional() {
         let target = this.questions[0];
-        let conditionals = new isEqualConditional({ target: target, value: "" });
+        let conditionals = new IsEqualConditional({ target: target, value: '' });
         this.current.hideConditions = [
             ...this.current.hideConditions,
             conditionals
@@ -35,7 +35,7 @@ export class QuestionConditionalsComponent{
 
     addIsNullCondional() {
         let target = this.questions[0];
-        let conditionals = new isNullConditional({ target: target });
+        let conditionals = new IsNullConditional({ target: target });
         this.current.hideConditions = [
             ...this.current.hideConditions,
             conditionals

@@ -12,10 +12,9 @@ import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
 export abstract class BaseApiService {
-    private _apiUrl = '/api/';
     constructor(protected _http: Http, protected _csrf: CsrfService) { }
 
-    protected simple_post(url:string, data){
+    protected simple_post(url:string, data) {
         let body = JSON.stringify(data);
         let options = this.getDefaultOptions();
         return this._http.post(url, body, options)
@@ -23,11 +22,17 @@ export abstract class BaseApiService {
             .catch(this.handleError);
     }
 
-    protected simple_get(url:string, qs = {}){
+    protected simple_get(url:string, qs = {}) {
         let options = this.getDefaultOptions();
         return this._http.get(url, options)
             .map(this.extractData)
-            .catch(this.handleError)
+            .catch(this.handleError);
+    }
+
+    protected handleError(error: any) {
+        let errMsg = error.message || 'Server error';
+        console.error(errMsg);
+        return Observable.throw(errMsg);
     }
 
     private extractData(res: Response) {
@@ -36,12 +41,6 @@ export abstract class BaseApiService {
         }
         let body = res.json();
         return body || {};
-    }
-
-    protected handleError(error: any) {
-        let errMsg = error.message || 'Server error';
-        console.error(errMsg);
-        return Observable.throw(errMsg);
     }
 
     private getDefaultOptions() {
