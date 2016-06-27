@@ -10,17 +10,15 @@
       {% trans 'Update monitoring' %}
     </a>
 
-    {% if not object.started %}
-    <a href="{{object.get_reinitalize_url}}" class="btn btn-primary">
-      <i class="fa fa-pencil" aria-hidden="true"></i>
-      {% trans 'Reinitialize monitoring' %}
-    </a>
-    {% else %}
-    <a class="btn btn-primary disabled">
-      <i class="fa fa-pencil" aria-hidden="true"></i>
-      {% trans 'Reinitialize monitoring' %}
-    </a>
-    
+    {% if perms.monitorings.change_monitoring %}
+      {% if object.started %}
+      <a class="btn btn-primary disabled">
+      {% else %}
+      <a href="{{object.get_reinitalize_url}}" class="btn btn-primary">
+      {% endif %}
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        {% trans 'Reinitialize monitoring' %}
+      </a>
     {% endif %}
 
     <a href="{{object.get_assign_url}}" class="btn btn-primary">

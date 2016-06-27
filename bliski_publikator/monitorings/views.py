@@ -37,6 +37,15 @@ NO_QUESTION = _f("Questions are required. No questions provided")
 UNKNOWN_TARGET = _f("Attempt to create reference to non-exists target.")
 
 
+class StartedMixin(object):
+    def get_queryset(self, *args, **kwargs):
+        qs = super(StartedMixin, self).get_queryset(*args, **kwargs)
+        if (self.request.user.is_authenticated() and
+           self.request.user.has_perm('monitorings.change_monitoring')):
+            return qs.with_started()
+        return qs
+
+
 class CustomJSONResponseMixin(object):
     def error_list(self, form):
         return [(k, force_text(v[0])) for k, v in form.errors.items()]
@@ -53,7 +62,7 @@ class MonitoringListView(SelectRelatedMixin, ListView):
     paginate_by = 25
 
 
-class MonitoringDetailView(SelectRelatedMixin, DetailView):
+class MonitoringDetailView(SelectRelatedMixin, StartedMixin, DetailView):
     model = Monitoring
     select_related = ['user', ]
 
@@ -63,10 +72,6 @@ class MonitoringDetailView(SelectRelatedMixin, DetailView):
             with_point().\
             select_related('institution', 'institution__region').\
             all()
-
-    def get_queryset(self, *args, **kwargs):
-        qs = super(MonitoringDetailView, self).get_queryset(*args, **kwargs)
-        return qs.with_started()
 
     def get_context_data(self, **kwargs):
         context = super(MonitoringDetailView, self).get_context_data(**kwargs)
@@ -149,7 +154,8 @@ class MonitoringQuestionMixin(object):
         return None
 
 
-class MonitoringAPICreateView(LoginRequiredMixin, CustomJSONResponseMixin, PermissionRequiredMixin,
+class MonitoringAPICreateView(LoginRequiredMixin, CustomJSONResponseMixin,
+                              StartedMixin, PermissionRequiredMixin,
                               MonitoringQuestionMixin, TemplateView):
     model = Monitoring
     permission_required = 'monitorings.add_monitoring'
@@ -172,15 +178,12 @@ class MonitoringAPICreateView(LoginRequiredMixin, CustomJSONResponseMixin, Permi
         return JsonResponse({'success': True, 'url': monitoring.get_absolute_url()})
 
 
-class MonitoringAPIUpdateView(LoginRequiredMixin, CustomJSONResponseMixin, PermissionRequiredMixin,
+class MonitoringAPIUpdateView(LoginRequiredMixin, CustomJSONResponseMixin,
+                              StartedMixin, PermissionRequiredMixin,
                               MonitoringQuestionMixin, DetailView):
     model = Monitoring
     permission_required = 'monitorings.update_monitoring'
     template_name = 'monitorings/monitoring_form_monitoring.html'
-
-    def get_queryset(self, *args, **kwargs):
-        qs = super(MonitoringAPIUpdateView, self).get_queryset(*args, **kwargs)
-        return qs.with_started()
 
     def get_sheet_exists_message(self):
         return _("You can not modify this way of " +
@@ -228,8 +231,9 @@ class PageInline(InlineFormSet):
         return kwargs
 
 
-class MonitoringUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UserFormKwargsMixin,
-                           FormValidMessageMixin, NamedFormsetsMixin, UpdateWithInlinesView):
+class MonitoringUpdateView(LoginRequiredMixin, PermissionRequiredMixin,
+                           StartedMixin, UserFormKwargsMixin, FormValidMessageMixin,
+                           NamedFormsetsMixin, UpdateWithInlinesView):
     inlines = [PageInline, ]
     inlines_names = ['pages', ]
     model = Monitoring
@@ -321,8 +325,9 @@ class MonitoringSignleAssingUpdateView(LoginRequiredMixin, TemplateView):
         return HttpResponseRedirect(new_thr.get_absolute_url())
 
 
-class MonitoringDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteMessageMixin,
-                           DeleteView):
+class MonitoringDeleteView(LoginRequiredMixin, StartedMixin,
+                           PermissionRequiredMixin,
+                           DeleteMessageMixin, DeleteView):
     model = Monitoring
     success_url = reverse_lazy('monitorings:list')
     permission_required = 'monitorings.delete_monitoring'
