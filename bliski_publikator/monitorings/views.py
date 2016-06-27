@@ -190,7 +190,8 @@ class MonitoringAPIUpdateView(LoginRequiredMixin, CustomJSONResponseMixin, Permi
         return _("You modification of %(monitoring)s was saved.") % {'monitoring': self.object}
 
     def get(self, *args, **kwargs):
-        if self.get_object().started:
+        self.object = self.get_object()
+        if self.object.started:
             messages.error(self.request, self.get_sheet_exists_message())
             return HttpResponseRedirect(self.monitoring.get_absolute_url())
         return super(MonitoringAPIUpdateView, self).get(*args, **kwargs)
