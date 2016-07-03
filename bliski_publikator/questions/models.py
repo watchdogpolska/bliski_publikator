@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Prefetch
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from jsonfield import JSONField
@@ -110,6 +112,13 @@ class SheetQuerySet(models.QuerySet):
     def institution(self, institution):
         return self.filter(monitoring_institution__institution=institution)
 
+    def with_answer(self):
+        qs = self.prefetch_related('answer_set',
+                                   'answer_set__answertext')
+        prefetch = Prefetch('answer_set__answerchoice',
+                            queryset=AnswerChoice.objects.select_related('value'))
+        return qs.prefetch_related(prefetch)
+
 
 class Sheet(TimeStampedModel):
     monitoring_institution = models.ForeignKey(to=MonitoringInstitution)
@@ -125,6 +134,10 @@ class Sheet(TimeStampedModel):
     @property
     def institution(self):
         return self.monitoring_institution.institution
+
+    def get_sheet_url(self):
+        return reverse('monitorings:sheet_list', kwargs={'slug': self.monitoring.slug,
+                                                         'institution_slug': self.institution.slug})
 
     class Meta:
         verbose_name = _("Sheet")

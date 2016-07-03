@@ -1,29 +1,35 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from bliski_publikator.institutions.viewsets import InstitutionViewSet
+from bliski_publikator.monitoring_pages.viewsets import PageViewSet
+from bliski_publikator.monitorings.viewsets import MonitoringViewSet
+from bliski_publikator.questions.viewsets import (
+    QuestionViewSet,
+    SheetViewSet
+)
+
+from teryt_tree.rest_framework_ext.viewsets import JednostkaAdministracyjnaViewSet
+from bliski_publikator.users.viewsets import UserViewSet
+
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
 from django.views import defaults as default_views
-
+from django.views.generic import TemplateView
 from rest_framework import routers
-from bliski_publikator.institutions.viewsets import InstitutionViewSet
-from bliski_publikator.users.viewsets import UserViewSet
-from bliski_publikator.teryt.viewsets import (JSTViewSet, JednostkaAdministracyjnaViewSet,
-                                              CategoryViewSet)
-from bliski_publikator.monitorings.viewsets import MonitoringViewSet
-from bliski_publikator.monitoring_pages.viewsets import PageViewSet
 
 router = routers.DefaultRouter()
 router.register(r'institutions', InstitutionViewSet)
 router.register(r'users', UserViewSet)
-router.register(r'teryt', JSTViewSet)
 router.register(r'teryt', JednostkaAdministracyjnaViewSet)
-router.register(r'category', CategoryViewSet)
 router.register(r'monitorings', MonitoringViewSet)
 router.register(r'monitoring_pages', PageViewSet)
+
+router.register(r'questions', QuestionViewSet)
+router.register(r'sheet', SheetViewSet)
+
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),

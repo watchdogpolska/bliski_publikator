@@ -3,6 +3,8 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    on_site = serializers.CharField(source='get_absolute_url', read_only=True)
+
     class Meta:
         model = get_user_model()
-        fields = ('url', 'username', 'is_staff')
+        fields = ('on_site', 'url', 'username', 'is_staff')
