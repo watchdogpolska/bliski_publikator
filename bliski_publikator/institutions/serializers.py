@@ -19,5 +19,6 @@ class InstitutionSerializer(serializers.HyperlinkedModelSerializer):
                   'krs',
                   'monitorings')
         extra_kwargs = {
-            'region': {'view_name': 'jednostkaadministracyjna-detail'}
+            'region': {'view_name': 'jednostkaadministracyjna-detail'},
+            'user': {'read_only': True}
         }
