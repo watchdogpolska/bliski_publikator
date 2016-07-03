@@ -15,12 +15,12 @@ class SheetFilter(filters.FilterSet):
                   ]
 
 
-class QuestionViewSet(viewsets.ModelViewSet):
+class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Question.objects.prefetch_related('condition_related', 'choice_set').all()
     serializer_class = QuestionSerializer
 
 
-class SheetViewSet(viewsets.ModelViewSet):
+class SheetViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = (Sheet.objects.
                 select_related('monitoring_institution').
                 select_related('monitoring_institution__monitoring').

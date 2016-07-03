@@ -10,7 +10,7 @@ class MonitoringFilter(filters.FilterSet):
         fields = ['active', ]
 
 
-class MonitoringViewSet(viewsets.ModelViewSet):
+class MonitoringViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = (Monitoring.objects.
                 prefetch_related('page_set').
                 prefetch_related('institutions').
