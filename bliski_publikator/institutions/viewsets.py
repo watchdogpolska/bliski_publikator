@@ -18,3 +18,6 @@ class InstitutionViewSet(viewsets.ModelViewSet):
     serializer_class = InstitutionSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_class = InstitutionFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
