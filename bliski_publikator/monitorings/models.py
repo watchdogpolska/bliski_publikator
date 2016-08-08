@@ -18,6 +18,12 @@ class MonitoringInstitutionQuerySet(models.QuerySet):
     def with_monitoring(self):
         return self.select_related('monitoring')
 
+    def with_institution(self):
+        return self.select_related('institution')
+
+    def with_absolute_url(self):
+        return self.with_monitoring().with_institution()
+
 
 class MonitoringInstitution(models.Model):
     monitoring = models.ForeignKey(to='monitorings.Monitoring',

@@ -8,9 +8,15 @@ from bliski_publikator.questions.viewsets import (
     QuestionViewSet,
     SheetViewSet
 )
-
-from teryt_tree.rest_framework_ext.viewsets import JednostkaAdministracyjnaViewSet
 from bliski_publikator.users.viewsets import UserViewSet
+from teryt_tree.rest_framework_ext.viewsets import JednostkaAdministracyjnaViewSet
+
+from bliski_publikator.institutions.sitemaps import InstitutionSitemap
+from bliski_publikator.monitorings.sitemaps import MonitoringInstitutionSitemap, MonitoringSitemap
+from bliski_publikator.monitoring_pages.sitemaps import PageSitemap
+from bliski_publikator.users.sitemaps import UserSitemap
+from bliski_publikator.teryt.sitemaps import JSTSitemap
+from bliski_publikator.main.sitemaps import StaticViewSitemap
 
 from django.conf import settings
 from django.conf.urls import include, url
@@ -19,6 +25,7 @@ from django.contrib import admin
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from rest_framework import routers
+from django.contrib.sitemaps.views import sitemap, index
 
 router = routers.DefaultRouter()
 router.register(r'institutions', InstitutionViewSet)
@@ -30,6 +37,15 @@ router.register(r'monitoring_pages', PageViewSet)
 router.register(r'questions', QuestionViewSet)
 router.register(r'sheet', SheetViewSet)
 
+sitemaps = {
+    'institution': InstitutionSitemap,
+    'monitoring': MonitoringSitemap,
+    'monitoring_institution': MonitoringInstitutionSitemap,
+    'monitoring_page': PageSitemap,
+    'users': UserSitemap,
+    'teryt': JSTSitemap,
+    'static': StaticViewSitemap
+}
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
@@ -47,9 +63,8 @@ urlpatterns = [
     url(r'^teryt/', include("bliski_publikator.teryt.urls", namespace="teryt")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),
-    # Your stuff: custom urls includes go here
-
-
+    url(r'^sitemap\.xml$', index, {'sitemaps': sitemaps, 'sitemap_url_name': 'sitemaps'}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', sitemap, {'sitemaps': sitemaps}, name='sitemaps'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
