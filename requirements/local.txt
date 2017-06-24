@@ -6,8 +6,8 @@ Sphinx
 django-extensions==1.6.7
 Werkzeug==0.11.10
 django-test-plus==1.0.13
-factory-boy==2.7.0
-
+factory-boy==2.8.1
+Faker==0.7.17
 # django-debug-toolbar that works with Django 1.5+
 django-debug-toolbar==1.4
 
