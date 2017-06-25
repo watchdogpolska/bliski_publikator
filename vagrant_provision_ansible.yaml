@@ -1,0 +1,159 @@
+- hosts: all
+  vars:
+    db_name: feder
+    db_user: feder
+    db_pass: feder
+    db_names:
+      - "{{ db_name }}"
+      - "test-{{ db_name }}"
+    env_path: "~/env"
+    src_path: "/vagrant"
+    requirements_paths: 
+      - "{{src_path}}/requirements/local.txt"
+      - "{{src_path}}/requirements/production.txt"
+    settings: {
+      DJANGO_SETTINGS_MODULE: "config.settings.local",
+      DATABASE_URL: "mysql://{{db_user}}:{{db_pass}}@localhost/{{db_name}}"
+    }
+
+  tasks:
+  - name: Install general OS-dependencies
+    block:
+    - name: Ensure apt-transport-https is installed.
+      apt: 
+        name: apt-transport-https
+        state: present
+
+  - name: Install MariaDB OS-dependencies
+    block:
+    - name: Add repository key to the system
+      apt_key: keyserver=keyserver.ubuntu.com id=0xF1656F24C74CD1D8
+      register: repository_status
+      become: yes
+
+    - name: Install MariaDB repository
+      apt_repository: 
+        repo: 'deb [arch=amd64,i386,ppc64el] http://mariadb.kisiek.net/repo/10.1/ubuntu xenial main' 
+        state: present
+      become: yes
+
+    - name: Update repository info
+      # Workaround of https://github.com/ansible/ansible/issues/21006
+      apt:
+        update_cache: yes
+      when: repository_status.changed
+      become: yes
+
+    - name: Install OS-level libraries and application
+      apt: 
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - mariadb-server
+        - libmariadbclient18
+        - libmariadbclient-dev
+      become: yes
+  - name: Install Python OS-dependencies
+    block: 
+    - name: Install Python apt-packages
+      apt: 
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - python2.7
+        - build-essential
+        - git
+        - python-pip
+        - virtualenv
+        - python-dev
+        - libffi-dev
+        - libssl-dev
+        - libjpeg-dev
+        - libpng12-dev
+        - libxml2-dev
+        - libxslt1-dev
+        - libjpeg62
+      become: yes  
+    - name: Install Python pip-packages
+      pip: name={{item}} state=latest
+      with_items:
+        - pip
+        - wheel
+        - mysqlclient  # Required for Ansible mysql_db and mysql_user module
+      become: yes
+  - name: Install NodeJS OS-level OS-dependencies
+    block:  
+    - name: Ensure APT repository for Node exists 
+      apt_repository: 
+        repo: 'deb https://deb.nodesource.com/node_6.x xenial main' 
+        state: present
+      become: yes
+      register: node_repo
+
+    - name: Update apt cache if repo was added.
+      apt: update_cache=yes
+      when: node_repo.changed
+
+  - name: Create a new MariaDB database 
+    mysql_db:
+      name: "{{ item }}"
+      encoding: utf8
+      state: "present"
+    become: yes
+    items: "{{ db_names }}"
+
+  - name: Create a new MariaDB user
+    mysql_user:
+      name: "{{ db_user }}"
+      password: "{{ db_pass }}"
+      host: "localhost"
+      priv: '*.*:ALL'
+      state: present
+    become: yes
+
+  - name: Flush privileges
+    command: mysql -e "FLUSH PRIVILEGES;"
+    become: yes
+    
+  - name: Create virtualenv and install requirements
+    pip: 
+      requirements: "{{ item }}"
+      virtualenv: "{{ env_path }}"
+    with_items: "{{requirements_paths}}"
+
+  - name: Create virtualenv
+    pip: 
+      name: "django"
+      virtualenv: "{{ env_path }}"
+
+  - name: Update activator
+    lineinfile:
+      dest: "{{ env_path }}/bin/activate"
+      state: present
+      regexp: '^export {{ item.key }}='
+      line: 'export {{ item.key }}="{{ item.value }}"'
+    with_dict: "{{ settings }}"
+  
+  - name: Update ~/.bashrc to autostart in project
+    lineinfile:
+      dest: "~/.bashrc"
+      state: present
+      regexp: '^{{item}}$'
+      line: '{{item}}'
+    with_items:
+      - "source {{ env_path }}/bin/activate;"
+      - "cd {{src_path }};"
+
+  - name: execute database migrations
+    django_manage:
+      command: migrate
+      app_path: "{{ src_path }}"
+      virtualenv: "{{ env_path}}"
+    environment: "{{ settings }}"
+
+  - name: Install npm
+    shell: npm install
+
+  - name: Build dependencies
+    shell: gulp prod
+

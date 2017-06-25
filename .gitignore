@@ -69,3 +69,6 @@ staticfiles
 bliski_publikator.egg-info/
 
 typings
+.vagrant
+*.retry
+
