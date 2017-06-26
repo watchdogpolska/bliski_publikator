@@ -153,7 +153,13 @@
 
   - name: Install npm
     shell: npm install
+    args:
+      creates: "{{ src_path }}/node_modules"
+
+  - name: Install gulp
+    shell: npm install -g gulp
 
   - name: Build dependencies
-    shell: gulp prod
+    shell: "{{ src_path }}/node_modules/.bin/gulp prod"
+
 
