@@ -18,7 +18,7 @@
                 </div>
               </div>
               <div [ngSwitch]='condition.type'>
-                <div *ngSwitchWhen="'is-equal'">
+                <div *ngSwitchCase="'is-equal'">
                   <div class="form-group">
                     <label for="input" class="col-sm-2 control-label">Wartość:</label>
                     <div class="col-sm-10">

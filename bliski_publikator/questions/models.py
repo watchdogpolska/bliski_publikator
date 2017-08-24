@@ -81,6 +81,8 @@ class Condition(TimeStampedModel):
                    ('is-false', _('Is false')),
                    ('is-equal', _("Is equal")),
                    ('is-not-equal', _("Is not equal")),
+                   ('is-less', _('Is less')),
+                   ('is-more', _('Is more'))
                    )
     type = models.CharField(choices=TYPE,
                             default='is-true',

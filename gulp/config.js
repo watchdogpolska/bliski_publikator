@@ -94,7 +94,10 @@ module.exports = {
     }
   },
   scripts: {
-    src: srcAssets + '/scripts/*.js',
+    src: [
+      './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+      srcAssets + '/scripts/*.js',
+    ],
     dest: devStatic + '/scripts'
   },
   styles: {

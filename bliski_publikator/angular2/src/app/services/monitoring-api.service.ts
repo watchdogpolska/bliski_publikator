@@ -1,8 +1,9 @@
 import { Observable }     from 'rxjs/Observable';
 
-import { Http } from '@angular/http';
+import { DOCUMENT } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, Inject } from '@angular/core';
 
-import { BaseApiService } from './api.base.service';
 import { Monitoring } from '../model/monitoring';
 
 import { QuestionBase } from '../model/question-base';
@@ -12,24 +13,24 @@ import { LongTextQuestion } from '../model/question-longtext';
 
 import { IsEqualConditional } from '../conditionals/conditional-is-equal';
 import { IsNullConditional } from '../conditionals/conditional-is-null';
+import { IsMoreConditional } from '../conditionals/conditional-is-more';
+import { IsLessConditional } from '../conditionals/conditional-is-less';
 
 import { IsEqualCountCondition } from '../count.conditions/is-equal.cconditions';
 
-import {CsrfService} from '../services/csrf.service';
 
-export class MonitoringService extends BaseApiService {
+@Injectable()
+export class MonitoringService {
 
-    constructor(http: Http, csrf: CsrfService) {
-        super(http, csrf);
-    }
+    constructor(private _http: HttpClient, @Inject(DOCUMENT) private _doc: any) { }
 
     saveMonitoring(monitoring: Monitoring) {
         var data = monitoring.toPlainObject();
-        return this.simple_post(document.location.href, data);
+        return this._http.post<any>(this._doc.location.pathname, data);
     }
 
     getMonitoring(id: number):Observable<Monitoring> {
-        return this.simple_get(`/monitorings/${id}/api`)
+        return this._http.get<any>(`/monitorings/${id}/api`)
             .map(data => {
                 let questions = this.parseQuestionsList(data.questions);
                 this.addConditions(data.questions, questions);
@@ -41,7 +42,6 @@ export class MonitoringService extends BaseApiService {
                     }
                 );
             })
-            .map(data => data);
     }
 
     parseQuestionsList(questions:any[]):QuestionBase<any>[] {
@@ -79,13 +79,22 @@ export class MonitoringService extends BaseApiService {
     parseHideConditions(data, questions: QuestionBase<any>[]) {
         let target = questions[data.target];
         switch(data.type) {
-            case 'is-equal':{
+            case 'is-equal': {
                 let value = data.value;
                 return new IsEqualConditional({ target, value });
             }
-            case 'is-null':{
+            case 'is-null': {
                 return new IsNullConditional({ target });
             }
+            case 'is-less': {
+                let value = data.value;
+                return new IsLessConditional({ target, value });
+            }
+            case 'is-more': {
+                let value = data.value;
+                return new IsMoreConditional({ target, value });
+            }
+            
 
         }
         throw new Error(`Unsupported hide conditions [${data.hideConditions}].`);

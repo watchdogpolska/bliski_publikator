@@ -9,6 +9,8 @@
                 <li role="menuitem">
                     <a class="dropdown-item" href="#" (click)="addIsEqualCondional(); $event.preventDefault();">Jest równy wartości</a>
                     <a class="dropdown-item" href="#" (click)="addIsNullCondional(); $event.preventDefault();">Jest pusty</a>
+                    <a class="dropdown-item" href="#" (click)="addIsLessCondional(); $event.preventDefault();">Jest mniejszy</a>
+                    <a class="dropdown-item" href="#" (click)="addIsMoreCondional(); $event.preventDefault();">Jest większy</a>
                 </li>
             </ul>
         </div>
@@ -18,56 +20,86 @@
             <li *ngFor="let condition of current.hideConditions">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div [ngSwitch]="condition.type">
-                            <div *ngSwitchWhen="'is-equal'">
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="input" class="col-sm-2 control-label">Typ:</label>
-                                        <div class="col-sm-2">
-                                            Równość
-                                        </div>
+                        <div *ngIf="condition.type == 'is-equal'">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">Typ:</label>
+                                    <div class="col-sm-2">
+                                        Równość
                                     </div>
-                                    <div class="form-group">
-                                        <label for="input" class="col-sm-2 control-label">Wartość:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="" [(ngModel)]="condition.value" id="input" class="form-control" value="">
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">Wartość:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="" [(ngModel)]="condition.value" id="input" class="form-control" value="">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="input" class="col-sm-2 control-label">Pytanie:</label>
-                                        <div class="col-sm-10">
-                                            <select name="" id="input" class="form-control" required="required">
-                                                <option
-                                                *ngFor="let option of questions"
-                                                [value]="option"
-                                                [hidden]="current == option"
-                                                [selected]="current.target == option">
-                                                {{ option.name }}</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">Pytanie:</label>
+                                    <div class="col-sm-10">
+                                        <select name="" id="input" class="form-control" required="required">
+                                            <option
+                                            *ngFor="let option of questions"
+                                            [value]="option"
+                                            [hidden]="current == option"
+                                            [selected]="current.target == option">
+                                            {{ option.name }}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div *ngSwitchWhen="'is-null'">
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="input" class="col-sm-2 control-label">Typ:</label>
-                                        <div class="col-sm-2">
-                                            Jest pusty
-                                        </div>
+                        </div>
+                        <div *ngIf="condition.type == 'is-null'">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">Typ:</label>
+                                    <div class="col-sm-2">
+                                        Jest pusty
                                     </div>
-                                   <div class="form-group">
-                                        <label for="input" class="col-sm-2 control-label">Pytanie:</label>
-                                        <div class="col-sm-10">
-                                            <select name="" id="input" class="form-control" required="required">
-                                                <option
-                                                *ngFor="let option of questions"
-                                                [value]="option"
-                                                [hidden]="current == option"
-                                                [selected]="current.target == option">
-                                                {{ option.name }}</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">Pytanie:</label>
+                                    <div class="col-sm-10">
+                                        <select name="" id="input" class="form-control" required="required">
+                                            <option
+                                            *ngFor="let option of questions"
+                                            [value]="option"
+                                            [hidden]="current == option"
+                                            [selected]="current.target == option">
+                                            {{ option.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="condition.type == 'is-less' || condition.type == 'is-more'">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">Typ:</label>
+                                    <div class="col-sm-2">
+                                        <span *ngIf="condition.type == 'is-less'; else elseBlock ">
+                                            Jest mniejszy
+                                        </span>
+                                        <ng-template #elseBlock>Jest większy</ng-template>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">Wartość:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" name="" [(ngModel)]="condition.value" id="input" class="form-control" value="0">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">Pytanie:</label>
+                                    <div class="col-sm-10">
+                                        <select name="" id="input" class="form-control" required="required">
+                                            <option
+                                            *ngFor="let option of questions"
+                                            [value]="option"
+                                            [hidden]="current == option"
+                                            [selected]="current.target == option">
+                                            {{ option.name }}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

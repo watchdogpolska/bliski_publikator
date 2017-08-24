@@ -5,6 +5,7 @@ var gutil = require('gulp-util');
 var config = require('../config').webpack;
 
 gulp.task("webpack:dev", function(callback) {
+  gutil.log("[webpack]", "Start webpack"); 
   webpack(
     require('../../webpack/webpack.dev'),
     function(err, stats) {
@@ -15,6 +16,7 @@ gulp.task("webpack:dev", function(callback) {
 });
 
 gulp.task("webpack:prod", function(callback) {
+  gutil.log("[webpack]", "Start webpack");  
   webpack(
     require('../../webpack/webpack.prod'),
     function(err, stats) {

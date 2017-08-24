@@ -47,7 +47,12 @@ sitemaps = {
     'static': StaticViewSitemap
 }
 
+def test_json(request):
+    from django.http import JsonResponse
+    return JsonResponse({'test':'test'})
+
 urlpatterns = [
+    url(r'^test_json$', test_json),
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
     url(r'^contact/$', TemplateView.as_view(template_name='pages/contact.html'), name="contact"),
 

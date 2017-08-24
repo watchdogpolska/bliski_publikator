@@ -12,28 +12,21 @@ export class QuestionOptionEditComponent implements OnInit {
     @Input()
     question: DropdownQuestion;
 
-    options: DropdownOption[] = [];
-
-    ngOnInit() {
-        this.options = this.question.options;
-        this.question.options_changes.subscribe(
-            options => this.options = options
-        );
-    }
+    ngOnInit() { }
 
     removeOption(option:any) {
-        let index = this.options.indexOf(option);
-        if(index >= 0) {
+        let index = this.question.options.indexOf(option);
+        if (index >= 0) {
             this.question.options = [
-                ...this.options.slice(0, index),
-                ...this.options.slice(index + 1)
+                ...this.question.options.slice(0, index),
+                ...this.question.options.slice(index + 1)
             ];
         }
     }
 
     addOption() {
         this.question.options = [
-            ...this.options,
+            ...this.question.options,
             { key: '', value: '' }
         ];
     }

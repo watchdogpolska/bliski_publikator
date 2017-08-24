@@ -1,0 +1,19 @@
+<div *ngIf="monitoring">
+    <div [ngSwitch]="mode" *ngIf="monitoring">
+        <div *ngSwitchCase="'solver'">
+            <sowp-solver [monitoring]="monitoring"></sowp-solver>
+        </div>
+        <div *ngSwitchCase="'editor'">
+            <sowp-question-editor [monitoring]="monitoring"></sowp-question-editor>                
+        </div>
+    </div>
+</div>
+<div *ngIf="!monitoring">
+    Loading
+</div>
+
+<!--<sowp-question-viewer [monitoring]="monitoring"></sowp-question-viewer>-->
+<!--<pre>{{ monitoring | json }}></pre>-->
+
+
+

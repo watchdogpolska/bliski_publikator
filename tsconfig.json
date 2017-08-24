@@ -5,12 +5,21 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": ["es5", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"]
+    },
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
+  "include": [
+    "bliski_publikator/angular2/**/*"
+  ],
   "exclude": [
-    "node_modules",
-    "typings/main.d.ts",
-    "typings/main"
+    "node_modules"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

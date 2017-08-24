@@ -2,10 +2,10 @@
 <div [innerHTML]="monitoring.description"></div>
 
 <div>
-	<form (ngSubmit)="onSubmit()" class="form-horizontal">
+	<form class="form-horizontal" (ngSubmit)="onSubmit()" [formGroup]="form">
 		<div *ngFor="let question of monitoring.questions">
 			<div [hidden]="isHidden(question)">
-				<sowp-question-view [question]="question" [hidden]="isHidden(question)" [form]="form"></sowp-question-view>
+				<sowp-solve-item [question]="question" [hidden]="isHidden(question)" [form]="form"></sowp-solve-item>
 				<hr>
 			</div>
 		</div>

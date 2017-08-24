@@ -1,16 +1,12 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const fs = require('fs');
 const packageName = JSON.parse(fs.readFileSync('./package.json')).name;
+const root = path.resolve('./' + packageName + '/');
+const source = path.join(root, 'angular2', 'src');
+const static = path.join(root, 'static', 'angular2');
 
-const root = './' + packageName + '/angular2/';
-const static = './' + packageName + '/static/angular2/';
-
-console.log({root, static});
 module.exports = {
   entry: {
     polyfills: [
@@ -21,17 +17,13 @@ module.exports = {
       '@angular/core',
       '@angular/common',
       '@angular/compiler',
-      '@angular/http',
       '@angular/platform-browser-dynamic',
       '@angular/platform-browser',
-      'ng2-dragula/ng2-dragula',
-      // 'rxjs/Rx'
-      'rxjs/add/operator/map',
-      'rxjs/add/operator/catch',
-      'rxjs/add/observable/from',
-      'rxjs/add/observable/throw'
+      'ng2-dragula',
+      'ngx-bootstrap',
+      'rxjs',
     ],
-    main: root + '/src/main.ts'
+    main: source + '/main.ts'
   },
   output: {
     path: static,
@@ -40,30 +32,23 @@ module.exports = {
     chunkFilename: '[id].chunk.js'
   },
   resolve: {
-    root: [ path.join(root, 'src') ],
-    extensions: ['', '.ts', '.js']
+    extensions: ['.ts', '.js']
   },
   module: {
     loaders: [
-      { test: /\.ts$/, loader: 'ts-loader', exclude: [/\.(spec|e2e)\.ts$/] },
+      // See https://github.com/TypeStrong/ts-loader/issues/572
+      { test: /\.ts$/, loader: 'ts-loader?silent', exclude: [/\.(spec|e2e)\.ts$/] },
       { test: /\.html$/, loader: 'raw-loader' },
-      { test: /\.scss$/, loaders: ['raw-loader', 'postcss-loader', 'sass-loader'] }
     ],
-    noParse: [
-      path.join(root, 'node_modules', 'zone.js', 'dist'),
-      path.join(root, 'node_modules', 'angular2', 'bundles')
-    ]
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(true),
-    new webpack.optimize.CommonsChunkPlugin({name: ['vendor', 'polyfills'], minChunks: Infinity}),
-    // new HtmlWebpackPlugin({
-    //   template: static + './src/index.html',
-    //   chunksSortMode: 'dependency' // will be removed in webpack2
-    // })
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'polyfills'],
+      minChunks: Infinity
+    }),
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)@angular/,
+      path.resolve(__dirname, '../src')
+    ),
   ],
-  // thirdparty loader-configs
-  postcss: function () {
-    return [ autoprefixer ];
-  }
 };

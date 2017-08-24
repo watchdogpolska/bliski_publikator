@@ -5,30 +5,25 @@ import {
 } from '@angular/core';
 import {
     FormBuilder,
-    ControlGroup
-} from '@angular/common';
+    FormGroup,
+    FormControl
+} from '@angular/forms';
 import { Monitoring } from '../model/monitoring';
 import { QuestionBase } from '../model/question-base';
 import { QuestionControlService } from './question-control.service';
-import { QuestionSolveItemComponent } from './question-solve-item.component';
-import { AnswerService } from '../services/answers-api.service';
+import { AnswerService } from '../services/answers.service';
 
 @Component({
-    selector: 'sowp-question-solver',
-    template: require('./question-solver.component.html'),
-    providers: [
-        QuestionControlService,
-        AnswerService
-    ],
-    directives: [
-        QuestionSolveItemComponent,
-    ]
+    selector: 'sowp-solver',
+    template: require('./solver.component.html'),
+    // template: './question-solver.component.html',
+
 })
-export class QuestionSolverComponent implements OnInit {
+export class SolverComponent implements OnInit {
     @Input()
     monitoring: Monitoring;
 
-    form: ControlGroup;
+    form: FormGroup;
     visibility: { key:string, hidden:boolean }[] = [];
 
 
@@ -38,23 +33,29 @@ export class QuestionSolverComponent implements OnInit {
 
     ngOnInit() {
         this.buildForm();
-        console.log(this.form);
-        this.form.valueChanges.subscribe((v) => this.validateVisibility(v));
-        this.validateVisibility(this.form.value);
+        this.observeFormValuesChanges();
     }
 
     onSubmit() {
+        // let values = this.form.getRawValue();
         let values = this.form.value;
-        if(!this.validateAnswer(values)) {
+        
+        if (!this.validateAnswer(values)) {
             alert('Sprawdz poprawność wypełnienia formularza');
             return;
         };
         this._api
             .saveAnswers(this.generateAnswerSheet(values))
             .subscribe(
-                data => { console.log(data); document.location = data.return_url; },
+                data => { console.log(data); document.location.href = data.return_url; },
                 error => { console.log('FAIL', error); }
             );
+    }
+    
+    observeFormValuesChanges() {
+        this.form.valueChanges.forEach(console.log.bind(console));
+        this.form.valueChanges.forEach((v) => this.validateVisibility(v));
+        this.validateVisibility(this.form.value);
     }
 
     validateVisibility(values) {
@@ -64,10 +65,10 @@ export class QuestionSolverComponent implements OnInit {
         this.visibility = visibility;
     }
 
-     buildForm() {
-        let group = {};
-        this.monitoring.questions.forEach(t => group[t.key] = []);
-        this.form = this._fb.group(group);
+    buildForm() {
+        let group: any = {}
+        this.monitoring.questions.forEach(t => group[t.key] = new FormControl(''));
+        this.form = new FormGroup(group);
     }
 
     validateAnswer(values) {
@@ -96,10 +97,10 @@ export class QuestionSolverComponent implements OnInit {
             answers.push({
                 question_id: question.id,
                 value: curr_value,
-                point: question.calc_point_sum(curr_value);
+                point: question.calc_point_sum(curr_value)
             });
         }
-        console.log(answers);
+        console.log({answers});
         return answers;
     }
 

@@ -5,10 +5,10 @@ import {
 
 import { QuestionBase } from '../model/question-base';
 
-import {IsEqualCountCondition} from '../count.conditions/is-equal.cconditions';
+import { IsEqualCountCondition } from '../count.conditions/is-equal.cconditions';
 
 @Component({
-	'selector': 'sowp-count-condition';
+	'selector': 'sowp-count-condition',
 	'template': require('./count-condition-edit.component.html')
 })
 export class CountConditionEditComponent {

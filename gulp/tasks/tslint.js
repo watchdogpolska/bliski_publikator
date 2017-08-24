@@ -1,6 +1,5 @@
 var gulp           = require('gulp');
 var tslint         = require('gulp-tslint');
-var tslintStylish  = require('tslint-stylish');
 var isCi           = require('is-ci');
 var config         = require('../config').tslint;
 
@@ -11,8 +10,10 @@ var config         = require('../config').tslint;
 gulp.task('tslint', function () {
   return gulp.src(config.src)
     // .pipe(require('gulp-debug')())
-    .pipe(tslint())
-    .pipe(tslint.report(tslintStylish, {
+    .pipe(tslint({
+      formatter: "verbose"
+    }))
+    .pipe(tslint.report({
       emitError: isCi,
       sort: true,
       bell: true

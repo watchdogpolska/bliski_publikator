@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { ACCORDION_DIRECTIVES, DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
+import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 import { Monitoring } from '../model/monitoring';
 
@@ -13,8 +12,6 @@ import { LongTextQuestion } from '../model/question-longtext';
 import { QuestionEditComponent } from './question-edit.component';
 import { MonitoringService } from '../services/monitoring-api.service';
 
-import {TinyMceComponent } from '../tinymce/tinymce.value-accessor';
-
 function isNotBlank(obj) {
     return obj != null && typeof obj == 'string' && obj.length > 0;
 }
@@ -22,17 +19,6 @@ function isNotBlank(obj) {
 @Component({
     selector: 'sowp-question-editor',
     template: require('./question-editor.component.html'),
-    directives: [
-        QuestionEditComponent,
-        ACCORDION_DIRECTIVES,
-        DROPDOWN_DIRECTIVES,
-        TinyMceComponent,
-        Dragula
-    ],
-    viewProviders: [DragulaService],
-    providers: [
-        MonitoringService
-    ]
 })
 export class QuestionEditorComponent implements OnInit {
 
@@ -40,8 +26,6 @@ export class QuestionEditorComponent implements OnInit {
     monitoring: Monitoring;
 
     questions: QuestionBase<any>[];
-
-    preview: Object;
 
     constructor(private _api: MonitoringService, private _dragula: DragulaService) {
         this._dragula.setOptions('questions', {
@@ -52,7 +36,7 @@ export class QuestionEditorComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.questions = this.monitoring.questions;
+        this.questions = this.monitoring.questions || [];
         this.monitoring.questions_changes.subscribe(
             (questions) => this.questions = questions
         );
@@ -94,7 +78,7 @@ export class QuestionEditorComponent implements OnInit {
             return;
         }
         this._api.saveMonitoring(this.monitoring).subscribe(
-            v => { document.location = v.url; },
+            v => { document.location.href = v.url; },
             v => { console.log(v); alert('Błąd. Nie udało się zapisać. Sprawdź poprawność formularza.'); },
         );
     }

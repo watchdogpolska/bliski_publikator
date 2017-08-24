@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder ,ControlGroup } from '@angular/common';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuestionBase } from '../model/question-base';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class QuestionControlService {
 
     }
 
-    toControlGroup(questions:QuestionBase<any>[]): ControlGroup {
+    toControlGroup(questions:QuestionBase<any>[]): FormGroup {
         let group = {};
 
         questions.forEach(t => group[t.key] = []);

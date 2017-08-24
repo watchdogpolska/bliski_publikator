@@ -10,13 +10,14 @@
   <div class="form-group">
     <label for="monitoring_description" class="col-sm-2 control-label">Opis:</label>
     <div class="col-sm-10">
-      <tinymce-editor [(value)]="monitoring.description"></tinymce-editor>
+      <app-tinymce [(ngModel)]="monitoring.description"></app-tinymce>
     </div>
   </div>
   <div class="form-group">
     <label for="monitoring_instruction" class="col-sm-2 control-label">Instrukcja:</label>
     <div class="col-sm-10">
-      <tinymce-editor [(value)]="monitoring.instruction"></tinymce-editor>
+        <app-tinymce [(ngModel)]="monitoring.instruction"></app-tinymce>
+        {{ monitoring.instruction }}
     </div>
   </div>
 </div>
@@ -76,7 +77,3 @@
     </button>
   </div>
 </div>
-
-<pre *ngIf="preview">
-  {{ preview | json}}
-</pre>

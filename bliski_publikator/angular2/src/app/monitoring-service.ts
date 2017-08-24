@@ -16,8 +16,7 @@ export class MonitoringService {
                 id: 1,
                 name: 'Czy to jest bardzo ważne?',
                 description: 'Czy to jest bardzo ważne?',
-                hideConditions: [
-                ]
+                // hideConditions: []
             }
         );
 
@@ -26,8 +25,7 @@ export class MonitoringService {
                 id: 2,
                 name: 'Czy to jest bardzo ważne?',
                 description: 'Czy to jest bardzo ważne?',
-                hideConditions: [
-                ]
+                // hideConditions: []
             }
         );
 

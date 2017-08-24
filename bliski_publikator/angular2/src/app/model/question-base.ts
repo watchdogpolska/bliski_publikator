@@ -24,15 +24,17 @@ export class QuestionBase<T> {
         name?: string,
         description?: string,
         order?: number,
-        controlType?: string
+        controlType?: string,
+        hideconditions?: BaseConditional[]
     } = {}) {
         this.id = (options.id || options.id > 0) ? options.id : -1;
         this._key = options.key || '';
         this.name = options.name || '';
         this.description = options.description || '';
         this.order = options.order === undefined ? 1 : options.order;
-        this.controlType = options.controlType || '';    }
-
+        this.controlType = options.controlType || '';
+        this.hideConditions = options.hideconditions || [];
+    }
     get key(){
         if (this._key)
             return this._key;

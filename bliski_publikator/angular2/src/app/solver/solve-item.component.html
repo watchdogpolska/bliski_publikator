@@ -1,0 +1,22 @@
+<div class="form-group" [formGroup]="form">
+  <div class="col-sm-12 col-md-6">
+    <p><b>{{ question.name }}</b></p>
+    <p>{{ question.description }}</p>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <div [ngSwitch]="question.controlType">
+      <div *ngSwitchCase="'short_text'">
+        <input [formControlName]="question.key" class="form-control"/>
+      </div>
+      <div *ngSwitchCase="'long_text'">
+        <textarea [id]="question.key" [formControlName]="question.key" class="form-control"></textarea>
+      </div>
+      <div *ngSwitchCase="'choice'">
+        <select [id]="question.key" [name]="question.key" [formControlName]="question.key" class="form-control">
+          <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+        </select>
+      </div>
+      <div *ngSwitchDefault>default</div>
+    </div>
+  </div>
+</div>
