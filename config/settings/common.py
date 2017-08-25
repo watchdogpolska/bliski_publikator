@@ -16,7 +16,7 @@ ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
 APPS_DIR = ROOT_DIR.path('bliski_publikator')
 
 env = environ.Env()
-environ.Env.read_env()
+#environ.Env.read_env()
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
