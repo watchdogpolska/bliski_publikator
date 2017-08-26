@@ -8,7 +8,7 @@
       - "test-{{ db_name }}"
     env_path: "~/env"
     src_path: "/vagrant"
-    requirements_paths: 
+    requirements_paths:
       - "{{src_path}}/requirements/local.txt"
       - "{{src_path}}/requirements/production.txt"
     settings: {
@@ -20,9 +20,10 @@
   - name: Install general OS-dependencies
     block:
     - name: Ensure apt-transport-https is installed.
-      apt: 
+      apt:
         name: apt-transport-https
         state: present
+      become: yes
 
   - name: Install MariaDB OS-dependencies
     block:
@@ -32,20 +33,19 @@
       become: yes
 
     - name: Install MariaDB repository
-      apt_repository: 
-        repo: 'deb [arch=amd64,i386,ppc64el] http://mariadb.kisiek.net/repo/10.1/ubuntu xenial main' 
+      apt_repository:
+        repo: 'deb [arch=amd64,i386,ppc64el] http://mariadb.kisiek.net/repo/10.1/ubuntu xenial main'
         state: present
       become: yes
 
     - name: Update repository info
       # Workaround of https://github.com/ansible/ansible/issues/21006
-      apt:
-        update_cache: yes
+      apt: update_cache=yes
       when: repository_status.changed
       become: yes
 
     - name: Install OS-level libraries and application
-      apt: 
+      apt:
         name: "{{item}}"
         state: latest
       with_items:
@@ -54,9 +54,9 @@
         - libmariadbclient-dev
       become: yes
   - name: Install Python OS-dependencies
-    block: 
+    block:
     - name: Install Python apt-packages
-      apt: 
+      apt:
         name: "{{item}}"
         state: latest
       with_items:
@@ -73,7 +73,7 @@
         - libxml2-dev
         - libxslt1-dev
         - libjpeg62
-      become: yes  
+      become: yes
     - name: Install Python pip-packages
       pip: name={{item}} state=latest
       with_items:
@@ -82,19 +82,31 @@
         - mysqlclient  # Required for Ansible mysql_db and mysql_user module
       become: yes
   - name: Install NodeJS OS-level OS-dependencies
-    block:  
-    - name: Ensure APT repository for Node exists 
-      apt_repository: 
-        repo: 'deb https://deb.nodesource.com/node_6.x xenial main' 
+    block:
+    - name: Ensure APT repository for Node exists
+      apt_repository:
+        repo: 'deb https://deb.nodesource.com/node_6.x xenial main'
         state: present
       become: yes
       register: node_repo
+    - name:
+      apt_key:
+        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+      become: yes
 
     - name: Update apt cache if repo was added.
       apt: update_cache=yes
       when: node_repo.changed
+      become: yes
 
-  - name: Create a new MariaDB database 
+    - name: Install NodeJS
+      apt:
+        name: "nodejs"
+        state: latest
+      become: yes
+
+  - name: Create a new MariaDB database
     mysql_db:
       name: "{{ item }}"
       encoding: utf8
@@ -114,15 +126,15 @@
   - name: Flush privileges
     command: mysql -e "FLUSH PRIVILEGES;"
     become: yes
-    
+
   - name: Create virtualenv and install requirements
-    pip: 
+    pip:
       requirements: "{{ item }}"
       virtualenv: "{{ env_path }}"
     with_items: "{{requirements_paths}}"
 
   - name: Create virtualenv
-    pip: 
+    pip:
       name: "django"
       virtualenv: "{{ env_path }}"
 
@@ -133,7 +145,7 @@
       regexp: '^export {{ item.key }}='
       line: 'export {{ item.key }}="{{ item.value }}"'
     with_dict: "{{ settings }}"
-  
+
   - name: Update ~/.bashrc to autostart in project
     lineinfile:
       dest: "~/.bashrc"
@@ -157,9 +169,18 @@
       creates: "{{ src_path }}/node_modules"
 
   - name: Install gulp
-    shell: npm install -g gulp
+    shell: npm install gulp
+    args:
+      chdir: "{{ src_path }}"
+
+  - name: Install bower
+    shell: npm install -g bower
+    args:
+      chdir: "{{ src_path }}"
+    become: true
 
   - name: Build dependencies
     shell: "{{ src_path }}/node_modules/.bin/gulp prod"
-
+    args:
+      chdir: "{{ src_path }}"
 
