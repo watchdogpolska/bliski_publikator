@@ -16,6 +16,8 @@ from .common import *  # noqa
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
+ALLOWED_HOSTS = ('192.168.33.10',)
+
 STATICFILES_DIRS += (
     str(ROOT_DIR.path("bower_components")),
 )
