@@ -5,10 +5,10 @@ import {
 } from '../model/question-dropdown';
 
 @Component({
-    selector: 'sowp-question-option-edit',
-    template: require('./question-option-edit.component.html')
+    selector: 'sowp-options',
+    template: require('./options.component.html')
 })
-export class QuestionOptionEditComponent implements OnInit {
+export class OptionsComponent implements OnInit {
     @Input()
     question: DropdownQuestion;
 

@@ -8,10 +8,10 @@ import { QuestionBase } from '../model/question-base';
 import { IsEqualCountCondition } from '../count.conditions/is-equal.cconditions';
 
 @Component({
-	'selector': 'sowp-count-condition',
-	'template': require('./count-condition-edit.component.html')
+	'selector': 'sowp-count-conditions',
+	'template': require('./count-conditions.component.html')
 })
-export class CountConditionEditComponent {
+export class CountConditionsComponent {
     @Input()
     current: QuestionBase<any>;
 

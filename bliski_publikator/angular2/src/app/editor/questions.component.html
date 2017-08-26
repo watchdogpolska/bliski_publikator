@@ -1,0 +1,48 @@
+<h3>Pytania</h3>
+<div class="questions">
+  <accordion *ngIf="monitoring.questions.length > 0" [dragula]='"questions"' [dragulaModel]='questions'>
+    <accordion-group #group *ngFor="let question of monitoring.questions, let i = index">
+      <div accordion-heading>
+        <a href="#" class="dragula-handle btn btn-xs btn-primary" title="Przytrzymaj i przeciągnij, aby przesunać">
+          <i class="fa fa-arrows-v" aria-hidden="true"></i> Przesuń
+        </a>
+        <i class="pull-right fa fa-caret-down"
+          [ngClass]="{'fa-rotate-180': group?.isOpen}"  aria-hidden="true"></i>
+        Pytanie: {{ question.name }}
+      </div>
+      <div class="text-right">
+        <div class="btn-group">
+          <button class="btn btn-primary btn-xs" (click)="removeQuestion(question)">
+            <i class="fa fa-trash" aria-hidden="true"></i> Skasuj
+          </button>
+          <button class="btn btn-primary btn-xs" *ngIf="i !== 0" (click)="moveQuestion(question, -1,  $event)">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i> Do góry
+          </button>
+          <button class="btn btn-primary btn-xs" *ngIf="i != monitoring.questions.length - 1" (click)="moveQuestion(question, +1,  $event)">
+            <i class="fa fa-arrow-down" aria-hidden="true"></i> W dół
+          </button>
+        </div>
+      </div>
+      <sowp-question [question]="question" [questions]="monitoring.questions"></sowp-question>
+    </accordion-group>
+  </accordion>
+  <p *ngIf="!(monitoring.questions.length > 0)">Brak pytań jeszcze!</p>
+</div>
+<div>
+  <div class="btn-group" dropdown>
+    <button type="button" class="btn btn-primary" dropdownToggle>
+      <i class="fa fa-plus" aria-hidden="true"></i> Dodaj <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+      <li role="menuitem">
+        <a class="dropdown-item" href="#" (click)="addTextBoxQuestion(); $event.preventDefault();">Pytanie tekstowe</a>
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" href="#" (click)="addDropdownQuestion(); $event.preventDefault();">Pytanie wyboru</a>
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" href="#" (click)="addLongTextQuestion(); $event.preventDefault();">Pytanie długie tekstowe</a>
+      </li>
+    </ul>
+  </div>
+</div>

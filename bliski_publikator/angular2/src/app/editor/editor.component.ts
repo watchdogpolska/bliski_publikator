@@ -1,76 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { DragulaService } from 'ng2-dragula/ng2-dragula';
+import { MonitoringService } from '../services/monitoring-api.service';
 
 import { Monitoring } from '../model/monitoring';
-
 import { QuestionBase } from '../model/question-base';
 import { DropdownQuestion, DropdownOption } from '../model/question-dropdown';
-import { TextboxQuestion } from '../model/question-textbox';
-import { LongTextQuestion } from '../model/question-longtext';
-
-import { QuestionEditComponent } from './question-edit.component';
-import { MonitoringService } from '../services/monitoring-api.service';
 
 function isNotBlank(obj) {
     return obj != null && typeof obj == 'string' && obj.length > 0;
 }
 
 @Component({
-    selector: 'sowp-question-editor',
-    template: require('./question-editor.component.html'),
+    selector: 'sowp-editor',
+    template: require('./editor.component.html'),
 })
-export class QuestionEditorComponent implements OnInit {
+export class EditorComponent {
 
     @Input()
     monitoring: Monitoring;
 
-    questions: QuestionBase<any>[];
-
-    constructor(private _api: MonitoringService, private _dragula: DragulaService) {
-        this._dragula.setOptions('questions', {
-            moves: function(el, container, handle:HTMLElement) {
-                return handle.classList.contains('dragula-handle');
-            }
-        });
-    }
-
-    ngOnInit() {
-        this.questions = this.monitoring.questions || [];
-        this.monitoring.questions_changes.subscribe(
-            (questions) => this.questions = questions
-        );
-    }
-
-    addDropdownQuestion() {
-        this.monitoring.questions = [...this.questions, new DropdownQuestion()];
-    }
-
-    addTextBoxQuestion() {
-        this.monitoring.questions = [...this.questions, new TextboxQuestion()];
-    }
-
-    addLongTextQuestion() {
-        this.monitoring.questions = [...this.questions, new LongTextQuestion()];
-    }
-
-    removeQuestion(question: QuestionBase<any>) {
-        var index = this.questions.indexOf(question);
-        if(index >= 0) {
-            this.monitoring.questions = [
-                ...this.questions.slice(0, index),
-                ...this.questions.slice(index + 1),
-            ];
-        }
-    }
-
-    moveQuestion(question: QuestionBase<any>, change: number, ev: MouseEvent) {
-        let index = this.questions.indexOf(question);
-        let questions = this.questions.slice();
-        questions[index] = questions[index + change];
-        questions[index + change] = question;
-        this.monitoring.questions = questions;
-        ev.preventDefault();
+    constructor(private _api: MonitoringService) {
     }
 
     saveMonitoring() {

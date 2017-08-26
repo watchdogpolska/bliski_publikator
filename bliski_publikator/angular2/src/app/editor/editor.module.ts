@@ -10,11 +10,13 @@ import { TinymceModule } from 'angular2-tinymce';
 
 // import { TinyMceModule }   from '../tinymce/tinymce.module';
 
-import { CountConditionEditComponent } from './count-condition-edit.component';
-import { QuestionEditorComponent } from './question-editor.component';
-import { QuestionEditComponent } from './question-edit.component';
-import { QuestionOptionEditComponent } from './question-option-edit.component'
-import { QuestionConditionalsComponent } from './question-conditionals.component'
+import { BasicInfoComponent } from './basic-info.component';
+import { QuestionsComponent } from './questions.component';
+import { QuestionComponent } from './question.component';
+import { CountConditionsComponent } from './count-conditions.component';
+import { EditorComponent } from './editor.component';
+import { OptionsComponent } from './options.component'
+import { QuestionConditionalsComponent } from './conditionals.component'
 
 
 @NgModule({
@@ -30,14 +32,16 @@ import { QuestionConditionalsComponent } from './question-conditionals.component
         }),
     ],
     declarations: [
-        CountConditionEditComponent,
-        QuestionEditorComponent,
-        QuestionEditComponent,
-        QuestionOptionEditComponent,
+        BasicInfoComponent,
+        EditorComponent,
+        CountConditionsComponent,
+        QuestionsComponent,
+        QuestionComponent,
+        OptionsComponent,
         QuestionConditionalsComponent
     ],
     exports: [
-        QuestionEditorComponent
+        EditorComponent
     ]
 })
 export class EditorModule { }

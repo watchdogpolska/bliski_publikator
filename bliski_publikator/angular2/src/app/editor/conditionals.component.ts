@@ -1,5 +1,3 @@
-
-
 import {
     Component,
     Input
@@ -13,8 +11,8 @@ import { IsLessConditional } from '../conditionals/conditional-is-less';
 import { IsMoreConditional } from '../conditionals/conditional-is-more';
 
 @Component({
-    selector: 'sowp-question-conditionals',
-    template: require('./question-conditionals.component.html'),
+    selector: 'sowp-conditionals',
+    template: require('./conditionals.component.html'),
 })
 export class QuestionConditionalsComponent {
     @Input()
@@ -57,5 +55,15 @@ export class QuestionConditionalsComponent {
             ...this.current.hideConditions,
             conditionals
         ];
+    }
+
+    removeConditional(conditional:any) {
+        let index = this.current.hideConditions.indexOf(conditional);
+        if (index >= 0) {
+            this.current.hideConditions = [
+                ...this.current.hideConditions.slice(0, index),
+                ...this.current.hideConditions.slice(index + 1)
+            ];
+        }
     }
 }

@@ -20,6 +20,9 @@
             <li *ngFor="let condition of current.hideConditions">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <div class="text-right">
+                            <button (click)="removeConditional(condition); $event.preventDefault();" class="btn btn-primary btn-xs"><i class="fa fa-trash"> Skasuj</i></button>
+                        </div>
                         <div *ngIf="condition.type == 'is-equal'">
                             <div class="form-horizontal">
                                 <div class="form-group">

@@ -20,15 +20,14 @@
             <div class="control-label">Opcje:</div>
           </div>
           <div class="col-sm-10">
-            <sowp-question-option-edit [question]="question"></sowp-question-option-edit>
+            <sowp-options [question]="question"></sowp-options>
           </div>
         </div>
       </div>
       <div *ngSwitchDefault>
       </div>
   </div>
-  <sowp-question-conditionals [questions]="questions" [current]="question"></sowp-question-conditionals>
-  <sowp-count-condition [current]="question"></sowp-count-condition>
-
+  <sowp-conditionals [questions]="questions" [current]="question"></sowp-conditionals>
+  <sowp-count-conditions [current]="question"></sowp-count-conditions>
 </form>
 
