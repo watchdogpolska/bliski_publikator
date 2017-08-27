@@ -2,12 +2,10 @@ var fs = require('fs');
 var packageName       = JSON.parse(fs.readFileSync('./package.json')).name;
 
 var srcAssets         = packageName + '/assets/';
-var devStatic         = packageName + '/static/dev';
-var prodStatic        = packageName + '/static/prod';
+var destAssets        = packageName + '/static/assets/';
 
 var srcTemplates      = packageName + '/main/templates';
-var devTemplates      = packageName + '/main/templates_dev';
-var prodTemplates     = packageName + '/main/templates_prod';
+var destTemplates     = packageName + '/main/templates_inject';
 
 var baseTemplate      = srcTemplates + '/base.html';
 var baseScss          = srcAssets + '/scss/style.scss';
@@ -33,17 +31,14 @@ module.exports = {
       proxy: 'localhost:8010',
       open: false,
       files: [
-        devStatic + '/styles/*.css',
+        destAssets + '/styles/*.css',
       ]
     }
   },
-  delete: {
-    dev: [devStatic, devTemplates],
-    prod: [devStatic, prodStatic, prodTemplates]
-  },
+  delete: [destAssets, destTemplates],
   deps: {
     src: baseTemplate,
-    dest: devTemplates,
+    dest: destTemplates,
     bower: {
       options: {
         name: 'bower',
@@ -53,7 +48,10 @@ module.exports = {
       }
     },
     project: {
-      assets: [devStatic + '/**/*.js', devStatic + '/**/*.css'],
+      assets: [
+        destAssets + '/**/*.js',
+        destAssets + '/**/*.css'
+      ],
       options: {
         addRootSlash: false,
         ignorePath: packageName + '/static/',
@@ -62,15 +60,12 @@ module.exports = {
     }
   },
   fonts: {
-    dest: [
-      prodStatic + '/fonts/',
-      devStatic + '/fonts'
-    ]
+    dest: destAssets + '/fonts'
   },
   inject: {
     src: baseTemplate,
-    dest: prodTemplates,
-    assets: [prodStatic + '/**/*.js', prodStatic + '/**/*.css'],
+    dest: destTemplates,
+    assets: [destAssets + '/**/*.js', destAssets + '/**/*.css'],
     options: {
       addRootSlash: false,
       ignorePath: packageName + '/static/',
@@ -78,31 +73,28 @@ module.exports = {
     }
   },
   optimize: {
-    dest: prodStatic,
+    dest: destAssets,
     mainBowerFiles: {},
     js:{
-      src: devStatic + '/**/*.js',
       fileName: 'scripts/bundle.js',
       concat: {},
       uglify: {}
     },
     css: {
-      src: devStatic + '/**/*.css',
       fileName: 'styles/bundle.css',
       concat: {},
       cssnano: {}
     }
   },
   scripts: {
-    src: [
-      './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
-      srcAssets + '/scripts/*.js',
-    ],
-    dest: devStatic + '/scripts'
+    src: [ srcAssets + '/scripts/*.js' ],
+    dest: destAssets + '/scripts'
   },
   styles: {
-    src: baseScss,
-    dest: devStatic + '/styles/',
+    src: [
+      baseScss
+    ],
+    dest: destAssets + '/styles/',
     postcss: {
       autoprefixer: {
         browsers: [
@@ -122,15 +114,6 @@ module.exports = {
       options: {
         relative: true
       }
-    }
-  },
-  webpack: {
-    entry: packageName + '/angular2/src/main.ts',
-    dev: {
-      dest: devStatic + '/angular2/'
-    },
-    prod: {
-      dest: prodStatic + '/angular2/'
     }
   },
   tslint: {

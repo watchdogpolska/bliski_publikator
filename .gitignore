@@ -72,3 +72,7 @@ typings
 .vagrant
 *.retry
 
+
+# Frontend generated files
+bliski_publikator/static/assets/
+bliski_publikator/main/templates_inject/

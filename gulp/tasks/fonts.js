@@ -6,10 +6,7 @@ var config = require('../config').fonts;
 gulp.task('fonts', function(){
 	var fontsFilter = gulpFilter(['**/*.{eot,svg,ttf,woff,woff2}']);
 
-	var stream = gulp.src(bowerFiles())
+	return gulp.src(bowerFiles())
 		.pipe(fontsFilter)
-
-	config.dest.forEach(function(dest){
-		stream.pipe(gulp.dest(dest));
-	})
+		.pipe(gulp.dest(config.dest));
 })

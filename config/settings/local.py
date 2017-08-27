@@ -16,15 +16,10 @@ from .common import *  # noqa
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
-ALLOWED_HOSTS = ('192.168.33.10',)
+ALLOWED_HOSTS = ('localhost', '192.168.33.10',)
 
 STATICFILES_DIRS += (
     str(ROOT_DIR.path("bower_components")),
-)
-
-
-TEMPLATES[0]['DIRS'].insert(
-    0, str(APPS_DIR.path("main/templates_dev"))
 )
 
 # SECRET CONFIGURATION
