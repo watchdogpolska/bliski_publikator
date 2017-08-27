@@ -180,6 +180,10 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATES[0]['DIRS'].insert(
+    0, str(APPS_DIR.path("main/templates_inject"))
+)
+
 # See: http://django-crispy-forms.readthedocs.org/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 

@@ -25,7 +25,7 @@ var processors = [
 
 gulp.task('styles', function () {
   return gulp.src(config.src)
-    .pipe(require('gulp-debug')())
+    .pipe(require('gulp-debug')({ title: "styles:files:" }))
     // monkey patches stream to enable error event
     .pipe(plumber({
       errorHandler: onError
