@@ -25,7 +25,7 @@
         state: present
       become: yes
 
-  - name: Install MariaDB OS-dependencies
+  - name: Install MariaDB server
     block:
     - name: Add repository key to the system
       apt_key: keyserver=keyserver.ubuntu.com id=0xF1656F24C74CD1D8
@@ -53,6 +53,7 @@
         - libmariadbclient18
         - libmariadbclient-dev
       become: yes
+
   - name: Install Python OS-dependencies
     block:
     - name: Install Python apt-packages
@@ -74,6 +75,7 @@
         - libxslt1-dev
         - libjpeg62
       become: yes
+
     - name: Install Python pip-packages
       pip: name={{item}} state=latest
       with_items:
@@ -81,23 +83,23 @@
         - wheel
         - mysqlclient  # Required for Ansible mysql_db and mysql_user module
       become: yes
-  - name: Install NodeJS OS-level OS-dependencies
+
+  - name: Install NodeJS
     block:
-    - name: Ensure APT repository for Node exists
+    - name: Ensure APT repository for NodeJS exists
       apt_repository:
         repo: 'deb https://deb.nodesource.com/node_6.x xenial main'
         state: present
       become: yes
-      register: node_repo
-    - name:
+
+    - name: Ensure GPG key for NodeJS exists
       apt_key:
         url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
         state: present
       become: yes
 
-    - name: Update apt cache if repo was added.
+    - name: Update apt cache
       apt: update_cache=yes
-      when: node_repo.changed
       become: yes
 
     - name: Install NodeJS
@@ -106,26 +108,78 @@
         state: latest
       become: yes
 
-  - name: Create a new MariaDB database
-    mysql_db:
-      name: "{{ item }}"
-      encoding: utf8
-      state: "present"
-    become: yes
-    items: "{{ db_names }}"
+  - name: Install Yarn
+    block:
+    - name: Ensure GPG key for Yarn exists
+      become: yes
+      apt_key:
+        url: https://dl.yarnpkg.com/debian/pubkey.gpg
+        state: present
 
-  - name: Create a new MariaDB user
-    mysql_user:
-      name: "{{ db_user }}"
-      password: "{{ db_pass }}"
-      host: "localhost"
-      priv: '*.*:ALL'
-      state: present
-    become: yes
+    - name: Ensure Debian sources list file for Yarn exists
+      become: yes
+      file:
+        path: /etc/apt/sources.list.d/yarn.list
+        owner: root
+        mode: 0644
+        state: touch
 
-  - name: Flush privileges
-    command: mysql -e "FLUSH PRIVILEGES;"
+    - name: Ensure Debian package for Yarn is in sources list
+      become: yes
+      lineinfile:
+        dest: /etc/apt/sources.list.d/yarn.list
+        regexp: 'deb http://dl.yarnpkg.com/debian/ stable main'
+        line: 'deb http://dl.yarnpkg.com/debian/ stable main'
+        state: present
+
+    - name: Update apt cache
+      apt: update_cache=yes
+      become: yes
+
+    - name: Install Yarn
+      become: yes
+      apt:
+        name: yarn
+        state: installed
+
+  - name: Install NodeJS OS-dependencies
+    shell: yarn global add {{ item }}
     become: yes
+    args:
+      creates: "/usr/lib/node_modules/{{ item }}"
+    with_items:
+      - gulp-cli
+      - bower
+
+  - name: Install NodeJS project dependencies
+    shell: yarn install
+    args:
+      chdir: "{{ src_path }}"
+    # Todo: Add check
+    # changed_when: "'Already up-to-date' not in command_result.stdout"
+
+  - name: Configure MariaDB database'
+    block:
+    - name: Create a new MariaDB database
+      mysql_db:
+        name: "{{ item }}"
+        encoding: utf8
+        state: "present"
+      become: yes
+      items: "{{ db_names }}"
+
+    - name: Create a new MariaDB user
+      mysql_user:
+        name: "{{ db_user }}"
+        password: "{{ db_pass }}"
+        host: "localhost"
+        priv: '*.*:ALL'
+        state: present
+      become: yes
+
+    - name: Flush privileges
+      command: mysql -e "FLUSH PRIVILEGES;"
+      become: yes
 
   - name: Create virtualenv and install requirements
     pip:
@@ -156,30 +210,14 @@
       - "source {{ env_path }}/bin/activate;"
       - "cd {{src_path }};"
 
-  - name: execute database migrations
+  - name: Execute database migrations
     django_manage:
       command: migrate
       app_path: "{{ src_path }}"
       virtualenv: "{{ env_path}}"
     environment: "{{ settings }}"
 
-  - name: Install npm
-    shell: npm install
-    args:
-      creates: "{{ src_path }}/node_modules"
-
-  - name: Install gulp
-    shell: npm install gulp
-    args:
-      chdir: "{{ src_path }}"
-
-  - name: Install bower
-    shell: npm install -g bower
-    args:
-      chdir: "{{ src_path }}"
-    become: true
-
-  - name: Build dependencies
+  - name: Build frontend dependencies
     shell: "{{ src_path }}/node_modules/.bin/gulp prod"
     args:
       chdir: "{{ src_path }}"
