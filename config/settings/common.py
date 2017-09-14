@@ -153,7 +153,10 @@ TEMPLATES = [
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-        'DIRS': [],
+        'DIRS': [
+            str(APPS_DIR.path('main/templates')),
+            str(APPS_DIR.path("main/templates_inject"))
+        ],
         'OPTIONS': {
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
             'debug': DEBUG,
@@ -242,6 +245,7 @@ SOCIALACCOUNT_ADAPTER = 'bliski_publikator.users.adapters.SocialAccountAdapter'
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = 'users:redirect'
 LOGIN_URL = 'account_login'
+ACCOUNT_FORMS = {'login': 'bliski_publikator.users.forms.CustomLoginForm'}
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'atom.ext.slugify.slugifier.ascii_slugify'
