@@ -66,7 +66,7 @@ LOCAL_APPS = (
 
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DJANGO_APPS
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -154,8 +154,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
-            str(APPS_DIR.path('main/templates')),
-            str(APPS_DIR.path("main/templates_inject"))
+            str(APPS_DIR.path("main/templates_inject")),
         ],
         'OPTIONS': {
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
@@ -182,10 +181,6 @@ TEMPLATES = [
         },
     },
 ]
-
-TEMPLATES[0]['DIRS'].insert(
-    0, str(APPS_DIR.path("main/templates_inject"))
-)
 
 # See: http://django-crispy-forms.readthedocs.org/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
