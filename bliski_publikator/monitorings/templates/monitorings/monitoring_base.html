@@ -3,49 +3,51 @@
 
 {% block buttons %}
 {% if object %}
-<div class="btn-group pull-right" role="group">
-    {% if perms.monitorings.change_monitoring %}
-    <a href="{{object.get_update_url}}" class="btn btn-primary">
-      <i class="fa fa-pencil" aria-hidden="true"></i>
-      {% trans 'Update monitoring' %}
-    </a>
-
-    {% if perms.monitorings.change_monitoring %}
-      {% if object.started %}
-      <a class="btn btn-primary disabled">
-      {% else %}
-      <a href="{{object.get_reinitalize_url}}" class="btn btn-primary">
-      {% endif %}
+<div class="text-right">
+  <div class="btn-group" role="group">
+      {% if perms.monitorings.change_monitoring %}
+      <a href="{{object.get_update_url}}" class="btn btn-primary">
         <i class="fa fa-pencil" aria-hidden="true"></i>
-        {% trans 'Reinitialize monitoring' %}
+        {% trans 'Update monitoring' %}
       </a>
-    {% endif %}
 
-    <a href="{{object.get_assign_url}}" class="btn btn-primary">
-      <i class="fa fa-search-plus" aria-hidden="true"></i>
-      {% trans 'Assign institutions' %}
-    </a>
-    {% endif %}
+      {% if perms.monitorings.change_monitoring %}
+        {% if object.started %}
+        <a class="btn btn-primary disabled">
+        {% else %}
+        <a href="{{object.get_reinitalize_url}}" class="btn btn-primary">
+        {% endif %}
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          {% trans 'Reinitialize monitoring' %}
+        </a>
+      {% endif %}
 
-    {% if perms.monitorings.delete_monitoring %}
-    <a href="{{object.get_delete_url}}" class="btn btn-primary">
-      <i class="fa fa-trash" aria-hidden="true"></i>
-      {% trans 'Delete monitoring' %}
-    </a>
-    {% endif %}
+      <a href="{{object.get_assign_url}}" class="btn btn-primary">
+        <i class="fa fa-search-plus" aria-hidden="true"></i>
+        {% trans 'Assign institutions' %}
+      </a>
+      {% endif %}
 
-    {% if perms.monitoring_pages.add_page %}
-    <a href="{% url 'monitorings:pages:create' monitoring_slug=object.slug %}" class="btn btn-primary">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-      {% trans 'Add page' %}
-    </a>
-    {% endif %}
+      {% if perms.monitorings.delete_monitoring %}
+      <a href="{{object.get_delete_url}}" class="btn btn-primary">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        {% trans 'Delete monitoring' %}
+      </a>
+      {% endif %}
 
-    <a href="{% url 'institutions:create' monitoring_slug=object.slug%}" class="btn btn-primary">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-      {% trans 'Add institution' %}
-    </a>
+      {% if perms.monitoring_pages.add_page %}
+      <a href="{% url 'monitorings:pages:create' monitoring_slug=object.slug %}" class="btn btn-primary">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        {% trans 'Add page' %}
+      </a>
+      {% endif %}
 
+      <a href="{% url 'institutions:create' monitoring_slug=object.slug%}" class="btn btn-primary">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        {% trans 'Add institution' %}
+      </a>
+
+  </div>
 </div>
 {% endif %}
 {% endblock %}
