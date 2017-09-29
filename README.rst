@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwatchdogpolska%2Fbliski_publikator.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwatchdogpolska%2Fbliski_publikator?ref=badge_shield)
+
 .. image:: https://codecov.io/github/watchdogpolska/bliski_publikator/coverage.svg?branch=master
     :target: https://codecov.io/github/watchdogpolska/bliski_publikator?branch=master
     :alt: Coverage Status
@@ -111,3 +113,7 @@ Summary:
 * Do you want to prepare applications for production? ``gulp prod``
 * Do you want to start programming ? Just ``gulp``
 * Do you only want to build applications without observing changes for developing? ``gulp build``
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwatchdogpolska%2Fbliski_publikator.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwatchdogpolska%2Fbliski_publikator?ref=badge_large)
