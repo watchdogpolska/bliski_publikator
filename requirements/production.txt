@@ -13,3 +13,4 @@ gevent==1.1.1
 gunicorn==19.6.0
 setproctitle==1.1.10
 
+elastic-apm==3.0.0

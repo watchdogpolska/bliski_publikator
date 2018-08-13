@@ -145,3 +145,12 @@ RAVEN_CONFIG = {
 
 # Custom Admin URL, use {% url 'admin:index' %}
 ADMIN_URL = env('DJANGO_ADMIN_URL')
+
+# APM
+INSTALLED_APPS = INSTALLED_APPS + (
+    'elasticapm.contrib.django', )
+
+MIDDLEWARE_CLASSES = (
+    'elasticapm.contrib.django.middleware.TracingMiddleware',
+) + MIDDLEWARE_CLASSES
+
